@@ -10,6 +10,11 @@
 *
 ****/
 
+branco {
+    background-color: white;
+    margin: 10px;
+    width: 100px;
+}
 body {
     margin: 0;
     padding: 0;
