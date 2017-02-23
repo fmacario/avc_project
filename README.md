@@ -1,1 +1,1 @@
-# AVC Project Documentation website
+# AVC Documentation website
