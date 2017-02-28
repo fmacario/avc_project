@@ -1,0 +1,30 @@
+.example-form {
+  width: 50%;
+  float: left;
+}
+ 
+.selected {
+    background-color: brown !important;
+    color: white;
+  }
+  .patients {
+    list-style-type: none;
+    text-align: center;
+  }
+  .patients li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: lightslategrey;
+    margin: .5em;
+  }
+
+  .patients li:hover {
+    color: lightskyblue;
+    background-color: darkslategrey;
+    left: .1em;
+  }
+
+.example-full-width {
+  width: 100%;
+}

@@ -1,95 +1,74 @@
-import { NgModule, ApplicationRef } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
-import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+import { NgModule }                     from '@angular/core';
+import { BrowserModule }                from '@angular/platform-browser';
+import { CommonModule, LocationStrategy,
+         HashLocationStrategy/*, PathLocationStrategy*/ }         from '@angular/common';
+import { FormsModule }                  from '@angular/forms';
+import { HttpModule }                   from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
 
-/*
- * Platform and Environment providers/directives/pipes
- */
-import { ENV_PROVIDERS } from './environment';
-import { routing } from './app.routing';
+import { AppComponent }                 from './app.component';
+import { Ng2BootstrapModule }           from 'ng2-bootstrap/ng2-bootstrap';
+import { NAV_DROPDOWN_DIRECTIVES }      from './shared/nav-dropdown.directive';
 
-// App is our top level component
-import { App } from './app.component';
-import { AppState, InternalStateType } from './app.service';
-import { GlobalState } from './global.state';
-import { NgaModule } from './theme/nga.module';
-import { PagesModule } from './pages/pages.module';
+import { ChartsModule }                 from 'ng2-charts/ng2-charts';
+import { SIDEBAR_TOGGLE_DIRECTIVES }    from './shared/sidebar.directive';
+import { AsideToggleDirective }         from './shared/aside.directive';
+import { BreadcrumbsComponent }         from './shared/breadcrumb.component';
 
-// Application wide providers
-const APP_PROVIDERS = [
-  AppState,
-  GlobalState
-];
+import { AuthService } from './shared/services/auth.service';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 
-export type StoreType = {
-  state: InternalStateType,
-  restoreInputValues: () => void,
-  disposeOldHosts: () => void
+// Routing Module
+import { AppRoutingModule }             from './app.routing';
+
+import { UnauthorizedModule } from './unauthorized/unauthorized.module';
+import { ProtectedModule } from './protected/protected.module';
+
+// Layouts
+import { FullLayoutComponent }          from './layouts/full-layout.component';
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
+    authDomain: "avcproject-fae11.firebaseapp.com",
+    databaseURL: "https://avcproject-fae11.firebaseio.com",
+    storageBucket: "avcproject-fae11.appspot.com",
+    messagingSenderId: "1031859806052"
 };
 
-/**
- * `AppModule` is the main entry point into Angular2's bootstraping process
- */
 @NgModule({
-  bootstrap: [App],
-  declarations: [
-    App
-  ],
-  imports: [ // import Angular's modules
-    BrowserModule,
-    HttpModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgaModule.forRoot(),
-    PagesModule,
-    routing
-  ],
-  providers: [ // expose our Services and Providers into Angular's dependency injection
-    ENV_PROVIDERS,
-    APP_PROVIDERS
-  ]
+    imports: [
+        HttpModule,
+        FormsModule,
+        BrowserModule,
+        CommonModule,
+        AppRoutingModule,
+        Ng2BootstrapModule,
+        ChartsModule,
+        AngularFireModule.initializeApp(firebaseConfig),
+        MaterialModule,
+
+        ProtectedModule,
+        UnauthorizedModule
+    ],
+    declarations: [
+        AppComponent,
+        FullLayoutComponent,
+        NAV_DROPDOWN_DIRECTIVES,
+        BreadcrumbsComponent,
+        SIDEBAR_TOGGLE_DIRECTIVES,
+        AsideToggleDirective
+    ],
+    providers: [
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy // This strategy with base-href './' allow to move the app to any subsite and works
+            // useClass: PathLocationStrategy // Only if passed the --base-href argument at build & the server has url rewrite to index.html
+        },
+        AuthService,
+        AuthGuardService
+    ],
+    bootstrap: [ AppComponent ]
 })
-
-export class AppModule {
-
-  constructor(public appRef: ApplicationRef, public appState: AppState) {
-  }
-
-  hmrOnInit(store: StoreType) {
-    if (!store || !store.state) return;
-    console.log('HMR store', JSON.stringify(store, null, 2));
-    // set state
-    this.appState._state = store.state;
-    // set input values
-    if ('restoreInputValues' in store) {
-      let restoreInputValues = store.restoreInputValues;
-      setTimeout(restoreInputValues);
-    }
-    this.appRef.tick();
-    delete store.state;
-    delete store.restoreInputValues;
-  }
-
-  hmrOnDestroy(store: StoreType) {
-    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    // save state
-    const state = this.appState._state;
-    store.state = state;
-    // recreate root elements
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    // save input values
-    store.restoreInputValues = createInputTransfer();
-    // remove styles
-    removeNgStyles();
-  }
-
-  hmrAfterDestroy(store: StoreType) {
-    // display new elements
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
-}
+export class AppModule { }
