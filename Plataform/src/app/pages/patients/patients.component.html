@@ -1,0 +1,49 @@
+<form class="example-form">
+  <h3> Patient </h3>
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><md-input-container class="example-full-width">
+      <input type="text" [(ngModel)]="selectedPatient.fname" name="first" mdInput placeholder="First name">
+    </md-input-container></td>
+    <td><md-input-container class="example-full-width">
+      <input type="text" [(ngModel)]="selectedPatient.lname" name ="second" mdInput placeholder="Last names">
+    </md-input-container></td>
+  </tr></table>
+
+  <p>
+    <md-input-container class="example-full-width">
+      <textarea type="text" [(ngModel)]="selectedPatient.address" name ="third" mdInput placeholder="Address">Bairro de Santiago</textarea>
+    </md-input-container>
+  </p>
+
+  <table class="example-full-width" cellspacing="0"><tr>
+    <td><md-input-container class="example-full-width">
+      <input type="text" [(ngModel)]="selectedPatient.city" name ="fourth" mdInput placeholder="City">
+    </md-input-container></td>
+    <td><md-input-container class="example-full-width">
+      <input type="text" [(ngModel)]="selectedPatient.state" name ="fifth" mdInput placeholder="State">
+    </md-input-container></td>
+    <td><md-input-container class="example-full-width">
+      <input [(ngModel)]="selectedPatient.postal" name ="sixth" mdInput placeholder="Postal Code" >
+    </md-input-container></td>
+  </tr></table>
+
+  <div class="button-row">
+    <button md-raised-button (click)="submit()">Submit</button>
+  </div>
+  <div class="button-row">
+    <button md-raised-button (click)="delete()">Delete</button>
+  </div>
+</form>
+
+<md-list class="example-form">
+  <div style="height: 8.7px"></div>
+  <h3 md-subheader>List of patients</h3>
+  <md-divider></md-divider>
+  <ul class="patients">
+    <li *ngFor="let patient of patients | async"
+    [class.selected]="patient === selectedPatient"
+    (click)="onSelect(patient, patient.$key)">
+      {{patient.fname}} {{patient.lname}}
+    </li>
+  </ul>
+</md-list>
