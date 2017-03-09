@@ -1,20 +1,33 @@
-#configuration_div{
-	border: 1px solid black;
-	height: 500px;
-	padding: 10px;
+html{
+	height: 100%;
+}
+
+head{
+	height: 15%;
+}
+
+body{
+	height: 85%;
 }
 
 
+
+#ask_number_div{
+		
+}
+
+#inserted_sing_img_div{
+	height: 25%;
+}
 
 .div-border{
 	border: 1px solid black;				
 }
 
 .div-setup{
-	height: 250px;
-	width: 25%;
-	padding: 5px;
-	border-radius: 15px;			
+	border: 1px solid black;
+	height: 100%;
+	padding: 20px;		
 }
 
 .img-size{

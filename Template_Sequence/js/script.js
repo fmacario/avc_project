@@ -1,5 +1,11 @@
 $("#generate").click(function () {
-	$("#configuration_div").hide();
+	$("#ask_number_div").hide();
+	
+	var number_of_images = $("#number_of_images").val();
+	console.log(number_of_images);
+	for(i=0; i<number_of_images; i++){
+		$("#insert_img_div").append('<div id="inserted_sing_img_div" class="col-sm-3 div-border"><p>test</p></div>');
+	}
 });
 
 
