@@ -20,28 +20,24 @@
 			
 				<h1>Tarefa de Sequenciação</h1>
 				
-				<!-- <input type="file" id="fileinput" multiple/> -->
+				<!--  -->
 		</header>
-		<div id="main_div" class="container-fluid div-setup">			
-				<div id="task_div" class="container-fluid div-border div-setup" style="padding:10px">
-					<div id="configuration_div" class="container-fluid col-sm-8 div-border div-setup"> 
-						<div id="ask_number_div" class="div-border div-setup text-center">
-							<p>
-								Número de imagens a inserir: 
-								<input id="number_of_images" type="text">
-								<button id="generate">Passo Seguinte</button>
-							</p> 
-						</div>
-						<br>
-						<div id="insert_img_div" class="row div-setup">
-							
-						</div>						
-						
-					</div>	
-				</div>
-				<!-- <div class="row div-border" id="answer_row">	</div> -->
-				
+		
+		<div id="main_div" class="container-fluid div-border">			
+			<div id="ask_number_div" class="div-border text-center">
+				<p>
+					Número de imagens a inserir: 
+					<input id="number_of_images" type="text">
+					<button id="generate">Passo Seguinte</button>
+				</p> 
 			</div>
+			
+			<div id="insert_img_div" class="div-border">
+			
+			</div>			
+					
+		</div>					
+			
 	</body>
 	
 	<script src="js/script.js"></script>

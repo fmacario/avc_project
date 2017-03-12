@@ -10,24 +10,27 @@ body{
 	height: 85%;
 }
 
-
-
-#ask_number_div{
-		
+#main_div{
+	height: 100%;
+	padding: 20px;
 }
 
-#inserted_sing_img_div{
+#ask_number_div{
+	height: 15%;
+	padding: 20px;
+}
+
+#insert_img_div{
+	height: 85%;
+	padding: 20px;
+}
+
+#single_insert_div{
 	height: 25%;
 }
 
 .div-border{
 	border: 1px solid black;				
-}
-
-.div-setup{
-	border: 1px solid black;
-	height: 100%;
-	padding: 20px;		
 }
 
 .img-size{
