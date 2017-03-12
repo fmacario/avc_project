@@ -25,15 +25,11 @@ body{
 	padding: 20px;
 }
 
-#single_insert_div{
-	height: 25%;
-}
-
 .div-border{
 	border: 1px solid black;				
 }
 
-.single_img_siv{
+.single_img_div{
 	height: 25%;
 }
 
