@@ -1,17 +1,30 @@
+$("#generate").click(function () {
+	$("#ask_number_div").hide();
+	
+	var number_of_images = $("#number_of_images").val();
+	console.log(number_of_images);
+	for(i=0; i<number_of_images; i++){
+		$("#insert_img_div").append('<div id="inserted_sing_img_div" class="col-sm-3 div-border"><p>test</p></div>');
+	}
+});
+
+
+
+/*
 $("#fileinput").change(function(){
 			
 			var i = 0;
-    		var images_row = document.getElementById("images_row");
-    		var answer_row = document.getElementById("answer_row");
+    		var images_div = document.getElementById("images_div");
+    		var answer_div = document.getElementById("answer_div");
 			var paths = [];			
 			
     		for (i=0; i< this.files.length; i++) {
     			
-    			images_row.innerHTML += "<div ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" class=\"brightness div-setup col-sm-3\"\"><img draggable=\"true\" ondragstart=\"drag(event)\" class=\"img-size image-responsive\" src=\"#\" id=\"img"+i+"\"></div>";
+    			images_div.innerHTML += "<div ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" class=\"brightness div-setup col-sm-3\"\"><img draggable=\"true\" ondragstart=\"drag(event)\" class=\"img-size image-responsive\" src=\"#\" id=\"img"+i+"\"></div>";
 
-				answer_row.innerHTML += "<div ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" class=\"div-border div-setup col-sm-3\" id=\"ans"+i+"\"></div>";
+				answer_div.innerHTML += "<div ondrop=\"drop(event)\" ondragover=\"allowDrop(event)\" class=\"div-border div-setup col-sm-3\" id=\"ans"+i+"\"></div>";
     		
-    			
+    			console.log(this.files[i].pathname);
     			paths[i] = "img/"+this.files[i].name;
     			
     			console.log(paths);
@@ -66,8 +79,7 @@ function drop(ev) {
 	 	itemp++;
 	 }
 }
-
-
+*/
 
 
 

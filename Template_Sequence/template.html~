@@ -1,38 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">	
 
-	
-	
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Tarefa de Sequência</title>
+		<title>Tarefa de Sequenciação</title>
 
 		
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
 		<link rel="stylesheet" href="css/style.css">
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	
+		
 		
 	</head> 
 		
 	<body>
-
 		<header class="top-header text-center">
-			<div class="container">
+			
 				<h1>Tarefa de Sequenciação</h1>
 				
-				<input type="file" id="fileinput" multiple/>
-				
-				<div class="row" id="images_row">	</div>	
-				
-				<div class="row" id="answer_row">	</div>
+				<!-- <input type="file" id="fileinput" multiple/> -->
+		</header>
+		<div id="main_div" class="container-fluid div-setup">			
+				<div id="task_div" class="container-fluid div-border div-setup" style="padding:10px">
+					<div id="configuration_div" class="container-fluid col-sm-8 div-border div-setup"> 
+						<div id="ask_number_div" class="div-border div-setup text-center">
+							<p>
+								Número de imagens a inserir: 
+								<input id="number_of_images" type="text">
+								<button id="generate">Passo Seguinte</button>
+							</p> 
+						</div>
+						<br>
+						<div id="insert_img_div" class="row div-setup">
+							
+						</div>						
+						
+					</div>	
+				</div>
+				<!-- <div class="row div-border" id="answer_row">	</div> -->
 				
 			</div>
-			
-		</header>
 	</body>
 	
 	<script src="js/script.js"></script>
