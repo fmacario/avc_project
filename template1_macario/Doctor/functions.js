@@ -7,7 +7,7 @@
 $(function () {
 	  //Function to upload image
     $(":file").change(function () {
-        if (this.files && this.files[1]) {
+        if (this.files && this.files[0]) {
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
             reader.readAsDataURL(this.files[0]);
