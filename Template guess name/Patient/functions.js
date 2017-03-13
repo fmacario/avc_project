@@ -81,12 +81,12 @@ function gerarDivs(){
   for (var i = 0; i < input.length; i++) {
     if (arrayLetters[i] == ' ') {
       for (var x = 0; x < count; x++) {
-        $("#inner").append("<div class=\"child col-sm-1\" id=\"espaco"+x+"\">&nbsp;</div>");
+        $("#inner").append("<div class=\"child col-sm-1 unselectable\" id=\"espaco"+x+"\">&nbsp;</div>");
       }
       count=12;
     }
     else {
-      $("#inner").append("<div class=\"child col-sm-1\" id=\"letra"+i+"\">"+arrayLetters[i]+"</div>");
+      $("#inner").append("<div class=\"child col-sm-1 unselectable\" id=\"letra"+i+"\">"+arrayLetters[i]+"</div>");
       count--;
     }
   }
