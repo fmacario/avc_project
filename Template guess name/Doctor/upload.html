@@ -30,11 +30,18 @@
 
 				</div>
 
-				<form>
-				  Palavra a descobrir(titulo da imagem por defeito):<input id="palavra" type="text">
-				  <br>Número de letras para preencher(duas por defeito):<input id="nrletras" type="number" value="2">
+				<form class="text-left">
+				  Palavra a descobrir(titulo da imagem por defeito):<input id="palavra" type="text"></input>
+				  <br>Número de letras para preencher(duas por defeito):<input id="nrletras" type="number" value="2"></input>
 				  <button type="button" id="todos">Todas</button>
 				  <button type="button" id="metade">Metade</button>
+					<br>Mensagens de ajuda:<input style="width: 30%;" id="msgAjuda" type="text"></input>
+					<button type="button" id="adicionarMensagem">Adicionar</button>
+					<button type="button" id="apagarMensagem">Apagar Ultima Mensagem</button>
+
+					<div id="mensagens">
+
+					</div>
 				  <br><button type="button" id="submitBtn">Generate template!</button>
 				</form>
 			</div>

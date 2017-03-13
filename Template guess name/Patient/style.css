@@ -45,20 +45,25 @@ body{
 #inner {
   padding: 20px;
   height: 100%;
-  border: 0px solid black;
+  border: 1px solid black;
 
 }
 
 #buttons{
-  height: 50%;
-  border: 0px solid black;
+  height: 40%;
+  border: 1px solid black;
 
 
 }
 
 #divLetras{
-  height: 50%;
-  border: 0px solid black;
+  height: 40%;
+  border: 1px solid black;
+}
+
+#message{
+  height: 20%;
+  border: 1px solid black;
 }
 
 .child {
@@ -70,6 +75,7 @@ body{
   font-size: 150%;
   color: black;
 }
+
 
 .unselectable {
     -webkit-touch-callout: none;
