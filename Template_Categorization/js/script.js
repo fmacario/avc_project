@@ -36,4 +36,4 @@ function readURL(input, i) {
     	};
     	reader.readAsDataURL(input.files[0]);
   	}	
-}
+}  
