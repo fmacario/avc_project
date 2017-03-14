@@ -4,32 +4,42 @@ html{
 
 body{
 	height: 100%;
+}
 
+heather{
+    height: 15%;
 }
 
 #main_div{
     text-align: center;
 	height: 85%;
 	padding: 10px;
-    border: 1px solid black;
 }
 
 #choice_div{
     max-width: 100%;
     height: 50%;
     padding: 10px;
-    border: 1px solid black;
 }
 
 #answer_div{
     max-width: 100%;
     height: 50%;
     padding: 10px;
-    border: 1px solid black;
+}
+
+#answer_div div{
+	border: 2px solid black;
 }
 
 .single_img_div{
 	text-align: center;
-	border: 2px solid black;
 	border-radius: 10px;
+    padding: 10px;
+}
+
+.img{
+    border-radius: 10px;
+    max-height: 100%;
+    max-width: 100%;
 }
