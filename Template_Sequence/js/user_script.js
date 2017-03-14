@@ -1,5 +1,6 @@
-function start(num, images){
+function start(images){
     var i, col, height, temp, order;
+    var num = images.length;
     var temp_images = images.slice();
 
     if(num>=5){
@@ -43,7 +44,7 @@ function drop(ev, target) {
     
     imageId = data.split("").reverse()[0];
     divId = target.id.split("").reverse()[0];
-
+    
     if(imageId == divId){
         ev.target.appendChild(document.getElementById(data));
     }
