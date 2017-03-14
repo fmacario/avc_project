@@ -1,48 +1,63 @@
 
 
-   var input="Bruno Henri ques";		//input dado para adivinhar
-   var nrLetras="2";	//nr de letras para esconder
+   var input="Joao Quintanilha";		//input dado para adivinhar
+   var nrLetras="5";	//nr de letras para esconder
    var arrayLetters = input.split(''); //Array com as letras da palavra
    var letrasEscondidas = []; //arra de letras que estao escondidas
+   var mensagensDoDoutor = [];
+   var mensagensAjudaRandom = ["Você consegue, tente outra vez!", "Está cada vez mais perto!", "Vai ver que vai acertar na próxima!", "Não desista!"];
+
 
 
 $(function () {
 
-        gerarDivs();
-        esconderLetras();
+        gerarDivs(); //gera divs para palavra a descobrir
+        esconderLetras(); //esconde as letras a adivinhar
 
-
-        //Qando clica butao, verifica se existe e mostra ou nao
+        //quando botao e clicado
         $(":button").click(function() {
             var clickedButton = this.id;
+
+
+            //Qando clica butao, verifica se existe e mostra ou nao (para minuscuas  maiusculas)
             if( $.inArray(clickedButton, letrasEscondidas) != -1){
                  for (var i = 0; i < arrayLetters.length; i++) {
                    if ($("#letra"+escondePosicao[i]).html() == clickedButton) {
                       $("#letra"+escondePosicao[i]).hide().fadeToggle(1000).css('background-color', 'white');
+                      $("#letra"+escondePosicao[i]).css('visibility', 'visible');
                       $(this).animate({ opacity: 0 });
                       letrasEscondidas.remove(clickedButton);
+
                     }
                  }
                }
-              if ($.inArray(clickedButton.toUpperCase(), letrasEscondidas) != -1) {
+              else if ($.inArray(clickedButton.toUpperCase(), letrasEscondidas) != -1) {
                   for (var i = 0; i < arrayLetters.length; i++) {
                     if ($("#letra"+escondePosicao[i]).html() == clickedButton.toUpperCase()) {
                        $("#letra"+escondePosicao[i]).hide().fadeToggle(1000).css('background-color', 'white');
                        $(this).animate({ opacity: 0 });
                        letrasEscondidas.remove(clickedButton.toUpperCase());
+
                      }
                   }
               }
-              else {
+              else {  //se a letra do butao nao tiver escondida, tira o butao
                 $(this).animate({ opacity: 0 });
                 $(this).attr('disabled', true);
+                if (mensagensDoDoutor.length != 0) {  //usa mensagens dadas pela doutora se ela tiver dado
+                  $("#message").html("<p id=\"textoAjuda\">"+mensagensDoDoutor[Math.floor(Math.random() * (mensagensDoDoutor.length))]+"</p>");
+                }
+                else {  //usa mensagens de ajuda predefinidas
+                  $("#message").html("<p id=\"textoAjuda\">"+mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))]+"</p>");
+                }
+
+                $("#textoAjuda").delay(3000).fadeOut(1000);
+
               }
+
+              checkIfDone();
           });
 });
-
-
-
-
 
 /* function que esconde os caracteres */
 function esconderLetras(){
@@ -71,7 +86,9 @@ function esconderLetras(){
 /* poe background preto para esconder e mete as letras escondidas no array letrasescondidas */
   for (var i = 0; i < escondePosicao.length; i++) {
       letrasEscondidas[i] = $("#letra"+escondePosicao[i]).html();
+
       $("#letra"+escondePosicao[i]).css('background-color', 'black');
+
   }
 }
 
@@ -92,7 +109,6 @@ function gerarDivs(){
   }
 }
 
-
 /* Removes element from array by value*/
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
@@ -105,9 +121,8 @@ Array.prototype.remove = function() {
     return this;
 };
 
-
 function checkIfDone(){
   if (letrasEscondidas.length == 0) {
-    console.log("DONE!");
+    alert("DONE!");
   }
 }

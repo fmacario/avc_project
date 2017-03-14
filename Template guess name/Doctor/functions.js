@@ -1,15 +1,15 @@
 
 
 
-
+   var msgNr = 0; // variavel de contar mensagens
    var imgTitle;	//titulo da imagem sem path/extencao
    var input;		//input dado para adivinhar
    var nrLetras;	//nr de letras para esconder
    var pathToImg; //path to image to upload o patient side
+   var mensagens = []; //array de mensagens dadas
 
 $(function () {
 	  //Function to upload image
-
 
     $(":file").change(function () {
         if (this.files && this.files[0]) {
@@ -24,57 +24,82 @@ $(function () {
         }
     });
 
-	//Butao de esconder todas as letras
-	$("#todos").on('click', function(){
 
-		assertImgInsert();
-		getInput();
+    //Butao de eliminar mensagem
+  	$("#apagarMensagem").on('click', function(){
+  		assertImgInsert();
 
-		var stringWithoutSpace = input.replace(/ /g,"") //tira os espaços entre os nomes para contagem de letras
-    $("#nrletras").val(stringWithoutSpace.length);
-	});
+      if (msgNr == 0) {
+        alert("Não existe texto ajuda para eliminar!");throw new Error("No text available to delete")
+      }
+      msgNr--;
+      $("#mensagem"+msgNr).hide();
+      mensagens.pop();
+  	});
 
-	//Butao de esconder metade das letras
-	$("#metade").on('click', function(){
-
-		assertImgInsert();
-		getInput();
-
-		var stringWithoutSpace = input.replace(/ /g,"") //tira os espaços entre os nomes para contagem de letras
-        $("#nrletras").val(stringWithoutSpace.length/2 | 0); //arredonda para baixo
-	});
-
-	//Submit button
-	$('#submitBtn').on('click', function(){
-
-			assertImgInsert();
-			getInput();
-			nrLetras = $('#nrletras').val();		//nrLetras é o nr de letras a esconder
+    //Butao de adicionar mensagem
+  	$("#adicionarMensagem").on('click', function(){
+  		assertImgInsert();
+  		getMessage();
 
 
-			if (nrLetras > input.length){alert("Número de letras a esconder é superior ao número de letras na palavra!");throw new Error("Assertion failed");}
-			else if (nrLetras <= 0) {alert("Número de letras não pode ser menor ou igual a 0!");throw new Error("Assertion failed");}
-			else{
+      $("#mensagens").append("<li id=\"mensagem"+msgNr+"\">"+mensagens[msgNr]+"</li>");
+      $("#msgAjuda").val("");
+      msgNr++;
+  	});
 
-        console.log(input);
-				console.log(nrLetras);
-        console.log(pathToImg);
+  	//Butao de esconder todas as letras
+  	$("#todos").on('click', function(){
+  		assertImgInsert();
+  		getInput();
 
-        var myObject = new Object();
-        myObject.input = input;
-        myObject.letras = nrLetras;
-        myObject.path = pathToImg;
+  		var stringWithoutSpace = input.replace(/ /g,"") //tira os espaços entre os nomes para contagem de letras
+      $("#nrletras").val(stringWithoutSpace.length);
+  	});
 
-        var myString = JSON.stringify(myObject);
-        console.log(myString);
+  	//Butao de esconder metade das letras
+  	$("#metade").on('click', function(){
 
-        var blob = new Blob([myString], {type: "text/plain;charset=utf-8"});    //Generates a .json file with keys for template
-        saveAs(blob, input+nrLetras+"escondidas.json");
+  		assertImgInsert();
+  		getInput();
 
-			}
-    });
+  		var stringWithoutSpace = input.replace(/ /g,"") //tira os espaços entre os nomes para contagem de letras
+          $("#nrletras").val(stringWithoutSpace.length/2 | 0); //arredonda para baixo
+  	});
 
-});
+  	//Submit button
+  	$('#submitBtn').on('click', function(){
+
+  			assertImgInsert();
+  			getInput();
+  			nrLetras = $('#nrletras').val();		//nrLetras é o nr de letras a esconder
+
+
+  			if (nrLetras > input.length){alert("Número de letras a esconder é superior ao número de letras na palavra!");throw new Error("Assertion failed");}
+  			else if (nrLetras <= 0) {alert("Número de letras não pode ser menor ou igual a 0!");throw new Error("Assertion failed");}
+  			else{
+                                            //meter ajudas para o ficheiro
+          console.log(input);
+  				console.log(nrLetras);
+          console.log(pathToImg);
+          console.log(mensagens);
+
+          var myObject = new Object();
+          myObject.input = input;
+          myObject.letras = nrLetras;
+          myObject.path = pathToImg;
+          myObject.mensagens = mensagens;
+
+          var myString = JSON.stringify(myObject);
+          console.log(myString);
+
+          var blob = new Blob([myString], {type: "text/plain;charset=utf-8"});    //Generates a .json file with keys for template
+          saveAs(blob, input+"_"+nrLetras+"letras_escondidas.json");
+
+  			}
+      });
+
+  });
 
 //Load the image and take out the upload button
 function imageIsLoaded(e) {
@@ -97,8 +122,32 @@ function assertImgInsert(){
 
 //Get input
 function getInput(){
-
 	input = $('#palavra').val();		//input é a palavra
 
 	if(input == "") {input = imgTitle;} 	//se nao houver input, palavra = titulo da img
 }
+
+//Get mensagem
+function getMessage(){
+  mensagemEmQuestao = $('#msgAjuda').val();
+
+  if (mensagemEmQuestao == "") {
+    alert("Insira um texto de ajuda!");throw new Error("Help not given!");
+  }
+
+	mensagens[msgNr] = mensagemEmQuestao;
+
+}
+
+
+/* Removes element from array by value*/
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
+    }
+    return this;
+};
