@@ -3,9 +3,14 @@ $(document).ready(function(){
 	$("#generate").click(function () {	
 		var number_of_images = $("#number_of_images").val();
 		
+		if(number_of_images == "" || number_of_images <= 0){
+			alert("Insira um número válido de imagens");
+			throw new Error("Número inválido de imagens");
+		}
+
 		$('#ask_number_div').hide();		
 		
-		$('#insert_img_div').append('<h4>Insira as imagens na ordem correcta:</h4>');
+		$('#insert_img_div').append('<h4><b>Seleccione</b> ou <b>arraste</b> as imagens na ordem correcta:</h4>');
 		
 		for(var i=0; i<number_of_images; i++){
 			$("#insert_img_div").append('<div id="img'+i+'_div" class="col-sm-3 single_img_div"> <input type="file" id="input'+i+'" class="input" value="Aqui" onchange="readURL(this, '+i+')" /> </div>');
