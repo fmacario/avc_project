@@ -1,67 +1,61 @@
-   var imgTitle;	//titulo da imagem sem path/extencao
-   var input;		//input dado para adivinhar
-   var nrLetras;	//nr de letras para esconder
-   var nImages;   // numero de imagens
-   var title;     // titulo (questão)
-
-$(function () {
-	  //Function to upload image
-    $(":file").change(function () {
-        if (this.files && this.files[0]) {
-            var reader = new FileReader();
-            reader.onload = imageIsLoaded;
-            reader.readAsDataURL(this.files[0]);
-			imgTitle = takeExtension(this.files[0].name);
-			$('#palavra').val(imgTitle);
-        }
-    });
-
-
-	//Submit button
-	$('#submitBtn').on('click', function(){
-
-			assertImgInsert();
-			getInput();
-			nrLetras = $('#nrletras').val();		//nrLetras é o nr de letras a esconder
-
-
-			if (nrLetras > input.length){alert("Número de letras a esconder é superior ao número de letras na palavra!");throw new Error("Assertion failed");}
-			else if (nrLetras <= 0) {alert("Número de letras não pode ser menor ou igual a 0!");throw new Error("Assertion failed");}
-			else{
-				console.log(input);
-				console.log(nrLetras);
-
-				//CODE GOES HERE TO GENERATE THE PATIENT TEMPLATE SIDE
-			}
-
-
-
-		});
+$(document).ready(function(){
+	
+	$("#generate").click(function () {	
+		var number_of_images = $("#number_of_images").val();
+		
+		$('#ask_number_div').hide();		
+		
+		
+		for(var i=0; i<number_of_images; i++){
+			$("#insert_img_div").append('<div id="img'+i+'_div" class="col-sm-3 single_img_div"> <input type="file" id="input'+i+'" class="input" value="Aqui" onchange="readURL(this, '+i+')" /> </div>');
+			console.log(i);
+			$("#img"+i+"_div").append("<input type='radio' id='myRadio"+i+"'>")
+		}
+	});
+	
 });
 
-//Load the image and take out the upload button
-function imageIsLoaded(e) {
-    $('#myImg').attr('src', e.target.result);
-	var input = document.getElementById("result").style.display = "none";
+function readURL(input, i) {
+	if (input.files && input.files[0]) {    
+		var reader = new FileReader();    	
+    	reader.onload = function (e) {
+    		$('#input'+i).hide();
+      		$('#img'+i+'_div').append('<img id="img'+i+'" src="" class="img">');
+        	$('#img'+i+'').attr('src', e.target.result);
+    	};
+    	reader.readAsDataURL(input.files[0]);
+  	}	
+}	
+
+// initialize
+function Init() {
+
+	var fileselect = $id("fileselect"),
+		filedrag = $id("filedrag"),
+		submitbutton = $id("submitbutton");
+
+	// file select
+	fileselect.addEventListener("change", FileSelectHandler, false);
+
+	// is XHR2 available?
+	var xhr = new XMLHttpRequest();
+	if (xhr.upload) {
+
+		// file drop
+		filedrag.addEventListener("dragover", FileDragHover, false);
+		filedrag.addEventListener("dragleave", FileDragHover, false);
+		filedrag.addEventListener("drop", FileSelectHandler, false);
+		filedrag.style.display = "block";
+
+		// remove submit button
+		submitbutton.style.display = "none";
+	}
 
 }
 
-//Get name without extentions
-function takeExtension(e) {
-		parts = e.split("."); // This is not an answer for all the scnarios, like if file name is `services.controller.js`
-		e = parts[0];
-		return e;
+// getElementById
+function $id(id) {
+	return document.getElementById(id);
 }
 
-//Assert image was placed
-function assertImgInsert(){
-	if(imgTitle==null){alert("Insira imagem!");throw new Error("Image not inserted");}	//se não houver imagem, erro
-}
-
-//Get input
-function getInput(){
-
-	input = $('#palavra').val();		//input é a palavra
-
-	if(input == "") {input = imgTitle;} 	//se nao houver input, palavra = titulo da img
-}
+	

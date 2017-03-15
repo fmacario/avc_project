@@ -13,26 +13,38 @@
 	</head>
 
 	<body>
-		<header class="top-header ">
-			<div class="container text-center"	>
+		<header class="top-header text-center">
 				<h1>Template 1 - Memória de reconhecimento visual</h1>
-
-				<div class="portrait">
-					<img class="img" id="myImg"/>
-				</div>
-
-				<p></p>
-
-				<input type='file' id="result" multiple/>
-
-				<form>
-					<p></p>
-						Título: <input id="title" type="text" size="50" value="Selecione imagens relacionadas com _______">
-					<p></p>
-				  <br><button type="button" id="submitBtn">Criar template</button>
-				</form>
-			</div>
 		</header>
+
+
+		<div id="main_div" class="container-fluid">			
+			<div id="ask_number_div" class=" text-center">
+				<p>
+					Número de imagens a inserir: 
+					<input id="number_of_images" type="text">
+					<button id="generate">Passo Seguinte</button>
+				</p> 
+			</div>
+			
+			<div id="insert_img_div">
+			
+			</div>
+
+			<div id="target"></div>		
+
+			<hr></hr>
+			<div id="ask_category_div" class=" text-center">
+				<p>
+					Título: <input id="title" type="text" size="50" value="Selecione imagens relacionadas com _______">
+					<button id="generate2">Passo Seguinte</button>
+				</p> 
+			</div>
+			
+			<div id="insert_cat_div">
+			
+			</div>				
+		</div>
 	</body>
 
 
