@@ -3,11 +3,11 @@ html{
 }
 
 head{
-	height: 15%;
+	height: 5%;
 }
 
 body{
-	height: 85%;
+	height: 95%;
 }
 
 #main_div{
@@ -16,22 +16,22 @@ body{
 }
 
 #ask_number_div{
-	height: 5%;
+	height: 2%;
 	padding: 20px;
 }
 
 #insert_img_div{
-	height: 40%;
+	height: 30%;
 	padding: 20px;
 }
 
 #ask_category_div{
-	height: 5%;
+	height: 3%;
 	padding: 20px;
 }
 
 #insert_cat_div{
-	height: 65%;
+	height: 70%;
 	padding: 20px;
 }
 
@@ -41,19 +41,19 @@ body{
 
 .single_img_div{
 	text-align: center;
-	height: 50%;
+	height: 100%;
 }
 
 .single_cat_div{
-	text-align: center;
-	height: 75%;
+	text-align: left;
+	height: 85%;
 	padding-right: 20%;
 }
 
 .all_cat_div{
 	text-align: center;
 	height: 100%;
-	width: 25%;
+	width: 32%;
 }
 
 .text_input{
