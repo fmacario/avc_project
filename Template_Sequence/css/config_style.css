@@ -22,6 +22,7 @@ body{
 	padding: 10px;
 }
 
+
 .single_img_div{
 	text-align: center;
 	height: 25%;
@@ -35,6 +36,11 @@ body{
 	max-height: 100%;
 }
 
+.input{
+	height: 100%;
+	width: 100%;
+}
+
 .brightness {
     background-color: white;
     display: inline-block;
@@ -43,4 +49,12 @@ body{
 
 .brightness img:hover {
     opacity: .75;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }
