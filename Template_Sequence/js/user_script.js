@@ -23,7 +23,7 @@ function start(images){
         //console.log(images);
 
         $('#choice_div').append('<div style="height:'+height+'%" id="choice'+i+'" class="col-sm-'+col+' single_img_div"> <img id="image'+order+'" src="'+temp_images[temp]+'" class="img" ondragstart="drag(event)"> </div>');
-        $('#answer_div').append('<div style="height:'+height+'%" id="answer'+i+'" class="col-sm-'+col+' single_img_div" ondrop="drop(event, this)" ondragover="allowDrop(event)"></div>');
+        $('#answer_div').append('<div style="height:'+height+'%" id="answer'+i+'" class="col-sm-'+col+' single_img_div" ondrop="drop(event, this, '+num+')" ondragover="allowDrop(event)"></div>');
         
         temp_images.splice(temp, 1);
     }
@@ -38,10 +38,12 @@ function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
-function drop(ev, target) {
+function drop(ev, target, num) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
+    var counter = 0;
     var message = document.createTextNode('Tente novamente');
+    console.log(num);
     //Element('div');
     //message.id = 'mess';
     //console.log(message.id);
@@ -49,13 +51,20 @@ function drop(ev, target) {
     
     imageId = data.split("").reverse()[0];
     divId = target.id.split("").reverse()[0];
-    
+
     if(imageId == divId){
+        alert('Acertaste!');
         ev.target.appendChild(document.getElementById(data));
+        /*
+        counter += 1;
+        if( $('#'+target.id+' img').length == num) {
+            alert('Congrats!!');
+        }
+        */
     }
     else{
 
-        if($('#'+target.id+':has(img)').length > 0){
+        if( $('#'+target.id+':has(img)').length > 0 ){
             
         }
         else{
