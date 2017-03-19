@@ -7,9 +7,11 @@ $(document).ready(function(){
 			alert("Insira um número válido de imagens");
 			throw new Error("Número inválido de imagens");
 		}
-
-		$('#ask_number_div').hide();		
 		
+		if( $('#insert_img_div:has(div)').length > 0 ){
+			$('#insert_img_div').html('');
+		}
+
 		$('#insert_img_div').append('<h4><b>Seleccione</b> ou <b>arraste</b> as imagens na ordem correcta:</h4>');
 		
 		for(var i=0; i<number_of_images; i++){
