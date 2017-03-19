@@ -1,0 +1,20 @@
+/*doctor */
+
+#butaoGuardar{
+	padding: 20px;
+}
+
+/*pacient */
+
+#styleRespostasPaciente{
+	padding: 20px;
+}
+
+#pergunta_paciente{
+	padding: 20px;
+}
+
+.btn:hover{
+background-image:none;
+background-color:green;	
+}
