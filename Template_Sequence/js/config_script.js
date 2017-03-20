@@ -15,7 +15,7 @@ $(document).ready(function(){
 		$('#insert_img_div').append('<h4><b>Seleccione</b> ou <b>arraste</b> as imagens na ordem correcta:</h4>');
 		
 		for(var i=0; i<number_of_images; i++){
-			$("#insert_img_div").append('<div id="img'+i+'_div" class="col-sm-3 single_img_div"> <input type="file" id="input'+i+'" class="input" value="Aqui" onchange="readURL(this, '+i+')" /> </div>');
+			$("#insert_img_div").append('<div id="img'+i+'_div" class="col-sm-3 single_img_div"> <input type="file" id="input'+i+'" class="input" onchange="readURL(this, '+i+')" /> </div>');
 		}
 	});
 
@@ -23,7 +23,8 @@ $(document).ready(function(){
 
 function readURL(input, i) {
 	if (input.files && input.files[0]) {    
-		var reader = new FileReader();    	
+		var reader = new FileReader();
+		console.log(input.id);    	
     	reader.onload = function (e) {
     		$('#input'+i).hide();
       		$('#img'+i+'_div').append('<img id="img'+i+'" src="" class="img">');
