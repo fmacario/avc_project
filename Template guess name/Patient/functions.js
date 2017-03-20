@@ -1,59 +1,64 @@
 
 
-   var input="Joao Quintanilha";		//input dado para adivinhar
-   var nrLetras="5";	//nr de letras para esconder
-   var arrayLetters = input.split(''); //Array com as letras da palavra
+   var selectedDiv;
+   var input;		//input dado para adivinhar
+   var nrLetras;	//nr de letras para esconder
+   var arrayLetters; //Array com as letras da palavra
    var letrasEscondidas = []; //arra de letras que estao escondidas
-   var mensagensDoDoutor = [];
-   var mensagensAjudaRandom = ["Você consegue, tente outra vez!", "Está cada vez mais perto!", "Vai ver que vai acertar na próxima!", "Não desista!"];
+   var mensagensDoDoutor = []; //Mensgens de ajuda dadas pelo doutor
+   var mensagensAjudaRandom = ["Você consegue, tente outra vez!", "Está cada vez mais perto!", "Vai ver que vai acertar na próxima!", "Não desista!"]; //mensagens de ajuda pre definidas
 
 
 
 $(function () {
 
+        // GERAR TEMPLATE EM SERVIDOR
+        /*
+        $.getJSON('Joao Pedro Quintanilha_5letras_escondidas.json', function(data) {
+            input = data[Object.keys(data)[0]];
+            nrLetras = data[Object.keys(data)[1]];
+            mensagensDoDoutor = data[Object.keys(data)[3]];
+            arrayLetters = input.split('');
+
+                    gerarDivs(); //gera divs para palavra a descobrir
+                    esconderLetras(); //esconde as letras a adivinhar
+        });
+
+        */
+
+        // GERAR TEMPLATE EM SERVIDOR loclmente
+        input = "Joao Quintanilha";
+        nrLetras = 5;
+        arrayLetters = input.split('');
+
         gerarDivs(); //gera divs para palavra a descobrir
         esconderLetras(); //esconde as letras a adivinhar
+
 
         //quando botao e clicado
         $(":button").click(function() {
             var clickedButton = this.id;
+            var selectedLetter = $("#"+selectedDiv).html();
 
+            checkIfDivSelected();
 
-            //Qando clica butao, verifica se existe e mostra ou nao (para minuscuas  maiusculas)
-            if( $.inArray(clickedButton, letrasEscondidas) != -1){
-                 for (var i = 0; i < arrayLetters.length; i++) {
-                   if ($("#letra"+escondePosicao[i]).html() == clickedButton) {
-                      $("#letra"+escondePosicao[i]).hide().fadeToggle(1000).css('background-color', 'white');
-                      $("#letra"+escondePosicao[i]).css('visibility', 'visible');
-                      $(this).animate({ opacity: 0 });
-                      letrasEscondidas.remove(clickedButton);
-
-                    }
-                 }
-               }
-              else if ($.inArray(clickedButton.toUpperCase(), letrasEscondidas) != -1) {
-                  for (var i = 0; i < arrayLetters.length; i++) {
-                    if ($("#letra"+escondePosicao[i]).html() == clickedButton.toUpperCase()) {
-                       $("#letra"+escondePosicao[i]).hide().fadeToggle(1000).css('background-color', 'white');
-                       $(this).animate({ opacity: 0 });
-                       letrasEscondidas.remove(clickedButton.toUpperCase());
-
-                     }
-                  }
+            if (selectedLetter == clickedButton || selectedLetter == clickedButton.toUpperCase()) {
+              $("#"+selectedDiv).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
+              $("#"+selectedDiv).attr('onclick', '');
+              selectedDiv = null;
+              letrasEscondidas.remove(clickedButton);
+              letrasEscondidas.remove(clickedButton.toUpperCase());
+            }
+            else {
+              if (mensagensDoDoutor.length != 0) {  //usa mensagens dadas pela doutora se ela tiver dado
+                $("#message").html("<p id=\"textoAjuda\">"+mensagensDoDoutor[Math.floor(Math.random() * (mensagensDoDoutor.length))]+"</p>");
               }
-              else {  //se a letra do butao nao tiver escondida, tira o butao
-                $(this).animate({ opacity: 0 });
-                $(this).attr('disabled', true);
-                if (mensagensDoDoutor.length != 0) {  //usa mensagens dadas pela doutora se ela tiver dado
-                  $("#message").html("<p id=\"textoAjuda\">"+mensagensDoDoutor[Math.floor(Math.random() * (mensagensDoDoutor.length))]+"</p>");
-                }
-                else {  //usa mensagens de ajuda predefinidas
-                  $("#message").html("<p id=\"textoAjuda\">"+mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))]+"</p>");
-                }
-
-                $("#textoAjuda").delay(3000).fadeOut(1000);
-
+              else {  //usa mensagens de ajuda predefinidas
+                $("#message").html("<p id=\"textoAjuda\">"+mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))]+"</p>");
               }
+
+              $("#textoAjuda").delay(3000).fadeOut(1000);
+            }
 
               checkIfDone();
           });
@@ -77,34 +82,30 @@ function esconderLetras(){
       }else {                                             //previne repeticao dentro do array
           if( $.inArray(tmp, escondePosicao) != -1){
              i--;
-        } else {
+        }
+        else {
             escondePosicao [i] = tmp;
         }
       }
   }
 
 /* poe background preto para esconder e mete as letras escondidas no array letrasescondidas */
+/* atribui ás letras escondidas a chance de serem clicadas */
   for (var i = 0; i < escondePosicao.length; i++) {
       letrasEscondidas[i] = $("#letra"+escondePosicao[i]).html();
-
-      $("#letra"+escondePosicao[i]).css('background-color', 'black');
-
+      $("#letra"+escondePosicao[i]).attr('class', 'child col-sm-1 unselectable hided-div');
+      $("#letra"+escondePosicao[i]).attr('onclick', 'getSelectedDiv(id)');
   }
 }
 
 /*function que gera divs com as letras das palavras a adivinhar */
 function gerarDivs(){
-  var count=12;
   for (var i = 0; i < input.length; i++) {
     if (arrayLetters[i] == ' ') {
-      for (var x = 0; x < count; x++) {
-        $("#inner").append("<div class=\"child col-sm-1 unselectable\" id=\"espaco"+x+"\">&nbsp;</div>");
-      }
-      count=12;
+        $("#inner").append("<div  class=\"row unselectable\" id=\"espaco"+x+"\">&nbsp;</div>");
     }
     else {
-      $("#inner").append("<div class=\"child col-sm-1 unselectable\" id=\"letra"+i+"\">"+arrayLetters[i]+"</div>");
-      count--;
+      $("#inner").append("<div  class=\"child col-sm-1 unselectable\" id=\"letra"+i+"\">"+arrayLetters[i]+"</div>");
     }
   }
 }
@@ -123,6 +124,32 @@ Array.prototype.remove = function() {
 
 function checkIfDone(){
   if (letrasEscondidas.length == 0) {
-    alert("DONE!");
+    $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIO COM SUCESSO A TAREFA!</h3></p>");
+    $("button").prop('disabled', true);
+  }
+}
+
+function getSelectedDiv(div){
+  if (selectedDiv == null) {
+    selectedDiv = div;
+    $("#"+selectedDiv).attr("class", "child col-sm-1 unselectable hided-selected-div");
+  }
+  else {
+    unselectLastDiv(selectedDiv);
+    selectedDiv = div;
+    $("#"+selectedDiv).attr("class", "child col-sm-1 unselectable hided-selected-div");
+  }
+
+}
+
+function unselectLastDiv(div){
+  $("#"+div).attr("class", "child col-sm-1 unselectable hided-div");
+}
+
+function checkIfDivSelected(){
+  if (selectedDiv == null) {
+    $("#message").html("<p id=\"textoAjuda\">Seleccione um espaço preto para adivinhar a letra!</p>");
+    $("#textoAjuda").delay(2000).fadeOut(1000);
+    throw new Error("No black area selected");
   }
 }

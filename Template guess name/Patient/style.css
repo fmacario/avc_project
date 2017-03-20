@@ -86,3 +86,14 @@ body{
     -o-user-select: none;
     user-select: none;
 }
+
+.hided-div{
+    background-color: black;
+    color: black;
+    cursor: pointer;
+}
+
+.hided-selected-div{
+  background-color: orange;
+  color: orange;
+}
