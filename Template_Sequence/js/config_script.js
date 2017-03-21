@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	
-	$("#generate").click(function () {	
+	$('#generate').click(function () {	
 		var number_of_images = $("#number_of_images").val();
 		
 		if(number_of_images == "" || number_of_images <= 0){
@@ -12,27 +12,35 @@ $(document).ready(function(){
 			$('#insert_img_div').html('');
 		}
 
-		$('#insert_img_div').append('<h4><b>Seleccione</b> ou <b>arraste</b> as imagens na ordem correcta:</h4>');
+		$('#insert_img_div').append('<h4><b>Seleccione</b> ou <b>arraste de uma pasta</b> as imagens na ordem correcta:</h4>');
+		$('#insert_img_div').append('<button id="save">Guardar Tarefa</button><br><br>');
 		
 		for(var i=0; i<number_of_images; i++){
 			$("#insert_img_div").append('<div id="img'+i+'_div" class="col-sm-3 single_img_div"> <input type="file" id="input'+i+'" class="input" onchange="readURL(this, '+i+')" /> </div>');
 		}
 	});
 
+	$('#save').click(saveTask());
+
 });
 
 function readURL(input, i) {
 	if (input.files && input.files[0]) {    
 		var reader = new FileReader();
-		console.log(input.id);    	
+
     	reader.onload = function (e) {
     		$('#input'+i).hide();
-      		$('#img'+i+'_div').append('<img id="img'+i+'" src="" class="img">');
-        	$('#img'+i+'').attr('src', e.target.result);
+      		$('#img'+i+'_div').append('<img id="img'+i+'" src="'+e.target.result+'" class="img">');
     	};
     	reader.readAsDataURL(input.files[0]);
   	}	
 }	
+
+
+function saveTask(){
+	console.log("lets save!");
+}
+
 
 // initialize
 function Init() {
