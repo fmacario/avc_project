@@ -155,11 +155,12 @@ function checkIfDivSelected(){
 }
 
 
-
+/*
 var recognizing;
 var final;
 var interim;
-var recognition = new webkitSpeechRecognition();
+//var recognition = new webkitSpeechRecognition();
+var recognition = new window.SpeechRecognition();
 recognition.continuous = true;
 recognition.interim = true;
 reset();
@@ -190,14 +191,11 @@ function reset() {
 }
 
 function toggleStartStop() {
-  if (recognizing) {
-    recognition.stop();
-    reset();
-  } else {
+
     recognition.start();
     recognizing = true;
     buttonss.innerHTML = "Click to Stop";
     final_span.innerHTML = "";
     interim_span.innerHTML = "";
-  }
+    */
 }
