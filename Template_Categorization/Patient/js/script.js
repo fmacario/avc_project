@@ -5,16 +5,16 @@ function start(num, images){
     for(i=0; i<num; i++){
         temp = Math.floor((Math.random() * temp_images.length));
         order = images.indexOf(temp_images[temp]);
-		
-		$("#insert_img_div").append('<img id="image'+order+'" style="height:90%; margin:15px;" src="'+temp_images[temp]+'" class="img single_img_div" ondragstart="drag(event)">');
-		
+
+		      $("#insert_img_div").append('<img id="image'+order+'" style="margin:15px;" src="'+temp_images[temp]+'" class="single_img_div" ondragstart="drag(event)">');
+
         temp_images.splice(temp, 1);
     }
-	
-	$("#insert_cat_div").append('<h4>Livros</h4><div id="cat_div" style="margin:10px;" class="div-border single_cat_div col-sm-4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
-	$("#insert_cat_div").append('<h4>Desporto</h4><div id="cat_div2" style="margin:10px;" class="div-border single_cat_div col-sm-4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
-	$("#insert_cat_div").append('<h4>Carros</h4><div id="cat_div3" style="margin:10px;" class="div-border single_cat_div col-sm-4" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
-	
+
+	$("#insert_cat_div").append('<div id="all_cat0" class="all_cat_div col-xs-3"><h4>Livros</h4><div id="cat_div0" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+	$("#insert_cat_div").append('<div id="all_cat1" class="all_cat_div col-xs-3"><h4>Desporto</h4><div id="cat_div1" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+	$("#insert_cat_div").append('<div id="all_cat2" class="all_cat_div col-xs-3"><h4>Carros</h4><div id="cat_div2" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+
 }
 
 function allowDrop(ev) {
@@ -28,5 +28,8 @@ function drag(ev) {
 function drop(ev, target) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-	ev.target.appendChild(document.getElementById(data));
+	   ev.target.appendChild(document.getElementById(data));
+
+     $('#single_image_div').append('<div class="col-xs-3 div-border"><img id="img'+x+'" src="'+e.target.result+'" class="img-size div-border"></div>');
+
 }
