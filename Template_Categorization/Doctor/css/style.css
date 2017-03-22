@@ -1,33 +1,25 @@
-html{
+html, body{
 	height: 100%;
 }
 
-head{
-	height: 5%;
-}
-
-body{
-	height: 95%;
+header{
+	height: 15%;
 }
 
 #main_div{
-	height: 100%;
-	padding: 20px;
+	height: 85%;
+	padding: 10px;
 }
 
 #ask_category_div{
-	height: 30%;
+	height: 15%;
 	padding: 20px;
 }
 
 #insert_cat_div{
-	height: 70%;
-	padding: 20px;
-}
-
-#insert_img_div{
-	height: 70%;
-	padding: 20px;
+	height: 85%;
+	padding: 10px;
+	border: 1px solid black;
 }
 
 .div-border{
@@ -40,16 +32,15 @@ body{
 }
 
 .single_cat_div{
-	text-align: left;
-	height: 100%;
-	padding-right: 20%;
-	padding-bottom: 10%;
+	text-align: center;
+	height: 80%;
+	padding: 10px;
 }
 
 .all_cat_div{
 	text-align: center;
 	height: 70%;
-	width: 33%;
+	padding: 10px;
 }
 
 .text_input{
