@@ -1,7 +1,9 @@
+
+var categorias = ["Carros", "Livros", "Desporto"];
+
 function start(num, images){
     var i, col, temp, order;
     var temp_images = images.slice();
-
     for(i=0; i<num; i++){
         temp = Math.floor((Math.random() * temp_images.length));
         order = images.indexOf(temp_images[temp]);
@@ -9,11 +11,10 @@ function start(num, images){
 		      $("#insert_img_div").append('<img id="image'+order+'" style="margin:15px;" src="'+temp_images[temp]+'" class="single_img_div" ondragstart="drag(event)">');
 
         temp_images.splice(temp, 1);
-    }
 
-	$("#insert_cat_div").append('<div id="all_cat0" class="all_cat_div col-xs-3"><h4>Livros</h4><div id="cat_div0" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
-	$("#insert_cat_div").append('<div id="all_cat1" class="all_cat_div col-xs-3"><h4>Desporto</h4><div id="cat_div1" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
-	$("#insert_cat_div").append('<div id="all_cat2" class="all_cat_div col-xs-3"><h4>Carros</h4><div id="cat_div2" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+
+    }
+    generateDivForCat(categorias);
 
 }
 
@@ -25,11 +26,20 @@ function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
-function drop(ev, target) {
+function drop(ev, constante) {
+
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-	   ev.target.appendChild(document.getElementById(data));
+	   //ev.target.appendChild(document.getElementById(data));
+     $('#'+ev.target.id).append('<div id=tmp'+constante+' class="col-xs-3 div-border"></div>');
 
-     $('#single_image_div').append('<div class="col-xs-3 div-border"><img id="img'+x+'" src="'+e.target.result+'" class="img-size div-border"></div>');
 
+}
+
+function generateDivForCat(cat){
+
+  for (var i = 0; i < cat.length; i++) {
+    $("#insert_cat_div").append('<div id="all_cat'+i+'" class="all_cat_div col-xs-3 "><h4>'+cat[i]+'</h4><div id="cat_div'+i+'" style="margin:10px;" class="div-border single_cat_div col-xs-3" ondrop="drop(event, i)" ondragover="allowDrop(event)"></div></div>');
+
+  }
 }
