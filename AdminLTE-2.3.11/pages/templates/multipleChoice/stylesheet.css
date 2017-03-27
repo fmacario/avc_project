@@ -1,20 +1,21 @@
-/*doctor */
-
-#butaoGuardar{
-	padding: 20px;
-}
 
 /*pacient */
 
-#styleRespostasPaciente{
-	padding: 20px;
-}
-
-#pergunta_paciente{
-	padding: 20px;
-}
 
 .btn:hover{
 background-image:none;
-background-color:green;	
+}
+
+.border {
+		border: 0px solid black;
+}
+
+.answer {
+	width: 99%;
+	margin: 10px;
+	font-size: 20px;
+}
+
+#message{
+	margin-top: 10px;
 }
