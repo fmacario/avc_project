@@ -1,0 +1,57 @@
+html, body{
+	height: 100%;
+}
+
+header{
+	height: 15%;
+}
+
+#main_div{
+	height: 85%;
+}
+
+#ask_category_div{
+	height: 15%;
+}
+
+#insert_cat_div{
+	height: 85%;
+}
+
+.div-border{
+	border: 1px solid black;
+}
+
+.single_img_div{
+	text-align: center;
+	height: 100%;
+}
+
+.single_cat_div{
+	text-align: center;
+	height: 80%;
+	padding: 4%;
+}
+
+.all_cat_div{
+	text-align: center;
+	height: 70%;
+}
+
+.text_input{
+	text-align:	center;
+}
+
+.img-size{
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.brightness {
+    background-color: white;
+    display: inline-block;
+}
+
+.brightness img:hover {
+    opacity: .75;
+}
