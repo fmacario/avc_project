@@ -55,7 +55,7 @@ function Init() {
 	// is XHR2 available?
 	var xhr = new XMLHttpRequest();
 	if (xhr.upload) {
-
+		console.log();
 		// file drop
 		filedrag.addEventListener("dragover", FileDragHover, false);
 		filedrag.addEventListener("dragleave", FileDragHover, false);
@@ -70,6 +70,7 @@ function Init() {
 
 // getElementById
 function $id(id) {
+	console.log("aqui");
 	return document.getElementById(id);
 }
 

@@ -4,11 +4,15 @@ html{
 
 body{
 	height: 100%;
+}
 
+#title{
+	margin-top: 0px;
+	padding: 5px;
 }
 
 #main_div{
-	height: 85%;
+	height: 100%;
 	padding: 10px;
 }
 
