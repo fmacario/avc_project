@@ -1,13 +1,12 @@
 
 
    var selectedDiv;
-   var input;		//input dado para adivinhar
+   var input;	//input dado para adivinhar
    var nrLetras;	//nr de letras para esconder
    var arrayLetters; //Array com as letras da palavra
    var letrasEscondidas = []; //arra de letras que estao escondidas
    var mensagensDoDoutor = []; //Mensgens de ajuda dadas pelo doutor
    var mensagensAjudaRandom = ["Você consegue, tente outra vez!", "Está cada vez mais perto!", "Vai ver que vai acertar na próxima!", "Não desista!"]; //mensagens de ajuda pre definidas
-
 
 
 $(function () {
@@ -27,7 +26,7 @@ $(function () {
         */
 
         // GERAR TEMPLATE EM SERVIDOR loclmente
-        input = "Joao Quintanilha";
+        input = "João Quintanilha";
         nrLetras = 5;
         arrayLetters = input.split('');
 
@@ -42,12 +41,41 @@ $(function () {
 
             checkIfDivSelected();
 
-            if (selectedLetter == clickedButton || selectedLetter == clickedButton.toUpperCase()) {
+            var certo = false;
+
+            if (true){
+            	if (selectedLetter == clickedButton || selectedLetter == clickedButton.toUpperCase()){
+            		certo = true;
+            	}
+
+            	if (clickedButton == 'a' || clickedButton == 'A'){
+            		if(selectedLetter == 'ã' || selectedLetter == 'Ã' || selectedLetter == 'á' || selectedLetter == 'Á')
+            			certo = true;
+            	}
+            	else if (clickedButton == 'o' || clickedButton == 'O'){
+            		if(selectedLetter == 'õ' || selectedLetter == 'Õ' || selectedLetter == 'ó' || selectedLetter == 'Ó')
+            			certo = true;
+            	}
+            	else if (clickedButton == 'i' || clickedButton == 'I'){
+            		if(selectedLetter == 'í' || selectedLetter == 'Í')
+            			certo = true;
+            	}
+            	else if (clickedButton == 'e' || clickedButton == 'E'){
+            		if(selectedLetter == 'é' || selectedLetter == 'É')
+            			certo = true;
+            	}
+            	else if (clickedButton == 'u' || clickedButton == 'U'){
+            		if(selectedLetter == 'ú' || selectedLetter == 'Ú')
+            			certo = true;
+            	}
+            }
+
+            if (certo){
               $("#"+selectedDiv).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
               $("#"+selectedDiv).attr('onclick', '');
               selectedDiv = null;
-              letrasEscondidas.remove(clickedButton);
-              letrasEscondidas.remove(clickedButton.toUpperCase());
+              letrasEscondidas.remove(selectedLetter);
+              letrasEscondidas.remove(selectedLetter.toUpperCase());
             }
             else {
               if (mensagensDoDoutor.length != 0) {  //usa mensagens dadas pela doutora se ela tiver dado
@@ -124,7 +152,7 @@ Array.prototype.remove = function() {
 
 function checkIfDone(){
   if (letrasEscondidas.length == 0) {
-    $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIO COM SUCESSO A TAREFA!</h3></p>");
+    $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
     $("button").prop('disabled', true);
   }
 }
@@ -154,48 +182,12 @@ function checkIfDivSelected(){
   }
 }
 
-
-/*
-var recognizing;
-var final;
-var interim;
-//var recognition = new webkitSpeechRecognition();
-var recognition = new window.SpeechRecognition();
-recognition.continuous = true;
-recognition.interim = true;
-reset();
-recognition.onend = reset;
-recognition.lang = "pt-PT";
-
-recognition.onresult = function (event) {
-  final = "";
-  interim = "";
-  for (var i = 0; i < event.results.length; ++i) {
-    if (event.results[i].final) {
-        final += event.results[i][0].transcript;
-    } else {
-        interim += event.results[i][0].transcript;
-        if (input == event.results[i][0].transcript) {
-          console.log("RESPOSTA CERTA")
-        } 
-        console.log("resp " + event.results[i][0].transcript);
-    }
-  }
-  final_span.innerHTML = final;
-  interim_span.innerHTML = interim;
-}
-
-function reset() {
-  recognizing = false;
-  buttonss.innerHTML = "Click to Speak";
-}
-
-function toggleStartStop() {
-
-    recognition.start();
-    recognizing = true;
-    buttonss.innerHTML = "Click to Stop";
-    final_span.innerHTML = "";
-    interim_span.innerHTML = "";
-    */
+// se o utilizador adivinhar, por voz, aparecem as letras todas
+function end(){
+	for (var i = 0; i < arrayLetters.length; i++) {
+		$("#letra"+i).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
+              $("#letra"+i).attr('onclick', '');
+	}
+	$("button").prop('disabled', true);
+	$("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
 }

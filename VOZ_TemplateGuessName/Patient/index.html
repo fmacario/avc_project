@@ -86,8 +86,7 @@
 
 					<button id="rect">Gravar</button>
 
-					<button id="buttonss" onclick="toggleStartStop()"></button>
-					<div style="border:dotted;padding:10px">
+					<div style="border:dotted;padding:20px">
 					    <span id="final_span"></span>
 					    <span id="interim_span" style="color:black"></span>
 					</div>
@@ -97,7 +96,7 @@
       window.SpeechRecognition = window.SpeechRecognition       ||
                                  window.webkitSpeechRecognition ||
                                  null;
- 
+ 	
 		//caso não suporte esta API DE VOZ                              
 		if (window.SpeechRecognition === null) {
 	    	document.getElementById('unsupported').classList.remove('hidden');
@@ -112,6 +111,16 @@
         		for (var i = event.resultIndex; i < event.results.length; i++) {
         			if(event.results[i].isFinal){
         				transcription.textContent += event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')';
+        					if (event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase()) != -1){
+        						console.log("OKKKKKK");
+        						end();
+        					}
+        				var teste = event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase());
+        				console.log(teste);
+        				console.log(event.results[i][0].transcript.toLowerCase());
+        				console.log(input.toLowerCase());
+
+
         			}else{
 		            	transcription.textContent += event.results[i][0].transcript;
         			}
