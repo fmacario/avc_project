@@ -34,6 +34,8 @@
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/config_style.css">  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
   <script src="js/config_script.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -174,29 +176,53 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <header class="top-header text-center">
-        <h1 id="title">Tarefa de Sequenciação</h1>   
-    </header>
-    
-    <div id="main_div" class="container-fluid">     
-      <div id="ask_number_div" class=" text-center">
-        <p>
-          Número de imagens a inserir: 
-          <input id="number_of_images" type="text">
-          <button id="generate">Passo Seguinte</button>
-        </p> 
-      </div>
-      
-      <div id="insert_img_div"> </div>      
-    
-    </div>          
-  </div>
-  <!-- /.row (main row) -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1> Patients </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">Patients</li>
+        </ol>
+      </section>
 
-  </section>
-  <!-- /.content -->
-  </div>
+      <!-- Main content -->
+      <section class="content">
+
+        <!-- Sequence box -->
+        <div class="box box-solid box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Sequenciação</h3>
+            <div class="box-tools pull-right">
+              <!-- Buttons, labels, and many other things can be placed here! -->
+            </div>
+            <!-- /.box-tools -->
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div id="main_div" class="container-fluid">
+              <div id="ask_number_div" class=" text-center">
+                <p>
+                  Número de imagens a inserir:
+                  <input id="number_of_images" type="text">
+                  <button id="generate">Passo Seguinte</button>
+                </p>
+              </div>
+
+              <div id="insert_img_div"> </div>
+              <button id="save">Guardar Tarefa</button>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <!-- Adicionar qualquer coisa ao footer -->
+          </div>
+          <!-- box-footer -->
+        </div>
+        <!-- /.box -->
+      </section>
+      <!-- /.content -->
+    </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">

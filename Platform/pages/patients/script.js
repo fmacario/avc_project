@@ -18,6 +18,7 @@ $(document).ready(function () {
 
   patientsRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
+      console.log(childSnapshot.val().pid);
       tpatients.append($('<tr>')
         .append($('<td>')
           .text(childSnapshot.val().pid)
