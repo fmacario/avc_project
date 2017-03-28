@@ -82,14 +82,17 @@
 
 					</div>
 
-					<span id="unsupported" class="hidden">API not supported</span>
-
-					<button id="rect">Gravar</button>
-
+					<div class="container text-center">
+						<span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span><p></p>
+						<button style="width: 300px" id="rect">Gravar</button>
+					</div>
+					
+					<!-- 
 					<div style="border:dotted;padding:20px">
 					    <span id="final_span"></span>
 					    <span id="interim_span" style="color:black"></span>
-					</div>
+					</div> 
+					-->
 
     <script type="text/javascript">
       // Test browser support
@@ -102,17 +105,17 @@
 	    	document.getElementById('unsupported').classList.remove('hidden');
         }else {
             var recognizer = new window.SpeechRecognition();
-            var transcription = document.getElementById("final_span");
+            //var transcription = document.getElementById("final_span");
         	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
         	recognizer.continuous = true
         	recognizer.lang = "pt-PT";
         	recognizer.onresult = function(event){
-        		transcription.textContent = "";
+        		//transcription.textContent = "";
         		for (var i = event.resultIndex; i < event.results.length; i++) {
         			if(event.results[i].isFinal){
-        				transcription.textContent += event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')';
+        				//transcription.textContent += event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')';
+        				console.log(event.results[i][0].transcript+" (Taxa de acerto [0/1] : " + event.results[i][0].confidence + ")");
         					if (event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase()) != -1){
-        						console.log("OKKKKKK");
         						end();
         					}
         				var teste = event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase());
@@ -122,7 +125,7 @@
 
 
         			}else{
-		            	transcription.textContent += event.results[i][0].transcript;
+		            	//transcription.textContent += event.results[i][0].transcript;
         			}
 
         		}
