@@ -19,7 +19,7 @@ var images = [];
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         order = childSnapshot.val().ordem;
-
+        console.log(order);
         for(var i=0; i<order.length; i++) {
             // read image
             var spaceRef = storageRef.child('templates/sequence/0' + order[i]);
@@ -39,6 +39,8 @@ templatesRef.once("value", function (snapshot) {
 function start(){
     console.log(images);
     var orilength = images.length;
+    var tempImages = images.slice();
+    console.log(tempImages);
 
     var col, height;
 
@@ -53,7 +55,9 @@ function start(){
 
     for(var i=0; i<orilength; i++){
         var temp = Math.floor((Math.random() * images.length));
-        $('#choice_div').append('<div style="height:'+height+'%" id="choice'+i+'" class="col-sm-'+col+' single_img_div"> <img src="'+images[temp]+'" class="img" ondragstart="drag(event)"> </div>');
+        var correctOrder = images.indexOf(tempImages[temp]);
+        $('#choice_div').append('<div style="height:'+height+'%" id="choice'+i+'" class="col-sm-'+col+' single_img_div"> <img id="img'+correctOrder+'" src="'+images[temp]+'" class="img" ondragstart="drag(event)"> </div>');
+        $('#answer_div').append('<div style="height:'+height+'%" id="answer'+i+'" class="col-sm-'+col+' single_img_div" ondrop="drop(event, '+orilength+')" ondragover="allowDrop(event)"></div>');
         images.splice(temp, 1);
     }
 }
@@ -83,9 +87,8 @@ function start(){
 
 
  }
-
-
 }
+*/
 
 function allowDrop(ev) {
     ev.preventDefault();
@@ -103,6 +106,8 @@ function drop(ev, num) {
     imageId = data.split("").reverse()[0];
     divId = ev.target.id.split("").reverse()[0];
 
+    console.log(imageId);
+    console.log(divId);
 
     if ($("#" + ev.target.id + ':has(img)').length == 0) {
         if (imageId == divId) {
@@ -119,4 +124,4 @@ function drop(ev, num) {
             }, 1000);
         }
     }
-}*/
+}
