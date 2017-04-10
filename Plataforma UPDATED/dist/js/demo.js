@@ -338,10 +338,3 @@
 
   }
 })(jQuery, $.AdminLTE);
-
-
-function tmp(a){
-  
-    document.getElementById("masterSection").innerHTML='<object type="text/html"data="'+a+'" class="content" style="width:100%; height:85vh;"></object>';
-
-};
