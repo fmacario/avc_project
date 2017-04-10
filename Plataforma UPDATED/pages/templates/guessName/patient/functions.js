@@ -15,12 +15,13 @@ var database = firebase.database(); // database service
 // read metadata
 var input;
 var nrLetters;
-var templatesRef = database.ref("templates/"); // database templates
+var templatesRef = database.ref("templates/guessname/"); // database templates
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        input = childSnapshot.val().inputa;
+        input = childSnapshot.val().input;
         nrLetras = childSnapshot.val().nrLetras;
+
         var arrayLetters = input.split('');
         for (var i = 0; i < arrayLetters.length; i++) {
             if (arrayLetters[i] == ' ') {
@@ -30,6 +31,7 @@ templatesRef.once("value", function (snapshot) {
                 $("#inner").append("<div  class=\"child col-sm-1 unselectable\" id=\"letra" + i + "\">" + arrayLetters[i] + "</div>");
             }
         }
+
         var letrasEscondidas = [];
         var escondePosicao = [];        // posicao das letras a serem escondidas
 
@@ -83,7 +85,36 @@ $(":button").click(function () {
 
     checkIfDivSelected();
 
-    if (selectedLetter == clickedButton || selectedLetter == clickedButton.toUpperCase()) {
+    var certo = false;
+
+    if (true){
+    	if (selectedLetter == clickedButton || selectedLetter == clickedButton.toUpperCase()){
+    		certo = true;
+    	}
+
+    	if (clickedButton == 'a' || clickedButton == 'A'){
+    		if(selectedLetter == 'ã' || selectedLetter == 'Ã' || selectedLetter == 'á' || selectedLetter == 'Á')
+    			certo = true;
+    	}
+    	else if (clickedButton == 'o' || clickedButton == 'O'){
+    		if(selectedLetter == 'õ' || selectedLetter == 'Õ' || selectedLetter == 'ó' || selectedLetter == 'Ó')
+    			certo = true;
+    	}
+    	else if (clickedButton == 'i' || clickedButton == 'I'){
+    		if(selectedLetter == 'í' || selectedLetter == 'Í')
+    			certo = true;
+    	}
+    	else if (clickedButton == 'e' || clickedButton == 'E'){
+    		if(selectedLetter == 'é' || selectedLetter == 'É')
+    			certo = true;
+    	}
+    	else if (clickedButton == 'u' || clickedButton == 'U'){
+    		if(selectedLetter == 'ú' || selectedLetter == 'Ú')
+    			certo = true;
+    	}
+    }
+
+    if (certo) {
         $("#" + selectedDiv).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
         $("#" + selectedDiv).attr('onclick', '');
         selectedDiv = null;
@@ -153,7 +184,7 @@ Array.prototype.remove = function () {
 
 function checkIfDone() {
     if (letrasEscondidas.length == 0) {
-        $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIO COM SUCESSO A TAREFA!</h3></p>");
+        $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
         $("button").prop('disabled', true);
     }
 }
@@ -183,3 +214,11 @@ function checkIfDivSelected() {
     }
 }
 
+function end(){
+	for (var i = 0; i < arrayLetters.length; i++) {
+		$("#letra"+i).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
+              $("#letra"+i).attr('onclick', '');
+	}
+	$("button").prop('disabled', true);
+	$("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
+}

@@ -12,6 +12,7 @@ firebase.initializeApp(config);
 var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
 
+// Global variables
 var templatesRef = database.ref("templates/sequence"); // database templates
 var order = []; // Array ordenado com nomes das imagens
 var images = [];
@@ -20,7 +21,7 @@ templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         order = childSnapshot.val().ordem;
         for (var i = 0; i < order.length; i++) {
-            // read images
+            // read imagesz
             storageRef.child('templates/sequence/' + order[i]).getDownloadURL().then(function (url) {
                 images.push(url);
             });
@@ -45,7 +46,6 @@ function start() {
 
     for (var i = 0; i < orilength; i++) {
         var temp = Math.floor((Math.random() * images.length));
-        console.log(images[temp]);
         $('#choice_div').append('<div style="height:' + height + '%" id="choice' + i + '" class="col-sm-' + col + ' single_img_div"> <img id="img'+i+'" src="' + images[temp] + '" class="img" ondragstart="drag(event)"> </div>');
         images.splice(temp, 1);
         $('#answer_div').append('<div style="height:' + height + '%" id="'+ order[i] + '" class="col-sm-' + col + ' single_img_div" ondrop="drop(event, ' + orilength + ')" ondragover="allowDrop(event)"></div>');
