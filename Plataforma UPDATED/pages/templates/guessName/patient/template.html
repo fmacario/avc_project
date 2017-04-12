@@ -239,20 +239,21 @@
                                 <button type="button" class="button" id="z">Z</button>
                             </div>
                         </div>
+
                         <div class="container text-center">
-                            <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span>
-                            <p></p>
-                            <button style="width: 300px" id="rect">Gravar</button>
+                            <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span><p></p>
+                            <button style="width: 300px" id="rect">Responder por voz</button>
                         </div>
 
-                        <!-- 
-                    <div style="border:dotted;padding:20px">
-                        <span id="final_span"></span>
-                        <span id="interim_span" style="color:black"></span>
-                    </div> 
-                    -->
+                        <div id="divBorder" style="border:dotted">
+                            <span id="final_span"></span>
+                        </div>  
 
                         <script type="text/javascript">
+
+                            document.getElementById('divBorder').style.visibility = 'hidden';
+                            document.getElementById('rect').style.visibility = 'visible';
+
                             // Test browser support
                             window.SpeechRecognition = window.SpeechRecognition ||
                                 window.webkitSpeechRecognition ||
@@ -261,25 +262,27 @@
                             //caso não suporte esta API DE VOZ                              
                             if (window.SpeechRecognition === null) {
                                 document.getElementById('unsupported').classList.remove('hidden');
+                                document.getElementById('rect').style.visibility = 'hidden';  
+                                document.getElementById('divBorder').style.visibility = 'hidden';
                             } else {
                                 var recognizer = new window.SpeechRecognition();
-                                //var transcription = document.getElementById("final_span");
+                                var transcription = document.getElementById("final_span");
                                 //Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
                                 recognizer.continuous = true
                                 recognizer.lang = "pt-PT";
                                 recognizer.onresult = function (event) {
-                                    //transcription.textContent = "";
+                                    transcription.textContent = "";
                                     for (var i = event.resultIndex; i < event.results.length; i++) {
                                         if (event.results[i].isFinal) {
-                                            //transcription.textContent += event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')';
-                                            console.log(event.results[i][0].transcript + " (Taxa de acerto [0/1] : " + event.results[i][0].confidence + ")");
+                                            transcription.textContent += event.results[i][0].transcript;
+                                            //console.log(event.results[i][0].transcript + " (Taxa de acerto [0/1] : " + event.results[i][0].confidence + ")");
                                             if (event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase()) != -1) {
                                                 end();
                                             }
                                             var teste = event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase());
-                                            console.log(teste);
-                                            console.log(event.results[i][0].transcript.toLowerCase());
-                                            console.log(input.toLowerCase());
+                                            //console.log(teste);
+                                            //console.log(event.results[i][0].transcript.toLowerCase());
+                                            //console.log(input.toLowerCase());
 
 
                                         } else {
@@ -294,6 +297,8 @@
                                     } catch (ex) {
                                         alert("error: " + ex.message);
                                     }
+                                    document.getElementById('divBorder').style.visibility = 'visible';
+                                    document.getElementById('rect').style.visibility = 'hidden';
                                 });
                             }
                         </script>

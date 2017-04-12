@@ -15,7 +15,6 @@ var database = firebase.database(); // database service
 // Global variables
 var templateRef = database.ref("templates/multiplechoice");
 
-
 templateRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         rightAnswers = childSnapshot.val().respostasCertas,
@@ -25,9 +24,12 @@ templateRef.once("value", function (snapshot) {
     })
 });
 
+
 function start() {
     $('#start').hide();
 
+    document.getElementById('rect').style.visibility = 'visible';
+    
     inserirPergunta(); //gera pergunta
     shuffle(answers); // shuffles the array
     generateBtn(); //gera divs para palavra a descobrir
@@ -37,6 +39,8 @@ function start() {
         var clickedButton = this.id;
         var chosenAnswer = $("#" + clickedButton).html();
 
+        console.log(clickedButton);
+
         if (rightAnswers.includes(chosenAnswer)) {
             disableBtn(clickedButton);
             $("#" + clickedButton).attr('class', 'answer btn btn-success');
@@ -44,12 +48,19 @@ function start() {
             rightAnswers.remove(chosenAnswer);
             checkIfDone();
         }
+        else if(clickedButton == "rect"){
+            try {
+                recognizer.start();
+              } catch(ex) {
+                alert("error: "+ex.message);
+              }
+              document.getElementById('divBorder').style.visibility = 'visible';
+              document.getElementById('rect').style.visibility = 'hidden';
+        }
         else {
             disableBtn(clickedButton);
             $("#" + clickedButton).attr('class', 'answer btn btn-danger');
         }
-
-
     });
 }
 
@@ -65,6 +76,7 @@ function generateBtn() {
 
 function checkIfDone() {
     if (rightAnswers.length == 0) {
+        recognizer.stop();
         $("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
         for (var i = 0; i < answerNumber; i++) {
             $("#resposta" + i).attr('disabled', 'disabled');
@@ -98,4 +110,34 @@ function shuffle(a) {
         a[i - 1] = a[j];
         a[j] = x;
     }
+}
+
+function voz(botao_escolhido){
+    
+    var clickedButton = botao_escolhido.id;
+    var chosenAnswer = $("#" + clickedButton).html();
+
+    console.log("botao " + botao_escolhido.id);
+    console.log("chosenAnswer: " + chosenAnswer);
+
+
+    if (rightAnswers.includes(chosenAnswer)) {
+        console.log("certa");
+
+        disableBtn(clickedButton);
+        $("#" + clickedButton).attr('class', 'answer btn btn-success');
+
+        rightAnswers.remove(chosenAnswer);
+        checkIfDone();
+    }
+    else {
+        console.log("errada");
+
+        disableBtn(clickedButton);
+        $("#" + clickedButton).attr('class', 'answer btn btn-danger');
+    }
+}
+
+function getNoRespostas(){
+    return answerNumber;
 }

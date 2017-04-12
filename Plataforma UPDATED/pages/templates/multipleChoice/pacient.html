@@ -166,11 +166,11 @@
             <!-- Main content -->
             <section id="masterSection" class="content">
                 <section class="content-header">
-                    <h1> Escolha múltltipla </h1>
+                    <h1> Escolha múltipla </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li>Templates</li>
-                        <li class="active">Escolha múltltipla</li>
+                        <li class="active">Escolha múltipla</li>
                     </ol>
                 </section>
 
@@ -188,7 +188,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="container">
-                                <button id="start" onclick="start()"> Comecar</button>
+                                <button id="start" onclick="start()"> Começar</button>
                                 <h2 class="text-center border" id="question"></h2>
 
                                 <div id="answers" class="border"></div>
@@ -197,6 +197,109 @@
                                     <!-- Onde vao entrar as mensagens de ajuda-->
 
                                 </div>
+
+
+                    <div class="container text-center">
+                        <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span><p></p>
+                        <button style="width: 300px" id="rect">Responder por voz</button>
+                    </div>
+
+                    <div id="divBorder" style="border:dotted">
+                        <span id="final_span"></span>
+                    </div>   
+
+                    <script type="text/javascript">
+
+                        document.getElementById('divBorder').style.visibility = 'hidden';
+                        document.getElementById('rect').style.visibility = 'hidden';
+
+                      // Test browser support
+                      window.SpeechRecognition = window.SpeechRecognition       ||
+                                                 window.webkitSpeechRecognition ||
+                                                 null;
+                    
+                        //caso não suporte esta API DE VOZ                              
+                        if (window.SpeechRecognition === null) {
+                            document.getElementById('unsupported').classList.remove('hidden');
+                            document.getElementById('rect').style.visibility = 'hidden';  
+                            document.getElementById('divBorder').style.visibility = 'hidden';
+                            
+                        }else {
+                            var recognizer = new window.SpeechRecognition();
+                            var transcription = document.getElementById("final_span");
+
+                            recognizer.continuous = true
+                            recognizer.lang = "pt-PT";
+
+                            recognizer.onresult = function(event){
+                                transcription.textContent = "";
+                                for (var i = event.resultIndex; i < event.results.length; i++) {
+                                    if(event.results[i].isFinal){
+                                        transcription.textContent += event.results[i][0].transcript;
+                                        var teste;
+                                        var x = 0;
+                                        var botao;
+                                        var inputElement = document.createElement('input');
+                                        inputElement.type = "button";
+
+                                        while(x < getNoRespostas()){
+                                            var frase = event.results[i][0].transcript.toLowerCase().replace(/ /g,'');
+                                            var respostaX = answers[x].toLowerCase().replace(/ /g,'');
+
+                                            teste = frase == respostaX;
+                                            
+                                            console.log("frase: " + frase);
+
+                                            if (frase == "primeira" || frase == "primeiro") {
+                                                inputElement.id = "resposta0";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "segunda" || frase == "segundo") {
+                                                inputElement.id = "resposta1";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "terceira" || frase == "terceiro") {
+                                                inputElement.id = "resposta2";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "quarta" || frase == "quarto") {
+                                                inputElement.id = "resposta3";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "quinta" || frase == "quinto") {
+                                                inputElement.id = "resposta4";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "sexta" || frase == "sexto") {
+                                                inputElement.id = "resposta5";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "sétima" || frase == "sétimo") {
+                                                inputElement.id = "resposta6";
+                                                voz(inputElement);
+                                            }
+                                            if (frase == "oitava" || frase == "oitavo") {
+                                                inputElement.id = "resposta7";
+                                                voz(inputElement);
+                                            }
+                                            else if (teste) {
+                                                inputElement.id = "resposta" + x;   // 
+                                                voz(inputElement);
+                                            }
+
+                                            ++x;
+                                        }                               
+                                    }
+                                    else{
+                                    
+                                    }
+                                }
+                            }
+                        }
+                    </script>
+
+
+
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -237,143 +340,6 @@
     <!-- script local para esta pagina -->
     <script src="pacient.js"></script>
 
-</body>
-
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Blank Page</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../../dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../../dist/css/skins/_all-skins.min.css">
-
-    <link rel="stylesheet" href="stylesheet.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
-
-<body class="hold-transition skin-blue sidebar-mini">
-    <!-- =============================================== -->
-    <section class="content-header">
-        <h1> Escolha múltltipla </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li>Templates</li>
-            <li class="active">Escolha múltltipla</li>
-        </ol>
-    </section>
-
-    <!-- Main content -->
-    <section class="content">
-        <!-- Default box -->
-        <div class="box box-solid box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Configuração de template</h3>
-                <div class="box-tools pull-right">
-                    <!-- Buttons, labels, and many other things can be placed here! -->
-                </div>
-                <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="container">
-                    <button id="start" onclick="start()"> Comecar</button>
-                    <h2 class="text-center border" id="question"></h2>
-
-                    <div id="answers" class="border"></div>
-                    <div class="message border text-center" id="message">
-
-                        <!-- Onde vao entrar as mensagens de ajuda-->
-
-                    </div>
-                </div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <!-- Adicionar qualquer coisa ao footer -->
-            </div>
-            <!-- box-footer -->
-        </div>
-        <!-- /.box -->
-    </section>
-    <!-- /.content -->
-    <!-- ./wrapper -->
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
-    <!-- jQuery 2.2.3 -->
-    <script src="../../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-    <!-- Bootstrap 3.3.6 -->
-    <script src="../../../bootstrap/js/bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="../../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../../plugins/fastclick/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../../dist/js/app.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../../dist/js/demo.js"></script>
-
-    <!-- script local para esta pagina -->
-    <script src="pacient.js"></script>
 </body>
 
 </html>
