@@ -82,7 +82,7 @@ function showPatient(obj) {
 
         var conc = '<div id="templates">' +
             '<div class="form-group">' +
-            '<select class="form-control select2 " multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+            '<select class="form-control select2 " multiple="" data-placeholder="Escolha um template a associar" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 
         patientRefTemplates.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
