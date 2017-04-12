@@ -16,13 +16,18 @@ var database = firebase.database(); // database service
 var input;
 var nrLetters;
 var templatesRef = database.ref("templates/guessname/"); // database templates
+var selectedDiv = null;
+var letrasEscondidas = [];
+var arrayLetters = [];
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         input = childSnapshot.val().input;
         nrLetras = childSnapshot.val().nrLetras;
+        mensagensDoDoutor = childSnapshot.val().mensagens;
+        console.log(mensagensDoDoutor);
 
-        var arrayLetters = input.split('');
+        arrayLetters = input.split('');
         for (var i = 0; i < arrayLetters.length; i++) {
             if (arrayLetters[i] == ' ') {
                 $("#inner").append("<div  class=\"row unselectable\" id=\"espaco" + i + "\">&nbsp;</div>");
@@ -32,7 +37,7 @@ templatesRef.once("value", function (snapshot) {
             }
         }
 
-        var letrasEscondidas = [];
+        letrasEscondidas = [];
         var escondePosicao = [];        // posicao das letras a serem escondidas
 
         /* nao deixa a posicao de esconder ser a mesma */
@@ -122,10 +127,10 @@ $(":button").click(function () {
         letrasEscondidas.remove(clickedButton.toUpperCase());
     }
     else {
-        if (mensagensDoDoutor.length != 0) {  //usa mensagens dadas pela doutora se ela tiver dado
+        if (mensagensDoDoutor.length != 0) {  //usa messages dadas pela doutora se ela tiver dado
             $("#message").html("<p id=\"textoAjuda\">" + mensagensDoDoutor[Math.floor(Math.random() * (mensagensDoDoutor.length))] + "</p>");
         }
-        else {  //usa mensagens de ajuda predefinidas
+        else {  //usa messages de ajuda predefinidas
             $("#message").html("<p id=\"textoAjuda\">" + mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))] + "</p>");
         }
 

@@ -1,9 +1,9 @@
-var msgNr = 0; // variavel de contar mensagens
+var msgNr = 0; // variavel de contar messages
 var imgTitle;	//titulo da imagem sem path/extencao
 var input;		//input dado para adivinhar
 var nrLetras;	//nr de letras para esconder
 var pathToImg; //path to image to upload o patient side
-var mensagens = []; //array de mensagens dadas
+var messages = []; //array de messages dadas
 
 // Initialize Firebase
 var config = {
@@ -47,7 +47,7 @@ $(function () {
         }
         msgNr--;
         $("#mensagem" + msgNr).hide();
-        mensagens.pop();
+        messages.pop();
     });
 
     //Butao de adicionar mensagem
@@ -56,7 +56,7 @@ $(function () {
         getMessage();
 
 
-        $("#mensagens").append("<li id=\"mensagem" + msgNr + "\">" + mensagens[msgNr] + "</li>");
+        $("#messages").append("<li id=\"mensagem" + msgNr + "\">" + messages[msgNr] + "</li>");
         $("#msgAjuda").val("");
         msgNr++;
     });
@@ -101,7 +101,7 @@ $(function () {
             //meter ajudas para o ficheiro
             console.log(input);
             console.log(nrLetras);
-            console.log(mensagens);
+            console.log(messages);
 
 
             var imageRef = storageRef.child('teste.jpg');
@@ -120,7 +120,7 @@ $(function () {
                 templateid: 0,
                 input: input,
                 nrLetras: nrLetras,
-                mensagens: mensagens
+                mensagens: messages
             });
         }
     });
@@ -168,7 +168,7 @@ function getMessage() {
         throw new Error("Help not given!");
     }
 
-    mensagens[msgNr] = mensagemEmQuestao;
+    messages[msgNr] = mensagemEmQuestao;
 
 }
 

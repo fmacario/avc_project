@@ -107,6 +107,5 @@ function removePatient() {
 // Assign task to patient
 function assignTask() {
     var pname = $("#pname").val();
-    patientRefTemplates.
 }
 
