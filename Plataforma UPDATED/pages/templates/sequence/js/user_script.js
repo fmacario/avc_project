@@ -26,11 +26,13 @@ templatesRef.once("value", function (snapshot) {
                 images.push(url);
             });
         }
+            console.log(images);
     })
 });
 
 function start() {
     $('#start').hide();
+    console.log(images);
     var orilength = images.length;
 
     var col, height;
