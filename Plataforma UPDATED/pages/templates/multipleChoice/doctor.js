@@ -112,14 +112,14 @@ function generateTemplate() {
 function checkIfAnswerMissig() {
     if (answers.includes("")) {
         answers = [];
-        alert("Insira todas as respostas possiveis!");
+        alert("Insira todas as respostas possíveis!");
         throw new Error("missing answer");
     }
 }
 
 function checkIfNoCorrectAnswer() {
     if (rightAnswers.length == 0) {
-        alert("Insira pelo menos uma resposta correcta!");
+        alert("Insira pelo menos uma resposta correta!");
         throw new Error("missing right answer");
     }
 }

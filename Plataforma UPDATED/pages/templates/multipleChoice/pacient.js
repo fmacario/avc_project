@@ -14,6 +14,7 @@ var database = firebase.database(); // database service
 
 // Global variables
 var templateRef = database.ref("templates/multiplechoice");
+var historico = [];
 
 templateRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
@@ -49,8 +50,10 @@ function start() {
         if (rightAnswers.includes(chosenAnswer)) {
             disableBtn(clickedButton);
             $("#" + clickedButton).attr('class', 'answer btn btn-success');
+            // $("#" + clickedButton).delay(1000).fadeOut(1000); // para o botão desaparecer, depois de clicado
 
             rightAnswers.remove(chosenAnswer);
+            historico.push(chosenAnswer);
             checkIfDone();
         }
         else if(clickedButton == "rect"){
@@ -62,9 +65,13 @@ function start() {
               document.getElementById('divBorder').style.visibility = 'visible';
               document.getElementById('rect').style.visibility = 'hidden';
         }
-        else {
-            disableBtn(clickedButton);
+        else if(!historico.includes(chosenAnswer)){
+            //disableBtn(clickedButton); ("#textoAjuda").delay(3000).fadeOut(1000);
             $("#" + clickedButton).attr('class', 'answer btn btn-danger');
+
+           	setTimeout(function() {
+			    removerCorVermelha(clickedButton);
+			}, 1000);
         }
     });
 }
@@ -86,6 +93,8 @@ function checkIfDone() {
         for (var i = 0; i < answerNumber; i++) {
             $("#resposta" + i).attr('disabled', 'disabled');
         }
+        
+        document.getElementById('rect').style.visibility = 'hidden';
     }
 }
 
@@ -125,7 +134,8 @@ function voz(botao_escolhido){
     console.log("botao " + botao_escolhido.id);
     console.log("chosenAnswer: " + chosenAnswer);
 
-
+    console.log(rightAnswers);
+    console.log(historico);
     if (rightAnswers.includes(chosenAnswer)) {
         console.log("certa");
 
@@ -133,16 +143,24 @@ function voz(botao_escolhido){
         $("#" + clickedButton).attr('class', 'answer btn btn-success');
 
         rightAnswers.remove(chosenAnswer);
+        historico.push(chosenAnswer);
         checkIfDone();
     }
-    else {
+    else if(!historico.includes(chosenAnswer)){
         console.log("errada");
 
-        disableBtn(clickedButton);
         $("#" + clickedButton).attr('class', 'answer btn btn-danger');
+
+       	setTimeout(function() {
+		    removerCorVermelha(clickedButton);
+		}, 1000);
     }
 }
 
 function getNoRespostas(){
     return answerNumber;
+}
+
+function removerCorVermelha(clickedButton){
+	$("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }
