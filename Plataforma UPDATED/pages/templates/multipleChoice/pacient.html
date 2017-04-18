@@ -228,7 +228,7 @@
                             var recognizer = new window.SpeechRecognition();
                             var transcription = document.getElementById("final_span");
 
-                            recognizer.continuous = true
+                            recognizer.continuous = true;
                             recognizer.lang = "pt-PT";
 
                             recognizer.onresult = function(event){
@@ -253,38 +253,47 @@
                                             if (frase == "primeira" || frase == "primeiro") {
                                                 inputElement.id = "resposta0";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "segunda" || frase == "segundo") {
+                                            else if (frase == "segunda" || frase == "segundo") {
                                                 inputElement.id = "resposta1";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "terceira" || frase == "terceiro") {
+                                            else if (frase == "terceira" || frase == "terceiro") {
                                                 inputElement.id = "resposta2";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "quarta" || frase == "quarto") {
+                                            else if (frase == "quarta" || frase == "quarto") {
                                                 inputElement.id = "resposta3";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "quinta" || frase == "quinto") {
+                                            else if (frase == "quinta" || frase == "quinto") {
                                                 inputElement.id = "resposta4";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "sexta" || frase == "sexto") {
+                                            else if (frase == "sexta" || frase == "sexto") {
                                                 inputElement.id = "resposta5";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "sétima" || frase == "sétimo") {
+                                            else if (frase == "sétima" || frase == "sétimo") {
                                                 inputElement.id = "resposta6";
                                                 voz(inputElement);
+                                                break;
                                             }
-                                            if (frase == "oitava" || frase == "oitavo") {
+                                            else if (frase == "oitava" || frase == "oitavo") {
                                                 inputElement.id = "resposta7";
                                                 voz(inputElement);
+                                                break;
                                             }
                                             else if (teste) {
                                                 inputElement.id = "resposta" + x;   // 
                                                 voz(inputElement);
+                                                break;
                                             }
 
                                             ++x;

@@ -28,7 +28,12 @@ templateRef.once("value", function (snapshot) {
 function start() {
     $('#start').hide();
 
-    document.getElementById('rect').style.visibility = 'visible';
+    window.SpeechRecognition = window.SpeechRecognition       ||
+                                                 window.webkitSpeechRecognition ||
+                                                 null;
+                    
+    //caso não suporte esta API DE VOZ                              
+    if (window.SpeechRecognition != null) document.getElementById('rect').style.visibility = 'visible';
     
     inserirPergunta(); //gera pergunta
     shuffle(answers); // shuffles the array

@@ -268,7 +268,7 @@
                                 var recognizer = new window.SpeechRecognition();
                                 var transcription = document.getElementById("final_span");
                                 //Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
-                                recognizer.continuous = true
+                                recognizer.continuous = true;
                                 recognizer.lang = "pt-PT";
                                 recognizer.onresult = function (event) {
                                     transcription.textContent = "";
