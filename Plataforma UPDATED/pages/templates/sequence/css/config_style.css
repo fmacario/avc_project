@@ -25,7 +25,7 @@ body{
 
 .single_img_div{
 	text-align: center;
-	height: 25%;
+	height: auto;
 	border: 2px solid black;
 	border-radius: 10px;
 	padding: 5px;
@@ -33,7 +33,7 @@ body{
 
 .img{
 	border-radius: 10px;
-	max-width: 100%;
+	width: 100%;
 	max-height: 100%;
 }
 

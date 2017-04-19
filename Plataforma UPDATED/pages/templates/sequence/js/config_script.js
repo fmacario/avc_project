@@ -14,11 +14,14 @@ var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
 
 var array = [];
+var number_of_images;
 
 $(document).ready(function () {
 
+    $('#save').hide();
+    
     $('#generate').click(function () {
-        var number_of_images = $("#number_of_images").val();
+        number_of_images = $("#number_of_images").val();
 
         if (number_of_images == "" || number_of_images <= 0) {
             alert("Insira um número válido de imagens");
@@ -40,9 +43,11 @@ $(document).ready(function () {
         database.ref('templates/sequence/' + 0).set({
             ordem: array
         });
-        alert("Template criado com sucesso");
+        alert("Tarefa guardada com sucesso!");
     });
 });
+
+var counter = 0;
 
 function readURL(input, i) {
     if (input.files && input.files[0]) {
@@ -61,6 +66,11 @@ function readURL(input, i) {
             imagesImageRef.put(file).then(function () {
                 console.log('Uploaded a blob or file!');
             });
+
+            counter++;
+            if(counter== number_of_images){
+                $('#save').show();
+            }
         };
         reader.readAsDataURL(input.files[0]);
     }

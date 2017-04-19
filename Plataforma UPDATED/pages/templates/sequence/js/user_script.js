@@ -35,22 +35,22 @@ function start() {
     console.log(images);
     var orilength = images.length;
 
-    var col, height;
+    var col; //height;
 
     if (orilength >= 5) {
-        height = 50;
+        //height = 50;
         col = parseInt(12 / orilength) + 1;
     }
     else {
         col = 12 / orilength;
-        height = 100;
+        //height = 100;
     }
 
     for (var i = 0; i < orilength; i++) {
         var temp = Math.floor((Math.random() * images.length));
-        $('#choice_div').append('<div style="height:' + height + '%" id="choice' + i + '" class="col-sm-' + col + ' single_img_div"> <img id="img'+i+'" src="' + images[temp] + '" class="img" ondragstart="drag(event)"> </div>');
+        $('#choice_div').append('<div id="choice' + i + '" class="col-sm-' + col + ' single_img_div"> <img id="img'+i+'" src="' + images[temp] + '" class="img" ondragstart="drag(event)"> </div>');
         images.splice(temp, 1);
-        $('#answer_div').append('<div style="height:' + height + '%" id="'+ order[i] + '" class="col-sm-' + col + ' single_img_div" ondrop="drop(event, ' + orilength + ')" ondragover="allowDrop(event)"></div>');
+        $('#answer_div').append('<div id="'+ order[i] + '" class="col-sm-' + col + ' single_img_div" ondrop="drop(event, ' + orilength + ')" ondragover="allowDrop(event)"></div>');
 
     }
 }
