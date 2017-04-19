@@ -67,6 +67,10 @@ templatesRef.once("value", function (snapshot) {
             $("#letra" + escondePosicao[i]).attr('class', 'child col-sm-1 unselectable hided-div');
             $("#letra" + escondePosicao[i]).attr('onclick', 'getSelectedDiv(id)');
         }
+
+
+         $("#message").html("<p id=\"textoAjuda\">Seleccione um bloco preto para adivinhar a letra!</p>");
+
     });
 });
 
@@ -125,6 +129,9 @@ $(":button").click(function () {
         selectedDiv = null;
         letrasEscondidas.remove(clickedButton);
         letrasEscondidas.remove(clickedButton.toUpperCase());
+        $("#message").html("MUITO BEM!  <p>  Seleccione outro bloco preto para adivinhar a letra! </p>");
+
+
     }
     else {
         if (mensagensDoDoutor.length != 0) {  //usa messages dadas pela doutora se ela tiver dado
@@ -134,45 +141,12 @@ $(":button").click(function () {
             $("#message").html("<p id=\"textoAjuda\">" + mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))] + "</p>");
         }
 
-        $("#textoAjuda").delay(3000).fadeOut(1000);
+        //$("#textoAjuda").delay(3000).fadeOut(1000);
     }
 
     checkIfDone();
 });
 
-/* function que esconde os caracteres */
-function esconderLetras() {
-
-    escondePosicao = [];        // posicao das letras a serem escondidas
-
-    /* nao deixa a posicao de esconder ser a mesma */
-    for (var i = 0; i < nrLetras; i++) {
-        var tmp = Math.floor(Math.random() * (input.length));
-
-        while (arrayLetters[tmp] == " ") {                  //previne que a letra a ser escondida seja um espaco
-            tmp = Math.floor(Math.random() * (input.length));
-        }
-
-        if (escondePosicao.length == 0) {                 //se array tiver limpo, poe
-            escondePosicao [i] = tmp;
-        } else {                                             //previne repeticao dentro do array
-            if ($.inArray(tmp, escondePosicao) != -1) {
-                i--;
-            }
-            else {
-                escondePosicao [i] = tmp;
-            }
-        }
-    }
-
-    /* poe background preto para esconder e mete as letras escondidas no array letrasescondidas */
-    /* atribui ás letras escondidas a chance de serem clicadas */
-    for (var i = 0; i < escondePosicao.length; i++) {
-        letrasEscondidas[i] = $("#letra" + escondePosicao[i]).html();
-        $("#letra" + escondePosicao[i]).attr('class', 'child col-sm-1 unselectable hided-div');
-        $("#letra" + escondePosicao[i]).attr('onclick', 'getSelectedDiv(id)');
-    }
-}
 
 
 /* Removes element from array by value*/
@@ -198,11 +172,13 @@ function getSelectedDiv(div) {
     if (selectedDiv == null) {
         selectedDiv = div;
         $("#" + selectedDiv).attr("class", "child col-sm-1 unselectable hided-selected-div");
+        $("#message").html("Seleccione a letra para o respetivo bloco.");
     }
     else {
         unselectLastDiv(selectedDiv);
         selectedDiv = div;
         $("#" + selectedDiv).attr("class", "child col-sm-1 unselectable hided-selected-div");
+        $("#message").html("awdawdw");
     }
 
 }
@@ -213,8 +189,7 @@ function unselectLastDiv(div) {
 
 function checkIfDivSelected() {
     if (selectedDiv == null) {
-        $("#message").html("<p id=\"textoAjuda\">Seleccione um espaço preto para adivinhar a letra!</p>");
-        $("#textoAjuda").delay(2000).fadeOut(1000);
+       
         throw new Error("No black area selected");
     }
 }

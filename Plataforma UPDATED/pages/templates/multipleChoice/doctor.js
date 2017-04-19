@@ -35,7 +35,7 @@ function getNumberAnswers() {
     $("#div_respostas").html("");
 
     for (var i = 0; i < answerNumber; i++) {
-        $("#div_respostas").append('<div id="answer' + i + '" class="form-group "> <label class= "col-xs-12"for="usr">Resposta ' + (i + 1) + '</label><div class="col-xs-6"><input id="answerNumber' + i + '"type="text" class="form-control" > </div><label><button class="btn btn-primary btn-outlined" id="button' + i + '" type="button" onclick="correctAnswer(answerNumber' + i + '.id,this.id, answer' + i + '.id)">Correta</button></label> </div>');
+        $("#div_respostas").append('<div id="answer' + i + '" class="form-group "> <label class= "col-xs-12"for="usr">Resposta ' + (i + 1) + '</label><div class="col-xs-6"><input id="answerNumber' + i + '"type="text" class="form-control" > </div><label><input id="button' + i + '" type="checkbox" onclick="verificacao(answerNumber' + i + '.id,this.id, answer' + i + '.id)"></label> </div>');
     }
 
     $("#div_respostas").append('<div class="col-xs-12" id="butaoGuardar"><button onclick="generateTemplate()" class="col-xs-2 btn btn-primary btn-outlined" type="button" >Guardar</button></div>');
@@ -47,31 +47,38 @@ function correctAnswer(idResposta, idBotao, idDiv) {
     var resposta = $("#" + idResposta).val();
 
     if (rightAnswers.includes(resposta)) {
+    	document.getElementById(idBotao).checked = false; 
         alert("A resposta já existe!");
         throw new error("Equal rightAnswers!")
     }
     else if (resposta == "") {
-        alert("A resposta não pode ser vazia!");
-        throw new error("emptty right answer!")
+
+        console.log(idResposta);
+
+		document.getElementById(idBotao).checked = false; 
+
+		alert("A resposta não pode ser vazia!");
+        throw new error("emptty right answer!");
     }
-
-    var botao = $("#" + idBotao).attr('disabled', 'disabled');
-    $("#" + idResposta).attr('readonly', 'readonly');
-    $("#" + idDiv).append('<label><button id="meuid' + botaoTmpEditar + '" class="btn btn-primary btn-outlined" type="button" onclick="editAnswer(' + idResposta + '.id, ' + idBotao + '.id, ' + idDiv + '.id, this.id)">Editar</button></label>');
-    botaoTmpEditar++;
-    rightAnswers.push(resposta);
+    else{
+    	rightAnswers.push(resposta);
+	}
 }
 
-function editAnswer(idResposta, idBotao, idDiv, meuID) {
-    var tmp = $("#" + idResposta).val();
-    rightAnswers.remove(tmp);
-    $("#" + idResposta).removeAttr('readonly');
-    $("#" + idBotao).removeAttr('disabled');
-    $("#" + meuID).remove();
-    botaoTmpEditar--;
+function verificacao(idResposta, idBotao, idDiv){
+	console.log(rightAnswers);
+	if (document.getElementById(idBotao).checked) {
+		correctAnswer(idResposta, idBotao, idDiv);
 
-
-}
+		document.getElementById(idResposta).disabled = true;
+	}
+	else{
+		var resposta = $("#" + idResposta).val();
+		rightAnswers.remove(resposta);
+		document.getElementById(idResposta).disabled = false;
+	}
+	console.log(rightAnswers);
+};
 
 /* Removes element from array by value*/
 Array.prototype.remove = function () {
@@ -100,6 +107,8 @@ function generateTemplate() {
     checkIfAnswerMissig();
     checkIfNoCorrectAnswer();
     checkIfNotAllRight();
+
+    alert("Template criado com sucesso");
 
     database.ref('templates/multiplechoice/' + 0).set({
         pergunta: pergunta,

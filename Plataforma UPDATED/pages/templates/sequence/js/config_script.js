@@ -40,6 +40,7 @@ $(document).ready(function () {
         database.ref('templates/sequence/' + 0).set({
             ordem: array
         });
+        alert("Template criado com sucesso");
     });
 });
 
