@@ -11,6 +11,7 @@ firebase.initializeApp(config);
 
 // References
 var database = firebase.database(); // database service
+var auth = firebase.auth();
 
 // Global variables;
 var selectedPatient;
@@ -19,14 +20,25 @@ var patientRefTemplates
 
 // Displays patients of database in a table
 $(document).ready(function () {
-    var tpatients = $('table').find('tbody');  // table patients
+    var tpatients = $('#showpatients')  // table patients
+
+    var table = "<div id='showpatients' class='box-body table-responsive no-padding'>" +
+                "<table class='table table-hover'>" +
+                "<tbody>" +
+                "<tr><th>Nome</th></tr>" + 
+                "</tbody>" +
+                "</table>" +
+                "</div>";
+
     var patientsRef = database.ref("patients/"); // database patients
 
     patientsRef.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            tpatients.append($('<tr id="' + childSnapshot.key + '" onclick="showPatient(this)">')
-                .append($('<td>')
-                    .text(childSnapshot.val().pname)
+                tpatients.replaceWith(table);
+                    var teste = $("#showpatients table");
+            teste.append($('<tr id="' + childSnapshot.key + '" onclick="showPatient(this)">')
+                 .append($('<td>')
+                 .text(childSnapshot.val().pname)
                 )
             )
         });
@@ -36,6 +48,15 @@ $(document).ready(function () {
 // Adds patient to database
 function writeUserData() {
     var pname = $("#pname").val();
+    var pusername = $("#pusername").val() + '@strokerehab.com';
+    var ppassword = $("#ppassword").val();
+
+    auth.createUserWithEmailAndPassword(pusername, ppassword).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
+    });
 
     database.ref('patients/' + pname).set({
         pname: pname,
@@ -82,7 +103,7 @@ function showPatient(obj) {
 
         var conc = '<div id="templates">' +
             '<div class="form-group">' +
-            '<select class="form-control select2 " multiple="" data-placeholder="Escolha um template a associar" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+            '<select class="form-control select2 " multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 
         patientRefTemplates.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
@@ -108,4 +129,3 @@ function removePatient() {
 function assignTask() {
     var pname = $("#pname").val();
 }
-

@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Select2 -->
     <link rel="stylesheet" href="../../plugins/select2/select2.min.css">
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -39,7 +41,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index.html" class="logo">
+        <a href="../doctors_side/dashboard.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>S</b>R</span>
             <!-- logo for regular state and mobile devices -->
@@ -83,7 +85,7 @@
                                         <a href="#">Sales</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
+                                     $("p").hide();   <a href="#">Friends</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -195,9 +197,13 @@
                             <div class="form-group">
                                 <label>Nome do paciente</label>
                                 <input type="text" class="form-control" id="pname" placeholder="Insira nome">
+                                <label>Username</label>
+                                <input type="text" class="form-control" id="pusername" placeholder="Insira Username">
+                                <label>Password</label>
+                                <input type="text" class="form-control" id="ppassword" placeholder="Insira Password">
                             </div>
                             <button type="button" class="btn btn-block btn-primary btn-lg"
-                                    onclick="writeUserData();window.location.href=window.location.href;"
+                                    onclick="writeUserData();"
                                     style="width: 55%; margin: auto;">Adicionar Paciente
                             </button>
                         </form>
@@ -225,14 +231,8 @@
                         </div>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
-                            <tr>
-                                <th>Nome</th>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <div id="showpatients" class="box-body table-responsive no-padding">
+                        <div class="loader" style="margin: auto;"></div>
                     </div>
                     <!-- /.box-body -->
                 </div>
