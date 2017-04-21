@@ -16,6 +16,19 @@ var database = firebase.database(); // database service
 var templateRef = database.ref("templates/multiplechoice");
 var historico = [];
 
+//Time variables
+
+var timer = setInterval(clock, 10);
+var msec = 00;
+var sec = 00;
+var min = 00;
+
+//estatitics variables
+var tentativasResposta = 0;
+var respostasCorretas = 0;
+var respostasErradas = 0;
+
+
 templateRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         rightAnswers = childSnapshot.val().respostasCertas,
@@ -74,7 +87,24 @@ function start() {
 			}, 1000);
         }
     });
+
 }
+
+function clock() {
+
+    msec += 1;
+    if (msec == 100) {
+        sec += 1;
+        msec = 00;
+        if (sec == 60) {
+            sec = 00;
+            min += 1;
+
+        }
+    }
+    //console.log(min + ":" + sec + ":" + msec);
+}
+
 
 function inserirPergunta() {
     $("#question").html(question);
@@ -86,16 +116,39 @@ function generateBtn() {
     }
 }
 
+function clock() {
+
+    //console.log(timer);
+    msec += 1;
+    if (msec == 100) {
+        sec += 1;
+        msec = 00;
+        if (sec == 60) {
+            sec = 00;
+            min += 1;
+
+        }
+    }
+    //console.log(min + ":" + sec + ":" + msec);
+}
+
 function checkIfDone() {
     if (rightAnswers.length == 0) {
+        clearInterval(timer);
+        console.log(min + ":" + sec + ":" + msec);
+        tentativasResposta++;
+        respostasCorretas++;
         recognizer.stop();
         $("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
         for (var i = 0; i < answerNumber; i++) {
             $("#resposta" + i).attr('disabled', 'disabled');
         }
-        
         document.getElementById('rect').style.visibility = 'hidden';
     }
+
+    console.log("tentativas: " + tentativasResposta);
+    console.log("Corretas: " + respostasCorretas);
+    console.log("Erradas: " + respostasErradas);
 }
 
 function disableBtn(clickedButton) {
@@ -162,5 +215,7 @@ function getNoRespostas(){
 }
 
 function removerCorVermelha(clickedButton){
+    respostasErradas++;
+    tentativasResposta++;
 	$("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }
