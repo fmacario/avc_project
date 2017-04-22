@@ -135,9 +135,22 @@ function clock() {
 function checkIfDone() {
     if (rightAnswers.length == 0) {
         clearInterval(timer);
-        console.log(min + ":" + sec + ":" + msec);
+        
+        var n = min+"."+sec+"."+msec;
+        console.log(n); 
+
         tentativasResposta++;
         respostasCorretas++;
+        
+        database.ref('templates/multiplechoice/' + 0).set({
+        pergunta: question,
+        respostasCertas: rightAnswers,
+        respostas: answers,
+        nrEscolhas: answerNumber,
+        tempo: n,
+        attempts: tentativasResposta
+    })
+
         recognizer.stop();
         $("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
         for (var i = 0; i < answerNumber; i++) {

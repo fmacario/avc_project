@@ -32,6 +32,7 @@ $(function () {
             pathToImg = $(this).val();
 
             imgTitle = takeExtension(this.files[0].name);
+            nomeimagem = this.files[0].name;
             $('#palavra').val(imgTitle);
         }
     });
@@ -97,14 +98,14 @@ $(function () {
             throw new Error("Assertion failed");
         }
         else {
-            var path='templates/guessname/teste.jpg';
+            var path='templates/'+nomeimagem;
             //meter ajudas para o ficheiro
             console.log(input);
             console.log(nrLetras);
             console.log(messages);
 
 
-            var imageRef = storageRef.child('teste.jpg');
+            var imageRef = storageRef.child(nomeimagem);
             var imagesImageRef = storageRef.child(path);
 
             // While the file names are the same, the references point to different files
@@ -115,12 +116,13 @@ $(function () {
             imagesImageRef.put(file).then(function(snapshot) {
                 console.log('Uploaded a blob or file!');
             });
-
-            database.ref('templates/guessname/' + 0).set({
-                templateid: 0,
+            var nometemplate = $("#nometemplate").val();
+            database.ref('templates/' + nometemplate).set({
                 input: input,
                 nrLetras: nrLetras,
-                mensagens: messages
+                mensagens: messages,
+                tipo: 'guessname',
+                imgname: nomeimagem
             });
         }
     });

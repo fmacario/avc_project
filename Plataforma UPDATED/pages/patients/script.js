@@ -1,14 +1,3 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
-    authDomain: "avcproject-fae11.firebaseapp.com",
-    databaseURL: "https://avcproject-fae11.firebaseio.com",
-    storageBucket: "avcproject-fae11.appspot.com",
-    messagingSenderId: "1031859806052"
-};
-
-firebase.initializeApp(config);
-
 // References
 var database = firebase.database(); // database service
 var auth = firebase.auth();
@@ -47,18 +36,20 @@ $(document).ready(function () {
 
 // Adds patient to database
 function writeUserData() {
-    var pname = $("#pname").val();
-    var pusername = $("#pusername").val() + '@strokerehab.com';
-    var ppassword = $("#ppassword").val();
+    pname = $("#pname").val();
+    pusername = $("#pusername").val();
+    pusernameE = $("#pusername").val() + '@strokerehab.com';
+    ppassword = $("#ppassword").val();
 
-    auth.createUserWithEmailAndPassword(pusername, ppassword).catch(function(error) {
+    auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
     });
 
-    database.ref('patients/' + pname).set({
+
+    database.ref('patients/' + pusername).set({
         pname: pname,
     });
 }
@@ -66,9 +57,8 @@ function writeUserData() {
 // Displays selected patient from table
 function showPatient(obj) {
     selectedPatient = obj.id;
-
+    console.log(selectedPatient);
     patientRef = database.ref('patients/' + obj.id);
-    patientRefTemplates = database.ref('patients/' + obj.id + '/templates');
     var patientNameRef = database.ref('patients/' + obj.id + '/pname');
 
     patientNameRef.on('value', function (snapshot) {
@@ -91,7 +81,7 @@ function showPatient(obj) {
             '<li><a href="#">Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
             '<li>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
-            '<button type="button" class="btn btn-block btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();window.location.href=window.location.href;">Atribuir tarefa</button>' +
+            '<button type="button" class="btn btn-block btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
             '<div id="templates"></div>' +
             '</li>' +
             '</ul>' +
@@ -103,11 +93,13 @@ function showPatient(obj) {
 
         var conc = '<div id="templates">' +
             '<div class="form-group">' +
-            '<select class="form-control select2 " multiple="" data-placeholder="Select a State" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+            '<select id="seltemplates" class="form-control select2 " multiple="" data-placeholder="Select templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+        
+        refTemplates = database.ref('templates/');
 
-        patientRefTemplates.once("value", function (snapshot) {
+        refTemplates.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                    conc = conc + '<option>' + childSnapshot.val() + '</option>';
+                    conc = conc + '<option>' + childSnapshot.getKey() + '</option>';
             });
             conc = conc + '</select></div>';
             $('#templates').replaceWith(conc);
@@ -127,5 +119,10 @@ function removePatient() {
 
 // Assign task to patient
 function assignTask() {
-    var pname = $("#pname").val();
+    var seltemplates = $("#seltemplates").val();
+
+    database.ref('patients/' + selectedPatient).set({
+        pname: selectedPatient,
+        ptemplates: seltemplates
+    });
 }
