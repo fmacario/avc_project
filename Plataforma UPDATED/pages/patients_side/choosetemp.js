@@ -23,7 +23,7 @@ function redirect(id){
   var refTemplates2 = database.ref('templates/' + id.id);
   refTemplates2.once("value", function (snapshot) {
              console.log(snapshot.val());
-             window.location = '../../pages/templates/'+snapshot.val().tipo+'/patient/template.html' + '?param=' + id.id;
+             window.location = '../../pages/templates/'+snapshot.val().tipo+'/patient/patient.html' + '?param=' + id.id;
         });
    
 }
