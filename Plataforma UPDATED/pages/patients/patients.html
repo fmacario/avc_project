@@ -37,229 +37,232 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
-    <header class="main-header">
-        <!-- Logo -->
-        <a href="../doctors_side/dashboard.html" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>S</b>R</span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Stroke</b>Rehab</span>
-        </a>
-        <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="../doctors_side/dashboard.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>S</b>R</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Stroke</b>Rehab</span>
             </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
 
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
 
-                    <!-- Tasks: style can be found in dropdown.less -->
+                        <!-- Tasks: style can be found in dropdown.less -->
 
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">Alexander Pierce</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                <p>
-                                    Alexander Pierce - Web Developer
-                                </p>
-                            </li>
-                            <!-- Menu Body -->
-                            
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
-                                <div class="pull-right">
-                                    <button type="button" class="btn btn-primary btn-block btn-flat"
-                                            onclick="logout();"
-                                            margin: "auto;">Log out
+                                    <p>
+                                        Alexander Pierce - Web Developer
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-primary btn-block btn-flat" onclick="logout();" margin: "auto;">Log out
                                     </button>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
 
-            <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">MAIN NAVIGATION</li>
-                <li class="patients">
-                    <a href="patients.html">
-                        <i class="fa fa-fw fa-users"></i>
-                        <span>Gestão de Pacientes</span>
-                        <span class="pull-right-container">>
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="patients">
+                        <a href="patients.html">
+                            <i class="fa fa-fw fa-users"></i>
+                            <span>Gestão de Pacientes</span>
+                            <span class="pull-right-container">>
               </span>
-                    </a>
-                </li>
-                <li class="templates">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Area Configuração</span>
-                        <span class="pull-right-container">
+                        </a>
+                    </li>
+                    <li class="templates">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Area Configuração</span>
+                            <span class="pull-right-container">
               <span class="label label-primary pull-right">3</span>
                             </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li></li>
-                        <li><a href="../templates/sequence/doctor/doctor.html"><i class="fa fa-circle-o"></i> Sequenciação</a></li>
-                        <li><a href="../templates/guessname/doctor/doctor.html"><i class="fa fa-circle-o"></i> Adivinhar Nome</a>
-                        </li>
-                        <li><a href="../templates/multiplechoice/doctor/doctor.html"><i class="fa fa-circle-o"></i> Escolha Múltipla</a>
-                        </li>
-                        <!-- <li><a href="pages/templates/reconhecimentoVisdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Reconhecimento Visual</a></li> -->
-                        <!-- <li><a href="pages/templates/categorizatdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Categorização</a></li> -->
-                    </ul>
-                </li>
-                
+                        </a>
+                        <ul class="treeview-menu">
+                            <li></li>
+                            <li><a href="../templates/sequence/doctor/doctor.html"><i class="fa fa-circle-o"></i> Sequenciação</a></li>
+                            <li><a href="../templates/guessname/doctor/doctor.html"><i class="fa fa-circle-o"></i> Adivinhar Nome</a>
+                            </li>
+                            <li><a href="../templates/multiplechoice/doctor/doctor.html"><i class="fa fa-circle-o"></i> Escolha Múltipla</a>
+                            </li>
+                            <!-- <li><a href="pages/templates/reconhecimentoVisdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Reconhecimento Visual</a></li> -->
+                            <!-- <li><a href="pages/templates/categorizatdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Categorização</a></li> -->
+                        </ul>
+                    </li>
 
-            </ul>
-        </section>
-        <!-- /.sidebar -->
-    </aside>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Main content -->
-        <section id="masterSection" class="content">
-            <section class="content-header">
-                <h1> Gestão de Pacientes </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li>Templates</li>
-                    <li class="active">Gestão de Pacientes</li>
-                </ol>
+                </ul>
             </section>
+            <!-- /.sidebar -->
+        </aside>
 
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
             <!-- Main content -->
-            <section class="content">
-                <!-- Default box -->
-                <div class="box box-solid box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Adicionar novo Paciente</h3>
-                        <div class="box-tools pull-right">
-                            <!-- Buttons, labels, and many other things can be placed here! -->
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <form role="form">
-                            <!-- Patient Name -->
-                            <div class="form-group">
-                                <label>Nome do paciente</label>
-                                <input type="text" class="form-control" id="pname" placeholder="Insira nome">
-                                <label>Username</label>
-                                <input type="text" class="form-control" id="pusername" placeholder="Insira Username">
-                                <label>Password</label>
-                                <input type="text" class="form-control" id="ppassword" placeholder="Insira Password">
-                            </div>
-                            <button type="button" class="btn btn-block btn-primary btn-lg"
-                                    onclick="writeUserData();"
-                                    style="width: 55%; margin: auto;">Adicionar Paciente
-                            </button>
-                        </form>
-                    </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <!-- Adicionar qualquer coisa ao footer -->
-                    </div>
-                    <!-- box-footer -->
-                </div>
-                <!-- /.box -->
+            <section id="masterSection" class="content">
+                <section class="content-header">
+                    <h1> Gestão de Pacientes </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li>Templates</li>
+                        <li class="active">Gestão de Pacientes</li>
+                    </ol>
+                </section>
 
-                <!-- Show patients box -->
-                <div class="box box-solid box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Lista de pacientes</h3>
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control pull-right"
-                                       placeholder="Pesquisar">
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Default box -->
+                    <div class="box box-solid box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Adicionar novo Paciente</h3>
+                            <div class="box-tools pull-right">
+                                <!-- Buttons, labels, and many other things can be placed here! -->
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <form role="form">
+                                <!-- Patient Name -->
+                                <div class="form-group">
+                                    <label>Nome do paciente</label>
+                                    <input type="text" class="form-control" id="pname" placeholder="Insira nome">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" id="pusername" placeholder="Insira Username">
+                                    <label>Password</label>
+                                    <input type="text" class="form-control" id="ppassword" placeholder="Insira Password">
+                                </div>
+                                <button type="button" class="btn btn-block btn-primary btn-lg" onclick="writeUserData();" style="width: 55%; margin: auto;">Adicionar Paciente
+                            </button>
+                            </form>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <!-- Adicionar qualquer coisa ao footer -->
+                        </div>
+                        <!-- box-footer -->
+                    </div>
+                    <!-- /.box -->
+
+                    <!-- Show patients box -->
+                    <div class="box box-solid box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Lista de pacientes</h3>
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
+                                    <div class="input-group-btn">
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.box-header -->
+                        <div id="showpatients" class="box-body table-responsive no-padding">
+                            <div class="loader" style="margin: auto;"></div>
+                        </div>
+                        <div id='jogo' class='box-body table-responsive no-padding' style='display: none'>
+                            <table class='table table-hover'>
+                                <tbody>
+                                    <tr>
+                                        <th>Nome</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box-header -->
-                    <div id="showpatients" class="box-body table-responsive no-padding">
-                        <div class="loader" style="margin: auto;"></div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
-                <!-- Selected Patient box -->
-                <div class="box box-solid box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Paciente selecionado</h3>
+                    <!-- /.box -->
+                    <!-- Selected Patient box -->
+                    <div class="box box-solid box-primary">
+                        <div class="box-header">
+                            <h3 class="box-title">Paciente selecionado</h3>
 
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
+                            <div class="box-tools">
+                                <div class="input-group input-group-sm" style="width: 150px;">
+                                </div>
                             </div>
                         </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <div id="showpatient"></div>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive no-padding">
-                        <div id="showpatient"></div>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+                    <!-- /.box -->
+                </section>
+                <!-- /.content -->
             </section>
-            <!-- /.content -->
+        </div>
+        <!-- /.content -->
         </section>
     </div>
     <!-- /.content -->
-    </section>
-</div>
-<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
-<footer class="main-footer" style="text-align: right">
-    <strong><a href="http://xcoa.av.it.pt/~pei2016-2017_g9/">Stroke Rehab project website</a>.</strong> All rights
-    reserved.
-</footer>
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" style="text-align: right">
+        <strong><a href="http://xcoa.av.it.pt/~pei2016-2017_g9/">Stroke Rehab project website</a>.</strong> All rights reserved.
+    </footer>
 
-<!-- ./wrapper -->
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
-<!-- jQuery 2.2.3 -->
-<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Select2 -->
-<script src="../../plugins/select2/select2.full.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="../../bootstrap/js/bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../../plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../../dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+    <!-- ./wrapper -->
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+    <!-- jQuery 2.2.3 -->
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Select2 -->
+    <script src="../../plugins/select2/select2.full.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../dist/js/demo.js"></script>
 
-<!-- script local para esta pagina -->
-<script src="../../logout.js"></script>
-<script src="script.js"></script>
+    <!-- script local para esta pagina -->
+    <script src="../../logout.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

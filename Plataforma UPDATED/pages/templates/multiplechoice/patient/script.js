@@ -19,26 +19,30 @@ var respostasErradas = 0;
 
 
 templatesRef.once("value", function (snapshot) {
-        rightAnswers = snapshot.val().respostasCertas,
+    rightAnswers = snapshot.val().respostasCertas,
         question = snapshot.val().pergunta,
         answers = snapshot.val().respostas,
         answerNumber = snapshot.val().nrEscolhas
+        start();
 });
 
 
-function start() {
-    $('#start').hide();
 
-    window.SpeechRecognition = window.SpeechRecognition       ||
-                                                 window.webkitSpeechRecognition ||
-                                                 null;
-                    
+function start() {
+
+    window.SpeechRecognition = window.SpeechRecognition ||
+        window.webkitSpeechRecognition ||
+        null;
+
     //caso não suporte esta API DE VOZ                              
     if (window.SpeechRecognition != null) document.getElementById('rect').style.visibility = 'visible';
-    
+
     inserirPergunta(); //gera pergunta
     shuffle(answers); // shuffles the array
     generateBtn(); //gera divs para palavra a descobrir
+
+    $(".loader").css("display", "none");
+    $("#jogo").css("display", "block");
 
     $(":button").click(function () {
 
@@ -56,26 +60,28 @@ function start() {
             historico.push(chosenAnswer);
             checkIfDone();
         }
-        else if(clickedButton == "rect"){
+        else if (clickedButton == "rect") {
             try {
                 recognizer.start();
-              } catch(ex) {
-                alert("error: "+ex.message);
-              }
-              document.getElementById('divBorder').style.visibility = 'visible';
-              document.getElementById('rect').style.visibility = 'hidden';
+            } catch (ex) {
+                alert("error: " + ex.message);
+            }
+            document.getElementById('divBorder').style.visibility = 'visible';
+            document.getElementById('rect').style.visibility = 'hidden';
         }
-        else if(!historico.includes(chosenAnswer)){
+        else if (!historico.includes(chosenAnswer)) {
             //disableBtn(clickedButton); ("#textoAjuda").delay(3000).fadeOut(1000);
             $("#" + clickedButton).attr('class', 'answer btn btn-danger');
 
-           	setTimeout(function() {
-			    removerCorVermelha(clickedButton);
-			}, 1000);
+            setTimeout(function () {
+                removerCorVermelha(clickedButton);
+            }, 1000);
         }
     });
 
 }
+
+
 
 function clock() {
 
@@ -122,21 +128,21 @@ function clock() {
 function checkIfDone() {
     if (rightAnswers.length == 0) {
         clearInterval(timer);
-        
-        var n = min+"."+sec+"."+msec;
-        console.log(n); 
+
+        var n = min + "." + sec + "." + msec;
+        console.log(n);
 
         tentativasResposta++;
         respostasCorretas++;
-        
+
         database.ref('templates/multiplechoice/' + 0).set({
-        pergunta: question,
-        respostasCertas: rightAnswers,
-        respostas: answers,
-        nrEscolhas: answerNumber,
-        tempo: n,
-        attempts: tentativasResposta
-    })
+            pergunta: question,
+            respostasCertas: rightAnswers,
+            respostas: answers,
+            nrEscolhas: answerNumber,
+            tempo: n,
+            attempts: tentativasResposta
+        })
 
         recognizer.stop();
         $("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
@@ -179,8 +185,8 @@ function shuffle(a) {
     }
 }
 
-function voz(botao_escolhido){
-    
+function voz(botao_escolhido) {
+
     var clickedButton = botao_escolhido.id;
     var chosenAnswer = $("#" + clickedButton).html();
 
@@ -199,23 +205,23 @@ function voz(botao_escolhido){
         historico.push(chosenAnswer);
         checkIfDone();
     }
-    else if(!historico.includes(chosenAnswer)){
+    else if (!historico.includes(chosenAnswer)) {
         console.log("errada");
 
         $("#" + clickedButton).attr('class', 'answer btn btn-danger');
 
-       	setTimeout(function() {
-		    removerCorVermelha(clickedButton);
-		}, 1000);
+        setTimeout(function () {
+            removerCorVermelha(clickedButton);
+        }, 1000);
     }
 }
 
-function getNoRespostas(){
+function getNoRespostas() {
     return answerNumber;
 }
 
-function removerCorVermelha(clickedButton){
+function removerCorVermelha(clickedButton) {
     respostasErradas++;
     tentativasResposta++;
-	$("#" + clickedButton).attr('class', 'answer btn btn-outlined');
+    $("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }

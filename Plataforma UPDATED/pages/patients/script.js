@@ -11,26 +11,20 @@ var patientRefTemplates
 $(document).ready(function () {
     var tpatients = $('#showpatients')  // table patients
 
-    var table = "<div id='showpatients' class='box-body table-responsive no-padding'>" +
-                "<table class='table table-hover'>" +
-                "<tbody>" +
-                "<tr><th>Nome</th></tr>" + 
-                "</tbody>" +
-                "</table>" +
-                "</div>";
-
     var patientsRef = database.ref("patients/"); // database patients
 
     patientsRef.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-                tpatients.replaceWith(table);
-                    var teste = $("#showpatients table");
+            var teste = $("#showpatients table");
             teste.append($('<tr id="' + childSnapshot.key + '" onclick="showPatient(this)">')
-                 .append($('<td>')
-                 .text(childSnapshot.val().pname)
+                .append($('<td>')
+                    .text(childSnapshot.val().pname)
                 )
             )
         });
+
+        $(".loader").css("display", "none");
+        $("#jogo").css("display", "block");
     });
 });
 
@@ -41,7 +35,7 @@ function writeUserData() {
     pusernameE = $("#pusername").val() + '@strokerehab.com';
     ppassword = $("#ppassword").val();
 
-    auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function(error) {
+    auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -94,12 +88,12 @@ function showPatient(obj) {
         var conc = '<div id="templates">' +
             '<div class="form-group">' +
             '<select id="seltemplates" class="form-control select2 " multiple="" data-placeholder="Select templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
-        
+
         refTemplates = database.ref('templates/');
 
         refTemplates.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                    conc = conc + '<option>' + childSnapshot.getKey() + '</option>';
+                conc = conc + '<option>' + childSnapshot.getKey() + '</option>';
             });
             conc = conc + '</select></div>';
             $('#templates').replaceWith(conc);

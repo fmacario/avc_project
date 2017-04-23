@@ -28,6 +28,8 @@
   <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="style.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -53,7 +55,7 @@
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-            
+
           </div>
           <!-- /.navbar-collapse -->
           <!-- Navbar Right Menu -->
@@ -62,9 +64,9 @@
               <!-- Messages: style can be found in dropdown.less-->
 
               <!-- Notifications Menu -->
-              
+
               <!-- Tasks Menu -->
-              
+
               <!-- User Account Menu -->
               <li class="dropdown user user-menu">
                 <!-- Menu Toggle Button -->
@@ -113,41 +115,39 @@
           <h1>
             Página Principal
           </h1>
-          
+
         </section>
 
         <!-- Main content -->
         <section id="teste" class="content">
           <!-- Show patients box -->
-                <div class="box box-solid box-primary">
-                    <div class="box-header">
-                        <h3 class="box-title">Lista de templates</h3>
-                        <div class="box-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control pull-right"
-                                       placeholder="Pesquisar">
-                                <div class="input-group-btn">
-                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.box-header -->
-                    <div id="showtemplates" class="box-body table-responsive no-padding">
-                        <div class="loader" style="margin: auto;"></div>
-                    </div>
-                    <!-- /.box-body -->
+          <div class="box box-solid box-primary">
+            <div class="box-header">
+              <h3 class="box-title">Lista de templates</h3>
+              <div class="box-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
                 </div>
-                <!-- /.box -->
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div id="showtemplates" class="box-body table-responsive no-padding">
+              <div class="loader" style="margin: auto;"></div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
         </section>
         <!-- /.content -->
       </div>
       <!-- /.container -->
     </div>
-    <!-- /.content-wrapper --> 
+    <!-- /.content-wrapper -->
     <footer class="main-footer" style="text-align: right">
-      <strong><a href="http://xcoa.av.it.pt/~pei2016-2017_g9/">Stroke Rehab project website</a>.</strong> All rights
-      reserved.
+      <strong><a href="http://xcoa.av.it.pt/~pei2016-2017_g9/">Stroke Rehab project website</a>.</strong> All rights reserved.
       <!-- /.container -->
     </footer>
   </div>
@@ -159,8 +159,7 @@
   <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
   <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
   <script>
-                                                                                    $.widget.bridge('uibutton', $.ui.button);
-
+    $.widget.bridge('uibutton', $.ui.button);
   </script>
   <!-- Bootstrap 3.3.6 -->
   <script src="../../bootstrap/js/bootstrap.min.js"></script>

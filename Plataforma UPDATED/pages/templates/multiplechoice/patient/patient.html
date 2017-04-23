@@ -29,7 +29,7 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="../../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
-    <link rel="stylesheet" href="../stylesheet.css">
+    <link rel="stylesheet" href="style.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -128,9 +128,11 @@
                             <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <div class="container">
-                                <button id="start" onclick="start()"> Começar</button>
+                        <div id="showpatients" class="box-body table-responsive no-padding">
+                            <div class="loader" style="margin: auto;"></div>
+                        </div>
+                        <div id="jogo" class="box-body" style='display: none'>
+                            <div id ="jogo" class="container">
                                 <h2 class="text-center border" id="question"></h2>
 
                                 <div id="answers" class="border"></div>
