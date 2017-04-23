@@ -8,11 +8,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     var refTemplates = database.ref('patients/' + username);
         refTemplates.once("value", function (snapshot) {
             for(var i=0; i<snapshot.val().ptemplates.length; i++){
+              console.log(snapshot.val().ptemplates);
               var html_block =  "<div class='col-sm-3'>" +
-                                  "<button type='button' class='btn btn-primary btn-block btn-flat' style='height:150px;" + 
+                                  "<button type='button' class='btn btn-primary btn-block btn-flat' style='height:150px;'" + 
                                     "onclick='redirect("+snapshot.val().ptemplates[i]+");'" +
-                                    "style='margin: auto;' id="+ snapshot.val().ptemplates[i]+">" + snapshot.val().ptemplates[i] + 
-                                  " </button>" + 
+                                    "style='margin: auto;' id="+ snapshot.val().ptemplates[i]+">" + snapshot.val().ptemplates[i] + " </button>" + 
                                 "</div>";
               $("#teste").append(html_block);  
             }            
@@ -23,6 +23,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 });
 
 function redirect(id){
+  console.log(id.id);
   var refTemplates2 = database.ref('templates/' + id.id);
   refTemplates2.once("value", function (snapshot) {
              window.location = '../../pages/templates/'+snapshot.val().tipo+'/patient/patient.html' + '?param=' + id.id;
