@@ -49,8 +49,8 @@
         <div class="doc-wrapper">
             <div class="container">
                 <div id="doc-header" class="doc-header text-center">
-                    <h1 class="doc-title"><span aria-hidden="true" class="icon icon_datareport_alt"></span>NEW</h1>
-                    <div class="meta"><i class="fa fa-clock-o"></i> Last updated: Feb 25th, 2017</div>
+                    <h1 class="doc-title"><span aria-hidden="true" class="icon icon_datareport_alt"></span> M3 - Specification and Requirements</h1>
+                    <div class="meta"></div>
                 </div><!--//doc-header-->
             </div>
 		</div>
@@ -59,16 +59,855 @@
 
 <section class="index text-left" id="index">
 	<div class="container">
-		<h2>Index</h2>
 
-		
+	<nav id="primary_nav_wrap">
+
+	<div class="col-md-6 col-sm-6">
+		<div class="single-about-detail clearfix">
+			<div class="about-details">
+				<ul>
+					<li><a href="new.html#clientarea"><h4>Client Area</h4></a>
+					  <li><a href="new.html#specificationarea"><h4>Specification Area</h4></li>
+					  <li><a href="new.html#interactionexamples"><h4>Interaction Examples</h4></a></li>
+					  <li><a href="new.html#developerarea"><h4>Developer Area</h4></a></li>
+					  <li><a href="new.html#usecases1"><h4>Use Cases</h4></a></li>
+					  	<ul>
+						  <li><a href="new.html#usecases1"><h5>UC-1 Create an account</h5></a></li>
+						  <li><a href="new.html#usecases2"><h5>UC-2 Add a patient account</h5></a></li>
+						  <li><a href="new.html#usecases3"><h5>UC-3 Create a template</h5></a></li>
+						  <li><a href="new.html#usecases4"><h5>UC-4 Edit a template</h5></a></li>
+						  <li><a href="new.html#usecases5"><h5>UC-5 Remove a template</h5></a></li>
+						  <li><a href="new.html#usecases6"><h5>UC-6 Define/schedule a template</h5></a></li>
+						  <li><a href="new.html#usecases7"><h5>UC-7 Remove a patient account</h5></a></li>
+						  <li><a href="new.html#usecases8"><h5>UC-8 Edit a patient account</h5></a></li>
+						  <li><a href="new.html#usecases9"><h5>UC-9 Do a template/task</h5></a></li>
+						  <li><a href="new.html#usecases10"><h5>UC-10 Choose templates/tasks to do firstly</h5></a></li>
+						</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-6 col-sm-6">
+		<div class="single-about-detail clearfix">
+			<div class="about-details">
+				<ul>
+					<li><a href="new.html#userstory1"><h4>User Stories</h4></a></li>
+						<ul>
+							<li><a href="new.html#userstory1"><h5>User Story 1 Create an account</h5></a></li>
+							<li><a href="new.html#userstory2"><h5>User Story 2 Add a patient account</h5></a></li>
+							<li><a href="new.html#userstory3"><h5>User Story 3 Create a template</h5></a></li>
+							<li><a href="new.html#userstory4"><h5>User Story 4 Edit a template</h5></a></li>
+							<li><a href="new.html#userstory5"><h5>User Story 5 Remove a template</h5></a></li>
+							<li><a href="new.html#userstory6"><h5>User Story 6 Define/schedule a template</h5></a></li>
+							<li><a href="new.html#userstory7"><h5>User Story 7 Remove a patient account</h5></a></li>
+							<li><a href="new.html#userstory8"><h5>User Story 8 Edit a patient account</h5></a></li>
+							<li><a href="new.html#userstory9"><h5>User Story 9 Do a template/task</h5></a></li>
+							<li><a href="new.html#userstory10"><h5>User Story 10 Choose templates/tasks to do firstly</h5></a></li>
+						</ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	</nav>
+	
+	</div>	
+
+</section>
+<p></p>
+
+<section class="clientarea text-left" id="clientarea">
+	<div class="container">
+		<h2>Client Area</h2>
+		<h5></h5>
+																			
+		<section class="background text-left" id="background">
+			<div class="container">
+				<h5>&nbsp&nbsp&nbsp&nbspOur platform “Stroke Rehab” has two actors: doctors and patients. It has authentication for both of them and the main objective of this platform is to have various templates/tasks for the patients so they can evolve their mental disabilities.
+<p></p>&nbsp&nbsp&nbsp&nbspThe templates must be different due to the differentiated stroke levels of the patients and the doctors can decide what templates and how many templates must a patient perform. Those templates are made by the doctors (configured by them) in order to create tasks for each patient and create a “patient story”. For example, in “Multiple Choice Template”, the doctor can configure a question about something that is related to the patient’s life or even in “Nominate Template”, the doctor can configure an image of a patient’s relative. This configuration side is very important because it has much more impact on the client and the patient’s recovery would be easier and faster. Also, it is easier for the doctors to connect with the platform and patients, creating various templates.
+<p></p>&nbsp&nbsp&nbsp&nbspOther objective is that the doctors can save the templates and set them for the patients they want to perform it. They can edit them later and schedule for a date one or more templates for the patients. One advantage is that the templates have feedback phrases, in order to don’t let the patient give up or, if the patient succeeded in the task, to congratulate him. The doctors can create or edit those feedback phrases in a more appropriate way of each patient.
+<p></p>&nbsp&nbsp&nbsp&nbspAnother main goal of the platform is that have statistic charts of the task’s results. According to the results, each patient have a page on his account that have his results and the doctors can see their improvements and then, keep or change his tasks program.
+<p></p>&nbsp&nbsp&nbsp&nbspThe templates that the platform has are: “Nominate Task”, “Sequence Task”, “Multiple Choice Task”, “Categorization Task” and “Visual Recognition Memory Task”. In “Nominate Task”, the patient sees a photo of someone that is his relative or friend and tries to discover his name by some hidden words. In “Sequence Task”, the patient have multiple images to be drag and dropped into some boxes down below the images. In “Multiple Choice Task”, the patient have one question and a possible of 2 or more answers and have to guess what is the correct one. In “Categorization Task”, the patient have multiple images to be drag and dropped into some boxes down below the images. In “Visual Recognition Memory Task”, the patient have multiple images and he has to select the ones that are related to the category shown below the images.
+<p></p>&nbsp&nbsp&nbsp&nbspDue to the fact some patients have more disabilities than others, if a patient can’t do one task by himself he can do it with the help of the doctor. If the patient can’t point with one finger to the computer screen, maybe he can speak and do the task in the same. There are many disabilities in Stroke Rehab and they can be voided replacing with other features. That’s why we added the voice recognition functionality. We added it in templates so that the patient can speak and try to do the task anyway. For example, in “Nominate Task” the patient can try to guess the name of the person that is in the photo and say it. If the name is wrong, it appears a wrong feedback message, if it is correct, appears a correct feedback message.
+</h5>
+			</div>
+		<section>				
 	</div>
 <section>
 
+<section class="specificationarea text-left" id="specificationarea">
+	<div class="container">
+		<h2>Specification Area</h2>
+		<h5></h5>
+																				
+		<section class="background text-left" id="background">
+			<div class="container">
+				<h5>&nbsp&nbsp&nbsp&nbspOur platform will have two actors: doctors and patients. Both of them will have authentication and different types of accounts.
+<p></p>&nbsp&nbsp&nbsp&nbspThe patient’s account will have their info data, their pre-defined/scheduled templates and their results of the tasks in charts. It will be available in different pages and this can be all accessible by the doctors. The patients can also choose what templates they want to do or to do firstly, or else the doctors can choose them randomly.
+<p></p>&nbsp&nbsp&nbsp&nbspThe doctor’s account will have one page for the templates/tasks configuration, to save, edit and delete them, they can define and schedule the templates for each patient and see the statistics of the results of the tasks done by the patients. They can also add, edit and remove patients to the database, simultaneously giving each of them an username and a password to sign in later in order to complete the tasks previously configured.
+				</h5>
+			</div>
+		<section>				
+	</div>
+<section>
+
+<section class="interactionexamples text-left" id="interactionexamples">
+	<div class="container">
+		<h2>Interaction Examples</h2>
+		<h5></h5>
+																		
+		<section class="background text-left" id="background">
+			<div class="container">
+				<h5>&nbsp&nbsp&nbsp&nbsp●
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 - The doctor creates an account;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2 - The doctor creates a patient account and inserts info data;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3 - There are already some pre-configured templates on platform;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4 - The doctor sets an organized sequence of templates for the patient;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp5 - The patient do the template/task with the help of the doctor;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp6 - A statistic chart appears on the “Statistics Page” of the patient;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp7 - The doctor analyses the results.
+				<p> </p>
+				<p></p>&nbsp&nbsp&nbsp&nbsp●
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1 - The doctor logs in to the system;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp2 - There are some pre-configured templates on platform;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp3 - The doctor edits one template and define new feedback messages for it;
+				<p></p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp4 - The doctor defines the template for the patient.
+				<p> </p>
+				</h5>
+			</div>
+		<section>				
+	</div>
+<section>
+
+<section class="usecases text-left" id="usecases">
+	<div class="container">
+		<h2>Use Cases</h2>
+																				<!-- Background -->
+		<section class="background text-left" id="background">
+			<div class="container">
+				<h5>&nbsp&nbsp&nbsp&nbspFor the user cases and user stories, we will use the Smart Estimation in the figure below:</h5>
+		
+				<section class="nominateTask text-left" id="nominateTask">
+					<div class="container">
+						<img src="img/M3/smart.png" style="width:504px;">
+					</div>
+				</section>
+			</div>
+		</section>
+	</div>
+</section>
+
+			
 
 
 
-				
-				
-</html> 
+<section class="usecases text-left" id="usecases">
+			<div class="container">
+				<h5>
 
+				<head>
+		<style>
+			table, td {
+				border: 1px solid black;
+			}
+		</style>
+		</head>
+		<body>
+
+		<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>Actors</b>&nbsp&nbsp</td>
+			<td>&nbsp&nbsp<b>Use Cases</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Doctor</b></td>
+			<td>&nbsp&nbsp1. Create an account;<p></p>&nbsp
+				2. Add a patient;<p></p>&nbsp
+				3. Create a template;<p></p>&nbsp
+				4. Edit a template;<p></p>&nbsp
+				5. Remove a template;<p></p>&nbsp
+				6. Define/schedule a template to a patient;<p></p>&nbsp
+				7. Edit a patient;<p></p>&nbsp
+				8. Remove a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Patient</b></td>
+			<td>&nbsp&nbsp9. Do a template/task;<p></p>&nbsp
+				10. Choose templates/tasks to do firstly.</td>
+		  </tr>
+		  </table>
+				</h5>
+			</div>
+</section>
+			
+			
+<section class="developerarea text-left" id="developerarea">
+	<div class="container">
+		<h2>Developer Area</h2>
+		<h5></h5>
+																				<!-- Background -->
+		<section class="background text-left" id="background">
+			<div class="container">
+				<b>Implemented:</b><p></p>
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Platform “Stroke Rehab”;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Authentication and security functionalities (doctors and patients);
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Linked Databases;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Configured Templates;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Statistics charts;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Voice Recognition.
+				<p> </p>
+				<b>To be implemented:</b><p></p>
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Scheduling templates for one or more patients;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Leap;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Virtual Reality;
+				<p></p>&nbsp&nbsp&nbsp&nbsp● Link Leap + Voice Recognition.
+				</h5>
+			</div>
+		<section>				
+	</div>
+<section>			
+			
+<section class="usecases1 text-left" id="usecases1">
+	<div class="container">
+		<h2>Use Cases</h2>
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-1 Create an account</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor creates an account for the platform.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspJá existe uma conta associada ao respetivo nome.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp2</td>
+		  </tr>
+		</table>
+
+</section>
+		
+<p></p>
+		
+<section class="usecases2 text-left" id="usecases2">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-2 Add a patient account</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor adds a patient to the platform.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspJá existe um paciente com o mesmo nome na plataforma.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		</table>
+
+</section>
+		
+<p></p>
+		
+<section class="usecases3 text-left" id="usecases3">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-3 Create a template</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor creates a template to define it to a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspExceptions vary from template to template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp5</td>
+		  </tr>
+		</table>
+
+</section>	
+		
+<p></p>
+		
+<section class="usecases4 text-left" id="usecases4">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-4 Edit a template</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor edits a template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspExceptions vary from template to template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp4</td>
+		  </tr>
+		</table>
+
+</section>			
+		
+<p></p>
+		
+<section class="usecases5 text-left" id="usecases5">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-5 Remove a template</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor removes a template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspExceptions vary from template to template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp4</td>
+		  </tr>
+		</table>
+
+</section>			
+		
+<p></p>
+		
+<section class="usecases6 text-left" id="usecases6">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-6 Define/schedule a template</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor defines/schedules a template to a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspDate for scheduling not valid.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+		
+<section class="usecases7 text-left" id="usecases7">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-7 Edit a patient account</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor adds a patient to the platform.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspJá existe um paciente com o mesmo nome na plataforma.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		</table>
+
+</section>		
+		
+<p></p>
+		
+<section class="usecases8 text-left" id="usecases8">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-8 Remove a patient account</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspDoctors</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe doctor removes a patient from the platform.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspNone.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		</table>
+
+</section>				
+		
+<p></p>
+		
+<section class="usecases9 text-left" id="usecases9">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-9 Do a template/task</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspPatients</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe patient does a task from a specified template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspNone.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp4</td>
+		  </tr>
+		</table>
+
+</section>			
+
+<p></p>
+		
+<section class="usecases10 text-left" id="usecases10">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>ID and Name</b></td>
+			<td>&nbsp&nbsp<b>UC-10 Choose templates/tasks to do firstly</b></td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Created by:</b></td>
+			<td>&nbsp&nbspPatients</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Description:</b></td>
+			<td>&nbsp&nbspThe patient tells the doctor what templates/tasks he wants to do firstly.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Exceptions:</b></td>
+			<td>&nbsp&nbspNone.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority:</b></td>
+			<td>&nbsp&nbsp2</td>
+		  </tr>
+		</table>
+
+</section>	
+		
+<p></p>
+
+<section class="userstory1 text-left" id="userstory1">
+	<div class="container">
+		<h2>User Stories</h2>
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 1</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to create an account so that I can access the platform.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-1</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp2</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to access the platform.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI create an account.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspI can have access to all features included.</td>
+		  </tr>
+		</table>
+
+</section>
+		
+<p></p>
+
+<section class="userstory2 text-left" id="userstory2">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 2</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to add a patient so that the patient can have an own account. </td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-2</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to add a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI add a patient on the “Patient’s Configuration” tab.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspThe patient can have an own account.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory3 text-left" id="userstory3">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 3</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to create a template so that I can define it to a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-3</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp5</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to create a template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI select a template on the “Configuration Area” and create it.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspI can define the template to the patient.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory4 text-left" id="userstory4">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 4</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to edit a template so that I can change its content to a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-4</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp4</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to edit a template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI select a template on the “Configuration Area” and edit it.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspI can change the content of the template to a patient.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory5 text-left" id="userstory5">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 5</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to remove a template so that I can have the template removed.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-5</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp4</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to remove a template.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI select a template on the “Configuration Area” and remove it.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspI can change the content of the template to a patient.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory6 text-left" id="userstory6">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 6</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to define/schedule a template to a patient so that the patient can do the task.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-6</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to define/schedule a template to a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI select the patient and define the template I want to choose to him in the “Configuration Area”.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspThe patient can do the template task.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory7 text-left" id="userstory7">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 7</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to edit a patient so that the patient can have his account info data edited. </td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-7</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to edit a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI select a patient and edit his info data in the “Patients Configuration” tab.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspThe patient can have his account edited.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory8 text-left" id="userstory8">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 8</b></td>
+			<td>&nbsp&nbspAs a doctor, I want to remove a patient so that the patient can have his account removed. </td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-8</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp3</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to remove a patient.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI select a patient and remove his account on the “Patients Configuration” tab.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspThe patient can have his account removed.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory9 text-left" id="userstory9">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 9</b></td>
+			<td>&nbsp&nbspAs a patient, I want to do a template/task so that I can practice and try to recover my conditions.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-9</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp4</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to do a template/task.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspThe doctor helps me to get to the template task.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspI can practice and do the task and try to recover my conditions.</td>
+		  </tr>
+		</table>
+
+</section>
+
+<p></p>
+
+<section class="userstory10 text-left" id="userstory10">
+	<div class="container">
+		
+	<table id="myTable" class="altrowstable" id="alternatecolor">
+		  <tr>
+			<td>&nbsp&nbsp<b>User Story 10</b></td>
+			<td>&nbsp&nbspAs a patient, I want to choose templates/tasks to do firstly so that I can practice the templates.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Use Case</b></td>
+			<td>&nbsp&nbspUC-10</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Priority</b></td>
+			<td>&nbsp&nbsp2</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Given</b></td>
+			<td>&nbsp&nbspI want to choose templates/tasks to do firstly.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>When</b></td>
+			<td>&nbsp&nbspI tell the doctor what templates/tasks I want to do firstly.</td>
+		  </tr>
+		  <tr>
+			<td>&nbsp&nbsp<b>Then</b></td>
+			<td>&nbsp&nbspI can practice the templates I want to do firstly.</td>
+		  </tr>
+		</table>
+
+</section>
+		
+<p></p>		
+		
+</html>
