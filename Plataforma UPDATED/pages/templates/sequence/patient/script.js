@@ -1,33 +1,21 @@
-var config = {
-    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
-    authDomain: "avcproject-fae11.firebaseapp.com",
-    databaseURL: "https://avcproject-fae11.firebaseio.com",
-    storageBucket: "avcproject-fae11.appspot.com",
-    messagingSenderId: "1031859806052"
-};
-// Initialize Firebase
-firebase.initializeApp(config);
-
 // References
 var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
 
 // Global variables
-var templatesRef = database.ref("templates/sequence"); // database templates
+var myParam = location.search.split('param=')[1]
+var templatesRef = database.ref("templates/" + myParam); // database templates
 var order = []; // Array ordenado com nomes das imagens
 var images = [];
 
 templatesRef.once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        order = childSnapshot.val().ordem;
+        order = snapshot.val().ordem;
         for (var i = 0; i < order.length; i++) {
-            // read imagesz
+            // read images
             storageRef.child('templates/sequence/' + order[i]).getDownloadURL().then(function (url) {
                 images.push(url);
             });
         }
-            console.log(images);
-    })
 });
 
 function start() {

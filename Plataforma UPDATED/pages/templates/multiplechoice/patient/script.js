@@ -1,21 +1,10 @@
-var config = {
-    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
-    authDomain: "avcproject-fae11.firebaseapp.com",
-    databaseURL: "https://avcproject-fae11.firebaseio.com",
-    storageBucket: "avcproject-fae11.appspot.com",
-    messagingSenderId: "1031859806052"
-};
-
-// Initialize Firebase
-firebase.initializeApp(config);
-
 // References
 var database = firebase.database(); // database service
 
 // Global variables
-var templateRef = database.ref("templates/multiplechoice");
+var myParam = location.search.split('param=')[1]
+var templatesRef = database.ref("templates/" + myParam); // database templates
 var historico = [];
-
 //Time variables
 
 var timer = setInterval(clock, 10);
@@ -29,13 +18,11 @@ var respostasCorretas = 0;
 var respostasErradas = 0;
 
 
-templateRef.once("value", function (snapshot) {
-    snapshot.forEach(function (childSnapshot) {
-        rightAnswers = childSnapshot.val().respostasCertas,
-        question = childSnapshot.val().pergunta,
-        answers = childSnapshot.val().respostas,
-        answerNumber = childSnapshot.val().nrEscolhas
-    })
+templatesRef.once("value", function (snapshot) {
+        rightAnswers = snapshot.val().respostasCertas,
+        question = snapshot.val().pergunta,
+        answers = snapshot.val().respostas,
+        answerNumber = snapshot.val().nrEscolhas
 });
 
 
