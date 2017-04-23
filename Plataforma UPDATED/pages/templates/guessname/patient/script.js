@@ -1,13 +1,3 @@
-var config = {
-    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
-    authDomain: "avcproject-fae11.firebaseapp.com",
-    databaseURL: "https://avcproject-fae11.firebaseio.com",
-    storageBucket: "avcproject-fae11.appspot.com",
-    messagingSenderId: "1031859806052"
-};
-// Initialize Firebase
-firebase.initializeApp(config);
-
 // References
 var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
@@ -23,12 +13,10 @@ var arrayLetters = [];
 var imgTitle;
 
 templatesRef.once("value", function (snapshot) {
-    console.log(snapshot.val());
     imgTitle = snapshot.val().imgname;
     input = snapshot.val().input;
     nrLetras = snapshot.val().nrLetras;
     mensagensDoDoutor = snapshot.val().mensagens;
-    console.log(mensagensDoDoutor);
 
     arrayLetters = input.split('');
     for (var i = 0; i < arrayLetters.length; i++) {
@@ -75,7 +63,6 @@ templatesRef.once("value", function (snapshot) {
     $("#message").html("<p id=\"textoAjuda\">Seleccione um bloco preto para adivinhar a letra!</p>");
 
     // read image
-    console.log(imgTitle);
     var spaceRef = storageRef.child('templates/' + imgTitle);
     var path = spaceRef.fullPath;
 
