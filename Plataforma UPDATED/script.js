@@ -15,16 +15,16 @@ var database = firebase.database(); // database service
 
 //Handle Account Status
 firebase.auth().onAuthStateChanged(user => {
-    if(user) {
+    if (user) {
         var ref = database.ref("doctors/"); // database patients
         ref.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
                 console.log(user.email + "   " + childSnapshot.val().dname);
 
-                if(childSnapshot.val().dname === user.email){
+                if (childSnapshot.val().dname === user.email) {
                     window.location = 'pages/doctors_side/dashboard.html'; //After successful login, user will be redirected to dashboard.html
                 }
-                else{
+                else {
                     window.location = 'pages/patients_side/dashboard.html'; //After successful login, user will be redirected to dashboard.html
                 }
             });
@@ -37,10 +37,37 @@ function login() {
     var username = $("#username").val() + '@strokerehab.com';
     var password = $("#password").val();
 
-    firebase.auth().signInWithEmailAndPassword(username, password).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
+        if (errorCode === 'auth/invalid-email') {
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                '<h4><i class="icon fa fa-warning"></i> Utilizador inválido!</h4>' +
+                'Verifique se escreveu o utilizador' +
+                '</div>';
+
+            $("#mensagemErro").replaceWith(html_block);
+        }
+        if (errorCode === 'auth/user-not-found') {
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                '<h4><i class="icon fa fa-warning"></i> Utilizador não encontrado!</h4>' +
+                'Verifique se o nome do utilizador está correcto' +
+                '</div>';
+
+            $("#mensagemErro").replaceWith(html_block);
+        }
+        if (errorCode === 'auth/wrong-password') {
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                '<h4><i class="icon fa fa-warning"></i> Palavra-passe incorrecta!</h4>' +
+                'Verifique se está a escrever a palavra-passe correcta.' +
+                '</div>';
+
+            $("#mensagemErro").replaceWith(html_block);
+        }
     });
 }
