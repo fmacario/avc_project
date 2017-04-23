@@ -11,7 +11,7 @@ firebase.auth().onAuthStateChanged(function(user) {
               var html_block = "<button type='button' class='btn btn-primary btn-block btn-flat'" + 
                                "onclick='redirect("+snapshot.val().ptemplates[i]+");'" +
                                "style='margin: auto;' id="+ snapshot.val().ptemplates[i]+">" + snapshot.val().ptemplates[i]+ " </button>"; 
-              $("body").append(html_block);  
+              $("#teste").append(html_block);  
             }            
         });
   } else {
@@ -22,12 +22,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 function redirect(id){
   var refTemplates2 = database.ref('templates/' + id.id);
   refTemplates2.once("value", function (snapshot) {
-             console.log(snapshot.val());
-             window.location = '../../pages/templates/'+snapshot.val().tipo+'/patient/patient.html' + '?param=' + id.id;
+             window.location = '../../pages/templates/'+snapshot.val().tipo+'/patient/template.html' + '?param=' + id.id;
         });
    
 }
-
-
-// read metadata
-var templatesUser = database.ref("templ"); // database templates
