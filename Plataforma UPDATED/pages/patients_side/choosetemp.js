@@ -8,9 +8,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     var refTemplates = database.ref('patients/' + username);
         refTemplates.once("value", function (snapshot) {
             for(var i=0; i<snapshot.val().ptemplates.length; i++){
-              var html_block = "<button type='button' class='btn btn-primary btn-block btn-flat'" + 
-                               "onclick='redirect("+snapshot.val().ptemplates[i]+");'" +
-                               "style='margin: auto;' id="+ snapshot.val().ptemplates[i]+">" + snapshot.val().ptemplates[i]+ " </button>"; 
+              var html_block =  "<div class='col-sm-3'>" +
+                                  "<button type='button' class='btn btn-primary btn-block btn-flat' style='height:150px;" + 
+                                    "onclick='redirect("+snapshot.val().ptemplates[i]+");'" +
+                                    "style='margin: auto;' id="+ snapshot.val().ptemplates[i]+">" + snapshot.val().ptemplates[i] + 
+                                  " </button>" + 
+                                "</div>";
               $("#teste").append(html_block);  
             }            
         });
