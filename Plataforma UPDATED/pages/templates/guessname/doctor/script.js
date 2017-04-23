@@ -116,6 +116,8 @@ $(function () {
             imagesImageRef.put(file).then(function(snapshot) {
                 console.log('Uploaded a blob or file!');
             });
+            
+            alert("Template criado com sucesso");
             var nometemplate = $("#nometemplate").val();
             database.ref('templates/' + nometemplate).set({
                 input: input,

@@ -1,14 +1,3 @@
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
-    authDomain: "avcproject-fae11.firebaseapp.com",
-    databaseURL: "https://avcproject-fae11.firebaseio.com",
-    storageBucket: "avcproject-fae11.appspot.com",
-    messagingSenderId: "1031859806052"
-};
-
-firebase.initializeApp(config);
-
 // References
 var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
@@ -19,7 +8,7 @@ var number_of_images;
 $(document).ready(function () {
 
     $('#save').hide();
-    
+
     $('#generate').click(function () {
         number_of_images = $("#number_of_images").val();
 
@@ -40,8 +29,10 @@ $(document).ready(function () {
     });
 
     $('#save').click(function () {
-        database.ref('templates/sequence/' + 0).set({
-            ordem: array
+        var nometemplate = $("#nometemplate").val();
+        database.ref('templates/' + nometemplate).set({
+            ordem: array,
+            tipo: "sequence"
         });
         alert("Tarefa guardada com sucesso!");
     });
@@ -68,7 +59,7 @@ function readURL(input, i) {
             });
 
             counter++;
-            if(counter== number_of_images){
+            if (counter == number_of_images) {
                 $('#save').show();
             }
         };
@@ -107,6 +98,6 @@ function $id(id) {
     return document.getElementById(id);
 }
 
-	
+
 
 

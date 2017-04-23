@@ -109,11 +109,12 @@ function generateTemplate() {
     checkIfNotAllRight();
 
     alert("Template criado com sucesso");
-
-    database.ref('templates/multiplechoice/' + 0).set({
+    var nometemplate = $("#nometemplate").val();
+    database.ref('templates/' + nometemplate).set({
         pergunta: pergunta,
         respostasCertas: rightAnswers,
         respostas: answers,
+        tipo: 'multiplechoice',
         nrEscolhas: answerNumber
     })
 }
