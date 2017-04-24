@@ -16,6 +16,7 @@ templatesRef.once("value", function (snapshot) {
 
 var entity = [];
 var sceneEl;
+var terminado = false;
 
 function start(){
 	sceneEl = document.querySelector('a-scene');
@@ -202,6 +203,11 @@ function start(){
 		});
 	}
 
+	if(terminado){
+		a.addEventListener('click', function () {
+			window.location.replace("../../../patients_side/dashboard.html");
+		}
+	}
 
 
 
@@ -283,7 +289,7 @@ function checkIfDone(){
 		a.setAttribute('material', 'color: green');
 		a.setAttribute('position', '0  2 -1.5');
 		a.setAttribute('text', {
-			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!",
+			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!\n\nClique aqui para sair.",
 			color: 'white'
 		});
 
