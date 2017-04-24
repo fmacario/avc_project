@@ -205,8 +205,9 @@ function start(){
 
 	if(terminado){
 		a.addEventListener('click', function () {
+			console.log("teste");
 			window.location.replace("../../../patients_side/dashboard.html");
-		}
+		});
 	}
 
 
@@ -295,6 +296,11 @@ function checkIfDone(){
 
 		//
 		sceneEl.appendChild(a);
+
+		a.addEventListener('click', function () {
+			console.log("teste");
+			window.location.replace("../../../patients_side/dashboard.html");
+		});
 
         //for (var i = 0; i < answerNumber; i++) {
          //   $("#resposta" + i).attr('disabled', 'disabled');

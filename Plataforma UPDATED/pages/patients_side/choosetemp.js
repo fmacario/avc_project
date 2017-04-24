@@ -20,7 +20,7 @@ firebase.auth().onAuthStateChanged(function (user) {
       for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
         tpatients.replaceWith(table);
         var teste = $("#showtemplates table");
-        teste.append($('<tr id=' + snapshot.val().ptemplates[i] + ' onclick="redirect('+ snapshot.val().ptemplates[i] +')">')
+        teste.append($('<tr onclick="redirect('+ snapshot.val().ptemplates[i] +')">')
              .append($('<td>')
              .text(snapshot.val().ptemplates[i])
           )
@@ -33,7 +33,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function redirect(id) {
-  console.log("Lol");
   var refTemplates2 = database.ref('templates/' + id.id);
   refTemplates2.once("value", function (snapshot) {
     window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patient.html' + '?param=' + id.id;

@@ -132,7 +132,7 @@
                             <div class="loader" style="margin: auto;"></div>
                         </div>
                         <div id="jogo" class="box-body" style='display: none'>
-                            <div id ="jogo" class="container">
+                            <div id="jogo" class="container">
                                 <h2 class="text-center border" id="question"></h2>
 
                                 <div id="answers" class="border"></div>
@@ -143,115 +143,112 @@
                                 </div>
 
 
-                    <div class="container text-center">
-                        <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span><p></p>
-                        <button style="width: 300px" id="rect">Responder por voz</button>
-                    </div>
+                                <div class="container text-center">
+                                    <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span>
+                                    <button style="width: 300px" id="rect">Responder por voz</button>
+                                    <button id="goVR" style="width: 300px">Responder com VR</button>
+                                </div>
 
-                    <div id="divBorder" style="border:dotted">
-                        <span id="final_span"></span>
-                    </div>
+                                <div id="divBorder" style="border:dotted">
+                                    <span id="final_span"></span>
+                                </div>
+                                <script type="text/javascript">
+                                    document.getElementById('divBorder').style.visibility = 'hidden';
+                                    document.getElementById('rect').style.visibility = 'hidden';
 
-                    <button id="goVR" style="width: 300px">Responder com VR</button>
+                                    // Test browser support
+                                    window.SpeechRecognition = window.SpeechRecognition ||
+                                        window.webkitSpeechRecognition ||
+                                        null;
 
-                    <script type="text/javascript">
+                                    //caso não suporte esta API DE VOZ                              
+                                    if (window.SpeechRecognition === null) {
+                                        document.getElementById('unsupported').classList.remove('hidden');
+                                        document.getElementById('rect').style.visibility = 'hidden';
+                                        document.getElementById('divBorder').style.visibility = 'hidden';
 
-                        document.getElementById('divBorder').style.visibility = 'hidden';
-                        document.getElementById('rect').style.visibility = 'hidden';
+                                    } else {
+                                        var recognizer = new window.SpeechRecognition();
+                                        var transcription = document.getElementById("final_span");
 
-                      // Test browser support
-                      window.SpeechRecognition = window.SpeechRecognition       ||
-                                                 window.webkitSpeechRecognition ||
-                                                 null;
-                    
-                        //caso não suporte esta API DE VOZ                              
-                        if (window.SpeechRecognition === null) {
-                            document.getElementById('unsupported').classList.remove('hidden');
-                            document.getElementById('rect').style.visibility = 'hidden';  
-                            document.getElementById('divBorder').style.visibility = 'hidden';
-                            
-                        }else {
-                            var recognizer = new window.SpeechRecognition();
-                            var transcription = document.getElementById("final_span");
+                                        recognizer.continuous = true;
+                                        recognizer.lang = "pt-PT";
 
-                            recognizer.continuous = true;
-                            recognizer.lang = "pt-PT";
+                                        recognizer.onresult = function (event) {
+                                            transcription.textContent = "";
+                                            for (var i = event.resultIndex; i < event.results.length; i++) {
+                                                if (event.results[i].isFinal) {
+                                                    transcription.textContent += event.results[i][0].transcript;
+                                                    var teste;
+                                                    var x = 0;
+                                                    var botao;
+                                                    var inputElement = document.createElement('input');
+                                                    inputElement.type = "button";
 
-                            recognizer.onresult = function(event){
-                                transcription.textContent = "";
-                                for (var i = event.resultIndex; i < event.results.length; i++) {
-                                    if(event.results[i].isFinal){
-                                        transcription.textContent += event.results[i][0].transcript;
-                                        var teste;
-                                        var x = 0;
-                                        var botao;
-                                        var inputElement = document.createElement('input');
-                                        inputElement.type = "button";
+                                                    while (x < getNoRespostas()) {
+                                                        var frase = event.results[i][0].transcript.toLowerCase().replace(/ /g, '');
+                                                        var respostaX = answers[x].toLowerCase().replace(/ /g, '');
 
-                                        while(x < getNoRespostas()){
-                                            var frase = event.results[i][0].transcript.toLowerCase().replace(/ /g,'');
-                                            var respostaX = answers[x].toLowerCase().replace(/ /g,'');
+                                                        teste = frase == respostaX;
 
-                                            teste = frase == respostaX;
-                                            
-                                            console.log("frase: " + frase);
+                                                        console.log("frase: " + frase);
 
-                                            if (frase == "primeira" || frase == "primeiro") {
-                                                inputElement.id = "resposta0";
-                                                voz(inputElement);
-                                                break;
+                                                        if (frase == "primeira" || frase == "primeiro") {
+                                                            inputElement.id = "resposta0";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "segunda" || frase == "segundo") {
+                                                            inputElement.id = "resposta1";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "terceira" || frase == "terceiro") {
+                                                            inputElement.id = "resposta2";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "quarta" || frase == "quarto") {
+                                                            inputElement.id = "resposta3";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "quinta" || frase == "quinto") {
+                                                            inputElement.id = "resposta4";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "sexta" || frase == "sexto") {
+                                                            inputElement.id = "resposta5";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "sétima" || frase == "sétimo") {
+                                                            inputElement.id = "resposta6";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (frase == "oitava" || frase == "oitavo") {
+                                                            inputElement.id = "resposta7";
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+                                                        else if (teste) {
+                                                            inputElement.id = "resposta" + x;   // 
+                                                            voz(inputElement);
+                                                            break;
+                                                        }
+
+                                                        ++x;
+                                                    }
+                                                }
+                                                else {
+
+                                                }
                                             }
-                                            else if (frase == "segunda" || frase == "segundo") {
-                                                inputElement.id = "resposta1";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (frase == "terceira" || frase == "terceiro") {
-                                                inputElement.id = "resposta2";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (frase == "quarta" || frase == "quarto") {
-                                                inputElement.id = "resposta3";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (frase == "quinta" || frase == "quinto") {
-                                                inputElement.id = "resposta4";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (frase == "sexta" || frase == "sexto") {
-                                                inputElement.id = "resposta5";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (frase == "sétima" || frase == "sétimo") {
-                                                inputElement.id = "resposta6";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (frase == "oitava" || frase == "oitavo") {
-                                                inputElement.id = "resposta7";
-                                                voz(inputElement);
-                                                break;
-                                            }
-                                            else if (teste) {
-                                                inputElement.id = "resposta" + x;   // 
-                                                voz(inputElement);
-                                                break;
-                                            }
-
-                                            ++x;
-                                        }                               
+                                        }
                                     }
-                                    else{
-                                    
-                                    }
-                                }
-                            }
-                        }
-                    </script>
+                                </script>
 
 
 
@@ -285,7 +282,7 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-                            $.widget.bridge('uibutton', $.ui.button);
+                                    $.widget.bridge('uibutton', $.ui.button);
     </script>
     <!-- Bootstrap 3.3.6 -->
     <script src="../../../../bootstrap/js/bootstrap.min.js"></script>
