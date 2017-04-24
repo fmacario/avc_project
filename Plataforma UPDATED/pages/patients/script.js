@@ -48,6 +48,11 @@ function writeUserData() {
         pname: pname,
         ptemplates: ""
     });
+
+    setTimeout(function () {
+        window.location.href = window.location.href;
+    }, 1000);
+
 }
 
 // Displays selected patient from table
@@ -122,6 +127,8 @@ function assignTask() {
         pname: selectedPatient,
         ptemplates: seltemplates
     });
+
+    location.reload();
 }
 
 function associatedTemplates() {

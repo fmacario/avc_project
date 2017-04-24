@@ -45,8 +45,7 @@ function login() {
         if (errorCode === 'auth/invalid-email') {
             var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
-                '<h4><i class="icon fa fa-warning"></i> Utilizador inválido!</h4>' +
-                'Verifique se escreveu o utilizador' +
+                '<h5><i class="icon fa fa-warning"></i> Utilizador inválido!</h5>' +
                 '</div>';
 
             $("#mensagemErro").replaceWith(html_block);
@@ -54,8 +53,7 @@ function login() {
         if (errorCode === 'auth/user-not-found') {
             var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
-                '<h4><i class="icon fa fa-warning"></i> Utilizador não encontrado!</h4>' +
-                'Verifique se o nome do utilizador está correcto' +
+                '<h5><i class="icon fa fa-warning"></i> Utilizador não encontrado!</h5>' +
                 '</div>';
 
             $("#mensagemErro").replaceWith(html_block);
@@ -63,8 +61,7 @@ function login() {
         if (errorCode === 'auth/wrong-password') {
             var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
-                '<h4><i class="icon fa fa-warning"></i> Palavra-passe incorrecta!</h4>' +
-                'Verifique se está a escrever a palavra-passe correcta.' +
+                '<h5><i class="icon fa fa-warning"></i> Palavra-passe incorrecta!</h5>' +
                 '</div>';
 
             $("#mensagemErro").replaceWith(html_block);
