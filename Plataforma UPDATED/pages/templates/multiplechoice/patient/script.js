@@ -19,7 +19,7 @@ var respostasErradas = 0;
 
 
 templatesRef.once("value", function (snapshot) {
-    rightAnswers = snapshot.val().respostasCertas,
+        rightAnswers = snapshot.val().respostasCertas,
         question = snapshot.val().pergunta,
         answers = snapshot.val().respostas,
         answerNumber = snapshot.val().nrEscolhas
@@ -29,7 +29,6 @@ templatesRef.once("value", function (snapshot) {
 
 
 function start() {
-
     window.SpeechRecognition = window.SpeechRecognition ||
         window.webkitSpeechRecognition ||
         null;
@@ -225,3 +224,7 @@ function removerCorVermelha(clickedButton) {
     tentativasResposta++;
     $("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }
+
+$("#goVR").click(function() {
+    window.location.replace("escolhamultiplaVR.html" + '?param=' + myParam);
+});
