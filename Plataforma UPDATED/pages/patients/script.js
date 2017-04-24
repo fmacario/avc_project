@@ -5,7 +5,8 @@ var auth = firebase.auth();
 // Global variables;
 var selectedPatient;
 var patientRef;
-var patientRefTemplates
+var patientRefTemplates;
+var patientAssociatedTemplates;
 
 // Displays patients of database in a table
 $(document).ready(function () {
@@ -15,7 +16,7 @@ $(document).ready(function () {
 
     patientsRef.once("value", function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
-            var teste = $("#showpatients table");
+            var teste = $("#jogo table");
             teste.append($('<tr id="' + childSnapshot.key + '" onclick="showPatient(this)">')
                 .append($('<td>')
                     .text(childSnapshot.val().pname)
@@ -45,17 +46,19 @@ function writeUserData() {
 
     database.ref('patients/' + pusername).set({
         pname: pname,
+        ptemplates: ""
     });
 }
 
 // Displays selected patient from table
 function showPatient(obj) {
     selectedPatient = obj.id;
-    console.log(selectedPatient);
-    patientRef = database.ref('patients/' + obj.id);
-    var patientNameRef = database.ref('patients/' + obj.id + '/pname');
+    patientRef = database.ref('patients/' + selectedPatient);
+    var patientNameRef = database.ref('patients/' + selectedPatient);
 
     patientNameRef.on('value', function (snapshot) {
+        patientAssociatedTemplates = snapshot.val().ptemplates;
+
         var html_block = '<div id="showpatient">' +
             '<div class="box box-widget widget-user-2" style="z-index: 2;width: 100%;">' +
             '<div class="box-header with-border">' +
@@ -66,17 +69,17 @@ function showPatient(obj) {
             '<img class="img-circle" src="../../dist/img/user7-128x128.jpg" alt="User Avatar">' +
             '</div>' +
             '<!-- /.widget-user-image -->' +
-            '<h3 class="widget-user-username">' + snapshot.val() + '</h3>' +
+            '<h3 class="widget-user-username">' + snapshot.val().pname + '</h3>' +
             '<h5 class="widget-user-desc">Paciente</h5>' +
             '</div>' +
             '<div class="box-footer no-padding">' +
             '<ul class="nav nav-stacked">' +
-            '<li><a href="#">Tarefas atribuidas<span class="pull-right badge bg-aqua">0</span></a></li>' +
-            '<li><a href="#">Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
+            '<li><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + patientAssociatedTemplates.length + '</span></a onclick="associatedTemplates()"></li>' +
+            '<li><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
             '<li>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
+            '<div id="templates" style="width: 25%; margin: auto;"></div>' +
             '<button type="button" class="btn btn-block btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
-            '<div id="templates"></div>' +
             '</li>' +
             '</ul>' +
             '</div>' +
@@ -85,7 +88,7 @@ function showPatient(obj) {
 
         $('#showpatient').replaceWith(html_block);
 
-        var conc = '<div id="templates">' +
+        var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
             '<select id="seltemplates" class="form-control select2 " multiple="" data-placeholder="Select templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 
@@ -115,6 +118,13 @@ function removePatient() {
 function assignTask() {
     var seltemplates = $("#seltemplates").val();
 
+    database.ref('patients/' + selectedPatient).set({
+        pname: selectedPatient,
+        ptemplates: seltemplates
+    });
+}
+
+function associatedTemplates() {
     database.ref('patients/' + selectedPatient).set({
         pname: selectedPatient,
         ptemplates: seltemplates
