@@ -41,6 +41,8 @@ function writeUserData() {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode);
+
+        database.ref('patients/' + pusername).remove();
     });
 
 
