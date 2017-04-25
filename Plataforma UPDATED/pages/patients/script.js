@@ -43,6 +43,8 @@ function writeUserData() {
         console.log(errorCode);
 
         database.ref('patients/' + pusername).remove();
+        alert("Insira uma password com pelo menos 6 digitos.");
+        
     });
 
 
