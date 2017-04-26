@@ -69,7 +69,10 @@ function writeUserData() {
     });
 
     setTimeout(function () {
-        window.location.href = window.location.href;
+        relogin();
+        setTimeout(function () {
+            window.location.href = window.location.href;
+        }, 1000);
     }, 1000);
 }
 
@@ -182,5 +185,17 @@ function assignTask() {
             ptemplates: finalTemplates,
             ntemplates: finalTemplates.length
         });
+    });
+}
+
+function relogin() {
+    var dusername = "admin@strokerehab.com";
+    var dpassword = "admin123";
+
+    firebase.auth().signInWithEmailAndPassword(dusername, dpassword).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode);
     });
 }

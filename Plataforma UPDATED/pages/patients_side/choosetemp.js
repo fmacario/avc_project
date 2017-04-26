@@ -32,7 +32,8 @@ firebase.auth().onAuthStateChanged(function (user) {
   }
 });
 
-function redirect(pagina) { 
+function redirect(pagina) {
+  console.log(pagina);
   var refTemplates2 = database.ref('templates/' + pagina.id);
   refTemplates2.once("value", function (snapshot) {
     window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patient.html' + '?param=' + pagina.id;
