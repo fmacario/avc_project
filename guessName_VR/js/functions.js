@@ -16,9 +16,21 @@ var antigaLetraSelecionada = null;
 var letraSelecionada = null;
 var escondePosicao = [];        // posicao das letras a serem escondidas
 
+function customEnterVR () {
+  var scene = document.querySelector('a-scene');
+  if (scene) {
+    if (scene.hasLoaded) {
+      scene.enterVR();
+    } else {
+      scene.addEventListener('loaded', scene.enterVR);
+    }
+  }
+}
 
 
 function start(){
+	//document.addEventListener('mouseup', customEnterVR);	// 
+
 	var c;
 	var str = "";
 	for (var i = 0; i < input.length; i++) {
