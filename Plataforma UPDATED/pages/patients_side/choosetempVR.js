@@ -41,7 +41,7 @@ firebase.auth().onAuthStateChanged(function (user) {
           redirect(a);
         });
         
-
+        y -= 0.3;
    }
     });
   } else {
@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 function redirect(pagina) { 
   var refTemplates2 = database.ref('templates/' + pagina);
   refTemplates2.once("value", function (snapshot) {
-    window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patient.html' + '?param=' + pagina;
+    window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patientVR.html' + '?param=' + pagina;
   });
 
 }

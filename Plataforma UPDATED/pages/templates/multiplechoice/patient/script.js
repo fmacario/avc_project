@@ -226,5 +226,5 @@ function removerCorVermelha(clickedButton) {
 }
 
 $("#goVR").click(function() {
-    window.location.replace("escolhamultiplaVR.html" + '?param=' + myParam);
+    window.location.replace("patientVR.html" + '?param=' + myParam);
 });
