@@ -44,7 +44,7 @@ function writeUserData() {
 
         database.ref('patients/' + pusername).remove();
         alert("Insira uma password com pelo menos 6 digitos.");
-        
+
     });
 
 
@@ -127,12 +127,25 @@ function removePatient() {
 function assignTask() {
     var seltemplates = $("#seltemplates").val();
 
-    database.ref('patients/' + selectedPatient).set({
-        pname: selectedPatient,
-        ptemplates: seltemplates
+    database.ref('patients/' + selectedPatient + "/ptemplates").orderByKey().on("value", function (snapshot) {
+        for (var i = 0; i < seltemplates.length; i++) {
+            if (jQuery.inArray(seltemplates[i], snapshot.val()) == -1) {
+                finalTemplates = jQuery.makeArray(snapshot.val());
+                finalTemplates.push(seltemplates[i]);
+                console.log("adicionei " + seltemplates[i]);
+            }
+        }
+
+        database.ref('patients/' + selectedPatient).set({
+            pname: selectedPatient,
+            ptemplates: finalTemplates
+        });
     });
 
-    location.reload();
+
+    setTimeout(function () {
+        window.location.href = window.location.href;
+    }, 2000);
 }
 
 function associatedTemplates() {
