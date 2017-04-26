@@ -96,6 +96,7 @@ function showPatient(obj) {
             '<div class="box-footer no-padding">' +
             '<ul class="nav nav-stacked">' +
             '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a onclick="associatedTemplates()"></li>' +
+            '<div id="tabletemp"></div>' +
             '<li><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
             '<li>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
@@ -108,6 +109,29 @@ function showPatient(obj) {
             '</div>';
 
         $('#showpatient').replaceWith(html_block);
+        $('#atribuidas').click(function () {
+            html_block = "<table id='tabletemp' class='table table-hover'>" +
+                "<tbody>" +
+                "<tr>" +
+                "<th>Nome</th>" +
+                "<th>Tipo</th>" +
+                "</tr>" +
+                "</tbody>" +
+                "</table>";
+
+
+
+            if (snapshot.val().ntemplates != 0) {
+                $("#tabletemp").replaceWith(html_block);
+                for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
+                    $("#tabletemp").append($('<tr id="' + snapshot.key + '">')
+                        .append($('<td>')
+                            .text(snapshot.val().ptemplates[i])
+                        )
+                    )
+                }
+            }
+        })
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
