@@ -171,71 +171,72 @@
                                     <input type="text" class="form-control" id="ppassword" placeholder="Insira Password">
                                 </div>
                                 <button type="button" class="btn btn-block btn-primary btn-lg" onclick="writeUserData();" style="width: 55%; margin: auto;">Adicionar Paciente
-                            </button>
+                                </button>
+                                <div id="mensagemErro">
                             </form>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <!-- Adicionar qualquer coisa ao footer -->
+                            </div>
+                            <!-- box-footer -->
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <!-- Adicionar qualquer coisa ao footer -->
-                        </div>
-                        <!-- box-footer -->
-                    </div>
-                    <!-- /.box -->
+                        <!-- /.box -->
 
-                    <!-- Show patients box -->
-                    <div class="box box-solid box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Lista de pacientes</h3>
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        <!-- Show patients box -->
+                        <div class="box box-solid box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">Lista de pacientes</h3>
+                                <div class="box-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- /.box-header -->
+                            <div id="showpatients" class="box-body table-responsive no-padding">
+                                <div class="loader" style="margin: auto;"></div>
+                            </div>
+                            <div id='jogo' class='box-body table-responsive no-padding' style='display: none'>
+                                <table class='table table-hover'>
+                                    <tbody>
+                                        <tr>
+                                            <th>Nome</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-header -->
-                        <div id="showpatients" class="box-body table-responsive no-padding">
-                            <div class="loader" style="margin: auto;"></div>
-                        </div>
-                        <div id='jogo' class='box-body table-responsive no-padding' style='display: none'>
-                            <table class='table table-hover'>
-                                <tbody>
-                                    <tr>
-                                        <th>Nome</th>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                    <!-- Selected Patient box -->
-                    <div class="box box-solid box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Paciente selecionado</h3>
+                        <!-- /.box -->
+                        <!-- Selected Patient box -->
+                        <div class="box box-solid box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">Paciente selecionado</h3>
 
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
+                                <div class="box-tools">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                    </div>
                                 </div>
                             </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding">
+                                <div id="showpatient"></div>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <div id="showpatient"></div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
+                        <!-- /.box -->
                 </section>
                 <!-- /.content -->
             </section>
+            </div>
+            <!-- /.content -->
+            </section>
         </div>
         <!-- /.content -->
-        </section>
-    </div>
-    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer" style="text-align: right">

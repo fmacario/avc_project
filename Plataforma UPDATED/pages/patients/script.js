@@ -43,20 +43,34 @@ function writeUserData() {
         console.log(errorCode);
 
         database.ref('patients/' + pusername).remove();
-        alert("Insira uma password com pelo menos 6 digitos.");
 
+        if (errorCode === 'auth/email-already-in-use') {
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                '<h5><i class="icon fa fa-warning"></i> Utilizador já existe!</h5>' +
+                '</div>';
+
+            $("#mensagemErro").replaceWith(html_block);
+        }
+        if (errorCode === 'auth/weak-password') {
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+                '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+                '<h5><i class="icon fa fa-warning"></i>Palavra-chave fraca.</h5>' +
+                'Escolha uma palavra-chave com pelo menos digitos.' +
+                '</div>';
+
+            $("#mensagemErro").replaceWith(html_block);
+        }
     });
-
 
     database.ref('patients/' + pusername).set({
         pname: pname,
-        ptemplates: ""
+        ntemplates: 0
     });
 
     setTimeout(function () {
         window.location.href = window.location.href;
     }, 1000);
-
 }
 
 // Displays selected patient from table
@@ -66,8 +80,6 @@ function showPatient(obj) {
     var patientNameRef = database.ref('patients/' + selectedPatient);
 
     patientNameRef.on('value', function (snapshot) {
-        patientAssociatedTemplates = snapshot.val().ptemplates;
-
         var html_block = '<div id="showpatient">' +
             '<div class="box box-widget widget-user-2" style="z-index: 2;width: 100%;">' +
             '<div class="box-header with-border">' +
@@ -83,7 +95,7 @@ function showPatient(obj) {
             '</div>' +
             '<div class="box-footer no-padding">' +
             '<ul class="nav nav-stacked">' +
-            '<li><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + patientAssociatedTemplates.length + '</span></a onclick="associatedTemplates()"></li>' +
+            '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a onclick="associatedTemplates()"></li>' +
             '<li><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
             '<li>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
@@ -125,32 +137,26 @@ function removePatient() {
 
 // Assign task to patient
 function assignTask() {
-    var seltemplates = $("#seltemplates").val();
+    var finalTemplates = [];
 
-    database.ref('patients/' + selectedPatient + "/ptemplates").orderByKey().on("value", function (snapshot) {
-        for (var i = 0; i < seltemplates.length; i++) {
-            if (jQuery.inArray(seltemplates[i], snapshot.val()) == -1) {
-                finalTemplates = jQuery.makeArray(snapshot.val());
-                finalTemplates.push(seltemplates[i]);
-                console.log("adicionei " + seltemplates[i]);
+    database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+        console.log(snapshot.val());
+        finalTemplates = jQuery.makeArray(snapshot.val());
+        console.log(finalTemplates);
+
+        for (var i = 0; i < $("#seltemplates").val().length; i++) {
+            if (jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == -1 || jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == null) {
+                console.log("initial temp" + finalTemplates);
+                finalTemplates.push($("#seltemplates").val()[i]);
+                console.log("dei push a " + $("#seltemplates").val()[i]);
+                console.log("final temp " + finalTemplates);
             }
         }
 
         database.ref('patients/' + selectedPatient).set({
             pname: selectedPatient,
-            ptemplates: finalTemplates
+            ptemplates: finalTemplates,
+            ntemplates: finalTemplates.length
         });
-    });
-
-
-    setTimeout(function () {
-        window.location.href = window.location.href;
-    }, 2000);
-}
-
-function associatedTemplates() {
-    database.ref('patients/' + selectedPatient).set({
-        pname: selectedPatient,
-        ptemplates: seltemplates
     });
 }
