@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Stroke Rehab</title>
+
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="../../../../bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../../../dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../../../../dist/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="../../../../plugins/iCheck/flat/blue.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="../../../../plugins/jvectormap/jquery-jvectormap-1.2.2.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="../../../../plugins/datepicker/datepicker3.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="../../../../plugins/daterangepicker/daterangepicker.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="../../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
+    <!-- css file -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="../../../doctors_side/dashboard.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>S</b>R</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Stroke</b>Rehab</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <!-- Tasks: style can be found in dropdown.less -->
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="../../../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">Alexander Pierce</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                    <p>
+                                        Alexander Pierce - Web Developer
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-primary btn-block btn-flat" onclick="logout();" margin: "auto;">Log out
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    <li class="header">MAIN NAVIGATION</li>
+                    <li class="patients">
+                        <a href="../../../patients/patients.html">
+                            <i class="fa fa-fw fa-users"></i>
+                            <span>Gestão de Pacientes</span>
+                            <span class="pull-right-container">>
+              </span>
+                        </a>
+                    </li>
+                    <li class="templates">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Area Configuração</span>
+                            <span class="pull-right-container">
+              <span class="label label-primary pull-right">3</span>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li></li>
+                            <li><a href="../../sequence/doctor/doctor.html"><i class="fa fa-circle-o"></i> Sequenciação</a></li>
+                            <li><a href="../../guessname/doctor/doctor.html"><i class="fa fa-circle-o"></i> Adivinhar Nome</a></li>
+                            <li><a href="../../multiplechoice/doctor/doctor.html"><i class="fa fa-circle-o"></i> Escolha Múltipla</a></li>
+                            <!-- <li><a href="pages/templates/reconhecimentoVisdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Reconhecimento Visual</a></li> -->
+                            <!-- <li><a href="pages/templates/categorizatdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Categorização</a></li> -->
+                        </ul>
+                    </li>
+
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <section id="masterSection" class="content">
+                <section class="content-header">
+                    <h1> Categorização </h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li>Templates</li>
+                        <li class="active">Sequenciação</li>
+                    </ol>
+                </section>
+
+                <!-- Main content -->
+                <section class="content">
+                    <!-- Default box -->
+                    <div class="box box-solid box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Configuração de template</h3>
+                            <div class="box-tools pull-right">
+                                <!-- Buttons, labels, and many other things can be placed here! -->
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <div id="main_div" class="container-fluid">
+                                <div id="ask_number_div" class=" text-center">
+                                    <label for="usr">Nome do template:</label>
+                                    <input type="text" class="form-control" id="nometemplate">
+                                    <p>
+                                        Número de categorias a inserir:
+                                        <input id="number_of_categories" type="number">
+                                        <button id="generate">Passo Seguinte</button>
+                                    </p>
+
+                                </div>
+
+                                <div id="insert_cat_div">
+
+                                </div>
+
+                            </div>
+                            <button id="save" class="text-center">Guardar Tarefa</button>
+                            <!-- /.box-body -->
+
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </section>
+                <!-- /.content -->
+            </section>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer" style="text-align: right">
+        <strong><a href="http://xcoa.av.it.pt/~pei2016-2017_g9/">Stroke Rehab project website</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- ./wrapper -->
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+    <!-- jQuery 2.2.3 -->
+    <script src="../../../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="../../../../bootstrap/js/bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="../../../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../../plugins/fastclick/fastclick.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../../../dist/js/app.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../../../dist/js/demo.js"></script>
+
+    <!-- script local para esta pagina -->
+    <script src="../../../../logout1.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
