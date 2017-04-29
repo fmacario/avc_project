@@ -81,7 +81,7 @@ function readURL(input, i) {
   var path;
   var imageRef;
   var imagesImageRef;
-  var specialChars = "<>@!#$%^&*()_+[]{}?:;ãẽĩõũáéíóúàèìòùâêîôû|'\"\\,/~`-="
+  var specialChars = "<>@!#$%^&*()_+[]{}?:;ãẽĩõũáéíóúàèìòùâêîôû|'\"\\,/~`-=";
 
   for (var x = 0; x < input.files.length; x++) {
     if (check(input.files[x].name, specialChars) == true) {

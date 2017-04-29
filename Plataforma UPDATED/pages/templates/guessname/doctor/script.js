@@ -4,6 +4,7 @@ var input;		//input dado para adivinhar
 var nrLetras;	//nr de letras para esconder
 var pathToImg; //path to image to upload o patient side
 var messages = []; //array de messages dadas
+var specialChars = "<>@!#$%^&*()_+[]{}?:;ãẽĩõũáéíóúàèìòùâêîôû|'\"\\,/~`-=";
 
 // Initialize Firebase
 var config = {
@@ -24,6 +25,14 @@ $(function () {
     //Function to upload image
 
     $(":file").change(function () {
+
+      for (var x = 0; x < this.files.length; x++) {
+        if (check(this.files[x].name, specialChars) == true) {
+          alert("O nome da imagem não pode ter caracteres especiais, por favor renomeie o ficheiro");
+          throw new Error("Caracteres invalidos no titulo da imagem");
+        }
+      }
+
         if (this.files && this.files[0]) {
             var reader = new FileReader();
             reader.onload = imageIsLoaded;
@@ -83,11 +92,11 @@ $(function () {
 
     //Submit button
     $('#submitBtn').on('click', function () {
-
         assertImgInsert();
         getInput();
         nrLetras = $('#nrletras').val();		//nrLetras é o nr de letras a esconder
 
+        console.log(input);
 
         if (nrLetras > input.length) {
             alert("Número de letras a esconder é superior ao número de letras na palavra!");
@@ -97,13 +106,12 @@ $(function () {
             alert("Número de letras não pode ser menor ou igual a 0!");
             throw new Error("Assertion failed");
         }
+        else if (hasNumbers(input) || hasSpecialCaracters(input)) {
+          alert("Palavra a descobrir não pode conter números nem caracteres especiais");
+          throw new Error("Assertion failed");
+        }
         else {
             var path='templates/'+nomeimagem;
-            //meter ajudas para o ficheiro
-            console.log(input);
-            console.log(nrLetras);
-            console.log(messages);
-
 
             var imageRef = storageRef.child(nomeimagem);
             var imagesImageRef = storageRef.child(path);
@@ -116,16 +124,26 @@ $(function () {
             imagesImageRef.put(file).then(function(snapshot) {
                 console.log('Uploaded a blob or file!');
             });
-            
-            alert("Template criado com sucesso");
+
+
             var nometemplate = $("#nometemplate").val();
-            database.ref('templates/' + nometemplate).set({
-                input: input,
-                nrLetras: nrLetras,
-                mensagens: messages,
-                tipo: 'guessname',
-                imgname: nomeimagem
-            });
+
+            if (nometemplate == '') {
+              alert("Insira um nome para a tarefa!");
+              throw new Error("Sem nome para template");
+            }
+            else {
+              database.ref('templates/' + nometemplate).set({
+                  input: input,
+                  nrLetras: nrLetras,
+                  mensagens: messages,
+                  tipo: 'guessname',
+                  imgname: nomeimagem
+              });
+              alert("Template criado com sucesso");
+
+            }
+
         }
     });
 
@@ -215,4 +233,24 @@ function Init() {
 // getElementById
 function $id(id) {
     return document.getElementById(id);
+}
+
+
+function check(string, chars){
+  for(i = 0; i < chars.length;i++){
+        if(string.indexOf(chars[i]) > -1){
+            return true
+        }
+    }
+    return false;
+}
+
+function hasNumbers(str){
+  return /\d/.test(str);
+}
+
+function hasSpecialCaracters(str){
+  if(/^[a-zA-Z0-9- ]*$/.test(str) == false) {
+    return true;
+  }
 }

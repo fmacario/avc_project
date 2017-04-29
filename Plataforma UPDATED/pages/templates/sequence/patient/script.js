@@ -83,20 +83,30 @@ function drag(ev) {
 
 var counter = 0;
 function drop(ev, num) {
+  
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var path = ev.dataTransfer.getData("path");
     var divId = ev.target.id;
-
+    var divIdWithoutSpaces = divId.replace(" ","%20");
     var node = document.createTextNode("Tente Novamente!");
 
     if ( $('#' + divId + ':has(img)').length == 0 ) {
-        if (path.includes(divId)) {
 
+
+        if (path.includes(divId) || path.includes(divIdWithoutSpaces)) {
+
+
+            var tmp = data.replace("img", "");
+
+            $("#choice"+tmp).hide();
             document.getElementById(divId).appendChild(document.getElementById(data));
+            document.getElementById(data).ondragstart = function() { return false; };
+
+
             counter++;
             if (counter == num) {
-                alert('Parabéns! Tarefa concluída com sucesso!');
+                $('#feedback').append('<h1>Parabéns! Tarefa concluída com sucesso!</h1>');
             }
         }
         else {
