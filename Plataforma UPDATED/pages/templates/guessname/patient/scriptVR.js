@@ -1,5 +1,5 @@
 // References
-var storageRef = firebase.storage().ref(); // storage service
+//var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
 
 // Global variables
@@ -17,17 +17,16 @@ var selected = false;
 var antigaLetraSelecionada = null;
 var letraSelecionada = null;
 var escondePosicao = [];        // posicao das letras a serem escondidas
-var input;
-
+var input, imgTitle, nrLetras, mensagensDoDoutor;
 
 templatesRef.once("value", function (snapshot) {
+	console.log("------------TESTE");
     imgTitle = snapshot.val().imgname,
     input = snapshot.val().input,
     nrLetras = snapshot.val().nrLetras,
     mensagensDoDoutor = snapshot.val().mensagens
     start();
 });
-
 
 
 function customEnterVR () {
