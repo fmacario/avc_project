@@ -39,4 +39,8 @@ function redirect(pagina) {
     window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patient.html' + '?param=' + pagina.id;
   });
 
-}
+};
+
+function goToVR(){
+  window.location.replace("dashboardVR.html");
+};
