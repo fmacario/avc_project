@@ -210,22 +210,35 @@ function start(){
 		});
 	}
 
-
-
-
 };
-
 
 
 function inserirPergunta(){
 	var entityPergunta = sceneEl.querySelector('#pergunta');
-	entityPergunta.setAttribute('text', 'value', question);
-	entityPergunta.setAttribute('text', 'align', 'center');
+	entityPergunta.setAttribute('geometry', {
+	  primitive: 'plane',
+	  width: 2.5,
+	  height: 0.2
+	  });
+	  entityPergunta.setAttribute('material', {
+	    color: 'black',
+	    opacity: '0.2'
+	  });
+	  entityPergunta.setAttribute('position', '0 2.5 -1.5');
+	  entityPergunta.setAttribute('text', {
+	    value: question,
+	    color: 'white',
+	    align: 'center',
+	    width: '2',
+	    align: 'center'
+	  });
+
+//	geometry="primitive: plane; width: 3.5; height: auto" material="color: blue" position="0 2.5 -1.5"
 	console.log(entityPergunta);
 };
 
 function generateBtn(){
-	var y = 2;
+	var y = 2.1;
 
 	for (var i = 0; i < answers.length; i++) {
 		entity.push(document.createElement('a-entity'));
@@ -235,7 +248,10 @@ function generateBtn(){
 			width: 2.5,
 			height: 0.2
 		});
-		entity[i].setAttribute('material', 'color: white');
+		entity[i].setAttribute('material', {
+			color: 'white',
+			opacity: 0.8
+		});
 		entity[i].setAttribute('position', '0 ' + y + ' -1.5');
 		entity[i].setAttribute('text', {
 			value: answers[i],
@@ -246,7 +262,7 @@ function generateBtn(){
 		sceneEl.appendChild(entity[i]);
 		//console.log(entity[i]);
 		
-		y-= 0.3;
+		y-= 0.25;
 	}
 };
 
