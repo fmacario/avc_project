@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>VR: Guess Name</title>
-    <meta name="description" content="VR: Guess Name">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
-    <script src="scriptVR.js"></script>
-    <script src="../../../../logout1.js"></script>
-  </head>
-  <body>
+
+<head>
+  <title>VR: Guess Name</title>
+  <meta name="description" content="VR: Guess Name">
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+  <script src="../../../../logout1.js"></script>
+  <script src="scriptVR.js"></script>
+</head>
+
+<body>
 
   <a-scene>
 
-    <a-image id="fotografia" position="0 2.75 -1.5" ></a-image>
+    <a-image id="fotografia" position="0 2.75 -1.5"></a-image>
 
-    <a-entity
-      id="nome"
-      geometry="primitive: plane; width: 2; height: 1"
-      material="color: blue"
-      position="0 1.5 -1.5">
+    <a-entity id="nome" geometry="primitive: plane; width: 2; height: 1" material="color: blue" position="0 1.5 -1.5">
     </a-entity>
 
 
@@ -31,25 +29,18 @@
     <a-sky src="#city"></a-sky>
 
     <a-camera>
-      <a-cursor
-        id="cursor"
-        cursor="fuseTimeout: 2500" 
-        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-        material="color: black; shader: flat">
-          <a-animation begin="click" easing="ease-in" attribute="scale"
-               fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="1"></a-animation>
-          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
-               fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="2500"></a-animation>  
+      <a-cursor id="cursor" cursor="fuseTimeout: 2500" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
+        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="1"></a-animation>
+        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="2500"></a-animation>
       </a-cursor>
     </a-camera>
 
-   <!-- fuse: true; --> <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
+    <!-- fuse: true; -->
+    <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
 
 
 
   </a-scene>
-  </body>
+</body>
+
 </html>
-
-
-
