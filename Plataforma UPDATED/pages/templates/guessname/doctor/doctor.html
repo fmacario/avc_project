@@ -75,7 +75,7 @@
                                 </p>
                             </li>
                             <!-- Menu Body -->
-                           
+
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
@@ -115,21 +115,20 @@
                         <i class="fa fa-files-o"></i>
                         <span>Area Configuração</span>
                         <span class="pull-right-container">
-              <span class="label label-primary pull-right">3</span>
+              <span class="label label-primary pull-right">4</span>
                             </span>
                     </a>
                     <ul class="treeview-menu">
                         <li></li>
                         <li><a href="../../sequence/doctor/doctor.html"><i class="fa fa-circle-o"></i> Sequenciação</a></li>
-                        <li><a href="../../guessname/doctor/doctor.html"><i class="fa fa-circle-o"></i> Adivinhar Nome</a>
-                        </li>
-                        <li><a href="../../multiplechoice/doctor/doctor.html"><i class="fa fa-circle-o"></i> Escolha Múltipla</a>
-                        </li>
+                        <li><a href="../../guessname/doctor/doctor.html"><i class="fa fa-circle-o"></i> Adivinhar Nome</a></li>
+                        <li><a href="../../categorizacao/doctor/doctor.html"><i class="fa fa-circle-o"></i>Categorização</a></li>
+                        <li><a href="../../multiplechoice/doctor/doctor.html"><i class="fa fa-circle-o"></i> Escolha Múltipla</a></li>
                         <!-- <li><a href="pages/templates/reconhecimentoVisdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Reconhecimento Visual</a></li> -->
                         <!-- <li><a href="pages/templates/categorizatdoctor.htmlhtml"><i class="fa fa-circle-o"></i> Categorização</a></li> -->
                     </ul>
                 </li>
-                
+
 
             </ul>
         </section>
@@ -162,6 +161,10 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                      Nome do template:<input style="width: 30%;" id="nometemplate" type="text"></input>
+                      <h5><b>Seleccione</b> ou <b>arraste de uma pasta</b> as imagens para cada categoria. <p><b>IMPORTANTE:</b>Os ficheiros não podem conter caracteres especiais (<>@!#$%^~&*()_+[]{}?:;|\'`´-=) no seu nome!</p></h5>
+                        
+
                         <div class="portrait custom-file-upload" id="filedrag">
                             <input type='file' id="result" class="portrait"/>
                             <img class="img" id="myImg"></img>
@@ -172,30 +175,30 @@
                         <input type='file' id="result2" class="inputfile"
                                style="width : 100%; height : 100%;  visibility: hidden "/>
                         <form class="text-left">
-                            Palavra a descobrir(titulo da imagem por defeito):<input id="palavra" type="text"></input>
+                            Palavra a descobrir (não pode ter caracteres e digitos):<input id="palavra" type="text"></input>
                             <br>
                             <br> Número de letras para preencher(duas por defeito):<input id="nrletras" type="number"
                                                                                           value="2"></input>
-                            <button class="btn btn-primary btn-outlined" type="button" id="todos">Todas</button>
-                            <button class="btn btn-primary btn-outlined" type="button" id="metade">Metade</button>
+                            <button type="button" id="todos">Todas</button>
+                            <button  type="button" id="metade">Metade</button>
                             <br>
-                            <br> Nome do template:<input style="width: 30%;" id="nometemplate" type="text"></input>
+
                             <br> Mensagens de ajuda:<input style="width: 30%;" id="msgAjuda" type="text"></input>
 
                             <div id="messages"></div>
 
-                            <button class="btn btn-primary btn-outlined" type="button" id="adicionarMensagem">
-                                Adicionar
+                            <button type="button"  style=" margin-top: 10px;" id="adicionarMensagem">
+                                Adicionar mensagem
                             </button>
-                            <button class="btn btn-primary btn-outlined" type="button" id="apagarMensagem">Apagar Última
-                                Mensagem
+                            <button type="button" id="apagarMensagem">Apagar última
+                                mensagem
                             </button>
 
                             <div id="mensagens">
 
                             </div>
                             <br>
-                            <button class="btn btn-primary btn-outlined" type="button" id="submitBtn">Guardar Tarefa
+                            <button type="button" id="submitBtn">Guardar Tarefa
                             </button>
                         </form>
                     </div>
