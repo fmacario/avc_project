@@ -4,7 +4,7 @@ var input;		//input dado para adivinhar
 var nrLetras;	//nr de letras para esconder
 var pathToImg; //path to image to upload o patient side
 var messages = []; //array de messages dadas
-var specialChars = "<>@!#$%^&*()_+[]{}?:;ãẽĩõũáéíóúàèìòùâêîôû|'\"\\,/~`-=";
+var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,/~`-=";
 
 // Initialize Firebase
 var config = {
@@ -106,7 +106,7 @@ $(function () {
             alert("Número de letras não pode ser menor ou igual a 0!");
             throw new Error("Assertion failed");
         }
-        else if (hasNumbers(input) || hasSpecialCaracters(input)) {
+        else if (hasNumbers(input) || check(input, specialChars)) {
           alert("Palavra a descobrir não pode conter números nem caracteres especiais");
           throw new Error("Assertion failed");
         }
@@ -247,10 +247,4 @@ function check(string, chars){
 
 function hasNumbers(str){
   return /\d/.test(str);
-}
-
-function hasSpecialCaracters(str){
-  if(/^[a-zA-Z0-9- ]*$/.test(str) == false) {
-    return true;
-  }
 }
