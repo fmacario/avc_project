@@ -1,5 +1,5 @@
 // References
-//var storageRef = firebase.storage().ref(); // storage service
+var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
 
 // Global variables
@@ -730,7 +730,19 @@ function clicado(letraSelecionada, n){
 function inserirImagem(){
 	s = document.querySelector('a-scene');
 	var entityFotografia = s.querySelector('#fotografia');
-	entityFotografia.setAttribute('src', 'macario.JPG');
+
+	// read image
+    var spaceRef = storageRef.child('templates/' + imgTitle);
+    var path = spaceRef.fullPath;
+
+    storageRef.child('templates/' + imgTitle).getDownloadURL().then(function (url) {
+        var test = url;
+        entityFotografia.setAttribute('src', test);
+    }).catch(function (error) {
+
+    });
+
+	
 
 	var entityBloco = s.querySelector('#nome');
 	entityBloco.setAttribute('material', 'opacity: 0');
