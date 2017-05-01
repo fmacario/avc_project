@@ -225,6 +225,3 @@ function removerCorVermelha(clickedButton) {
     $("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }
 
-$("#goVR").click(function() {
-    window.location.replace("patientVR.html" + '?param=' + myParam);
-});
