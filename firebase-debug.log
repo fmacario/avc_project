@@ -3,7 +3,7 @@
 [debug] CLI Version:  3.6.1
 [debug] Platform:     linux
 [debug] Node Version: v6.10.0
-[debug] Time:         Sat Apr 22 2017 17:16:59 GMT+0100 (WEST)
+[debug] Time:         Tue May 02 2017 23:17:04 GMT+0100 (WEST)
 [debug] ----------------------------------------------------------------------
 [debug] 
 [debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
@@ -13,126 +13,22 @@
   client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
   grant_type: 'refresh_token',
   scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Sat Apr 22 2017 17:16:59 GMT+0100 (WEST)
+ Tue May 02 2017 23:17:05 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
- Sat Apr 22 2017 17:16:59 GMT+0100 (WEST)
+ Tue May 02 2017 23:17:05 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
- Sat Apr 22 2017 17:17:01 GMT+0100 (WEST)
+ Tue May 02 2017 23:17:06 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [info] Starting Firebase development server...
 [info] 
-[info] Project Directory: /home/mota/Desktop/PEI/Repositorio/avc_project
+[info] Project Directory: /home/mota/Desktop/avc_project
 [debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
- Sat Apr 22 2017 17:17:01 GMT+0100 (WEST)
+ Tue May 02 2017 23:17:07 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
- Sat Apr 22 2017 17:17:02 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[info] Public Directory: Plataforma UPDATED
-[info] 
-[info] Server listening at: http://localhost:5000
-[debug] ----------------------------------------------------------------------
-[debug] Command:      /usr/bin/nodejs /usr/bin/firebase deploy
-[debug] CLI Version:  3.6.1
-[debug] Platform:     linux
-[debug] Node Version: v6.10.0
-[debug] Time:         Sun Apr 23 2017 23:09:36 GMT+0100 (WEST)
-[debug] ----------------------------------------------------------------------
-[debug] 
-[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/ycUtyReAQABp-WGlaTBO-kxUdazlknbN72VE1O9_Kmc',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Sun Apr 23 2017 23:09:36 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
- Sun Apr 23 2017 23:09:37 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
- Sun Apr 23 2017 23:09:38 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[info] 
-[info] === Deploying to 'avcproject-fae11'...
-[info] 
-[info] i  deploying database, functions, hosting
-[info] ✔  database: rules ready to deploy.
-[debug] > [functions] package.json contents: {
-  "name": "functions",
-  "description": "Cloud Functions for Firebase",
-  "dependencies": {
-    "firebase-admin": "^4.1.2",
-    "firebase-functions": "^0.5"
-  },
-  "private": true
-}
-[info] i  functions: ensuring necessary APIs are enabled...
-[info] i  runtimeconfig: ensuring necessary APIs are enabled...
-[debug] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/avcproject-fae11?view=CONSUMER_VIEW  
- Sun Apr 23 2017 23:09:40 GMT+0100 (WEST)
-[debug] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/avcproject-fae11?view=CONSUMER_VIEW  
- Sun Apr 23 2017 23:09:40 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[info] ✔  runtimeconfig: all necessary APIs are enabled
-[debug] <<< HTTP RESPONSE 200
-[info] ✔  functions: all necessary APIs are enabled
-[debug] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/avcproject-fae11  
- Sun Apr 23 2017 23:09:42 GMT+0100 (WEST)
-[debug] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/avcproject-fae11/apiKeys  
- Sun Apr 23 2017 23:09:42 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] <<< HTTP RESPONSE 200
-[info] i  functions: preparing functions directory for uploading...
-[debug] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/avcproject-fae11/configs  
- Sun Apr 23 2017 23:09:46 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] > [functions] runtime config materialized as: {
-  "firebase": {
-    "databaseURL": "https://avcproject-fae11.firebaseio.com",
-    "storageBucket": "avcproject-fae11.appspot.com",
-    "apiKey": "AIzaSyDMoO--VtAlHxBmLTPs45LQb9UW3e1CWfE",
-    "authDomain": "avcproject-fae11.firebaseapp.com"
-  }
-}
-[debug] > [functions] parsed triggers: []
-[info] i  hosting: preparing Plataforma UPDATED directory for upload...
-[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/avcproject-fae11/uploads/-KiRrFZfPIcF87YQawK-?fileCount=1134&message=  
- Sun Apr 23 2017 23:10:04 GMT+0100 (WEST)
-[debug] ----------------------------------------------------------------------
-[debug] Command:      /usr/bin/nodejs /usr/bin/firebase serve
-[debug] CLI Version:  3.6.1
-[debug] Platform:     linux
-[debug] Node Version: v6.10.0
-[debug] Time:         Mon Apr 24 2017 15:40:48 GMT+0100 (WEST)
-[debug] ----------------------------------------------------------------------
-[debug] 
-[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/ycUtyReAQABp-WGlaTBO-kxUdazlknbN72VE1O9_Kmc',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Mon Apr 24 2017 15:40:48 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
- Mon Apr 24 2017 15:40:48 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
- Mon Apr 24 2017 15:40:49 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[info] Starting Firebase development server...
-[info] 
-[info] Project Directory: /home/mota/Desktop/PEI/Repositorio/avc_project
-[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
- Mon Apr 24 2017 15:40:50 GMT+0100 (WEST)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
- Mon Apr 24 2017 15:40:51 GMT+0100 (WEST)
+ Tue May 02 2017 23:17:08 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [info] Public Directory: Plataforma UPDATED
 [info] 
