@@ -169,7 +169,6 @@ function getSelectedDiv(div) {
         unselectLastDiv(selectedDiv);
         selectedDiv = div;
         $("#" + selectedDiv).attr("class", "child col-sm-1 unselectable hided-selected-div");
-        $("#message").html("awdawdw");
     }
 
 }
