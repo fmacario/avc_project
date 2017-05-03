@@ -3,7 +3,8 @@ var database = firebase.database(); // database service
 
 // Global variables
 var myParam = location.search.split('param=')[1]
-var templatesRef = database.ref("templates/" + myParam); // database templates
+myParamSpace = myParam.replace('_',' ');
+var templatesRef = database.ref("templates/" + myParamSpace); // database templates
 var historico = [];
 //Time variables
 

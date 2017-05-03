@@ -15,12 +15,14 @@ firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     var username = (user.email).split('@')[0];
     var refTemplates = database.ref('patients/' + username);
-
+    console.log
     refTemplates.once("value", function (snapshot) {
       for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
         tpatients.replaceWith(table);
-        var teste = $("#showtemplates table");
-        teste.append($('<tr id="' + snapshot.val().ptemplates[i] +'" onclick="redirect('+ snapshot.val().ptemplates[i] +')">')
+        var teste = $("#showtemplates table"); 
+        var templateespaco = snapshot.val().ptemplates[i];
+        templateespaco = templateespaco.replace(' ', '_');
+        teste.append($('<tr id="' + templateespaco +'" onclick="redirect('+ templateespaco +')">')
              .append($('<td>')
              .text(snapshot.val().ptemplates[i])
           )
@@ -33,9 +35,11 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function redirect(pagina) {
-  console.log(pagina);
-  var refTemplates2 = database.ref('templates/' + pagina.id);
+  paginaespaco = pagina.id.replace('_', ' ');
+  console.log(paginaespaco);
+  var refTemplates2 = database.ref('templates/' + paginaespaco);
   refTemplates2.once("value", function (snapshot) {
+    console.log(snapshot.val());
     window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patient.html' + '?param=' + pagina.id;
   });
 
