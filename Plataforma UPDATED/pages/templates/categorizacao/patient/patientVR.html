@@ -8,27 +8,20 @@
   <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
   <script src="jquery-3.2.0.min.js"></script>
   <script src="../../../../logout1.js"></script>
-  <script src="vr.js"></script>
+  <!-- jQuery 2.2.3 -->
+    <script src="../../../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  <script src="scriptVR.js"></script>
 </head>
 
 <body>
 
   <a-scene>
-    <a-entity id="pergunta">
+    <a-entity id="imgs">
     </a-entity>
 
-
-    <a-image id="fotografia" position="0 2.75 -1.5" ></a-image>
-
-
-    <!--
-    <a-entity id="pergunta2" position="0 1 -1.5" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 256; height: 256" square="text: Hello"></a-entity>
-
-    <a-entity position="0 2 -1.5" text="value: resposta" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 4; height: auto" ></a-entity>
-
-    <a-entity position="0 1.5 -1.5" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 256; height: 256" ></a-entity>
-    -->
-
+    
     <a-assets>
       <img id="city" src="sky.jpg">
     </a-assets>
@@ -44,15 +37,6 @@
 
     <!-- fuse: true; -->
     <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
-
-
-
-
-    <script type="text/javascript">
-      start();
-    </script>
-
-
 
 
   </a-scene>
