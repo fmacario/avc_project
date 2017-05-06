@@ -290,7 +290,7 @@ function checkIfDone(){
         var v = sceneEl.querySelectorAll('a-entity');
         console.log(v);
 
-        for (var i = 0; i < v.length-1; i++) {
+        for (var i = 0; i < v.length; i++) {
         	v[i].parentNode.removeChild(v[i]);
         }
 
