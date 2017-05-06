@@ -15,7 +15,10 @@ var z = -1.5;
 var entityImg = [], entityCat = [];
 var sceneEl;
 var antigaImgSelecionada = null;
+var imgSelecionada = null;
 var selected = false;
+
+////////////////////////// AFRAME.utils.device.isMobile ()
 
 templatesRef.once("value", function (snapshot) {
 
@@ -156,7 +159,8 @@ function inserirImagens(){
  }
  //------------------------------------
 
-function clicado(imgSelecionada){
+function clicado(img){
+  imgSelecionada = img;
   if (selected){
     antigaImgSelecionada.setAttribute('material', 'opacity', 1);
   }
@@ -171,13 +175,15 @@ function clicado(imgSelecionada){
 
   console.log(imgSelecionada);
   //////////////////////// eventListener /////////////////////////////////////////////
+  if(imgSelecionada != null)
   entityCat[0].addEventListener('click', function () { 
     
     if(contains(arrayTotal[0], imgSelecionada.getAttribute('src'))){
       console.log("YYYYYY");
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
-      //checkIfDone();
+      imgSelecionada = null;
+      checkIfDone();
     }
 
   });
@@ -188,7 +194,8 @@ function clicado(imgSelecionada){
       console.log("YYYYYY");
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
-      //checkIfDone();
+      imgSelecionada = null;
+      checkIfDone();
     }
 
   });
@@ -199,6 +206,43 @@ function clicado(imgSelecionada){
 
 }
 
+function checkIfDone(){
+  counter--;
+  
+  if (counter == 0) {
+        var v = sceneEl.querySelectorAll('a-entity');
+    //console.log(v);
+
+    for (var i = 0; i < v.length; i++) {
+      v[i].parentNode.removeChild(v[i]);
+    }
+
+    var a = document.createElement('a-entity');
+    a.setAttribute('id', "fim");
+    a.setAttribute('geometry', {
+      primitive: 'plane',
+      width: 2.5,
+      height: 1
+    });
+    a.setAttribute('material', {
+      color: 'green'
+    });
+    a.setAttribute('position', '0  2 -1.5');
+    a.setAttribute('text', {
+      value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!\n\nClique aqui para sair.",
+      color: 'white'
+    });
+
+    //
+    sceneEl.appendChild(a);
+
+    a.addEventListener('click', function () {
+      console.log("teste");
+      window.location.replace("../../../patients_side/dashboardVR.html");
+    });
+      }
+};
+
 
 function contains(array, source) {
     var i = array.length;
@@ -208,39 +252,4 @@ function contains(array, source) {
        }
     }
     return false;
-}
-
-function drop(ev, p) {
-
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData("nome");
-    var path = ev.dataTransfer.getData("path");
-    var node = document.createTextNode("Tente Novamente!");
-    var divId = ev.target.id;
-
-
-    //--------Para poder droppar  imagens nas imagens que ja estao na categoria-----
-    if ($('#'+divId).is("div")) {
-
-    }else {
-      divId = categorias[p];
-    }
-
-    //--------------Se a imagem pensense a categoria------------
-    if (contains(arrayTotal[p], data.replace(/%20/g, " "))) {
-
-      document.getElementById(divId).appendChild(document.getElementById(data));
-      document.getElementById(data).ondragstart = function() { return false; }; //depois de tar numa categoria, nao pode ser removida
-
-
-      if (counter-- == 1) {
-          $('#feed_div').append('<h1>Parabéns! Tarefa concluída com sucesso!</h1>');
-      }
-
-    }else {
-      document.getElementById(divId).appendChild(node);
-      setTimeout(function () {
-          document.getElementById(divId).removeChild(node);
-      }, 1000);
-    }
 }

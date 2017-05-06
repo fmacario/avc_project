@@ -286,9 +286,7 @@ function checkIfDone(){
 	if (rightAnswers.length == 0) {
         
         //$("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
-        console.log("BOA");
-
-
+        
         var v = sceneEl.querySelectorAll('a-entity');
         console.log(v);
 
@@ -303,7 +301,9 @@ function checkIfDone(){
 			width: 2.5,
 			height: 1
 		});
-		a.setAttribute('material', 'color: green');
+		a.setAttribute('material', {
+			color: 'green'
+		});
 		a.setAttribute('position', '0  2 -1.5');
 		a.setAttribute('text', {
 			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!\n\nClique aqui para sair.",
@@ -315,7 +315,7 @@ function checkIfDone(){
 
 		a.addEventListener('click', function () {
 			console.log("teste");
-			window.location.replace("../../../patients_side/dashboard.html");
+			window.location.replace("../../../patients_side/dashboardVR.html");
 		});
 
         //for (var i = 0; i < answerNumber; i++) {

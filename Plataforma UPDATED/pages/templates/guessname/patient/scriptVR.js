@@ -920,16 +920,17 @@ function checkIfDone() {
 		});
 		a.setAttribute('position', '0  2 -1.5');
 		a.setAttribute('text', {
-			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!",
+			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!\n\nClique aqui para sair.",
 			color: 'white'
 		});
 
 		//
 		sceneEl.appendChild(a);
 
-		//a.addEventListener('click', function () { 
-		//	window.location.replace("../../../patients_side/dashboard.html");
-		//});
+		a.addEventListener('click', function () {
+			console.log("teste");
+			window.location.replace("../../../patients_side/dashboardVR.html");
+		});
 	}
 };
 
