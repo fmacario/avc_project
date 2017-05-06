@@ -33,7 +33,8 @@ $(document).ready(function () {
 function writeUserData() {
     pname = $("#pname").val();
     pusername = $("#pusername").val();
-    pusernameE = $("#pusername").val() + '@strokerehab.com';
+    pusernameE = pusername.toLowerCase();
+    pusernameE = pusernameE + '@strokerehab.com';
     ppassword = $("#ppassword").val();
 
     auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
@@ -101,12 +102,11 @@ function showPatient(obj) {
             '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a onclick="associatedTemplates()"></li>' +
             '<div id="tabletemp"></div>' +
             '<li><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
-            '<li>' +
-            '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
-            '<div id="templates" style="width: 25%; margin: auto;"></div>' +
-            '<button type="button" class="btn btn-block btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
-            '</li>' +
             '</ul>' +
+            '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
+            '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
+            '<div id="templates" style="width: 25%; margin: auto;"></div>' +
+            '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
             '</div>' +
             '</div>' +
             '</div>';
@@ -122,16 +122,19 @@ function showPatient(obj) {
                 "</tbody>" +
                 "</table>";
 
-
-
             if (snapshot.val().ntemplates != 0) {
                 $("#tabletemp").replaceWith(html_block);
                 for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
-                    $("#tabletemp").append($('<tr id="' + snapshot.key + '">')
-                        .append($('<td>')
-                            .text(snapshot.val().ptemplates[i])
+                    $("#tabletemp")
+                        .append($('<tr id="' + snapshot.key + '">')
+                            .append($('<td>')
+                                .text(snapshot.val().ptemplates[i])
+                            )
+                            .append($('<td>')
+                                .text('A SER IMPLEMENTADO')
+                            )
+
                         )
-                    )
                 }
             }
         })

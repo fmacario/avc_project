@@ -19,8 +19,6 @@ firebase.auth().onAuthStateChanged(user => {
         var ref = database.ref("doctors/"); // database patients
         ref.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                console.log(user.email + "   " + childSnapshot.val().dname);
-
                 if (childSnapshot.val().dname === user.email) {
                     window.location = 'pages/doctors_side/dashboard.html'; //After successful login, user will be redirected to dashboard.html
                 }
@@ -35,9 +33,10 @@ firebase.auth().onAuthStateChanged(user => {
 // Adds patient to database
 function login() {
     var username = $("#username").val() + '@strokerehab.com';
+    var usernameE = username.toLowerCase();
     var password = $("#password").val();
 
-    firebase.auth().signInWithEmailAndPassword(username, password).catch(function (error) {
+    firebase.auth().signInWithEmailAndPassword(usernameE, password).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
