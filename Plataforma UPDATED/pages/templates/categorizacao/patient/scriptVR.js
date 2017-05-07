@@ -18,6 +18,8 @@ var antigaImgSelecionada = null;
 var imgSelecionada = null;
 var selected = false;
 var historico = [];
+var str = "https://firebasestorage.googleapis.com/v0/b/avcproject-fae11.appspot.com/o/templates%2Fcategorizacao%2F";
+var strSize=0;
 
 ////////////////////////// AFRAME.utils.device.isMobile ()
 
@@ -38,27 +40,21 @@ templatesRef.once("value", function (snapshot) {
         for (var i = 0; i < arrayTotal.length; i++) {
           for (var j = 0; j < arrayTotal[i].length; j++) {
             storageRef.child('templates/categorizacao/' + arrayTotal[i][j]).getDownloadURL().then(function (url) {
-              //images.push(url);
+              images.push(url);
             });
           }
         }
-        images.push('1.JPG');
-        images.push('241.JPG');
-        images.push('421.JPG');
-        images.push('552.JPG');
-        console.log(images);
-        start();
+       
+        setTimeout(function() {
+              inserirImagens();
+              start();
+          }, 1500);
 
       });
-//start();
 
 function start() {
-
-    
+    strSize = str.length;
     counter = images.length;
-    var col; //height;
-
-    inserirImagens();
 
     if (entityImg[0] != null){
       entityImg[0].addEventListener('click', function () { 
@@ -199,8 +195,10 @@ function inserirImagens(){
     //console.log(entity[i]);
     
     x+= 1;
-    if(i == 2 || i == 5)
+    if(i == 2 || i == 5){
       y-=0.2;
+      x=-1;
+    }
     
   }
 
@@ -258,24 +256,27 @@ function clicado(img){
   antigaImgSelecionada = imgSelecionada;
   selected = true;
 
-  console.log(imgSelecionada);
   //////////////////////// eventListener /////////////////////////////////////////////
 
   if (entityCat[0] != null)
   entityCat[0].addEventListener('click', function () { 
-    if(imgSelecionada!=null && contains(arrayTotal[0], imgSelecionada.getAttribute('src')) && !containsObj(historico, imgSelecionada)){
+    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
+    if(imgSelecionada!=null && contains(arrayTotal[0], nome) && !containsObj(historico, imgSelecionada)){
       imgSelecionada.setAttribute('material', 'visible', 'false');
+      console.log("FDS3");
       selected = false;
       historico.push(imgSelecionada);
       imgSelecionada = null;
       checkIfDone();
       entityCat[0].getAttribute();
+      console.log(entityCat[0]);
     }
   });
   
   if (entityCat[1] != null)
   entityCat[1].addEventListener('click', function () { 
-    if(imgSelecionada!=null && contains(arrayTotal[1], imgSelecionada.getAttribute('src')) && !containsObj(historico, imgSelecionada)){
+    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
+    if(imgSelecionada!=null && contains(arrayTotal[1], nome) && !containsObj(historico, imgSelecionada)){
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
       historico.push(imgSelecionada);
@@ -286,7 +287,8 @@ function clicado(img){
   
   if (entityCat[2] != null)
   entityCat[2].addEventListener('click', function () { 
-    if(imgSelecionada!=null && contains(arrayTotal[2], imgSelecionada.getAttribute('src')) && !containsObj(historico, imgSelecionada)){
+    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
+    if(imgSelecionada!=null && contains(arrayTotal[2], nome) && !containsObj(historico, imgSelecionada)){
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
       historico.push(imgSelecionada);
@@ -297,7 +299,8 @@ function clicado(img){
   
   if (entityCat[3] != null)
   entityCat[3].addEventListener('click', function () { 
-    if(imgSelecionada!=null && contains(arrayTotal[3], imgSelecionada.getAttribute('src')) && !containsObj(historico, imgSelecionada)){
+    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
+    if(imgSelecionada!=null && contains(arrayTotal[3], nome) && !containsObj(historico, imgSelecionada)){
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
       historico.push(imgSelecionada);
@@ -308,7 +311,8 @@ function clicado(img){
 
   if (entityCat[4] != null)
   entityCat[4].addEventListener('click', function () { 
-    if(imgSelecionada!=null && contains(arrayTotal[4], imgSelecionada.getAttribute('src')) && !containsObj(historico, imgSelecionada)){
+    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
+    if(imgSelecionada!=null && contains(arrayTotal[4], nome) && !containsObj(historico, imgSelecionada)){
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
       historico.push(imgSelecionada);
@@ -319,7 +323,8 @@ function clicado(img){
 
 if (entityCat[5] != null)
   entityCat[5].addEventListener('click', function () { 
-    if(imgSelecionada!=null && contains(arrayTotal[5], imgSelecionada.getAttribute('src')) && !containsObj(historico, imgSelecionada)){
+    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
+    if(imgSelecionada!=null && contains(arrayTotal[5], nome) && !containsObj(historico, imgSelecionada)){
       imgSelecionada.setAttribute('material', 'visible', 'false');
       selected = false;
       historico.push(imgSelecionada);
@@ -332,7 +337,20 @@ if (entityCat[5] != null)
 
   //////////////////////// eventListener /////////////////////////////////////////////
 
+};
+
+function getNomeImg(sr){
+  sr = sr.slice(strSize);
+  var s ="";
+  for (var i = 0; i < sr.length; i++) {
+    var c = sr.charAt(i);
+    if(c != '?')
+      s+=c;
+    else
+      return s;
+  }
 }
+
 
 function checkIfDone(){
   counter--;
