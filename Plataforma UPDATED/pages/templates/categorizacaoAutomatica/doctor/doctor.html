@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="../../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <!-- css file -->
-    <link rel="stylesheet" href="../stylesheet.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -142,7 +142,6 @@
                         </ul>
                     </li>
 
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -153,11 +152,11 @@
             <!-- Main content -->
             <section id="masterSection" class="content">
                 <section class="content-header">
-                    <h1> Escolha múltipla </h1>
+                    <h1> Categorização automática </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
                         <li>Templates</li>
-                        <li class="active">Escolha múltipla</li>
+                        <li class="active">Sequenciação</li>
                     </ol>
                 </section>
 
@@ -174,32 +173,39 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <div class="form-group col-xs-12">
-                                <label for="usr">Nome do template:</label>
-                                <input type="text" class="form-control" id="nometemplate">
-                                <label for="usr">Insira uma pergunta:</label>
-                                <input type="text" class="form-control" id="pergunta" onchange="getQuestion()">
+                            <div id="main_div" class="container-fluid">
+                                <div id="ask_number_div" class=" text-center">
+                                    <label for="usr">Nome do template (este nome será seguido de um número de 0 a X, onde X representa o número de tarefas que quer criar):</label>
+                                    <input type="text"  class="form-control" id="nometemplate">
+                                    <p>
+                                        Número de categorias a inserir:
+                                        <input id="number_of_categories" type="number">
 
-                                <br>
-                                <label for="sel1">Insira o número de respostas:</label>
-                                <select class="form-control" id="sel" onchange="getNumberAnswers()">
-                                    <option disabled selected value> -- Seleccione uma opção --</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                </select>
-                                <div id="div_respostas" style="padding: 10px"></div>
+                                    </p>
+                                    <p>
+                                        Número de imagens a inserir por pasta em cada tarefa:
+                                        <input id="numImg" type="number">
+                                    </p>
+                                    <p>
+                                        Número de tarefas a criar:
+                                        <input id="numTarefa" type="number">
+                                    </p>
+                                    <button id="generate">Passo Seguinte</button>
+                                </div>
+
+                                <div id="insert_cat_div">
+
+                                </div>
+
                             </div>
+
+
+                            <button id="save" class="text-center">Guardar Tarefa</button>
+                            <!-- /.box-body -->
+
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <!-- Adicionar qualquer coisa ao footer -->
-                        </div>
-                        <!-- box-footer -->
+                        <!-- /.box -->
                     </div>
-                    <!-- /.box -->
                 </section>
                 <!-- /.content -->
             </section>
@@ -231,7 +237,6 @@
     <!-- script local para esta pagina -->
     <script src="../../../../logout1.js"></script>
     <script src="script.js"></script>
-
 
 </body>
 
