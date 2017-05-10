@@ -247,17 +247,7 @@ function checkImg(nrImg){
   return false;
 }
 
-function shuffle(a) {
-    var j, x, i;
-    console.log(a);
-    for (i = a.length; i; i--) {
-        j = Math.floor(Math.random() * i);
-        x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
-    }
-    return a;
-}
+
 
 
 function generateRandomNumber(max, numImg){

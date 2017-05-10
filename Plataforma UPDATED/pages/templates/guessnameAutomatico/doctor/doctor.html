@@ -156,7 +156,7 @@
         <!-- Main content -->
         <section id="masterSection" class="content">
             <section class="content-header">
-                <h1> Adivinhar Nome </h1>
+                <h1> Adivinhar Nome automático </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li>Templates</li>
@@ -177,45 +177,25 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                      Nome do template:<input style="width: 30%;" id="nometemplate" type="text"></input>
-                      <h5><b>Seleccione</b> ou <b>arraste de uma pasta</b> as imagens para cada categoria. <p><b>IMPORTANTE:</b>Os ficheiros não podem conter caracteres especiais (<>@!#$%^~&*()_+[]{}?:;|\'`´-=) no seu nome!</p></h5>
+                      <label for="usr">Nome do template (este nome será seguido de um número de 0 a X, onde X representa o número de tarefas que quer criar):</label>
+                      <input type="text"  class="form-control" id="nometemplate">
+                      <h5><b>Seleccione</b> ou <b>arraste uma pasta</b>. <p><b>IMPORTANTE:</b>Os ficheiros dentro da pasta não podem conter caracteres especiais (<>@!#$%^~&*()_+[]{}?:;|\'`´-=) no seu nome!</p></h5>
 
-
-                        <div class="portrait custom-file-upload" id="filedrag">
-                            <input type='file' id="result" class="portrait"/>
-                            <img class="img" id="myImg"></img>
+                        <div id="filedrag">
+                            <input type='file' id="result" class="portrait" webkitdirectory="" directory="" onchange="readURL(this)"/>
+                            <div class="img" id="myImg"></div>
                         </div>
 
-                        <label for="result2" id="labelresult2" class="btn btn-primary btn-outlined"
+                        <!--<label for="result2" id="labelresult2" class="btn btn-primary btn-outlined"
                                style="visibility : hidden; margin-top: 10px;">Seleccionar outra imagem</label>
-                        <input type='file' id="result2" class="inputfile"
-                               style="width : 100%; height : 100%;  visibility: hidden "/>
-                        <form class="text-left">
-                            Palavra a descobrir (não pode ter caracteres e digitos):<input id="palavra" type="text"></input>
+                        <input type='file' id="result2" class="inputfile" visibility:"hidden" webkitdirectory="" directory=""/>
+                        <form class="text-left"> -->
+
+                            <br> Palavras a adivinhar:<input id="palavras" style="width: 70%;" disabled="true" type="text"></input>
+                            <br> Número de letras a esconder:<input id="nrletras" type="number"></input>
+
                             <br>
-                            <br> Número de letras para preencher(duas por defeito):<input id="nrletras" type="number"
-                                                                                          value="2"></input>
-                            <button type="button" id="todos">Todas</button>
-                            <button  type="button" id="metade">Metade</button>
-                            <br>
-
-                            <br> Mensagens de ajuda:<input style="width: 30%;" id="msgAjuda" type="text"></input>
-
-                            <div id="messages"></div>
-
-                            <button type="button"  style=" margin-top: 10px;" id="adicionarMensagem">
-                                Adicionar mensagem
-                            </button>
-                            <button type="button" id="apagarMensagem">Apagar última
-                                mensagem
-                            </button>
-
-                            <div id="mensagens">
-
-                            </div>
-                            <br>
-                            <button type="button" id="submitBtn">Guardar Tarefa
-                            </button>
+                            <button type="button" id="submitBtn">Guardar Tarefa</button>
                         </form>
                     </div>
                     <!-- /.box-body -->
@@ -256,9 +236,9 @@
 <script src="../../../../dist/js/demo.js"></script>
 
 <!-- script local para esta pagina -->
+
 <script src="../../../../logout1.js"></script>
 <script src="script.js"></script>
-
 
 </body>
 
