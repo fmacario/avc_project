@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="../../../../plugins/daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="../../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
     <!-- css file -->
     <link rel="stylesheet" href="style.css">
 
@@ -82,7 +83,7 @@
                                     </div>
                                     <div class="pull-right">
                                         <button type="button" class="btn btn-primary btn-block btn-flat" onclick="logout();" margin: "auto;">Log out
-                                    </button>
+                                        </button>
                                     </div>
                                 </li>
                             </ul>
@@ -126,7 +127,6 @@
                         </ul>
                     </li>
 
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -137,11 +137,11 @@
             <!-- Main content -->
             <section id="masterSection" class="content">
                 <section class="content-header">
-                    <h1> Adivinhar Nome </h1>
+                    <h1> Categorização </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li>Templates</li>
-                        <li class="active">Adivinhar Nome</li>
+                        <li class="active">Sequenciação</li>
                     </ol>
                 </section>
 
@@ -157,54 +157,127 @@
                             <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            Nome do template:<input style="width: 30%;" id="nometemplate" type="text"></input>
-                            <h5><b>Seleccione</b> ou <b>arraste de uma pasta</b> as imagens para cada categoria.
-                                <p><b>IMPORTANTE:</b>Os ficheiros não podem conter caracteres especiais (
-                                    <>@!#$%^~&*()_+[]{}?:;|\'`´-=) no seu nome!</p>
-                            </h5>
-
-
-                            <div class="portrait custom-file-upload" id="filedrag">
-                                <input type='file' id="result" class="portrait" />
-                                <img class="img" id="myImg"></img>
+                        <div id="showpatients" class="box-body table-responsive no-padding">
+                            <div class="loader" style="margin: auto;"></div>
+                        </div>
+                        <div id="jogo" class="box-body" style='display: none'>
+                            <div class="portrait text-center" id="portrait">
+                                <img id="imgid" class="img" />
                             </div>
 
-                            <label for="result2" id="labelresult2" class="btn btn-primary btn-outlined" style="visibility : hidden; margin-top: 10px;">Seleccionar outra imagem</label>
-                            <input type='file' id="result2" class="inputfile" style="width : 100%; height : 100%;  visibility: hidden " />
-                            <form class="text-left">
-                                Palavra a descobrir (não pode ter caracteres e digitos):<input id="palavra" type="text"></input>
-                                <br>
-                                <br> Número de letras para preencher(duas por defeito):
-                                <input id="nrletras" type="number" value="2"></input>
-                                <button type="button" id="todos">Todas</button>
-                                <button type="button" id="metade">Metade</button>
-                                <br>
+                            <div class="row"></div>
 
-                                <br> Mensagens de ajuda:<input style="width: 30%;" id="msgAjuda" type="text"></input>
+                            <div class="letterArea text-center" id="letterArea">
 
-                                <div id="messages"></div>
+                                <div class="divLetras row">
 
-                                <button type="button" style=" margin-top: 10px;" id="adicionarMensagem">
-                                Adicionar mensagem
-                            </button>
-                                <button type="button" id="apagarMensagem">Apagar última
-                                mensagem
-                            </button>
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-6">
+                                        <div id="inner" class="row">
+                                            <!-- Onde vao entrar as divs para as letras-->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
 
-                                <div id="mensagens">
+
+                                <div class="message" id="message">
+
+                                    <!-- Onde vao entrarmessagesgens de ajuda-->
 
                                 </div>
-                                <br>
-                                <button type="button" id="submitBtn">Guardar Tarefa</button>
-                                <button id="preview" class="text-center">Pré-visualizar</button> <!-- esta a dar reload no idea why -->
-                            </form>
+                                <div class="butons" id="buttons">
+                                    <button type="button" class="button" id="a">A</button>
+                                    <button type="button" class="button" id="b">B</button>
+                                    <button type="button" class="button" id="c">C</button>
+                                    <button type="button" class="button" id="d">D</button>
+                                    <button type="button" class="button" id="e">E</button>
+                                    <button type="button" class="button" id="f">F</button>
+                                    <button type="button" class="button" id="g">G</button>
+                                    <button type="button" class="button" id="h">H</button>
+                                    <button type="button" class="button" id="i">I</button>
+                                    <button type="button" class="button" id="j">J</button>
+                                    <button type="button" class="button" id="l">L</button>
+                                    <button type="button" class="button" id="m">M</button>
+                                    <button type="button" class="button" id="n">N</button>
+                                    <button type="button" class="button" id="o">O</button>
+                                    <button type="button" class="button" id="p">P</button>
+                                    <button type="button" class="button" id="q">Q</button>
+                                    <button type="button" class="button" id="r">R</button>
+                                    <button type="button" class="button" id="s">S</button>
+                                    <button type="button" class="button" id="t">T</button>
+                                    <button type="button" class="button" id="u">U</button>
+                                    <button type="button" class="button" id="v">V</button>
+                                    <button type="button" class="button" id="x">X</button>
+                                    <button type="button" class="button" id="z">Z</button>
+                                </div>
+                            </div>
+
+                            <div class="container text-center">
+                                <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span>
+                                <p></p>
+                                <button style="width: 300px" id="rect">Responder por voz</button>
+                            </div>
+
+                            <div id="divBorder" style="border:dotted">
+                                <span id="final_span"></span>
+                            </div>
+
+                            <script type="text/javascript">
+                                document.getElementById('divBorder').style.visibility = 'hidden';
+                                document.getElementById('rect').style.visibility = 'visible';
+
+                                // Test browser support
+                                window.SpeechRecognition = window.SpeechRecognition ||
+                                    window.webkitSpeechRecognition ||
+                                    null;
+
+                                //caso não suporte esta API DE VOZ                              
+                                if (window.SpeechRecognition === null) {
+                                    document.getElementById('unsupported').classList.remove('hidden');
+                                    document.getElementById('rect').style.visibility = 'hidden';
+                                    document.getElementById('divBorder').style.visibility = 'hidden';
+                                } else {
+                                    var recognizer = new window.SpeechRecognition();
+                                    var transcription = document.getElementById("final_span");
+                                    //Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
+                                    recognizer.continuous = true;
+                                    recognizer.lang = "pt-PT";
+                                    recognizer.onresult = function (event) {
+                                        transcription.textContent = "";
+                                        for (var i = event.resultIndex; i < event.results.length; i++) {
+                                            if (event.results[i].isFinal) {
+                                                transcription.textContent += event.results[i][0].transcript;
+                                                //console.log(event.results[i][0].transcript + " (Taxa de acerto [0/1] : " + event.results[i][0].confidence + ")");
+                                                if (event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase()) != -1) {
+                                                    end();
+                                                }
+                                                var teste = event.results[i][0].transcript.toLowerCase().indexOf(input.toLowerCase());
+                                                //console.log(teste);
+                                                //console.log(event.results[i][0].transcript.toLowerCase());
+                                                //console.log(input.toLowerCase());
+
+
+                                            } else {
+                                                //transcription.textContent += event.results[i][0].transcript;
+                                            }
+
+                                        }
+                                    }
+                                    document.querySelector("#rect").addEventListener("click", function () {
+                                        try {
+                                            recognizer.start();
+                                        } catch (ex) {
+                                            alert("error: " + ex.message);
+                                        }
+                                        document.getElementById('divBorder').style.visibility = 'visible';
+                                        document.getElementById('rect').style.visibility = 'hidden';
+                                    });
+                                }
+                            </script>
                         </div>
                         <!-- /.box-body -->
-                        <div class="box-footer">
-                            <!-- Adicionar qualquer coisa ao footer -->
-                        </div>
-                        <!-- box-footer -->
+
                     </div>
                     <!-- /.box -->
         </div>
@@ -239,7 +312,6 @@
     <!-- script local para esta pagina -->
     <script src="../../../../logout1.js"></script>
     <script src="script.js"></script>
-
 </body>
 
 </html>

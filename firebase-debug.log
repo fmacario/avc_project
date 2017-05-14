@@ -3,24 +3,128 @@
 [debug] CLI Version:  3.6.1
 [debug] Platform:     linux
 [debug] Node Version: v6.10.0
-[debug] Time:         Sat May 06 2017 13:42:58 GMT+0100 (WEST)
+[debug] Time:         Sat May 06 2017 15:03:49 GMT+0100 (WEST)
 [debug] ----------------------------------------------------------------------
 [debug] 
 [debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
- Sat May 06 2017 13:42:58 GMT+0100 (WEST)
+ Sat May 06 2017 15:03:49 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
- Sat May 06 2017 13:43:00 GMT+0100 (WEST)
+ Sat May 06 2017 15:03:50 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [info] Starting Firebase development server...
 [info] 
 [info] Project Directory: /home/mota/Desktop/avc_project
 [debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
- Sat May 06 2017 13:43:00 GMT+0100 (WEST)
+ Sat May 06 2017 15:03:51 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
- Sat May 06 2017 13:43:01 GMT+0100 (WEST)
+ Sat May 06 2017 15:03:52 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[info] Public Directory: Plataforma UPDATED
+[info] 
+[info] Server listening at: http://localhost:5000
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/bin/nodejs /usr/bin/firebase serve
+[debug] CLI Version:  3.6.1
+[debug] Platform:     linux
+[debug] Node Version: v6.10.0
+[debug] Time:         Sat May 06 2017 15:30:56 GMT+0100 (WEST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
+ Sat May 06 2017 15:30:56 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
+ Sat May 06 2017 15:30:57 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /home/mota/Desktop/avc_project
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
+ Sat May 06 2017 15:30:58 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
+ Sat May 06 2017 15:30:59 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[warn] ⚠  Port 5000 is not available. Trying another port...
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
+ Sat May 06 2017 15:30:59 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
+ Sat May 06 2017 15:31:00 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[info] Public Directory: Plataforma UPDATED
+[info] 
+[info] Server listening at: http://localhost:5001
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/bin/nodejs /usr/bin/firebase serve
+[debug] CLI Version:  3.6.1
+[debug] Platform:     linux
+[debug] Node Version: v6.10.0
+[debug] Time:         Sat May 06 2017 16:03:02 GMT+0100 (WEST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/NQ8G-L46Dn7rDOH6twnL8gPnInNwkNbQ8TY4p66RTJw',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sat May 06 2017 16:03:02 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
+ Sat May 06 2017 16:03:02 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
+ Sat May 06 2017 16:03:03 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /home/mota/Desktop/avc_project
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
+ Sat May 06 2017 16:03:04 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
+ Sat May 06 2017 16:03:05 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[info] Public Directory: Plataforma UPDATED
+[info] 
+[info] Server listening at: http://localhost:5000
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/bin/nodejs /usr/bin/firebase serve
+[debug] CLI Version:  3.6.1
+[debug] Platform:     linux
+[debug] Node Version: v6.10.0
+[debug] Time:         Mon May 08 2017 15:44:18 GMT+0100 (WEST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/NQ8G-L46Dn7rDOH6twnL8gPnInNwkNbQ8TY4p66RTJw',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Mon May 08 2017 15:44:19 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/avcproject-fae11  
+ Mon May 08 2017 15:44:19 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/avcproject-fae11/tokens  
+ Mon May 08 2017 15:44:20 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: /home/mota/Desktop/avc_project
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/avcproject-fae11  
+ Mon May 08 2017 15:44:21 GMT+0100 (WEST)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/1031859806052/clients/_:getWebAppConfig  
+ Mon May 08 2017 15:44:22 GMT+0100 (WEST)
 [debug] <<< HTTP RESPONSE 200
 [info] Public Directory: Plataforma UPDATED
 [info] 

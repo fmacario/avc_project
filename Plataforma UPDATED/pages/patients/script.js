@@ -101,7 +101,8 @@ function showPatient(obj) {
             '<ul class="nav nav-stacked">' +
             '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a onclick="associatedTemplates()"></li>' +
             '<div id="tabletemp"></div>' +
-            '<li><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
+            '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
+            '<div id="tabletempdone"></div>' +
             '</ul>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
             '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
@@ -122,8 +123,8 @@ function showPatient(obj) {
                 "</tbody>" +
                 "</table>";
 
+            $("#tabletemp").replaceWith(html_block);
             if (snapshot.val().ntemplates != 0) {
-                $("#tabletemp").replaceWith(html_block);
                 for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
                     $("#tabletemp")
                         .append($('<tr id="' + snapshot.key + '">')
@@ -138,6 +139,38 @@ function showPatient(obj) {
                 }
             }
         })
+
+        $('#completadas').click(function () {
+            html_block = "<table id='tabletempdone' class='table table-hover'>" +
+                "<tbody>" +
+                "<tr>" +
+                "<th>Nome</th>" +
+                "<th>Tipo</th>" +
+                "<th>Resultados e estatisticas</th>" +
+                "</tr>" +
+                "</tbody>" +
+                "</table>";
+
+            if (snapshot.val().ntemplates != 0) {
+                $("#tabletempdone").replaceWith(html_block);
+                for (var i = 0; i < snapshot.val().ptemplatesdone.length; i++) {
+                    $("#tabletemp")
+                        .append($('<tr id="' + snapshot.key + '">')
+                            .append($('<td>')
+                                .text(snapshot.val().ptemplatesdone[i])
+                            )
+                            .append($('<td>')
+                                .text('A SER IMPLEMENTADO')
+                            )
+                            .append($('<td>')
+                                .text('A SER IMPLEMENTADO')
+                            )
+
+                        )
+                }
+            }
+        })
+
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +

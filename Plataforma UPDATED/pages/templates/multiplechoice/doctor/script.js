@@ -134,3 +134,12 @@ function reloadPage() {
     location.reload();
 }
 
+$('#preview').click(function () {
+  var pagina = $("#nometemplate").val();
+  var refTemplates2 = database.ref('templates/' + pagina);
+  refTemplates2.once("value", function (snapshot) {
+    console.log(snapshot.val().tipo);
+    var paginaespaco = pagina.replace(' ', '_');
+    window.location = '../../' + snapshot.val().tipo + '/patient/preview.html' + '?param=' + paginaespaco;
+  });
+});

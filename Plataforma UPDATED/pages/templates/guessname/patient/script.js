@@ -6,7 +6,7 @@ var database = firebase.database(); // database service
 var input;
 var nrLetters;
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_',' ');
+myParamSpace = myParam.replace('_', ' ');
 var templatesRef = database.ref("templates/" + myParamSpace); // database templates
 var selectedDiv = null;
 var letrasEscondidas = [];
@@ -153,10 +153,15 @@ Array.prototype.remove = function () {
     return this;
 };
 
+
 function checkIfDone() {
     if (letrasEscondidas.length == 0) {
         $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
         $("button").prop('disabled', true);
+
+        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+            console.log(snapshot.val());
+        });
     }
 }
 

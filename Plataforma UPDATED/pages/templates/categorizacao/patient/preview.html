@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="../../../../plugins/daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="../../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+
     <!-- css file -->
     <link rel="stylesheet" href="style.css">
 
@@ -82,7 +83,7 @@
                                     </div>
                                     <div class="pull-right">
                                         <button type="button" class="btn btn-primary btn-block btn-flat" onclick="logout();" margin: "auto;">Log out
-                                    </button>
+                                        </button>
                                     </div>
                                 </li>
                             </ul>
@@ -126,7 +127,6 @@
                         </ul>
                     </li>
 
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -137,11 +137,11 @@
             <!-- Main content -->
             <section id="masterSection" class="content">
                 <section class="content-header">
-                    <h1> Adivinhar Nome </h1>
+                    <h1> Categorização </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li>Templates</li>
-                        <li class="active">Adivinhar Nome</li>
+                        <li class="active">Sequenciação</li>
                     </ol>
                 </section>
 
@@ -158,61 +158,24 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            Nome do template:<input style="width: 30%;" id="nometemplate" type="text"></input>
-                            <h5><b>Seleccione</b> ou <b>arraste de uma pasta</b> as imagens para cada categoria.
-                                <p><b>IMPORTANTE:</b>Os ficheiros não podem conter caracteres especiais (
-                                    <>@!#$%^~&*()_+[]{}?:;|\'`´-=) no seu nome!</p>
-                            </h5>
-
-
-                            <div class="portrait custom-file-upload" id="filedrag">
-                                <input type='file' id="result" class="portrait" />
-                                <img class="img" id="myImg"></img>
+                            <div id="showpatients" class="box-body table-responsive no-padding">
+                                <div class="loader" style="margin: auto;"></div>
                             </div>
-
-                            <label for="result2" id="labelresult2" class="btn btn-primary btn-outlined" style="visibility : hidden; margin-top: 10px;">Seleccionar outra imagem</label>
-                            <input type='file' id="result2" class="inputfile" style="width : 100%; height : 100%;  visibility: hidden " />
-                            <form class="text-left">
-                                Palavra a descobrir (não pode ter caracteres e digitos):<input id="palavra" type="text"></input>
-                                <br>
-                                <br> Número de letras para preencher(duas por defeito):
-                                <input id="nrletras" type="number" value="2"></input>
-                                <button type="button" id="todos">Todas</button>
-                                <button type="button" id="metade">Metade</button>
-                                <br>
-
-                                <br> Mensagens de ajuda:<input style="width: 30%;" id="msgAjuda" type="text"></input>
-
-                                <div id="messages"></div>
-
-                                <button type="button" style=" margin-top: 10px;" id="adicionarMensagem">
-                                Adicionar mensagem
-                            </button>
-                                <button type="button" id="apagarMensagem">Apagar última
-                                mensagem
-                            </button>
-
-                                <div id="mensagens">
-
-                                </div>
-                                <br>
-                                <button type="button" id="submitBtn">Guardar Tarefa</button>
-                                <button id="preview" class="text-center">Pré-visualizar</button> <!-- esta a dar reload no idea why -->
-                            </form>
+                            <div id="main_div" class="container-fluid">
+                                <button id="start" onclick="start()"> Começar</button>
+                                <div id="feed_div" class="fluid row"></div>
+                                <div id="cat_div" class="fluid row"></div>
+                                <div id="img_div" class="fluid row"></div>
+                            </div>
+                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <!-- Adicionar qualquer coisa ao footer -->
-                        </div>
-                        <!-- box-footer -->
+                        <!-- /.box -->
                     </div>
-                    <!-- /.box -->
+                </section>
+                <!-- /.content -->
+            </section>
         </div>
-        </section>
         <!-- /.content -->
-        </section>
-    </div>
-    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer" style="text-align: right">
@@ -239,7 +202,6 @@
     <!-- script local para esta pagina -->
     <script src="../../../../logout1.js"></script>
     <script src="script.js"></script>
-
 </body>
 
 </html>

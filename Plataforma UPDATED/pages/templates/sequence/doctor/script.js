@@ -124,3 +124,12 @@ function check(string, chars){
     }
     return false;
 }
+
+$('#preview').click(function () {
+  var pagina = $("#nometemplate").val();
+  var refTemplates2 = database.ref('templates/' + pagina);
+  refTemplates2.once("value", function (snapshot) {
+    var paginaespaco = pagina.replace(' ', '_');
+    window.location = '../../' + snapshot.val().tipo + '/patient/preview.html' + '?param=' + paginaespaco;
+  });
+});

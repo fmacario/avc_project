@@ -3,7 +3,7 @@ var database = firebase.database(); // database service
 
 // Global variables
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_',' ');
+myParamSpace = myParam.replace('_', ' ');
 var templatesRef = database.ref("templates/" + myParamSpace); // database templates
 var historico = [];
 //Time variables
@@ -17,16 +17,23 @@ var min = 00;
 var tentativasResposta = 0;
 var respostasCorretas = 0;
 var respostasErradas = 0;
-
+var username;
 
 templatesRef.once("value", function (snapshot) {
-        rightAnswers = snapshot.val().respostasCertas,
+    rightAnswers = snapshot.val().respostasCertas,
         question = snapshot.val().pergunta,
         answers = snapshot.val().respostas,
         answerNumber = snapshot.val().nrEscolhas
-        start();
+    start();
 });
 
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        username = (user.email).split('@')[0];
+    } else {
+        // No user is signed in.
+    }
+});
 
 
 function start() {
@@ -35,7 +42,9 @@ function start() {
         null;
 
     //caso não suporte esta API DE VOZ                              
-    if (window.SpeechRecognition != null) document.getElementById('rect').style.visibility = 'visible';
+    if (window.SpeechRecognition != null) {
+        document.getElementById('rect').style.visibility = 'visible';
+    }
 
     inserirPergunta(); //gera pergunta
     shuffle(answers); // shuffles the array
@@ -146,6 +155,16 @@ function checkIfDone() {
 
         recognizer.stop();
         $("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
+
+
+        database.ref('patients/' + username + "/ptemplates").once("value", function (snapshot) {
+            for (var i = 0; i < snapshot.val().length; i++) {
+                if(snapshot.val()[i] == myParamSpace){
+                    console.log("yeah");
+                }
+            }
+        });
+
         for (var i = 0; i < answerNumber; i++) {
             $("#resposta" + i).attr('disabled', 'disabled');
         }
@@ -225,4 +244,6 @@ function removerCorVermelha(clickedButton) {
     tentativasResposta++;
     $("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }
+
+
 

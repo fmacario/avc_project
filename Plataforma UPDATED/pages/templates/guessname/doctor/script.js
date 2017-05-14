@@ -6,17 +6,6 @@ var pathToImg; //path to image to upload o patient side
 var messages = []; //array de messages dadas
 var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,/~`-=";
 
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyCWjs-R7KWD1Hqg1Ve4h1ZGynj06XbB-JQ",
-    authDomain: "avcproject-fae11.firebaseapp.com",
-    databaseURL: "https://avcproject-fae11.firebaseio.com",
-    storageBucket: "avcproject-fae11.appspot.com",
-    messagingSenderId: "1031859806052"
-};
-
-firebase.initializeApp(config);
-
 // References
 var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
@@ -248,3 +237,13 @@ function check(string, chars){
 function hasNumbers(str){
   return /\d/.test(str);
 }
+
+$('#preview').click(function () {
+  var pagina = $("#nometemplate").val();
+  var refTemplates2 = database.ref('templates/' + pagina);
+  refTemplates2.once("value", function (snapshot) {
+    console.log(snapshot.val().tipo);
+    var paginaespaco = pagina.replace(' ', '_');
+    window.location = '../../' + snapshot.val().tipo + '/patient/preview.html' + '?param=' + paginaespaco;
+  });
+});
