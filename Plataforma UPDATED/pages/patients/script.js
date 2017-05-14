@@ -10,6 +10,8 @@ var patientAssociatedTemplates;
 
 // Displays patients of database in a table
 $(document).ready(function () {
+    $("#jogo").hide();
+    
     var tpatients = $('#showpatients')  // table patients
 
     var patientsRef = database.ref("patients/"); // database patients
@@ -24,9 +26,12 @@ $(document).ready(function () {
             )
         });
 
-        $(".loader").css("display", "none");
-        $("#jogo").css("display", "block");
+        $(".loader").hide("slow");
+        $("#showpatients").toggleClass('box-body table-responsive no-padding');
+        $("#jogo").show("slow");
     });
+
+    
 });
 
 // Adds patient to database
@@ -77,17 +82,28 @@ function writeUserData() {
     }, 1000);
 }
 
+var encolher = "default";
+
 // Displays selected patient from table
 function showPatient(obj) {
+    if (obj.id == encolher) {
+        encolher = "default";
+        $("#showpatient").hide('slow');
+
+        return;
+    }
+
+    encolher = obj.id;
+
     selectedPatient = obj.id;
     patientRef = database.ref('patients/' + selectedPatient);
     var patientNameRef = database.ref('patients/' + selectedPatient);
 
     patientNameRef.on('value', function (snapshot) {
-        var html_block = '<div id="showpatient">' +
+        var html_block = '<div class="loader" style="margin: auto;"></div>' +
+            '<div id="showpatient" style="display: none">' +
             '<div class="box box-widget widget-user-2" style="z-index: 2;width: 100%;">' +
             '<div class="box-header with-border">' +
-            '<!-- /.box-tools -->' +
             '<!-- Add the bg color to the header using any of the bg-* classes -->' +
             '<div class="widget-user-header bg-blue">' +
             '<div class="widget-user-image">' +
@@ -103,6 +119,7 @@ function showPatient(obj) {
             '<div id="tabletemp"></div>' +
             '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
             '<div id="tabletempdone"></div>' +
+            '<li id="atribuidas"><a>Estatisticas<span class="pull-right badge bg-yellow"><i class="fa fa-fw fa-pie-chart"></i></span></a onclick=""></li>' +
             '</ul>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
             '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
@@ -189,6 +206,9 @@ function showPatient(obj) {
                 //Initialize Select2 Elements
                 $(".select2").select2();
             });
+
+            $(".loader").hide("slow");
+            $("#showpatient").show("slow");
         });
     });
 }
@@ -196,6 +216,11 @@ function showPatient(obj) {
 // Removes patient from database
 function removePatient() {
     patientRef.remove();
+}
+
+// Edits patients information
+function editPatient() {
+
 }
 
 // Assign task to patient

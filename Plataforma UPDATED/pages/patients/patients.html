@@ -128,20 +128,20 @@
                     </li>
 
                     <li class="templates">
-                            <a href="#">
-                                <i class="fa fa-files-o"></i>
-                                <span>Configuração Automática</span>
-                                <span class="pull-right-container">
+                        <a href="#">
+                            <i class="fa fa-files-o"></i>
+                            <span>Configuração Automática</span>
+                            <span class="pull-right-container">
                   <span class="label label-primary pull-right">2</span>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li></li>
-                                <li><a href="../templates/guessnameAutomatico/doctor/doctor.html"><i class="fa fa-circle-o"></i>Adivinhar Nome</a></li>
-                                <li><a href="../templates/categorizacaoAutomatica/doctor/doctor.html"><i class="fa fa-circle-o"></i>Categorização</a></li>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li></li>
+                            <li><a href="../templates/guessnameAutomatico/doctor/doctor.html"><i class="fa fa-circle-o"></i>Adivinhar Nome</a></li>
+                            <li><a href="../templates/categorizacaoAutomatica/doctor/doctor.html"><i class="fa fa-circle-o"></i>Categorização</a></li>
 
-                            </ul>
-                        </li>
+                        </ul>
+                    </li>
 
 
                 </ul>
@@ -229,10 +229,12 @@
                             </div>
                         </div>
                         <!-- /.box-header -->
-                        <div id="showpatients" class="box-body table-responsive no-padding">
+                        <div id="showpatients" class="box-body table-responsive" style="overflow-y: hidden;">
                             <div class="loader" style="margin: auto;"></div>
                         </div>
-                        <div id='jogo' class='box-body table-responsive no-padding' style='display: none'>
+                        <!-- Selected Patient zone -->
+                        <div id='jogo' class='box-body table-responsive'>
+                            <div id="showpatient"></div>
                             <table class='table table-hover'>
                                 <tbody>
                                     <tr>
@@ -244,22 +246,7 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-                    <!-- Selected Patient box -->
-                    <div class="box box-solid box-primary">
-                        <div class="box-header">
-                            <h3 class="box-title">Paciente selecionado</h3>
-                            <div class="box-tools">
-                                <div class="input-group input-group-sm" style="width: 150px;">
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
-                            <div id="showpatient"></div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
+
                 </section>
                 <!-- /.content -->
             </section>
