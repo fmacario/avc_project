@@ -19,7 +19,13 @@ templatesRef.once("value", function (snapshot) {
     nrLetras = snapshot.val().nrLetras;
     mensagensDoDoutor = snapshot.val().mensagens;
 
+    if (doesntContainNum(input)) {
+      $('#buttonsNumbers').hide();
+    }
+
     arrayLetters = input.split('');
+
+
     for (var i = 0; i < arrayLetters.length; i++) {
         if (arrayLetters[i] == ' ') {
             $("#inner").append("<div  class=\"row unselectable\" id=\"espaco" + i + "\">&nbsp;</div>");
@@ -197,4 +203,8 @@ function end() {
     }
     $("button").prop('disabled', true);
     $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
+}
+
+function doesntContainNum(string){
+  return !/\d/.test(string);
 }
