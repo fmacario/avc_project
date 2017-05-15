@@ -190,6 +190,9 @@
                                     <input type="text" class="form-control" id="ppassword" placeholder="Insira Password">
                                     <label>Nome do paciente</label>
                                     <input type="text" class="form-control" id="pname" placeholder="Insira Nome do Paciente">
+                                    <label>Nº de processo</label>
+                                    <input type="number" class="form-control" id="pprocess" placeholder="Insira o numero do processo associado">
+                                    <!--
                                     <label>Idade</label>
                                     <input type="number" class="form-control" id="page" placeholder="Insira Idade do paciente">
                                     <label>Escolaridade</label>
@@ -204,6 +207,7 @@
                                     <label>Tipo de lesão</label>
                                     <input type="text" class="form-control" id="ptypeinjury" placeholder="Tipo de lesão">
                                 </div>
+                                -->
                                 <button type="button" class="btn btn-block btn-primary btn-lg" onclick="writeUserData();" style="width: 55%; margin: auto;">Adicionar Paciente
                                 </button>
                                 <div id="mensagemErro"></div>
@@ -241,10 +245,13 @@
                                 <tbody>
                                     <tr>
                                         <th>Nome</th>
+                                        <th>Nº do processo</th>
+                                        <!--
                                         <th>Idade</th>
                                         <th>Anos de escolaridade</th>
                                         <th>Data da lesão</th>
                                         <th>Tipo da lesão</th>
+                                        -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -287,6 +294,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- Page script -->
+    <!-- 
     <script>
                                                                                                         $(function () {
                                                                                                             //Date picker
@@ -295,7 +303,7 @@
                                                                                                             });
                                                                                                         });
     </script>
-
+    -->
     <!-- script local para esta pagina -->
     <script src="../../logout.js"></script>
     <script src="script.js"></script>

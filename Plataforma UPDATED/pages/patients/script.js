@@ -24,6 +24,10 @@ $(document).ready(function () {
                     .text(childSnapshot.val().pname)
                 )
                 .append($('<td>')
+                    .text(childSnapshot.val().pprocess)
+                )
+                /*
+                .append($('<td>')
                     .text(childSnapshot.val().page)
                 )
                 .append($('<td>')
@@ -35,6 +39,7 @@ $(document).ready(function () {
                 .append($('<td>')
                     .text(childSnapshot.val().ptypeinjury)
                 )
+                */
             )
         });
 
@@ -53,11 +58,13 @@ function writeUserData() {
     pusernameE = pusernameE + '@strokerehab.com';
     var ppassword = $("#ppassword").val();
     var pname = $("#pname").val();
+    var pprocess = $("#pprocess").val();
+    /*
     var page = $("#page").val();
     var pschool = $("#pschool").val();
     var pdateinjury = $("#pdateinjury").val();
     var ptypeinjury = $("#ptypeinjury").val();
-
+    */
     auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -88,11 +95,7 @@ function writeUserData() {
     database.ref('patients/' + pusername).set({
         pname: pname,
         ntemplates: 0,
-        page: page,
-        pschool: pschool,
-        pdateinjury: pdateinjury,
-        ptypeinjury, ptypeinjury
-
+        pprocess: pprocess
     });
 
     setTimeout(function () {
@@ -233,6 +236,9 @@ function removePatient() {
     patientRef.remove();
 }
 
+//Eu sou panuco, sou louco por piça, por favor venham-me ao cu
+
+
 // Edits patients information
 function editPatient() {
     var patientsRef = database.ref("patients/" + selectedPatient); // database patients
@@ -247,7 +253,9 @@ function editPatient() {
             '<div class="form-group">' +
             '<label>Nome do paciente</label>' +
             '<input type="text" class="form-control" id="n_pname" placeholder="Insira Nome do Paciente" value="' + snapshot.val().pname + '">' +
-            '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="modifyPatient();">Aplicar alterações</button>' +
+            '<label>Nº de processo</label>' +
+            '<input type="number" class="form-control" id="n_pprocess" placeholder="Nº de processo" value="' + snapshot.val().pprocess + '">' +
+            '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="modifyPatient();">Aplicar alterações</button>';
 
             $('#showpatient').fadeOut("slow", function () {
                 $(this).replaceWith(html_block);
@@ -258,6 +266,7 @@ function editPatient() {
 
 function modifyPatient() {
     var n_pname = $("#n_pname").val();
+    var n_pprocess = $("#n_pprocess").val();
     var finalTemplates = [];
 
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
@@ -265,6 +274,7 @@ function modifyPatient() {
 
         database.ref('patients/' + selectedPatient).set({
             pname: n_pname,
+            pprocess: n_pprocess,
             ptemplates: finalTemplates,
             ntemplates: finalTemplates.length
         });
