@@ -3,7 +3,7 @@ var database = firebase.database(); // database service
 var auth = firebase.auth();
 
 // Global variables;
-var selectedPatient;
+var selectedPatient = "default";
 var patientRef;
 var patientRefTemplates;
 var patientAssociatedTemplates;
@@ -11,7 +11,7 @@ var patientAssociatedTemplates;
 // Displays patients of database in a table
 $(document).ready(function () {
     $("#jogo").hide();
-    
+
     var tpatients = $('#showpatients')  // table patients
 
     var patientsRef = database.ref("patients/"); // database patients
@@ -23,6 +23,18 @@ $(document).ready(function () {
                 .append($('<td>')
                     .text(childSnapshot.val().pname)
                 )
+                .append($('<td>')
+                    .text(childSnapshot.val().page)
+                )
+                .append($('<td>')
+                    .text(childSnapshot.val().pschool)
+                )
+                .append($('<td>')
+                    .text(childSnapshot.val().pdateinjury)
+                )
+                .append($('<td>')
+                    .text(childSnapshot.val().ptypeinjury)
+                )
             )
         });
 
@@ -31,16 +43,20 @@ $(document).ready(function () {
         $("#jogo").show("slow");
     });
 
-    
+
 });
 
 // Adds patient to database
 function writeUserData() {
-    pname = $("#pname").val();
-    pusername = $("#pusername").val();
-    pusernameE = pusername.toLowerCase();
+    var pusername = $("#pusername").val();
+    var pusernameE = pusername.toLowerCase();
     pusernameE = pusernameE + '@strokerehab.com';
-    ppassword = $("#ppassword").val();
+    var ppassword = $("#ppassword").val();
+    var pname = $("#pname").val();
+    var page = $("#page").val();
+    var pschool = $("#pschool").val();
+    var pdateinjury = $("#pdateinjury").val();
+    var ptypeinjury = $("#ptypeinjury").val();
 
     auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
         // Handle Errors here.
@@ -71,7 +87,12 @@ function writeUserData() {
 
     database.ref('patients/' + pusername).set({
         pname: pname,
-        ntemplates: 0
+        ntemplates: 0,
+        page: page,
+        pschool: pschool,
+        pdateinjury: pdateinjury,
+        ptypeinjury, ptypeinjury
+
     });
 
     setTimeout(function () {
@@ -82,18 +103,14 @@ function writeUserData() {
     }, 1000);
 }
 
-var encolher = "default";
-
 // Displays selected patient from table
 function showPatient(obj) {
-    if (obj.id == encolher) {
-        encolher = "default";
+    if (obj.id == selectedPatient) {
+        selectedPatient = "default";
         $("#showpatient").hide('slow');
 
         return;
     }
-
-    encolher = obj.id;
 
     selectedPatient = obj.id;
     patientRef = database.ref('patients/' + selectedPatient);
@@ -113,7 +130,6 @@ function showPatient(obj) {
             '<h3 class="widget-user-username">' + snapshot.val().pname + '</h3>' +
             '<h5 class="widget-user-desc">Paciente</h5>' +
             '</div>' +
-            '<div class="box-footer no-padding">' +
             '<ul class="nav nav-stacked">' +
             '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a onclick="associatedTemplates()"></li>' +
             '<div id="tabletemp"></div>' +
@@ -125,7 +141,6 @@ function showPatient(obj) {
             '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
             '<div id="templates" style="width: 25%; margin: auto;"></div>' +
             '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
-            '</div>' +
             '</div>' +
             '</div>';
 
@@ -220,7 +235,40 @@ function removePatient() {
 
 // Edits patients information
 function editPatient() {
+    var patientsRef = database.ref("patients/" + selectedPatient); // database patients
 
+    patientsRef.once("value", function (snapshot) {
+        $(".loader").hide("slow");
+        $("#showpatients").toggleClass('box-body table-responsive no-padding');
+        $("#jogo").show("slow");
+
+
+        var html_block = '<form role="form">' +
+            '<div class="form-group">' +
+            '<label>Nome do paciente</label>' +
+            '<input type="text" class="form-control" id="n_pname" placeholder="Insira Nome do Paciente" value="' + snapshot.val().pname + '">' +
+            '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="modifyPatient();">Aplicar alterações</button>' +
+
+            $('#showpatient').fadeOut("slow", function () {
+                $(this).replaceWith(html_block);
+                $('#showpatient').fadeIn("slow");
+            });
+    });
+}
+
+function modifyPatient() {
+    var n_pname = $("#n_pname").val();
+    var finalTemplates = [];
+
+    database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+        finalTemplates = jQuery.makeArray(snapshot.val());
+
+        database.ref('patients/' + selectedPatient).set({
+            pname: n_pname,
+            ptemplates: finalTemplates,
+            ntemplates: finalTemplates.length
+        });
+    });
 }
 
 // Assign task to patient
@@ -228,9 +276,7 @@ function assignTask() {
     var finalTemplates = [];
 
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
-        console.log(snapshot.val());
         finalTemplates = jQuery.makeArray(snapshot.val());
-        console.log(finalTemplates);
 
         for (var i = 0; i < $("#seltemplates").val().length; i++) {
             if (jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == -1 || jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == null) {
