@@ -6,11 +6,8 @@ var pathToImg; //path to image to upload o patient side
 var messages = []; //array de messages dadas
 var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,/~`-=";
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 2d2d92db86c781cc49f140d13ded8b165b29519d
 // References
 var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
@@ -242,13 +239,3 @@ function check(string, chars){
 function hasNumbers(str){
   return /\d/.test(str);
 }
-
-$('#preview').click(function () {
-  var pagina = $("#nometemplate").val();
-  var refTemplates2 = database.ref('templates/' + pagina);
-  refTemplates2.once("value", function (snapshot) {
-    console.log(snapshot.val().tipo);
-    var paginaespaco = pagina.replace(' ', '_');
-    window.location = '../../' + snapshot.val().tipo + '/patient/preview.html' + '?param=' + paginaespaco;
-  });
-});
