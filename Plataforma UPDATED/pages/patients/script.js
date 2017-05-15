@@ -13,7 +13,6 @@ $(document).ready(function () {
     $("#jogo").hide();
 
     var tpatients = $('#showpatients')  // table patients
-
     var patientsRef = database.ref("patients/"); // database patients
 
     patientsRef.once("value", function (snapshot) {
@@ -47,8 +46,6 @@ $(document).ready(function () {
         $("#showpatients").toggleClass('box-body table-responsive no-padding');
         $("#jogo").show("slow");
     });
-
-
 });
 
 // Adds patient to database
@@ -64,7 +61,7 @@ function writeUserData() {
     var pschool = $("#pschool").val();
     var pdateinjury = $("#pdateinjury").val();
     var ptypeinjury = $("#ptypeinjury").val();
-    */
+    */  
     auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -200,12 +197,10 @@ function showPatient(obj) {
                             .append($('<td>')
                                 .text('A SER IMPLEMENTADO')
                             )
-
                         )
                 }
             }
         })
-
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
@@ -257,10 +252,10 @@ function editPatient() {
             '<input type="number" class="form-control" id="n_pprocess" placeholder="Nº de processo" value="' + snapshot.val().pprocess + '">' +
             '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="modifyPatient();">Aplicar alterações</button>';
 
-            $('#showpatient').fadeOut("slow", function () {
-                $(this).replaceWith(html_block);
-                $('#showpatient').fadeIn("slow");
-            });
+        $('#showpatient').fadeOut("slow", function () {
+            $(this).replaceWith(html_block);
+            $('#showpatient').fadeIn("slow");
+        });
     });
 }
 
