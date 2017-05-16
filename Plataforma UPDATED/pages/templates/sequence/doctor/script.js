@@ -43,9 +43,10 @@ $(document).ready(function () {
               tipo: "sequence"
           });
           alert("Tarefa guardada com sucesso!");
-          $('#save').hide();
-          $('#preview').show();
-          $('#another').show();
+          location.reload();
+          //$('#save').hide();
+          //$('#preview').show();
+          //$('#another').show();
         }
     });
 });
