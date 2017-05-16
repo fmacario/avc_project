@@ -92,9 +92,7 @@ function writeUserData() {
     database.ref('patients/' + pusername).set({
         pname: pname,
         ntemplates: 0,
-        ptemplates: null,
-        ptemplatesdone: null,
-        pprocess: pprocess
+        pprocess: pprocess,
     });
 
     setTimeout(function () {
@@ -265,15 +263,21 @@ function modifyPatient() {
     var n_pname = $("#n_pname").val();
     var n_pprocess = $("#n_pprocess").val();
     var finalTemplates = [];
+    var finalTemplatesDone = [];
 
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
         finalTemplates = jQuery.makeArray(snapshot.val());
 
-        database.ref('patients/' + selectedPatient).set({
-            pname: n_pname,
-            pprocess: n_pprocess,
-            ptemplates: finalTemplates,
-            ntemplates: finalTemplates.length
+         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
+            finalTemplatesDone =  snapshot.child("ptemplatesdone").val();
+
+            database.ref('patients/' + selectedPatient).set({
+                pname: n_pname,
+                pprocess: n_pprocess,
+                ptemplates: finalTemplates,
+                ntemplates: finalTemplates.length,
+                ptemplatesdone: finalTemplatesDone
+            });
         });
     });
 }
@@ -281,26 +285,27 @@ function modifyPatient() {
 // Assign task to patient
 function assignTask() {
     var finalTemplates = [];
-    
+    var finalTemplatesDone = [];
+
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
         finalTemplates = jQuery.makeArray(snapshot.val());
-        
 
         for (var i = 0; i < $("#seltemplates").val().length; i++) {
             if (jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == -1 || jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == null) {
-                console.log("initial temp" + finalTemplates);
                 finalTemplates.push($("#seltemplates").val()[i]);
-                console.log("dei push a " + $("#seltemplates").val()[i]);
-                console.log("final temp " + finalTemplates);
             }
         }
 
-        database.ref('patients/' + selectedPatient).set({
-            pname: selectedPatient,
-            ptemplates: finalTemplates,
-            ntemplates: finalTemplates.length,
-            ptemplatesdone: null,
-            pprocess: pprocess
+        database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
+            finalTemplatesDone =  snapshot.child("ptemplatesdone").val();
+
+            database.ref('patients/' + selectedPatient).set({
+                pname: selectedPatient,
+                ptemplates: finalTemplates,
+                ntemplates: finalTemplates.length,
+                pprocess: pprocess,
+                ptemplatesdone: finalTemplatesDone
+            });
         });
     });
 }

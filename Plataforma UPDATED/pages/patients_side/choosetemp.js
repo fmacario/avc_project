@@ -22,7 +22,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         var teste = $("#showtemplates table");
         var templateespaco = snapshot.val().ptemplates[i];
         templateespaco = templateespaco.replace(' ', '_');
-        if (jQuery.inArray(templateespaco, ptemplatesdone) !== -1) {
+
+        var finalTemplatesDone = snapshot.child("ptemplatesdone").val();
+
+        if (jQuery.inArray(templateespaco, finalTemplatesDone) == -1) {
           teste.append($('<tr id="' + templateespaco + '" onclick="redirect(' + templateespaco + ')">')
             .append($('<td>')
               .text(snapshot.val().ptemplates[i])
