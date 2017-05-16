@@ -1,3 +1,7 @@
+
+$('#main_div').hide();
+
+
 // References
 var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
@@ -9,6 +13,7 @@ var templatesRef = database.ref("templates/" + myParamSpace); // database templa
 var arrayTotal = [];
 var categorias = [];
 var images = [];
+
 
 templatesRef.once("value", function (snapshot) {
 
@@ -33,38 +38,38 @@ templatesRef.once("value", function (snapshot) {
 
       });
 
-function start() {
-    $('#start').hide();
-    //console.log(images);
-    var orilength = categorias.length;
-    counter = images.length;
-    var col; //height;
+//console.log(images);
+var orilength = categorias.length;
+counter = images.length;
+var col; //height;
 
-    if (orilength >= 5) {
-        //height = 50;
-        col = parseInt(12 / orilength) + 1;
-    }
-    else {
-        col = 12 / orilength;
-        //height = 100;
-    }
+if (orilength >= 5) {
+    //height = 50;
+    col = parseInt(12 / orilength) + 1;
+}
+else {
+    col = 12 / orilength;
+    //height = 100;
+}
 
 
-    var until = images.length;
-    for (var i = 0; i < until; i++) {
-      var temp = Math.floor((Math.random() * images.length));
-      $('#img_div').append('<img id="'+images[temp].split('%2F')[2].split('?')[0]+'" src="' + images[temp] + '" class="img" ondragstart="drag(event)">');
-      images.remove(images[temp]);
-    }
+var until = images.length;
+for (var i = 0; i < until; i++) {
+    var temp = Math.floor((Math.random() * images.length));
+    $('#img_div').append('<img id="'+images[temp].split('%2F')[2].split('?')[0]+'" src="' + images[temp] + '" class="img" ondragstart="drag(event)">');
+    images.remove(images[temp]);
+}
 
-    for (var i = 0; i < orilength; i++) {
-        var array = arrayTotal[i];
-        $('#cat_div').append('<div id="'+categorias[i]+'" ondrop="drop(event, '+i+')" ondragover="allowDrop(event)" class="col-sm-' + col + ' single_img_div"><h3>'+categorias[i]+'</h3><div></div></div>');
-
-        }
-
+for (var i = 0; i < orilength; i++) {
+    var array = arrayTotal[i];
+    $('#cat_div').append('<div id="'+categorias[i]+'" ondrop="drop(event, '+i+')" ondragover="allowDrop(event)" class="col-sm-' + col + ' single_img_div"><h3>'+categorias[i]+'</h3><div></div></div>');
 
 }
+
+
+$('loader').hide('slow');
+$('#main_div').show('slow');
+
 
 
  //---- Removes element from array by value ------

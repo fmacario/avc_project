@@ -6,8 +6,10 @@ var storageRef = firebase.storage().ref(); // storage service
 var number_of_categories;
 
 $(document).ready(function () {
-
+    $('#main_div').hide();
     $('#save').hide();
+    $('#preview').hide();
+    $('#main_div').show('slow');
 
     $('#generate').click(function () {
         number_of_categories = $("#number_of_categories").val();
@@ -129,6 +131,7 @@ function readURL(input, i) {
     //_---------------------------------- Verificação para o botao aparecer ------------------------
     if (arrayTotal.length == number_of_categories ) {
       $('#save').show();
+      $('#preview').show();
     }
     //-----------------------------------------------------------------------------------------------
 
