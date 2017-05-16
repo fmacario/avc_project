@@ -63,6 +63,8 @@ $(function () {
           }
         }
         alert("Templates criados com sucesso");
+        location.reload();
+
     });
 
 });

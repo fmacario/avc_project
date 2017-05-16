@@ -8,6 +8,8 @@ var number_of_images;
 $(document).ready(function () {
 
     $('#save').hide();
+    $('#preview').hide();
+    $('#another').hide();
 
     $('#generate').click(function () {
         number_of_images = $("#number_of_images").val();
@@ -41,6 +43,9 @@ $(document).ready(function () {
               tipo: "sequence"
           });
           alert("Tarefa guardada com sucesso!");
+          $('#save').hide();
+          $('#preview').show();
+          $('#another').show();
         }
     });
 });
@@ -124,6 +129,10 @@ function check(string, chars){
     }
     return false;
 }
+
+$('#another').click(function(){
+    location.reload();
+});
 
 $('#preview').click(function () {
   var pagina = $("#nometemplate").val();

@@ -97,7 +97,7 @@ $(function () {
             alert("Número de letras não pode ser menor ou igual a 0!");
             throw new Error("Assertion failed");
         }
-        else if (hasNumbers(input) || check(input, specialChars)) {
+        else if (check(input, specialChars)) {
           alert("Palavra a descobrir não pode conter números nem caracteres especiais");
           throw new Error("Assertion failed");
         }
@@ -132,7 +132,7 @@ $(function () {
                   imgname: nomeimagem
               });
               alert("Template criado com sucesso");
-
+              location.reload();
             }
 
         }

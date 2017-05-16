@@ -7,6 +7,7 @@ var pergunta = "";
 var botaoTmpEditar = 0;
 var answerNumber;
 var answers = [];
+$('#preview').hide();
 
 
 function getQuestion() {
@@ -14,6 +15,7 @@ function getQuestion() {
 }
 
 function getNumberAnswers() {
+
 
     answers = [];
     botaoTmpEditar = 0;
@@ -36,7 +38,7 @@ function correctAnswer(idResposta, idBotao, idDiv) {
     var resposta = $("#" + idResposta).val();
 
     if (rightAnswers.includes(resposta)) {
-    	document.getElementById(idBotao).checked = false; 
+    	document.getElementById(idBotao).checked = false;
         alert("A resposta já existe!");
         throw new error("Equal rightAnswers!")
     }
@@ -44,7 +46,7 @@ function correctAnswer(idResposta, idBotao, idDiv) {
 
         console.log(idResposta);
 
-		document.getElementById(idBotao).checked = false; 
+		document.getElementById(idBotao).checked = false;
 
 		alert("A resposta não pode ser vazia!");
         throw new error("emptty right answer!");
@@ -106,6 +108,7 @@ function generateTemplate() {
         tipo: 'multiplechoice',
         nrEscolhas: answerNumber
     })
+    reloadPage();
 }
 
 function checkIfAnswerMissig() {

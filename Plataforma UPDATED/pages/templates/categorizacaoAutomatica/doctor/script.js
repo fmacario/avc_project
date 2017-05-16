@@ -106,7 +106,7 @@ for (var p = 0; p < numTarefa; p++) {
 
 
         alert("Tarefas guardadas com sucesso!");
-        //location.reload();
+        location.reload();
     });
 });
 
