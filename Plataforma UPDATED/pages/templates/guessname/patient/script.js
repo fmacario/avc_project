@@ -76,8 +76,8 @@ templatesRef.once("value", function (snapshot) {
     storageRef.child('templates/' + imgTitle).getDownloadURL().then(function (url) {
         var test = url;
         document.querySelector('#imgid').src = test;
-        $(".loader").css("display", "none");
-        $("#jogo").css("display", "block");
+        $(".loader").hide('slow');
+        $("#jogo").show('slow');//css("display", "block");
     }).catch(function (error) {
 
     });

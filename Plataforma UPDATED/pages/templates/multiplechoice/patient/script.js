@@ -37,6 +37,10 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
 function start() {
+    $(".loader").hide('slow');
+    $("#jogo").show('slow');
+
+
     window.SpeechRecognition = window.SpeechRecognition ||
         window.webkitSpeechRecognition ||
         null;
@@ -49,9 +53,6 @@ function start() {
     inserirPergunta(); //gera pergunta
     shuffle(answers); // shuffles the array
     generateBtn(); //gera divs para palavra a descobrir
-
-    $(".loader").css("display", "none");
-    $("#jogo").css("display", "block");
 
     $(":button").click(function () {
 
