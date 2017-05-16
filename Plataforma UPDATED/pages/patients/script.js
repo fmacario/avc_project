@@ -131,11 +131,11 @@ function showPatient(obj) {
             '<h5 class="widget-user-desc">Paciente</h5>' +
             '</div>' +
             '<ul class="nav nav-stacked">' +
-            '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a onclick="associatedTemplates()"></li>' +
+            '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a></li>' +
             '<div id="tabletemp"></div>' +
             '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
             '<div id="tabletempdone"></div>' +
-            '<li id="atribuidas"><a>Estatisticas<span class="pull-right badge bg-yellow"><i class="fa fa-fw fa-pie-chart"></i></span></a onclick=""></li>' +
+            '<li id="graphs"><a>Estatisticas<span class="pull-right badge bg-yellow"><i class="fa fa-fw fa-pie-chart"></i></span></a onclick="goToStatistics()"></li>' +
             '</ul>' +
             '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
             '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
@@ -201,6 +201,11 @@ function showPatient(obj) {
                 }
             }
         })
+
+        $("#graphs").click(function () {
+            console.log(selectedPatient);
+            window.location = '../statistics/statistics.html' + '?param=' + selectedPatient;
+        });
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
@@ -268,8 +273,8 @@ function modifyPatient() {
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
         finalTemplates = jQuery.makeArray(snapshot.val());
 
-         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
-            finalTemplatesDone =  snapshot.child("ptemplatesdone").val();
+        database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
+            finalTemplatesDone = snapshot.child("ptemplatesdone").val();
 
             database.ref('patients/' + selectedPatient).set({
                 pname: n_pname,
@@ -297,7 +302,7 @@ function assignTask() {
         }
 
         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
-            finalTemplatesDone =  snapshot.child("ptemplatesdone").val();
+            finalTemplatesDone = snapshot.child("ptemplatesdone").val();
 
             database.ref('patients/' + selectedPatient).set({
                 pname: selectedPatient,

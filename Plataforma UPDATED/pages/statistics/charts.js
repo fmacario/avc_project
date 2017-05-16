@@ -1,55 +1,70 @@
 // References
 var database = firebase.database(); // database service
 
-var templatesRef = database.ref("templates/multiplechoice/"); // database templates
+var myParam = location.search.split('param=')[1]
+myParamSpace = myParam.replace('_', ' ');
 
+var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        var ctx = document.getElementById("lineChart");
-        
-        console.log(childSnapshot.val().tempo);
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ["Pergunta 1", "Pergunta 2", "Pergunta 3", "Pergunta 4", "Pergunta 5", "Pergunta 6"],
-                datasets: [
-                    {
-                    label: "Tempo de resposta",
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "rgba(75,192,192,0.4)",
-                        borderColor: "rgba(75,192,192,1)",
-                        borderCapStyle: 'butt',
-                        borderDash: [],
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "rgba(75,192,192,1)",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                        pointHoverBorderColor: "rgba(220,220,220,1)",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: [childSnapshot.val().tempo,"5.5","5","1"],
-                        spanGaps: false,
-                    }
-                ]
-            },
-
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-        });
-
+        updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo);
     });
+
+    createGraph();
 });
+
+var templatenames = [];
+var tempo = [];
+function updateGraphValues(templatename, tempos) {
+    templatenames.push(templatename);
+
+    var tempoMin = tempos.split('.');
+    var tempoNew = tempoMin[0] + '.' + tempoMin[1];
+    tempo.push(tempoNew)
+}
+
+function createGraph() {
+    var ctx = document.getElementById("lineChart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: templatenames,
+            datasets: [
+                {
+                    label: "Tempo de resposta",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: tempo,
+                    spanGaps: false,
+                }
+            ]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+}
 
