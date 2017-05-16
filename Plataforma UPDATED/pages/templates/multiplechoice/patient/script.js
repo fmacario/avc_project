@@ -144,36 +144,34 @@ function checkIfDone() {
         tentativasResposta++;
         respostasCorretas++;
 
-        database.ref('templates/multiplechoice/' + 0).set({
-            pergunta: question,
-            respostasCertas: rightAnswers,
-            respostas: answers,
-            nrEscolhas: answerNumber,
-            tempo: n,
-            attempts: tentativasResposta
-        })
+        database.ref('patients/' + username).once("value", function (snapshot) {
+            var finalTemplates = snapshot.child("ptemplates").val();
+            var pprocess = snapshot.child("pprocess").val();
+            var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
+            finalTemplatesDone.push(myParamSpace);
+
+            database.ref('patients/' + username).once("value", function (snapshot) {
+                database.ref('patients/' + username + '/ptemplatesdone/' + myParamSpace).set({
+                    templatename: myParamSpace,
+                    pergunta: question,
+                    respostasCertas: rightAnswers,
+                    respostas: answers,
+                    nrEscolhas: answerNumber,
+                    tempo: n,
+                    attempts: tentativasResposta
+                });
+            });
+
+        });
 
         recognizer.stop();
         $("#message").append("<h2>MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!</h2>");
-
-
-        database.ref('patients/' + username + "/ptemplates").once("value", function (snapshot) {
-            for (var i = 0; i < snapshot.val().length; i++) {
-                if(snapshot.val()[i] == myParamSpace){
-                    console.log("yeah");
-                }
-            }
-        });
 
         for (var i = 0; i < answerNumber; i++) {
             $("#resposta" + i).attr('disabled', 'disabled');
         }
         document.getElementById('rect').style.visibility = 'hidden';
     }
-
-    console.log("tentativas: " + tentativasResposta);
-    console.log("Corretas: " + respostasCorretas);
-    console.log("Erradas: " + respostasErradas);
 }
 
 function disableBtn(clickedButton) {
@@ -244,6 +242,3 @@ function removerCorVermelha(clickedButton) {
     tentativasResposta++;
     $("#" + clickedButton).attr('class', 'answer btn btn-outlined');
 }
-
-
-
