@@ -61,7 +61,7 @@ function writeUserData() {
     var pschool = $("#pschool").val();
     var pdateinjury = $("#pdateinjury").val();
     var ptypeinjury = $("#ptypeinjury").val();
-    */  
+    */
     auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -92,6 +92,8 @@ function writeUserData() {
     database.ref('patients/' + pusername).set({
         pname: pname,
         ntemplates: 0,
+        ptemplates: null,
+        ptemplatesdone: null,
         pprocess: pprocess
     });
 
@@ -279,9 +281,10 @@ function modifyPatient() {
 // Assign task to patient
 function assignTask() {
     var finalTemplates = [];
-
+    
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
         finalTemplates = jQuery.makeArray(snapshot.val());
+        
 
         for (var i = 0; i < $("#seltemplates").val().length; i++) {
             if (jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == -1 || jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == null) {
@@ -295,7 +298,9 @@ function assignTask() {
         database.ref('patients/' + selectedPatient).set({
             pname: selectedPatient,
             ptemplates: finalTemplates,
-            ntemplates: finalTemplates.length
+            ntemplates: finalTemplates.length,
+            ptemplatesdone: null,
+            pprocess: pprocess
         });
     });
 }

@@ -19,14 +19,23 @@ firebase.auth().onAuthStateChanged(function (user) {
     refTemplates.once("value", function (snapshot) {
       for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
         tpatients.replaceWith(table);
-        var teste = $("#showtemplates table"); 
+        var teste = $("#showtemplates table");
         var templateespaco = snapshot.val().ptemplates[i];
         templateespaco = templateespaco.replace(' ', '_');
-        teste.append($('<tr id="' + templateespaco +'" onclick="redirect('+ templateespaco +')">')
-             .append($('<td>')
-             .text(snapshot.val().ptemplates[i])
+        if (jQuery.inArray(templateespaco, ptemplatesdone) !== -1) {
+          teste.append($('<tr id="' + templateespaco + '" onclick="redirect(' + templateespaco + ')">')
+            .append($('<td>')
+              .text(snapshot.val().ptemplates[i])
+            )
           )
-        )
+        }
+        else {
+          teste.append($('<tr id="' + templateespaco + '" onclick="redirect(' + templateespaco + ')" style="background-color: grey">')
+            .append($('<td>')
+              .text(snapshot.val().ptemplates[i])
+            )
+          )
+        }
       }
     });
   } else {
@@ -45,6 +54,6 @@ function redirect(pagina) {
 
 };
 
-function goToVR(){
+function goToVR() {
   window.location.replace("dashboardVR.html");
 };
