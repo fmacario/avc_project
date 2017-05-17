@@ -11,3 +11,18 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.divBtns {
+    padding: 5px;
+    text-align: right;
+}
+
+.moodBtns:hover {
+    background-color: lightblue;
+}
+
+.moodBtns {
+    background-color: lightcyan;
+    border-radius: 25%;
+    width: 50%;
+}
