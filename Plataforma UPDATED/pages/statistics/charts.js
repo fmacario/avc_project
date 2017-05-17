@@ -6,26 +6,59 @@ myParamSpace = myParam.replace('_', ' ');
 
 var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
 
+
+
+
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo);
+        updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts, );
     });
 
-    createGraph();
+    createGraphTempo();
+    createGraphAttempts();
+    createGraphPercentagem();
+
+
 });
 
 var templatenames = [];
 var tempo = [];
-function updateGraphValues(templatename, tempos) {
+var attempts = [];
+var percentagens = [];
+
+function updateGraphValues(templatename, tempos, tentativas) {
     templatenames.push(templatename);
 
     var tempoMin = tempos.split('.');
-    var tempoNew = tempoMin[0] + '.' + tempoMin[1];
+    var tempoNew;
+    var temps = 0, erradas = 0, percentagemErradas=0, percentagemCertas = 0; 
+   
+
+    if(tempoMin[1] < 10){
+    	tempoNew = tempoMin[0] + '.' + '0' + tempoMin[1];
+    }
+    else{
+    	tempoNew = tempoMin[0] + '.' + tempoMin[1];
+    } 
+
     tempo.push(tempoNew)
+    attempts.push(tentativas);
+
+    for(var i = 0; i < attempts.length; i++){
+    	temps += attempts[i];
+    }
+
+    erradas = temps - templatenames.length;
+    percentagemErradas = erradas/temps;
+    percentagemCertas = templatenames.length/temps;
+
+    percentagens[0] = percentagemCertas;
+    percentagens[1] = percentagemErradas;
+
 }
 
-function createGraph() {
-    var ctx = document.getElementById("lineChart");
+function createGraphTempo() {
+    var ctx = document.getElementById("lineChartTempo");
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -67,4 +100,64 @@ function createGraph() {
         }
     })
 }
+
+function createGraphAttempts() {
+    var ctx = document.getElementById("lineChartAttempts");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: templatenames,
+            datasets: [
+                {
+                    label: "Tentativas de resposta",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderCapStyle: 'butt',
+                    borderDash: [],
+                    borderDashOffset: 0.0,
+                    borderJoinStyle: 'miter',
+                    pointBorderColor: "rgba(75,192,192,1)",
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 1,
+                    pointHoverRadius: 5,
+                    pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                    pointHoverBorderColor: "rgba(220,220,220,1)",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 1,
+                    pointHitRadius: 10,
+                    data: attempts,
+                    spanGaps: false,
+                }
+            ]
+        },
+
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    })
+}
+
+function createGraphPercentagem() {
+
+	 var ctx = document.getElementById("ringChart");
+	 var myChart = new Chart(ctx, {
+	     type: 'doughnut',
+	     data : {
+	     labels: ["Certas (%)", "Erradas (%)" ],
+	     datasets: [{
+	             data: percentagens,
+	             backgroundColor: ["#FF6384", "#36A2EB"],
+	         }]
+	 	}
+	 });
+}
+
 
