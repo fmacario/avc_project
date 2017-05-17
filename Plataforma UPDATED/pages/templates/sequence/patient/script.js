@@ -1,26 +1,37 @@
+
+$('#main_div').hide();
+
 // References
 var storageRef = firebase.storage().ref(); // storage service
 var database = firebase.database(); // database service
 
 // Global variables
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_',' ');
+myParamSpace = myParam.replace('_', ' ');
 var templatesRef = database.ref("templates/" + myParamSpace); // database templates
 var order = []; // Array ordenado com nomes das imagens
 var images = [];
 
+
 templatesRef.once("value", function (snapshot) {
-        order = snapshot.val().ordem;
-        for (var i = 0; i < order.length; i++) {
-            // read images
-            storageRef.child('templates/sequence/' + order[i]).getDownloadURL().then(function (url) {
-                images.push(url);
-            });
-        }
+    order = snapshot.val().ordem;
+    for (var i = 0; i < order.length; i++) {
+        // read images
+        storageRef.child('templates/sequence/' + order[i]).getDownloadURL().then(function (url) {
+            images.push(url);
+
+            if(images.length == order.length){
+                start();
+            }
+        });
+    }
 });
 
 function start() {
-    $('#start').hide();
+    $('.loader').hide('slow');
+    $('#main_div').show('slow');
+
+
     console.log(images);
     var orilength = images.length;
 
@@ -37,9 +48,9 @@ function start() {
 
     for (var i = 0; i < orilength; i++) {
         var temp = Math.floor((Math.random() * images.length));
-        $('#choice_div').append('<div id="choice' + i + '" class="col-sm-' + col + ' single_img_div"> <img id="img'+i+'" src="' + images[temp] + '" class="img" ondragstart="drag(event)"> </div>');
+        $('#choice_div').append('<div id="choice' + i + '" class="col-sm-' + col + ' single_img_div"> <img id="img' + i + '" src="' + images[temp] + '" class="img" ondragstart="drag(event)"> </div>');
         images.splice(temp, 1);
-        $('#answer_div').append('<div id="'+ order[i] + '" class="col-sm-' + col + ' single_img_div" ondrop="drop(event, ' + orilength + ')" ondragover="allowDrop(event)"></div>');
+        $('#answer_div').append('<div id="' + order[i] + '" class="col-sm-' + col + ' single_img_div" ondrop="drop(event, ' + orilength + ')" ondragover="allowDrop(event)"></div>');
 
     }
 }
@@ -84,15 +95,15 @@ function drag(ev) {
 
 var counter = 0;
 function drop(ev, num) {
-  
+
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     var path = ev.dataTransfer.getData("path");
     var divId = ev.target.id;
-    var divIdWithoutSpaces = divId.replace(" ","%20");
+    var divIdWithoutSpaces = divId.replace(" ", "%20");
     var node = document.createTextNode("Tente Novamente!");
 
-    if ( $('#' + divId + ':has(img)').length == 0 ) {
+    if ($('#' + divId + ':has(img)').length == 0) {
 
 
         if (path.includes(divId) || path.includes(divIdWithoutSpaces)) {
@@ -100,9 +111,9 @@ function drop(ev, num) {
 
             var tmp = data.replace("img", "");
 
-            $("#choice"+tmp).hide();
+            $("#choice" + tmp).hide();
             document.getElementById(divId).appendChild(document.getElementById(data));
-            document.getElementById(data).ondragstart = function() { return false; };
+            document.getElementById(data).ondragstart = function () { return false; };
 
 
             counter++;

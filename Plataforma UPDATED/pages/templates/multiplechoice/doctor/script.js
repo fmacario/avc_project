@@ -7,6 +7,10 @@ var pergunta = "";
 var botaoTmpEditar = 0;
 var answerNumber;
 var answers = [];
+
+
+$('#main_div').hide();
+$('#main_div').show('slow');
 $('#preview').hide();
 
 

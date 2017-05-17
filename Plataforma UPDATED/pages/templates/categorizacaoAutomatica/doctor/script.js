@@ -6,7 +6,8 @@ var storageRef = firebase.storage().ref(); // storage service
 var number_of_categories;
 
 $(document).ready(function () {
-
+    $('#main_div').hide();
+    $('#main_div').show('slow');
     $('#save').hide();
 
     $('#generate').click(function () {

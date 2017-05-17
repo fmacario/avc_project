@@ -11,6 +11,9 @@ var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
 
 $(function () {
+    $('#main_div').hide();
+    $('#main_div').show('slow');
+
     //Submit button
     $('#submitBtn').on('click', function () {
         nrLetras = $('#nrletras').val();		//nrLetras é o nr de letras a esconder

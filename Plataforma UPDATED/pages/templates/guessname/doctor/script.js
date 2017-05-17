@@ -14,6 +14,8 @@ var storageRef = firebase.storage().ref(); // storage service
 
 $(function () {
     //Function to upload image
+    $('#main_div').hide();
+    $('#main_div').show('slow');
 
     $(":file").change(function () {
 

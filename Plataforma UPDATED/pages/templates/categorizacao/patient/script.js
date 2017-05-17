@@ -38,7 +38,6 @@ templatesRef.once("value", function (snapshot) {
                 images.push(url);
                 console.log(images);
                 if (images.length == counter) {
-                    console.log('aqui');
                     start();
                 }
             });
