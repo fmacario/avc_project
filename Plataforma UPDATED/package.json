@@ -23,6 +23,7 @@
     "grunt-includes": "^0.4.5"
   },
   "dependencies": {
+    "chart.js": "^2.5.0",
     "firebase-admin": "^4.2.1"
   }
 }
