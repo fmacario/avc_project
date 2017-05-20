@@ -4,8 +4,9 @@ var database = firebase.database(); // database service
 
 // Global variables
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_',' ');
+myParamSpace = myParam.replace('%20', ' ');
 var templatesRef = database.ref("templates/" + myParamSpace); // database templates
+
 var order = []; // Array ordenado com nomes das imagens
 var arrayTotal = [];
 var categorias = [];
@@ -39,7 +40,24 @@ templatesRef.once("value", function (snapshot) {
           }, 1500);
 });
 
+function customEnterVR() {
+  var scene = document.querySelector('a-scene');
+  if (scene) {
+    if (scene.hasLoaded) {
+      scene.enterVR();
+    } else {
+      scene.addEventListener('loaded', scene.enterVR);
+    }
+  }
+}
+
+
 function start() {
+  document.addEventListener('mouseup', customEnterVR);  // 
+  document.addEventListener('mousedown', customEnterVR);  //  
+  document.addEventListener('mouseleft', customEnterVR);  //  
+  document.addEventListener('mouseright', customEnterVR); // 
+  
     strSize = str.length;
     counter = images.length;
     opacity();
@@ -284,18 +302,17 @@ function isDone(){
     });
     a.setAttribute('position', '0  2 -1.5');
     a.setAttribute('text', {
-      value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!\n\nClique aqui para sair.",
+      value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO! Aguarde.",
       color: 'white'
     });
 
     //
     sceneEl.appendChild(a);
 
-    a.addEventListener('click', function () {
-      console.log("teste");
+    setTimeout(function() {
       window.location.replace("../../../patients_side/dashboardVR.html");
-    });
-      
+          }, 1500);
+  
 };
 
 

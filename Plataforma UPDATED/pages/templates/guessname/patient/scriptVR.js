@@ -4,7 +4,7 @@ var database = firebase.database(); // database service
 
 // Global variables
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_', ' ');
+myParamSpace = myParam.replace('%20', ' ');
 var templatesRef = database.ref("templates/" + myParamSpace); // database templates
 
 var selectedDiv = null;
@@ -19,13 +19,28 @@ var antigaLetraSelecionada = null;
 var letraSelecionada = null;
 var escondePosicao = [];        // posicao das letras a serem escondidas
 var input, imgTitle, nrLetras, mensagensDoDoutor;
+var test;
+var img = [];
 
 templatesRef.once("value", function (snapshot) {
 	imgTitle = snapshot.val().imgname,
 		input = snapshot.val().input,
-		nrLetras = snapshot.val().nrLetras,
-		mensagensDoDoutor = snapshot.val().mensagens
-	start();
+		nrLetras = snapshot.val().nrLetras;
+		//mensagensDoDoutor = snapshot.val().mensagens
+
+			// read image
+	var spaceRef = storageRef.child('templates/' + imgTitle);
+	var path = spaceRef.fullPath;
+
+	storageRef.child('templates/' + imgTitle).getDownloadURL().then(function (url) {
+		img.push(url);
+	});
+
+	setTimeout(function() {
+			inserirImagem();
+        	start();
+          }, 1500);
+	
 });
 
 
@@ -42,7 +57,11 @@ function customEnterVR() {
 
 
 function start() {
-	//document.addEventListener('mouseup', customEnterVR);	// 
+	document.addEventListener('mouseup', customEnterVR);	// 
+	document.addEventListener('mousedown', customEnterVR);	// 	
+	document.addEventListener('mouseleft', customEnterVR);	// 	
+	document.addEventListener('mouseright', customEnterVR);	// 
+
 	var c;
 	var str = "";
 	for (var i = 0; i < input.length; i++) {
@@ -66,9 +85,9 @@ function start() {
 	nrLetters = input.length;
 
 
-	sceneEl = document.querySelector('#nome');
+	//sceneEl = document.querySelector('#nome');
 	//console.log(nrLetters);
-	inserirImagem();
+	
 	inserirNome();
 	esconderLetras();
 	criarAlfabeto();
@@ -76,162 +95,163 @@ function start() {
 
 	//console.log(escondePosicao);
 
-	if (letra0 != null && escondePosicao.includes(0))
-		letra0.addEventListener('click', function () {
-			clicado(letra0, 0);
+	if (entity[0] != null && escondePosicao.includes(0))
+		entity[0].addEventListener('click', function () {
+			console.log("FDS");
+			clicado(entity[0], 0);
 		});
 
-	if (letra1 != null && escondePosicao.includes(1))
-		letra1.addEventListener('click', function () {
-			clicado(letra1, 1);
+	if (entity[1] != null && escondePosicao.includes(1))
+		entity[1].addEventListener('click', function () {
+			clicado(entity[1], 1);
 		});
 
-	if (letra2 != null && escondePosicao.includes(2))
-		letra2.addEventListener('click', function () {
-			clicado(letra2, 2);
+	if (entity[2] != null && escondePosicao.includes(2))
+		entity[2].addEventListener('click', function () {
+			clicado(entity[2], 2);
 		});
 
-	if (letra3 != null && escondePosicao.includes(3))
+	if (entity[3] != null && escondePosicao.includes(3))
 		letra3.addEventListener('click', function () {
 			clicado(letra3, 3);
 		});
 
-	if (letra4 != null && escondePosicao.includes(4))
+	if (entity[4] != null && escondePosicao.includes(4))
 		letra4.addEventListener('click', function () {
 			clicado(letra4, 4);
 		});
 
-	if (letra5 != null && escondePosicao.includes(5))
+	if (entity[5] != null && escondePosicao.includes(5))
 		letra5.addEventListener('click', function () {
 			clicado(letra5, 5);
 		});
 
-	if (letra6 != null && escondePosicao.includes(6))
+	if (entity[6] != null && escondePosicao.includes(6))
 		letra6.addEventListener('click', function () {
 			clicado(letra6, 6);
 		});
 
-	if (letra7 != null && escondePosicao.includes(7))
+	if (entity[7] != null && escondePosicao.includes(7))
 		letra7.addEventListener('click', function () {
 			clicado(letra7, 7);
 		});
 
-	if (letra8 != null && escondePosicao.includes(8))
+	if (entity[8] != null && escondePosicao.includes(8))
 		letra8.addEventListener('click', function () {
 			clicado(letra8, 8);
 		});
 
-	if (letra9 != null && escondePosicao.includes(9))
+	if (entity[9] != null && escondePosicao.includes(9))
 		letra9.addEventListener('click', function () {
 			clicado(letra9, 9);
 		});
 
-	if (letra10 != null && escondePosicao.includes(10))
+	if (entity[10] != null && escondePosicao.includes(10))
 		letra10.addEventListener('click', function () {
 			clicado(letra10, 10);
 		});
 
-	if (letra11 != null && escondePosicao.includes(11))
+	if (entity[11] != null && escondePosicao.includes(11))
 		letra11.addEventListener('click', function () {
 			clicado(letra11, 11);
 		});
 
-	if (letra12 != null && escondePosicao.includes(12))
+	if (entity[12] != null && escondePosicao.includes(12))
 		letra12.addEventListener('click', function () {
 			clicado(letra12, 12);
 		});
 
-	if (letra13 != null && escondePosicao.includes(13))
+	if (entity[13] != null && escondePosicao.includes(13))
 		letra13.addEventListener('click', function () {
 			clicado(letra13, 13);
 		});
 
-	if (letra14 != null && escondePosicao.includes(14))
+	if (entity[14] != null && escondePosicao.includes(14))
 		letra14.addEventListener('click', function () {
 			clicado(letra14, 14);
 		});
 
-	if (letra15 != null && escondePosicao.includes(15))
+	if (entity[15] != null && escondePosicao.includes(15))
 		letra15.addEventListener('click', function () {
 			clicado(letra15, 15);
 		});
 
-	if (letra16 != null && escondePosicao.includes(16))
+	if (entity[16] != null && escondePosicao.includes(16))
 		letra16.addEventListener('click', function () {
 			clicado(letra16, 16);
 		});
 
-	if (letra17 != null && escondePosicao.includes(17))
+	if (entity[17] != null && escondePosicao.includes(17))
 		letra17.addEventListener('click', function () {
 			clicado(letra17, 17);
 		});
 
-	if (letra18 != null && escondePosicao.includes(18))
+	if (entity[18] != null && escondePosicao.includes(18))
 		letra18.addEventListener('click', function () {
 			clicado(letra18, 18);
 		});
 
-	if (letra19 != null && escondePosicao.includes(19))
+	if (entity[19] != null && escondePosicao.includes(19))
 		letra19.addEventListener('click', function () {
 			clicado(letra19, 19);
 		});
 
-	if (letra20 != null && escondePosicao.includes(20))
+	if (entity[20] != null && escondePosicao.includes(20))
 		letra20.addEventListener('click', function () {
 			clicado(letra20, 20);
 		});
 
-	if (letra21 != null && escondePosicao.includes(21))
+	if (entity[21] != null && escondePosicao.includes(21))
 		letra21.addEventListener('click', function () {
 			clicado(letra21, 21);
 		});
 
-	if (letra22 != null && escondePosicao.includes(22))
+	if (entity[22] != null && escondePosicao.includes(22))
 		letra22.addEventListener('click', function () {
 			clicado(letra22, 22);
 		});
 
-	if (letra23 != null && escondePosicao.includes(23))
+	if (entity[23] != null && escondePosicao.includes(23))
 		letra23.addEventListener('click', function () {
 			clicado(letra23, 23);
 		});
 
-	if (letra24 != null && escondePosicao.includes(24))
+	if (entity[24] != null && escondePosicao.includes(24))
 		letra24.addEventListener('click', function () {
 			clicado(letra24, 24);
 		});
 
-	if (letra25 != null && escondePosicao.includes(25))
+	if (entity[25] != null && escondePosicao.includes(25))
 		letra25.addEventListener('click', function () {
 			clicado(letra25, 25);
 		});
 
-	if (letra26 != null && escondePosicao.includes(26))
+	if (entity[26] != null && escondePosicao.includes(26))
 		letra26.addEventListener('click', function () {
 			clicado(letra26, 26);
 		});
 
-	if (letra27 != null && escondePosicao.includes(27))
+	if (entity[27] != null && escondePosicao.includes(27))
 		letra27.addEventListener('click', function () {
 			clicado(letra27, 27);
 		});
 
-	if (letra28 != null && escondePosicao.includes(28))
+	if (entity[28] != null && escondePosicao.includes(28))
 		letra28.addEventListener('click', function () {
 			clicado(letra28, 28);
 		});
 
-	if (letra29 != null && escondePosicao.includes(29))
+	if (entity[29] != null && escondePosicao.includes(29))
 		letra29.addEventListener('click', function () {
 			clicado(letra29, 29);
 		});
 
-	if (letra30 != null && escondePosicao.includes(30))
+	if (entity[30] != null && escondePosicao.includes(30))
 		letra30.addEventListener('click', function () {
 			clicado(letra30, 30);
 		});
 
-	if (letra31 != null && escondePosicao.includes(31))
+	if (entity[31] != null && escondePosicao.includes(31))
 		letra31.addEventListener('click', function () {
 			clicado(letra31, 31);
 		});
@@ -404,7 +424,6 @@ function clicado(letraSelecionada, n) {
 
 
 
-
 		if (g.value === id.value || g.value === id.value.toUpperCase()) {
 			//letraSelecionada.setAttribute('text', 'value', id);
 			letraSelecionada.setAttribute('material', 'opacity', '0');
@@ -527,7 +546,6 @@ function clicado(letraSelecionada, n) {
 	P.addEventListener('click', function () {
 		g = P.getAttribute('text', 'value');
 		id = letraSelecionada.getAttribute('text', 'value');
-
 
 
 
@@ -705,7 +723,7 @@ function clicado(letraSelecionada, n) {
 	});
 
 	Z.addEventListener('click', function () {
-		g = Y.getAttribute('text', 'value');
+		g = Z.getAttribute('text', 'value');
 		id = letraSelecionada.getAttribute('text', 'value');
 
 
@@ -727,34 +745,23 @@ function clicado(letraSelecionada, n) {
 };
 
 function inserirImagem() {
+	sceneEl = document.querySelector('#imgs');
 	s = document.querySelector('a-scene');
-	var entityFotografia = s.querySelector('#fotografia');
+	
+	entityFotografia = document.createElement('a-image');
+	entityFotografia.setAttribute('src', img[0]);
+	entityFotografia.setAttribute('position', '0 2.3 -1.5');
 
-	// read image
-	var spaceRef = storageRef.child('templates/' + imgTitle);
-	var path = spaceRef.fullPath;
-
-	console.log(path);
-	console.log(spaceRef.name);
-	console.log(spaceRef.bucket);
-
-	storageRef.child('templates/' + imgTitle).getDownloadURL().then(function (url) {
-		var test = url;
-		entityFotografia.setAttribute('src', test);
-	}).catch(function (error) {
-
-	});
+	sceneEl.appendChild(entityFotografia);
 
 
-
-	var entityBloco = s.querySelector('#nome');
-	entityBloco.setAttribute('material', 'opacity: 0');
 
 };
 
 function inserirNome() {
 	arrayLetters = input.split('');
-
+	sceneEl = document.querySelector('a-scene');
+	x=-0.9, y=1.5, z=-1.5;
 	for (var i = 0; i < arrayLetters.length; i++) {
 		entity.push(document.createElement('a-entity'));
 		entity[i].setAttribute('id', "letra" + i);
@@ -767,7 +774,7 @@ function inserirNome() {
 			color: 'white',
 			opacity: 0
 		});
-		entity[i].setAttribute('position', x + ' ' + y + ' 0');
+		entity[i].setAttribute('position', ' ' + x + ' ' + y + ' '+ z+' ' );
 		entity[i].setAttribute('text', {
 			value: arrayLetters[i],
 			color: 'black',
@@ -788,7 +795,7 @@ function inserirNome() {
 		//console.log(entity[i]);
 
 		x += 0.25;
-	}
+	}console.log(entity);
 };
 
 function esconderLetras() {
@@ -839,7 +846,7 @@ function criarAlfabeto() {
 			height: 0.2
 		});
 		entity[i].setAttribute('material', 'color: white');
-		entity[i].setAttribute('position', x + ' ' + y + ' 0');
+		entity[i].setAttribute('position', x + ' ' + y + ' ' +z);
 		entity[i].setAttribute('text', {
 			value: letra(c),
 			color: 'black',
@@ -898,7 +905,7 @@ function checkIfDone() {
 	if (escondePosicao.length == 0) {
 
 		s = document.querySelector('a-scene');
-		var entityFotografia = s.querySelector('#fotografia');
+		var entityFotografia = s.querySelector('a-image');
 		entityFotografia.setAttribute('visible', 'false');
 
 		var v = sceneEl.querySelectorAll('a-entity');
@@ -920,17 +927,16 @@ function checkIfDone() {
 		});
 		a.setAttribute('position', '0  2 -1.5');
 		a.setAttribute('text', {
-			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO!\n\nClique aqui para sair.",
+			value: "MUITO BEM! CONCLUIU A TAREFA COM SUCESSO! Aguarde.",
 			color: 'white'
 		});
 
 		//
 		sceneEl.appendChild(a);
 
-		a.addEventListener('click', function () {
-			console.log("teste");
+		setTimeout(function() {
 			window.location.replace("../../../patients_side/dashboardVR.html");
-		});
+          }, 1500);
 	}
 };
 

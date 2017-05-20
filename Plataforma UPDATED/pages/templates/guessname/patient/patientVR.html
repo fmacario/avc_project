@@ -2,8 +2,9 @@
 <html>
 
 <head>
-  <title>VR: Guess Name</title>
-  <meta name="description" content="VR: Guess Name">
+  <title>VR: Completar Nome</title>
+  <meta name="description" content="VR: Completar Nome">
+  <script src="../../../../plugins/jQuery/jquery-2.2.3.min.js"></script>
   <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
   <script src="../../../../logout1.js"></script>
@@ -14,12 +15,14 @@
 
   <a-scene>
 
-    <a-image id="fotografia" position="0 2.75 -1.5"></a-image>
+  	<a-entity id="imgs"> </a-entity>
+
+    <!--<a-image id="fotografia" position="0 2.75 -1.5"></a-image>
 
     <a-entity id="nome" geometry="primitive: plane; width: 2; height: 1" material="color: blue" position="0 1.5 -1.5">
     </a-entity>
 
-
+-->
 
 
     <a-assets>

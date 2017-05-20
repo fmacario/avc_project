@@ -15,7 +15,7 @@ firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     var username = (user.email).split('@')[0];
     var refTemplates = database.ref('patients/' + username);
-    console.log
+    
     refTemplates.once("value", function (snapshot) {
       for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
         tpatients.replaceWith(table);
