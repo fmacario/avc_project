@@ -113,7 +113,7 @@
             <!-- Main content -->
             <section id="masterSection" class="content">
                 <section class="content-header">
-                    <h1> Escolha múltipla </h1>
+                    <h1> Reconhecimento Visual </h1>
                 </section>
 
                 <!-- Main content -->
@@ -146,7 +146,7 @@
                                 <div class="container text-center">
                                     <span id="unsupported" class="hidden">Voz não suportada. Use Google Chrome.</span>
                                     <button style="width: 300px" id="rect">Responder por voz</button>
-                                    
+
                                 </div>
 
                                 <div id="divBorder" style="border:dotted">
@@ -161,7 +161,7 @@
                                         window.webkitSpeechRecognition ||
                                         null;
 
-                                    //caso não suporte esta API DE VOZ                              
+                                    //caso não suporte esta API DE VOZ
                                     if (window.SpeechRecognition === null) {
                                         document.getElementById('unsupported').classList.remove('hidden');
                                         document.getElementById('rect').style.visibility = 'hidden';
@@ -234,7 +234,7 @@
                                                             break;
                                                         }
                                                         else if (teste) {
-                                                            inputElement.id = "resposta" + x;   // 
+                                                            inputElement.id = "resposta" + x;   //
                                                             voz(inputElement);
                                                             break;
                                                         }
