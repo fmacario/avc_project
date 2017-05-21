@@ -2,35 +2,25 @@
 <html>
 
 <head>
-  <title>VR: Escolha múltipla</title>
-  <meta name="description" content="VR: Escolha múltipla">
+  <title>VR: Reconhecimento Visual</title>
+  <meta name="description" content="VR: Reconhecimento Visual">
+  <script src="../../../../plugins/jQuery/jquery-2.2.3.min.js"></script>
   <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
-  <script src="jquery-3.2.0.min.js"></script>
   <script src="../../../../logout1.js"></script>
-  <script src="vr.js"></script>
+  <script src="scriptVR.js"></script>
 </head>
 
 <body>
 
   <a-scene>
-    <a-entity id="pergunta">
+   
+    
+    <a-entity id="imgs">
     </a-entity>
 
-
-    
-
-
-    <!--
-    <a-entity id="pergunta2" position="0 1 -1.5" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 256; height: 256" square="text: Hello"></a-entity>
-
-    <a-entity position="0 2 -1.5" text="value: resposta" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 4; height: auto" ></a-entity>
-
-    <a-entity position="0 1.5 -1.5" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 256; height: 256" ></a-entity>
-    -->
-
     <a-assets>
-      <img id="city" src="sky2.jpg">
+      <img id="city" src="sky.jpg">
     </a-assets>
 
     <a-sky src="#city"></a-sky>
@@ -44,16 +34,6 @@
 
     <!-- fuse: true; -->
     <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
-
-
-
-
-    <script type="text/javascript">
-      start();
-    </script>
-
-
-
 
   </a-scene>
 </body>

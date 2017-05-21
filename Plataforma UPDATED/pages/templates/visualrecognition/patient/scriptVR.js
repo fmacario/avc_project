@@ -7,47 +7,39 @@ var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('%20', ' ');
 var templatesRef = database.ref("templates/" + myParamSpace); // database templates
 
-var arrayTotal = [];
-var categorias = [];
 var images = [];
-var counter = 0;
 var x = -1;
 var y = 2.5;
 var z = -1.5;
-var entityImg = [], entityCat = [];
+var entityImg = [];
 var sceneEl;
 var antigaImgSelecionada = null;
 var imgSelecionada = null;
 var selected = false;
 var historico = [];
-var str = "https://firebasestorage.googleapis.com/v0/b/avcproject-fae11.appspot.com/o/templates%2Fcategorizacao%2F";
+var str = "https://firebasestorage.googleapis.com/v0/b/avcproject-fae11.appspot.com/o/templates%2Fvisualrecognition%2F%2F";
 var strSize=0;
+var answerNumber, question, rightAnswers;
+var entityPergunta;
 
 ////////////////////////// AFRAME.utils.device.isMobile ()
 
 templatesRef.once("value", function (snapshot) {
 
-        categorias = $.map(snapshot.val() ,function(value, index){
-          return [index];
-        });
-        categorias.pop(); //tira o tipo
-//        console.log(categorias + " asdsad"); //carros, pizza
+        rightAnswers = snapshot.val().respostasCertas,
+        question = snapshot.val().pergunta,
+        answers = snapshot.val().respostas,
+        answerNumber = snapshot.val().nrEscolhas
 
-        arrayTotal = $.map(snapshot.val() ,function(value, index){
-          return [value];
-        });
-        arrayTotal.pop(); //tira o tipo
-        console.log(arrayTotal);
-
-        for (var i = 0; i < arrayTotal.length; i++) {
-          for (var j = 0; j < arrayTotal[i].length; j++) {
-            storageRef.child('templates/categorizacao/' + arrayTotal[i][j]).getDownloadURL().then(function (url) {
-              images.push(url);
+        for (var i = 0; i < answerNumber; i++) {
+            // read images
+            storageRef.child('templates/reconhecimentovisual/' + answers[i]).getDownloadURL().then(function (url) {
+                images.push(url);
             });
-          }
         }
        
         setTimeout(function() {
+        	inserirPergunta();
               inserirImagens();
               start();
           }, 1500);
@@ -67,13 +59,12 @@ function customEnterVR() {
 
 
 function start() {
-	document.addEventListener('mouseup', customEnterVR);	// 
+	/*document.addEventListener('mouseup', customEnterVR);	// 
 	document.addEventListener('mousedown', customEnterVR);	// 	
 	document.addEventListener('mouseleft', customEnterVR);	// 	
 	document.addEventListener('mouseright', customEnterVR);	// 
-	
+	*/
     strSize = str.length;
-    counter = images.length;
 
     if (entityImg[0] != null){
       entityImg[0].addEventListener('click', function () { 
@@ -185,44 +176,39 @@ function start() {
 
 };
 
+
+function inserirPergunta(){
+	sceneEl = document.querySelector('a-scene');
+	entityPergunta = document.createElement('a-entity');
+	entityPergunta.setAttribute('id', 'perg');
+	entityPergunta.setAttribute('geometry', {
+	  primitive: 'plane',
+	  width: 2.5,
+	  height: 0.2
+	  });
+	  entityPergunta.setAttribute('material', {
+	    color: 'black',
+	    opacity: '0.2'
+	  });
+	  entityPergunta.setAttribute('position', '0 2.5 -1.5');
+	  entityPergunta.setAttribute('text', {
+	    value: question,
+	    color: 'white',
+	    align: 'center',
+	    width: '2',
+	    align: 'center'
+	  });
+	  sceneEl.appendChild(entityPergunta);
+//	geometry="primitive: plane; width: 3.5; height: auto" material="color: blue" position="0 2.5 -1.5"
+	//console.log(entityPergunta);
+};
+
 function inserirImagens(){
   // inserir categorias
   sceneEl = document.querySelector('#imgs');
-  var s = document.querySelector('a-scene');
   
-  for (var i = 0; i < categorias.length; i++) {
-    entityCat.push(document.createElement('a-entity'));
-    entityCat[i].setAttribute('id', "categoria"+i);
-    entityCat[i].setAttribute('geometry', {
-      primitive: 'plane',
-      width: 0.85,
-      height: 0.85
-    });
-    entityCat[i].setAttribute('material', {
-      color: 'white',
-      opacity: 0.5
-    });
-    entityCat[i].setAttribute('position', x + ' ' + y + ' ' + z);
-    entityCat[i].setAttribute('text', {
-      value: categorias[i],
-      color: 'black',
-      width: 4,
-      align: 'center'
-    });
-
-    sceneEl.appendChild(entityCat[i]);
-    //console.log(entity[i]);
-    
-    x+= 1;
-    if(i == 2 || i == 5){
-      y-=0.2;
-      x=-1;
-    }
-    
-  }
-
-  y-=1;
-  x=-1;
+  y-=0.75; 
+  
   for (var i = 0; i < images.length; i++) {
     entityImg.push(document.createElement('a-image'));
     entityImg[i].setAttribute('id', "img"+i);
@@ -263,99 +249,27 @@ function inserirImagens(){
 
 function clicado(img){
   imgSelecionada = img;
-  if (selected){
-    antigaImgSelecionada.setAttribute('material', 'opacity', 1);
-  }
 
-  imgSelecionada.setAttribute('material', {
-      color: 'white',
-      opacity: 0.25
-    });
-
-  antigaImgSelecionada = imgSelecionada;
-  selected = true;
-
-  //////////////////////// eventListener /////////////////////////////////////////////
-
-  if (entityCat[0] != null)
-  entityCat[0].addEventListener('click', function () { 
-    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
-    if(imgSelecionada!=null && contains(arrayTotal[0], nome) && !containsObj(historico, imgSelecionada)){
-      imgSelecionada.setAttribute('material', 'visible', 'false');
-      //console.log("FDS3");
-      selected = false;
-      historico.push(imgSelecionada);
-      imgSelecionada = null;
-      checkIfDone();
-      //entityCat[0].getAttribute();
-      //console.log(entityCat[0]);
-    }
-  });
   
-  if (entityCat[1] != null)
-  entityCat[1].addEventListener('click', function () { 
     var nome = getNomeImg(imgSelecionada.getAttribute('src'));
-    if(imgSelecionada!=null && contains(arrayTotal[1], nome) && !containsObj(historico, imgSelecionada)){
-      imgSelecionada.setAttribute('material', 'visible', 'false');
-      selected = false;
+    
+    if(imgSelecionada!=null && contains(rightAnswers, nome) && !containsObj(historico, imgSelecionada)){
+      imgSelecionada.setAttribute('material', 'color', 'green');
+      imgSelecionada.setAttribute('material', 'opacity', 0.5);
       historico.push(imgSelecionada);
-      imgSelecionada = null;
+      rightAnswers.remove(nome);
       checkIfDone();
     }
-  });
-  
-  if (entityCat[2] != null)
-  entityCat[2].addEventListener('click', function () { 
-    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
-    if(imgSelecionada!=null && contains(arrayTotal[2], nome) && !containsObj(historico, imgSelecionada)){
-      imgSelecionada.setAttribute('material', 'visible', 'false');
-      selected = false;
-      historico.push(imgSelecionada);
-      imgSelecionada = null;
-      checkIfDone();
+    else if(imgSelecionada!=null && !contains(rightAnswers, nome)){
+    	imgSelecionada.setAttribute('material', 'color', 'red');
+    	setTimeout(function() {
+        	removerCorVermelha(imgSelecionada);
+          }, 1500);
     }
-  });
-  
-  if (entityCat[3] != null)
-  entityCat[3].addEventListener('click', function () { 
-    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
-    if(imgSelecionada!=null && contains(arrayTotal[3], nome) && !containsObj(historico, imgSelecionada)){
-      imgSelecionada.setAttribute('material', 'visible', 'false');
-      selected = false;
-      historico.push(imgSelecionada);
-      imgSelecionada = null;
-      checkIfDone();
-    }
-  });
+};
 
-  if (entityCat[4] != null)
-  entityCat[4].addEventListener('click', function () { 
-    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
-    if(imgSelecionada!=null && contains(arrayTotal[4], nome) && !containsObj(historico, imgSelecionada)){
-      imgSelecionada.setAttribute('material', 'visible', 'false');
-      selected = false;
-      historico.push(imgSelecionada);
-      imgSelecionada = null;
-      checkIfDone();
-    }
-  });
-
-if (entityCat[5] != null)
-  entityCat[5].addEventListener('click', function () { 
-    var nome = getNomeImg(imgSelecionada.getAttribute('src'));
-    if(imgSelecionada!=null && contains(arrayTotal[5], nome) && !containsObj(historico, imgSelecionada)){
-      imgSelecionada.setAttribute('material', 'visible', 'false');
-      selected = false;
-      historico.push(imgSelecionada);
-      imgSelecionada = null;
-      checkIfDone();
-    }
-  });
-
-
-
-  //////////////////////// eventListener /////////////////////////////////////////////
-
+function removerCorVermelha(ent) {
+	ent.setAttribute('material', 'color', '#FFF');
 };
 
 function getNomeImg(sr){
@@ -372,16 +286,18 @@ function getNomeImg(sr){
 
 
 function checkIfDone(){
-  counter--;
   
-  if (counter == 0) {
-        var v = sceneEl.querySelectorAll('a-entity');
+  if (rightAnswers.length == 0) {
+    var v = sceneEl.querySelectorAll('a-image');
     //console.log(v);
+
+    perg.setAttribute('opacity', 1);
 
     for (var i = 0; i < v.length; i++) {
       v[i].parentNode.removeChild(v[i]);
     }
 
+        
     var a = document.createElement('a-entity');
     a.setAttribute('id', "fim");
     a.setAttribute('geometry', {
@@ -400,10 +316,10 @@ function checkIfDone(){
 
     //
     sceneEl.appendChild(a);
-
+/*
     setTimeout(function() {
       window.location.replace("../../../patients_side/dashboardVR.html");
-          }, 1500);
+          }, 1500);*/
   }
 };
 
