@@ -253,7 +253,7 @@ function inserirPergunta(){
 	  });
 
 //	geometry="primitive: plane; width: 3.5; height: auto" material="color: blue" position="0 2.5 -1.5"
-	console.log(entityPergunta);
+	//console.log(entityPergunta);
 };
 
 function generateBtn(){
