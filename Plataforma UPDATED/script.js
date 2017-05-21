@@ -13,6 +13,10 @@ firebase.initializeApp(config);
 var auth = firebase.auth();
 var database = firebase.database(); // database service
 
+$(document).ready(function () {
+    $("#mensagemErro").hide();
+});
+
 //Handle Account Status
 firebase.auth().onAuthStateChanged(user => {
     if (user) {
@@ -40,34 +44,33 @@ function login() {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorCode);
+
         if (errorCode === 'auth/invalid-email') {
             var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                 '<h5><i class="icon fa fa-warning"></i> Utilizador inválido!</h5>' +
                 '</div>';
-
-            $("#mensagemErro").replaceWith(html_block);
         }
         if (errorCode === 'auth/user-not-found') {
             var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                 '<h5><i class="icon fa fa-warning"></i> Utilizador não encontrado!</h5>' +
                 '</div>';
-
-            $("#mensagemErro").replaceWith(html_block);
         }
         if (errorCode === 'auth/wrong-password') {
             var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                 '<h5><i class="icon fa fa-warning"></i> Palavra-passe incorrecta!</h5>' +
                 '</div>';
-
-            $("#mensagemErro").replaceWith(html_block);
         }
+
+        $("#mensagemErro").replaceWith(html_block);
+        $("#mensagemErro").hide();
+        $("#mensagemErro").show('slow');
     });
 }
 
+// Enter key to submit
 $('.input').keypress(function (e) {
     if (e.which == 13) {
         login();

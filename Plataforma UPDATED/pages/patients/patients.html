@@ -69,15 +69,14 @@
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="hidden-xs">Alexander Pierce</span>
+                                <span class="username" class="hidden-xs"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
                                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                    <p>
-                                        Alexander Pierce - Web Developer
+                                    <p class='username'>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -218,18 +217,18 @@
                                     <input type="text" class="form-control" id="ptypeinjury" placeholder="Tipo de lesão">
                                 </div>
                                 -->
-                                <button type="button" class="btn btn-block btn-primary btn-lg" onclick="writeUserData();" style="width: 55%; margin: auto;">Adicionar Paciente
+                                    <button type="button" class="btn btn-block btn-primary btn-lg" onclick="writeUserData();" style="width: 55%; margin: auto;">Adicionar Paciente
                                 </button>
-                                <div id="mensagemErro"></div>
+                                    <div id="mensagemErro"></div>
                             </form>
+                            </div>
+                            <!-- /.box-body -->
+                            <div class="box-footer">
+                                <!-- Adicionar qualquer coisa ao footer -->
+                            </div>
+                            <!-- box-footer -->
                         </div>
-                        <!-- /.box-body -->
-                        <div class="box-footer">
-                            <!-- Adicionar qualquer coisa ao footer -->
-                        </div>
-                        <!-- box-footer -->
-                    </div>
-                    <!-- /.box -->
+                        <!-- /.box -->
                     </div>
 
                     <!-- Show patients box -->
@@ -317,6 +316,7 @@
     -->
     <!-- script local para esta pagina -->
     <script src="../../logout.js"></script>
+    <script src="../../username.js"></script>
     <script src="script.js"></script>
 </body>
 

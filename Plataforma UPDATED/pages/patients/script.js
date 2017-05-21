@@ -133,7 +133,7 @@ function showPatient(obj) {
             '<ul class="nav nav-stacked">' +
             '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a></li>' +
             '<div id="tabletemp"></div>' +
-            '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">0</span></a></li>' +
+            '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">' + snapshot.val().ntemplatesdone + '</span></a></li>' +
             '<div id="tabletempdone"></div>' +
             '<li id="graphs"><a>Estatisticas<span class="pull-right badge bg-yellow"><i class="fa fa-fw fa-pie-chart"></i></span></a onclick="goToStatistics()"></li>' +
             '</ul>' +
@@ -178,28 +178,29 @@ function showPatient(obj) {
                 "<tr>" +
                 "<th>Nome</th>" +
                 "<th>Tipo</th>" +
-                "<th>Resultados e estatisticas</th>" +
                 "</tr>" +
                 "</tbody>" +
                 "</table>";
-
-            if (snapshot.val().ntemplates != 0) {
+            
+            var patientNameRef2 = database.ref('patients/' + selectedPatient + '/ptemplatesdone');
+            
+            patientNameRef2.on('value', function (snapshot) {
                 $("#tabletempdone").replaceWith(html_block);
-                for (var i = 0; i < snapshot.val().ptemplatesdone.length; i++) {
-                    $("#tabletemp")
-                        .append($('<tr id="' + snapshot.key + '">')
+                console.log(snapshot.val());
+                snapshot.forEach(function (childSnapshot) {
+                    console.log(childSnapshot.val());
+                    $("#tabletempdone")
+                        .append($('<tr id="' + childSnapshot.key + '">')
                             .append($('<td>')
-                                .text(snapshot.val().ptemplatesdone[i])
-                            )
-                            .append($('<td>')
-                                .text('A SER IMPLEMENTADO')
+                                .text(childSnapshot.key)
                             )
                             .append($('<td>')
                                 .text('A SER IMPLEMENTADO')
                             )
                         )
-                }
-            }
+                });
+            });
+
         })
 
         $("#graphs").click(function () {
@@ -225,7 +226,9 @@ function showPatient(obj) {
                 $(".select2").select2();
             });
 
-            $(".loader").hide("slow");
+            $(".loader").hide("slow"); snapshot.forEach(function (childSnapshot) {
+                conc = conc + '<option>' + childSnapshot.getKey() + '</option>';
+            });
             $("#showpatient").show("slow");
         });
     });

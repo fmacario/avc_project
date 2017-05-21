@@ -1,16 +1,26 @@
-var msgNr = 0; // variavel de contar messages
-var imgTitle;	//titulo da imagem sem path/extencao
-var input;		//input dado para adivinhar
-var nrLetras;	//nr de letras para esconder
-var pathToImg; //path to image to upload o patient side
-var messages = []; //array de messages dadas
-var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,/~`-=";
-
-
-
 // References
 var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
+
+var msgNr = 0;      // variavel de contar messages
+var imgTitle;	    //titulo da imagem sem path/extencao
+var input;		    //input dado para adivinhar
+var nrLetras;	    //nr de letras para esconder
+var pathToImg;      //path to image to upload o patient side
+var messages = [];  //array de messages dadas
+var specialChars = "<>@!#$%^&*()_+[]{}?:;|'\"\\,/~`-=";
+
+var myParam = location.search.split('param=')[1];
+if (myParam != undefined) {
+    myParamSpace = myParam.replace('_', ' ');
+    var templateRef = database.ref("templates/" + myParamSpace); // database templates
+
+    templateRef.once("value", function (snapshot) {
+        $("#nometemplate").val(snapshot.key);
+    });
+
+}
+
 
 $(function () {
     //Function to upload image
@@ -19,12 +29,12 @@ $(function () {
 
     $(":file").change(function () {
 
-      for (var x = 0; x < this.files.length; x++) {
-        if (check(this.files[x].name, specialChars) == true) {
-          alert("O nome da imagem não pode ter caracteres especiais, por favor renomeie o ficheiro");
-          throw new Error("Caracteres invalidos no titulo da imagem");
+        for (var x = 0; x < this.files.length; x++) {
+            if (check(this.files[x].name, specialChars) == true) {
+                alert("O nome da imagem não pode ter caracteres especiais, por favor renomeie o ficheiro");
+                throw new Error("Caracteres invalidos no titulo da imagem");
+            }
         }
-      }
 
         if (this.files && this.files[0]) {
             var reader = new FileReader();
@@ -100,11 +110,11 @@ $(function () {
             throw new Error("Assertion failed");
         }
         else if (check(input, specialChars)) {
-          alert("Palavra a descobrir não pode conter números nem caracteres especiais");
-          throw new Error("Assertion failed");
+            alert("Palavra a descobrir não pode conter números nem caracteres especiais");
+            throw new Error("Assertion failed");
         }
         else {
-            var path='templates/'+nomeimagem;
+            var path = 'templates/' + nomeimagem;
 
             var imageRef = storageRef.child(nomeimagem);
             var imagesImageRef = storageRef.child(path);
@@ -114,7 +124,7 @@ $(function () {
             imageRef.fullPath === imagesImageRef.fullPath    // false
 
             var file = document.getElementById('result').files[0];
-            imagesImageRef.put(file).then(function(snapshot) {
+            imagesImageRef.put(file).then(function (snapshot) {
                 console.log('Uploaded a blob or file!');
             });
 
@@ -122,19 +132,19 @@ $(function () {
             var nometemplate = $("#nometemplate").val();
 
             if (nometemplate == '') {
-              alert("Insira um nome para a tarefa!");
-              throw new Error("Sem nome para template");
+                alert("Insira um nome para a tarefa!");
+                throw new Error("Sem nome para template");
             }
             else {
-              database.ref('templates/' + nometemplate).set({
-                  input: input,
-                  nrLetras: nrLetras,
-                  mensagens: messages,
-                  tipo: 'guessname',
-                  imgname: nomeimagem
-              });
-              alert("Template criado com sucesso");
-              location.reload();
+                database.ref('templates/' + nometemplate).set({
+                    input: input,
+                    nrLetras: nrLetras,
+                    mensagens: messages,
+                    tipo: 'guessname',
+                    imgname: nomeimagem
+                });
+                alert("Template criado com sucesso");
+                location.reload();
             }
 
         }
@@ -229,15 +239,15 @@ function $id(id) {
 }
 
 
-function check(string, chars){
-  for(i = 0; i < chars.length;i++){
-        if(string.indexOf(chars[i]) > -1){
+function check(string, chars) {
+    for (i = 0; i < chars.length; i++) {
+        if (string.indexOf(chars[i]) > -1) {
             return true
         }
     }
     return false;
 }
 
-function hasNumbers(str){
-  return /\d/.test(str);
+function hasNumbers(str) {
+    return /\d/.test(str);
 }
