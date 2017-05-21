@@ -93,6 +93,7 @@ function writeUserData() {
         pname: pname,
         ntemplates: 0,
         pprocess: pprocess,
+        ntemplatesdone: 0
     });
 
     setTimeout(function () {
@@ -307,13 +308,15 @@ function assignTask() {
         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
             finalTemplatesDone = snapshot.child("ptemplatesdone").val();
             var n_process = snapshot.child("pprocess").val();
+            var n_templatesdone = snapshot.child("ntemplatesdone").val();
+            console.log(n_templatesdone);
 
             database.ref('patients/' + selectedPatient).set({
                 pname: selectedPatient,
                 ptemplates: finalTemplates,
                 ntemplates: finalTemplates.length,
                 pprocess: n_process,
-                ptemplatesdone: finalTemplatesDone
+                ntemplatesdone: n_templatesdone
             });
         });
     });
