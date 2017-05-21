@@ -11,7 +11,9 @@ var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/")
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts, );
+        if(childSnapshot.val().tipotemplate == "guessname"){
+            updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts);
+        }
     });
 
     createGraphTempo();

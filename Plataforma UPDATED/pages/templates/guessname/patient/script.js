@@ -13,11 +13,33 @@ var letrasEscondidas = [];
 var arrayLetters = [];
 var imgTitle;
 
+//statistics variables
+var timer = setInterval(clock, 10);
+var msec = 00;
+var sec = 00;
+var min = 00;
+var attemps = 0;
+var letrasEscondidasEstatitiscas = [];
+var username;
+
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        username = (user.email).split('@')[0];
+    } else {
+        // No user is signed in.
+    }
+});
+
+
+
+
 templatesRef.once("value", function (snapshot) {
     imgTitle = snapshot.val().imgname;
     input = snapshot.val().input;
     nrLetras = snapshot.val().nrLetras;
     mensagensDoDoutor = snapshot.val().mensagens;
+    templateType = snapshot.val().tipo
 
     if (doesntContainNum(input)) {
       $('#buttonsNumbers').hide();
@@ -62,6 +84,9 @@ templatesRef.once("value", function (snapshot) {
     /* atribui ás letras escondidas a chance de serem clicadas */
     for (var i = 0; i < escondePosicao.length; i++) {
         letrasEscondidas[i] = $("#letra" + escondePosicao[i]).html();
+        //array para letras escondidas estatisticas
+        letrasEscondidasEstatitiscas[i] = $("#letra" + escondePosicao[i]).html();
+        
         $("#letra" + escondePosicao[i]).attr('class', 'child col-sm-1 unselectable hided-div');
         $("#letra" + escondePosicao[i]).attr('onclick', 'getSelectedDiv(id)');
     }
@@ -165,8 +190,24 @@ function checkIfDone() {
         $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
         $("button").prop('disabled', true);
 
-        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+/*        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
             console.log(snapshot.val());
+        });*/
+
+        database.ref('patients/' + username).once("value", function (snapshot) {
+            var finalTemplates = snapshot.child("ptemplates").val();
+            var pprocess = snapshot.child("pprocess").val();
+            var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
+            finalTemplatesDone.push(myParamSpace);
+
+            database.ref('patients/' + username).once("value", function (snapshot) {
+                database.ref('patients/' + username + '/ptemplatesdone/' + myParamSpace).set({
+                    templatename: myParamSpace,
+                    tipotemplate : templateType,
+                    escondidas : letrasEscondidasEstatitiscas,
+                });
+            });
+
         });
     }
 }
@@ -208,3 +249,21 @@ function end() {
 function doesntContainNum(string){
   return !/\d/.test(string);
 }
+
+//Contador para as estatisticas
+function clock() {
+
+    //console.log(timer);
+    msec += 1;
+    if (msec == 100) {
+        sec += 1;
+        msec = 00;
+        if (sec == 60) {
+            sec = 00;
+            min += 1;
+
+        }
+    }
+    //console.log(min + ":" + sec + ":" + msec);
+}
+

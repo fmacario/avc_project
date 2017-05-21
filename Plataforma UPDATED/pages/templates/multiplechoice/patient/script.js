@@ -23,7 +23,8 @@ templatesRef.once("value", function (snapshot) {
     rightAnswers = snapshot.val().respostasCertas,
         question = snapshot.val().pergunta,
         answers = snapshot.val().respostas,
-        answerNumber = snapshot.val().nrEscolhas
+        answerNumber = snapshot.val().nrEscolhas,
+        templateType = snapshot.val().tipo
     start();
 });
 
@@ -159,7 +160,8 @@ function checkIfDone() {
                     respostas: answers,
                     nrEscolhas: answerNumber,
                     tempo: n,
-                    attempts: tentativasResposta
+                    attempts: tentativasResposta,
+                    tipotemplate: templateType,
                 });
             });
 
