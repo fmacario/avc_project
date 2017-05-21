@@ -34,7 +34,42 @@ function removeTemplate(obj) {
     templateRef = database.ref('templates/' + selectedTemplate);
     templateRef.remove();
 
-    window.location.href = window.location.href;
+    patientsRef = database.ref('patients/');
+
+    patientsRef.once("value", function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+            var ptemplatesPatient = database.ref('patients/' + childSnapshot.key);
+
+            ptemplatesPatient.orderByKey().equalTo("ptemplates").on("child_added", function (snapshot2) {
+                var array = snapshot2.val();
+                var index = array.indexOf(selectedTemplate);
+                array.splice(index, 1);
+
+                if (index > -1) {
+                    if (childSnapshot.val().ptemplatesdone) {
+                        database.ref('patients/' + childSnapshot.key).set({
+                            pname: childSnapshot.val().pname,
+                            pprocess: childSnapshot.val().pprocess,
+                            ptemplates: array,
+                            ntemplates: array.length,
+                            ptemplatesdone: childSnapshot.val().ptemplatesDone
+                        });
+                    } else {
+                        database.ref('patients/' + childSnapshot.key).set({
+                            pname: childSnapshot.val().pname,
+                            pprocess: childSnapshot.val().pprocess,
+                            ptemplates: array,
+                            ntemplates: array.length,
+                        });
+                    }
+                } else {
+                    console.log("nao existe");
+                }
+            });
+        });
+    });
+
+    //window.location.href = window.location.href;
 }
 
 function previewTemplate(obj) {

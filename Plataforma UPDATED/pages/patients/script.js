@@ -306,12 +306,13 @@ function assignTask() {
 
         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
             finalTemplatesDone = snapshot.child("ptemplatesdone").val();
+            var n_process = snapshot.child("pprocess").val();
 
             database.ref('patients/' + selectedPatient).set({
                 pname: selectedPatient,
                 ptemplates: finalTemplates,
                 ntemplates: finalTemplates.length,
-                pprocess: pprocess,
+                pprocess: n_process,
                 ptemplatesdone: finalTemplatesDone
             });
         });
