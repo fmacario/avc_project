@@ -92,8 +92,8 @@ function writeUserData() {
     database.ref('patients/' + pusername).set({
         pname: pname,
         ntemplates: 0,
-        pprocess: pprocess,
-        ntemplatesdone: 0
+        ntemplatesdone: 0,
+        pprocess: pprocess
     });
 
     setTimeout(function () {
@@ -142,6 +142,9 @@ function showPatient(obj) {
             '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
             '<div id="templates" style="width: 25%; margin: auto;"></div>' +
             '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
+            '<div id="templates2" style="width: 25%; margin: auto;"></div>' +
+            '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="deassignTask();">Desatribuir tarefa</button>' +
+
             '</div>' +
             '</div>';
 
@@ -182,9 +185,9 @@ function showPatient(obj) {
                 "</tr>" +
                 "</tbody>" +
                 "</table>";
-            
+
             var patientNameRef2 = database.ref('patients/' + selectedPatient + '/ptemplatesdone');
-            
+
             patientNameRef2.on('value', function (snapshot) {
                 $("#tabletempdone").replaceWith(html_block);
                 console.log(snapshot.val());
@@ -227,10 +230,30 @@ function showPatient(obj) {
                 $(".select2").select2();
             });
 
-            $(".loader").hide("slow"); snapshot.forEach(function (childSnapshot) {
-                conc = conc + '<option>' + childSnapshot.getKey() + '</option>';
-            });
+            $(".loader").hide("slow");
             $("#showpatient").show("slow");
+        });
+
+        var conc2 = '<div id="templates2" style="width: 25%; margin: auto;">' +
+            '<div class="form-group">' +
+            '<select id="seltemplates2" class="form-control select2 " multiple="" data-placeholder="Select templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+
+        refTemplatesAss = database.ref('patients/' + selectedPatient + '/ptemplates');
+
+        refTemplatesAss.once("value", function (snapshot) {
+            if (snapshot.val()) {
+                for (var i = 0; i < snapshot.val().length; i++) {
+                    conc2 = conc2 + '<option>' + snapshot.val()[i] + '</option>';
+                }
+            }
+
+            conc2 = conc2 + '</select></div>';
+            $('#templates2').replaceWith(conc2);
+
+            $(function () {
+                //Initialize Select2 Elements
+                $(".select2").select2();
+            });
         });
     });
 }
@@ -239,9 +262,6 @@ function showPatient(obj) {
 function removePatient() {
     patientRef.remove();
 }
-
-//Eu sou panuco, sou louco por piça, por favor venham-me ao cu
-
 
 // Edits patients information
 function editPatient() {
@@ -282,10 +302,11 @@ function modifyPatient() {
 
             database.ref('patients/' + selectedPatient).set({
                 pname: n_pname,
-                pprocess: n_pprocess,
                 ptemplates: finalTemplates,
                 ntemplates: finalTemplates.length,
-                ptemplatesdone: finalTemplatesDone
+                ptemplatesdone: finalTemplatesDone,
+                ntemplatesdona: finalTemplatesDone.length,
+                pprocess: n_pprocess
             });
         });
     });
@@ -315,8 +336,39 @@ function assignTask() {
                 pname: selectedPatient,
                 ptemplates: finalTemplates,
                 ntemplates: finalTemplates.length,
-                pprocess: n_process,
-                ntemplatesdone: n_templatesdone
+                ntemplatesdone: n_templatesdone,
+                pprocess: n_process
+
+            });
+        });
+    });
+}
+
+// Deassgines templates to selected patient
+function deassignTask() {
+    var finalTemplates = [];
+    var finalTemplatesDone = [];
+
+    database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+        finalTemplates = jQuery.makeArray(snapshot.val());
+        var index;
+
+        for (var i = 0; i < $("#seltemplates2").val().length; i++) {
+            index = finalTemplates.indexOf($("#seltemplates2").val()[i]);
+            finalTemplates.splice(index, 1);
+        }
+
+        database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
+            finalTemplatesDone = snapshot.child("ptemplatesdone").val();
+            var n_process = snapshot.child("pprocess").val();
+            var n_templatesdone = snapshot.child("ntemplatesdone").val();
+
+            database.ref('patients/' + selectedPatient).set({
+                pname: selectedPatient,
+                ptemplates: finalTemplates,
+                ntemplates: finalTemplates.length,
+                ntemplatesdone: n_templatesdone,
+                pprocess: n_process
             });
         });
     });
