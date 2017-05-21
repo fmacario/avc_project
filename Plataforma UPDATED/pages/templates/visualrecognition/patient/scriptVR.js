@@ -59,11 +59,11 @@ function customEnterVR() {
 
 
 function start() {
-	/*document.addEventListener('mouseup', customEnterVR);	// 
+	document.addEventListener('mouseup', customEnterVR);	// 
 	document.addEventListener('mousedown', customEnterVR);	// 	
 	document.addEventListener('mouseleft', customEnterVR);	// 	
 	document.addEventListener('mouseright', customEnterVR);	// 
-	*/
+	
     strSize = str.length;
 
     if (entityImg[0] != null){
@@ -316,10 +316,10 @@ function checkIfDone(){
 
     //
     sceneEl.appendChild(a);
-/*
+
     setTimeout(function() {
       window.location.replace("../../../patients_side/dashboardVR.html");
-          }, 1500);*/
+          }, 1500);
   }
 };
 
