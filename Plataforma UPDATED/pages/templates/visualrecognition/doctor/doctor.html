@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="../../../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <!-- css file -->
-    <link rel="stylesheet" href="style.css">
+
 
 </head>
 
@@ -62,15 +62,16 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <span class="username" class="hidden-xs"></span>
+                                <img src="../../../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">Alexander Pierce</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                    <img src="../../../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                    <p class='username'>
+                                    <p>
+                                        Alexander Pierce - Web Developer
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -153,6 +154,7 @@
                         </ul>
                     </li>
 
+
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -163,11 +165,11 @@
             <!-- Main content -->
             <section id="masterSection" class="content">
                 <section class="content-header">
-                    <h1> Categorização automática </h1>
+                    <h1> Reconhecimento Visual </h1>
                     <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+                        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                         <li>Templates</li>
-                        <li class="active">Sequenciação</li>
+                        <li class="active">Reconhecimento Visual</li>
                     </ol>
                 </section>
 
@@ -183,40 +185,34 @@
                             <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body">
-                            <div id="main_div" class="container-fluid">
-                                <div id="ask_number_div" class=" text-center">
-                                    <label for="usr">Nome do template (este nome será seguido de um número de 0 a X, onde X representa o número de tarefas que quer criar):</label>
-                                    <input type="text" class="form-control" id="nometemplate">
-                                    <p>
-                                        Número de categorias a inserir:
-                                        <input id="number_of_categories" type="number">
+                        <div id="main_div" class="box-body">
+                            <div class="form-group col-xs-12">
+                                <label for="usr">Nome do template:</label>
+                                <input type="text" class="form-control" id="nometemplate">
+                                <label for="usr">Insira uma instrução:</label>
+                                <input type="text" class="form-control" id="pergunta">
 
-                                    </p>
-                                    <p>
-                                        Número de imagens a inserir por pasta em cada tarefa:
-                                        <input id="numImg" type="number">
-                                    </p>
-                                    <p>
-                                        Número de tarefas a criar:
-                                        <input id="numTarefa" type="number">
-                                    </p>
-                                    <button id="generate">Passo Seguinte</button>
-                                </div>
-
-                                <div id="insert_cat_div">
-
-                                </div>
-
+                                <br>
+                                <label for="sel1">Insira o número de imagens para respostas:</label>
+                                <select class="form-control" id="sel" onchange="getNumberAnswers()">
+                                    <option disabled selected value> -- Seleccione uma opção --</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                </select>
+                                <div id="div_respostas" style="padding: 10px"></div>
                             </div>
-
-
-                            <button id="save" class="text-center">Guardar Tarefas</button>
-                            <!-- /.box-body -->
-
+                            <button id="preview" class="text-center">Pré-visualizar</button>
                         </div>
-                        <!-- /.box -->
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <!-- Adicionar qualquer coisa ao footer -->
+                        </div>
+                        <!-- box-footer -->
                     </div>
+                    <!-- /.box -->
                 </section>
                 <!-- /.content -->
             </section>
@@ -247,8 +243,8 @@
 
     <!-- script local para esta pagina -->
     <script src="../../../../logout1.js"></script>
-    <script src="../../../../username.js"></script>
     <script src="script.js"></script>
+
 
 </body>
 

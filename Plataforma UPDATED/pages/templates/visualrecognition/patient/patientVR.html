@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>VR: Escolha múltipla</title>
+  <meta name="description" content="VR: Escolha múltipla">
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+  <script src="jquery-3.2.0.min.js"></script>
+  <script src="../../../../logout1.js"></script>
+  <script src="vr.js"></script>
+</head>
+
+<body>
+
+  <a-scene>
+    <a-entity id="pergunta">
+    </a-entity>
+
+
+    
+
+
+    <!--
+    <a-entity id="pergunta2" position="0 1 -1.5" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 256; height: 256" square="text: Hello"></a-entity>
+
+    <a-entity position="0 2 -1.5" text="value: resposta" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 4; height: auto" ></a-entity>
+
+    <a-entity position="0 1.5 -1.5" scale="2 0.25 0.25" geometry="primitive: box" draw="width: 256; height: 256" ></a-entity>
+    -->
+
+    <a-assets>
+      <img id="city" src="sky2.jpg">
+    </a-assets>
+
+    <a-sky src="#city"></a-sky>
+
+    <a-camera>
+      <a-cursor id="cursor" cursor="fuseTimeout: 2500" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
+        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="1"></a-animation>
+        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="2500"></a-animation>
+      </a-cursor>
+    </a-camera>
+
+    <!-- fuse: true; -->
+    <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
+
+
+
+
+    <script type="text/javascript">
+      start();
+    </script>
+
+
+
+
+  </a-scene>
+</body>
+
+</html>
