@@ -120,21 +120,6 @@ function generateBtn() {
     }
 }
 
-function clock() {
-
-    //console.log(timer);
-    msec += 1;
-    if (msec == 100) {
-        sec += 1;
-        msec = 00;
-        if (sec == 60) {
-            sec = 00;
-            min += 1;
-
-        }
-    }
-    //console.log(min + ":" + sec + ":" + msec);
-}
 
 function checkIfDone() {
     if (rightAnswers.length == 0) {

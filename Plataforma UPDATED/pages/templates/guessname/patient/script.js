@@ -14,13 +14,16 @@ var arrayLetters = [];
 var imgTitle;
 
 //statistics variables
+
 var timer = setInterval(clock, 10);
 var msec = 00;
 var sec = 00;
 var min = 00;
-var attemps = 0;
+var totalAttemps = 0;
 var letrasEscondidasEstatitiscas = [];
 var username;
+var attemps = [];
+var letrasClicadas=[];
 
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -30,8 +33,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         // No user is signed in.
     }
 });
-
-
 
 
 templatesRef.once("value", function (snapshot) {
@@ -146,6 +147,9 @@ $(":button").click(function () {
         }
     }
 
+    letrasClicadas.push(clickedButton.toUpperCase());
+    console.log(clickedButton.toUpperCase());
+
     if (certo) {
         $("#" + selectedDiv).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
         $("#" + selectedDiv).attr('onclick', '');
@@ -153,6 +157,11 @@ $(":button").click(function () {
         letrasEscondidas.remove(clickedButton);
         letrasEscondidas.remove(clickedButton.toUpperCase());
         $("#message").html("MUITO BEM!  <p>  Seleccione outro bloco preto para adivinhar a letra! </p>");
+        console.log(totalAttemps);
+        attemps.push(totalAttemps);
+        totalAttemps = 0;
+        console.log(attemps);
+
 
 
     }
@@ -164,6 +173,9 @@ $(":button").click(function () {
             $("#message").html("<p id=\"textoAjuda\">" + mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))] + "</p>");
         }
 
+        totalAttemps++;
+        console.log(totalAttemps);
+        console.log(attemps);
         //$("#textoAjuda").delay(3000).fadeOut(1000);
     }
 
@@ -205,6 +217,9 @@ function checkIfDone() {
                     templatename: myParamSpace,
                     tipotemplate : templateType,
                     escondidas : letrasEscondidasEstatitiscas,
+                    tentativas : attemps,
+                    palavra : input,
+                    clicadas : letrasClicadas,
                 });
             });
 
@@ -231,7 +246,7 @@ function unselectLastDiv(div) {
 }
 
 function checkIfDivSelected() {
-    if (selectedDiv == null) {
+    if (selectedDiv == null) {     
 
         throw new Error("No black area selected");
     }
@@ -250,10 +265,8 @@ function doesntContainNum(string){
   return !/\d/.test(string);
 }
 
-//Contador para as estatisticas
 function clock() {
 
-    //console.log(timer);
     msec += 1;
     if (msec == 100) {
         sec += 1;
@@ -266,4 +279,5 @@ function clock() {
     }
     //console.log(min + ":" + sec + ":" + msec);
 }
+
 

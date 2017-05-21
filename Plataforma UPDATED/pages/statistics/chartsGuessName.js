@@ -5,30 +5,67 @@ var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
 var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
-
+var count =0;
 
 
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         if(childSnapshot.val().tipotemplate == "guessname"){
-            updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts);
+            count++;
+            updateTableValues(childSnapshot.val().templatename, childSnapshot.val().palavra, childSnapshot.val().escondidas, childSnapshot.val().tentativas, childSnapshot.val().clicadas);
+
+
         }
     });
 
-    createGraphTempo();
-    createGraphAttempts();
-    createGraphPercentagem();
-
+  
 
 });
 
-var templatenames = [];
-var tempo = [];
-var attempts = [];
-var percentagens = [];
+var i;
 
-function updateGraphValues(templatename, tempos, tentativas) {
+function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClicladas){
+        for (i = 1; i <= count; i++) {
+            $("#tableGuessName").append("<table class=\"table table-bordered table-hover\">" + 
+                                        "<thead>"+
+                                            "<tr>" +
+                                                "<th>"+ nomeTemplate + "</th>" +
+                                            "</tr>" +
+                                        "</thead>" +
+                                        "<tbody>" + 
+                                            "<tr>"+
+                                                "<td>"+
+                                                    "<table class=\"table\">"+
+                                                        "<thead>"+
+                                                            "<tr>"+
+                                                                "<th>Palavra</th>"+
+                                                                "<th>Letras Escondidas</th>"+
+                                                                "<th>Numero de Tentativas</th>"+
+                                                                "<th>Letras Clicadas</th>"+
+                                                            "</tr>"+
+                                                        "</thead>"+
+                                                        "<tbody>"+ 
+                                                                "<tr>"+
+                                                                    "<td>"+palavra+"</td>"+
+                                                                    "<td>"+letras+"</td>"+
+                                                                    "<td>"+tentativas+"</td>"+
+                                                                    "<td>"+letrasClicladas+"</td>"+
+                                                                "</tr>"+
+                                                         "</tbody>"+
+                                                      "</table>"+     
+                                                "</td>" +
+                                              "</tr>"+
+                                            "</tbody>"+
+                                        "</table>");
+
+            }
+
+    
+}
+
+
+/*function updateGraphValues(templatename, tempos, tentativas) {
     templatenames.push(templatename);
 
     var tempoMin = tempos.split('.');
@@ -163,3 +200,4 @@ function createGraphPercentagem() {
 }
 
 
+*/
