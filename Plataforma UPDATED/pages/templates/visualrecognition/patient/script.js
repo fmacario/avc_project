@@ -2,11 +2,9 @@
 var database = firebase.database(); // database service
 var storageRef = firebase.storage().ref(); // storage service
 
-
 // Global variables
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_', ' ');
-var templatesRef = database.ref("templates/" + myParamSpace); // database templates
+var templatesRef = database.ref("templates/" + myParam); // database templates
 var historico = [];
 var images= [];
 

@@ -34,7 +34,7 @@ $(document).ready(function () {
     $('#save').click(function () {
 
         var nometemplate = $("#nometemplate").val();
-
+        nometemplate = nometemplate.replace(/ /g,"_");
 //------------------Erros---------------------
         if (nometemplate == '') {
           alert("Insira um nome para a tarefa!");

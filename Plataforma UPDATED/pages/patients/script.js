@@ -165,7 +165,7 @@ function showPatient(obj) {
                     $("#tabletemp")
                         .append($('<tr id="' + snapshot.key + '">')
                             .append($('<td>')
-                                .text(snapshot.val().ptemplates[i])
+                                .text(snapshot.val().ptemplates[i].replace(/_/g, ' '))
                             )
                             .append($('<td>')
                                 .text('A SER IMPLEMENTADO')
@@ -220,7 +220,7 @@ function showPatient(obj) {
 
         refTemplates.once("value", function (snapshot) {
             snapshot.forEach(function (childSnapshot) {
-                conc = conc + '<option>' + childSnapshot.getKey() + '</option>';
+                conc = conc + '<option>' + childSnapshot.getKey().replace(/_/g, ' ') + '</option>';
             });
             conc = conc + '</select></div>';
             $('#templates').replaceWith(conc);
@@ -243,7 +243,7 @@ function showPatient(obj) {
         refTemplatesAss.once("value", function (snapshot) {
             if (snapshot.val()) {
                 for (var i = 0; i < snapshot.val().length; i++) {
-                    conc2 = conc2 + '<option>' + snapshot.val()[i] + '</option>';
+                    conc2 = conc2 + '<option>' + snapshot.val()[i].replace(/_/g, ' ') + '</option>';
                 }
             }
 

@@ -13,7 +13,7 @@ $(document).ready(function () {
             var teste = $("#jogo table");
             teste.append($('<tr id="' + childSnapshot.key + '">')
                 .append($('<td>')
-                    .text(childSnapshot.key)
+                    .text(childSnapshot.key.replace(/_/g, ' '))
                 )
                 .append($('<td>')
                     .text(childSnapshot.val().tipo)
@@ -76,9 +76,7 @@ function previewTemplate(obj) {
     var selectedTemplate = obj.parentElement.parentElement.parentElement.id;
     templateRef = database.ref('templates/' + selectedTemplate);
     templateRef.once("value", function (snapshot) {
-        var pagina = snapshot.key;
-        var paginaespaco = pagina.replace(' ', '_');
-        window.location = '../templates/' + snapshot.val().tipo + '/patient/preview.html' + '?param=' + paginaespaco;
+        window.location = '../templates/' + snapshot.val().tipo + '/patient/preview.html' + '?param=' + snapshot.key;
     });
 }
 
@@ -86,8 +84,6 @@ function editTemplate(obj) {
     var selectedTemplate = obj.parentElement.parentElement.parentElement.id;
     templateRef = database.ref('templates/' + selectedTemplate);
     templateRef.once("value", function (snapshot) {
-        var pagina = snapshot.key;
-        var paginaespaco = pagina.replace(' ', '_');
-        window.location = '../templates/' + snapshot.val().tipo + '/doctor/doctor.html' + '?param=' + paginaespaco;
+        window.location = '../templates/' + snapshot.val().tipo + '/doctor/doctor.html' + '?param=' + snapshot.key;
     });
 }

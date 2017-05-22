@@ -20,22 +20,20 @@ firebase.auth().onAuthStateChanged(function (user) {
       for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
         tpatients.replaceWith(table);
         var teste = $("#showtemplates table");
-        var templateespaco = snapshot.val().ptemplates[i];
-        templateespaco = templateespaco.replace(' ', '_');
-
+        var template = snapshot.val().ptemplates[i];
         var finalTemplatesDone = snapshot.child("ptemplatesdone").val();
 
-        if (jQuery.inArray(templateespaco, finalTemplatesDone) == -1) {
-          teste.append($('<tr id="' + templateespaco + '" onclick="redirect(' + templateespaco + ')">')
+        if (jQuery.inArray(template, finalTemplatesDone) == -1) {
+          teste.append($('<tr id="' + template + '" onclick="redirect(' + template + ')">')
             .append($('<td>')
-              .text(snapshot.val().ptemplates[i])
+              .text(snapshot.val().ptemplates[i].replace(/_/g, ' '))
             )
           )
         }
         else {
-          teste.append($('<tr id="' + templateespaco + '" onclick="redirect(' + templateespaco + ')" style="background-color: grey">')
+          teste.append($('<tr id="' + template + '" onclick="redirect(' + template + ')" style="background-color: grey">')
             .append($('<td>')
-              .text(snapshot.val().ptemplates[i])
+              .text(snapshot.val().ptemplates[i].replace(/_/g, ' '))
             )
           )
         }
@@ -47,9 +45,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 });
 
 function redirect(pagina) {
-  paginaespaco = pagina.id.replace('_', ' ');
-  console.log(paginaespaco);
-  var refTemplates2 = database.ref('templates/' + paginaespaco);
+  var refTemplates2 = database.ref('templates/' + pagina.id);
   refTemplates2.once("value", function (snapshot) {
     console.log(snapshot.val());
     window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patient.html' + '?param=' + pagina.id;

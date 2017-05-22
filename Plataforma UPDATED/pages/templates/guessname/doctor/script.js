@@ -130,6 +130,7 @@ $(function () {
 
 
             var nometemplate = $("#nometemplate").val();
+            nometemplate = nometemplate.replace(/ /g,"_");
 
             if (nometemplate == '') {
                 alert("Insira um nome para a tarefa!");

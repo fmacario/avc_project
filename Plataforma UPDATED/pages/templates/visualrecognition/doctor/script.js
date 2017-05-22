@@ -163,6 +163,7 @@ Array.prototype.remove = function () {
 function generateTemplate() {
 
   var nometemplate = $("#nometemplate").val();
+  nometemplate = nometemplate.replace(/ /g,"_");
   var pergunta = $("#pergunta").val();
 
     if (pergunta == "") {

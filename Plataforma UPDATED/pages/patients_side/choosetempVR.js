@@ -244,3 +244,7 @@ function criarCabecalho(){
   
   sceneEl.appendChild(cabecalho);
 };
+
+document.addEventListener('mouseup', function (){
+  $(".a-enter-vr-button button").trigger('click');
+});

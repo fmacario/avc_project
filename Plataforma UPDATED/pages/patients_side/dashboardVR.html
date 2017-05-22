@@ -2,12 +2,14 @@
 <html>
 
 <head>
-<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
 
-<!-- jQuery 2.2.3 -->
-  
+  <!-- jQuery 2.2.3 -->
+
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
+  <!-- jQuery 2.2.3 -->
+  <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
   <!-- Scripts locais -->
   <script src="../../logout.js"></script>
   <script src="choosetempVR.js"></script>
@@ -19,33 +21,28 @@
 <body>
 
   <a-scene>
-     <a-assets>
+    <a-assets>
       <img id="city" src="sky.jpg">
     </a-assets>
 
     <a-sky src="#city"></a-sky>
 
     <a-camera>
-      <a-cursor
-        id="cursor"
-        cursor="fuseTimeout: 2500" 
-        geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-        material="color: black; shader: flat">
-          <a-animation begin="click" easing="ease-in" attribute="scale"
-               fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="1"></a-animation>
-          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
-               fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="2500"></a-animation>  
+      <a-cursor id="cursor" cursor="fuseTimeout: 2500" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: black; shader: flat">
+        <a-animation begin="click" easing="ease-in" attribute="scale" fill="backwards" from="0.1 0.1 0.1" to="1 1 1" dur="1"></a-animation>
+        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" fill="forwards" from="1 1 1" to="0.1 0.1 0.1" dur="2500"></a-animation>
       </a-cursor>
     </a-camera>
 
-   <!-- fuse: true; --> <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
+    <!-- fuse: true; -->
+    <a-entity cursor raycaster="far: 20; interval: 1000; objects: .clickable"></a-entity>
 
 
     <script type="text/javascript">
       //start();
     </script>
   </a-scene>
-  
+
 
 
 
@@ -53,17 +50,17 @@
     <!-- Show patients box -->
     <div class="box box-solid box-primary">
       <div class="box-header">
-        
-      <!-- /.box-header -->
-      <div id="showtemplates" class="box-body table-responsive no-padding">
-        <div class="loader" style="margin: auto;"></div>
+
+        <!-- /.box-header -->
+        <div id="showtemplates" class="box-body table-responsive no-padding">
+          <div class="loader" style="margin: auto;"></div>
+        </div>
+        <!-- /.box-body -->
       </div>
-      <!-- /.box-body -->
-    </div>
-    <!-- /.box -->
+      <!-- /.box -->
   </section>
 
-  
+
 </body>
 
 </html>

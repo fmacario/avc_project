@@ -105,6 +105,7 @@ function generateTemplate() {
 
     alert("Template criado com sucesso");
     var nometemplate = $("#nometemplate").val();
+    nometemplate = nometemplate.replace(/ /g,"_");
     database.ref('templates/' + nometemplate).set({
         pergunta: pergunta,
         respostasCertas: rightAnswers,

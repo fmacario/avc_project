@@ -6,8 +6,7 @@ var database = firebase.database(); // database service
 var input;
 var nrLetters;
 var myParam = location.search.split('param=')[1]
-myParamSpace = myParam.replace('_', ' ');
-var templatesRef = database.ref("templates/" + myParamSpace); // database templates
+var templatesRef = database.ref("templates/" + myParam); // database templates
 var selectedDiv = null;
 var letrasEscondidas = [];
 var arrayLetters = [];
