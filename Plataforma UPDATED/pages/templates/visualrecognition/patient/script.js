@@ -177,7 +177,7 @@ function generateBtn() {
     }
 
     for (var i = 0; i < orilength; i++) {
-        $("#button"+i).append("<button class=\" btn\" id=\""+ answers[i] +"\" style=\"background: url("+images[i]+"); background-repeat: no-repeat; background-position: 50% 50%;\"></button>");
+        $("#button"+i).append("<button class=\" btn\" id=\""+ answers[i] +"\" style=\"background: url("+images[i]+"); background-repeat: no-repeat; background-position: 50% 50%; background-size: 100%;\"></button>");
     }
 }
 

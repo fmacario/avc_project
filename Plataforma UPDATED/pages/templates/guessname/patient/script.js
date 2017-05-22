@@ -12,11 +12,34 @@ var letrasEscondidas = [];
 var arrayLetters = [];
 var imgTitle;
 
+//statistics variables
+
+var timer = setInterval(clock, 10);
+var msec = 00;
+var sec = 00;
+var min = 00;
+var totalAttemps = 0;
+var letrasEscondidasEstatitiscas = [];
+var username;
+var attemps = [];
+var letrasClicadas=[];
+
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        username = (user.email).split('@')[0];
+    } else {
+        // No user is signed in.
+    }
+});
+
+
 templatesRef.once("value", function (snapshot) {
     imgTitle = snapshot.val().imgname;
     input = snapshot.val().input;
     nrLetras = snapshot.val().nrLetras;
     mensagensDoDoutor = snapshot.val().mensagens;
+    templateType = snapshot.val().tipo
 
     if (doesntContainNum(input)) {
       $('#buttonsNumbers').hide();
@@ -61,6 +84,9 @@ templatesRef.once("value", function (snapshot) {
     /* atribui ás letras escondidas a chance de serem clicadas */
     for (var i = 0; i < escondePosicao.length; i++) {
         letrasEscondidas[i] = $("#letra" + escondePosicao[i]).html();
+        //array para letras escondidas estatisticas
+        letrasEscondidasEstatitiscas[i] = $("#letra" + escondePosicao[i]).html();
+        
         $("#letra" + escondePosicao[i]).attr('class', 'child col-sm-1 unselectable hided-div');
         $("#letra" + escondePosicao[i]).attr('onclick', 'getSelectedDiv(id)');
     }
@@ -120,6 +146,9 @@ $(":button").click(function () {
         }
     }
 
+    letrasClicadas.push(clickedButton.toUpperCase());
+    console.log(clickedButton.toUpperCase());
+
     if (certo) {
         $("#" + selectedDiv).hide().fadeToggle(1000).attr('class', 'child col-sm-1 unselectable');
         $("#" + selectedDiv).attr('onclick', '');
@@ -127,6 +156,11 @@ $(":button").click(function () {
         letrasEscondidas.remove(clickedButton);
         letrasEscondidas.remove(clickedButton.toUpperCase());
         $("#message").html("MUITO BEM!  <p>  Seleccione outro bloco preto para adivinhar a letra! </p>");
+        console.log(totalAttemps);
+        attemps.push(totalAttemps);
+        totalAttemps = 0;
+        console.log(attemps);
+
 
 
     }
@@ -138,6 +172,9 @@ $(":button").click(function () {
             $("#message").html("<p id=\"textoAjuda\">" + mensagensAjudaRandom[Math.floor(Math.random() * (mensagensAjudaRandom.length))] + "</p>");
         }
 
+        totalAttemps++;
+        console.log(totalAttemps);
+        console.log(attemps);
         //$("#textoAjuda").delay(3000).fadeOut(1000);
     }
 
@@ -164,8 +201,27 @@ function checkIfDone() {
         $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
         $("button").prop('disabled', true);
 
-        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+/*        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
             console.log(snapshot.val());
+        });*/
+
+        database.ref('patients/' + username).once("value", function (snapshot) {
+            var finalTemplates = snapshot.child("ptemplates").val();
+            var pprocess = snapshot.child("pprocess").val();
+            var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
+            finalTemplatesDone.push(myParamSpace);
+
+            database.ref('patients/' + username).once("value", function (snapshot) {
+                database.ref('patients/' + username + '/ptemplatesdone/' + myParamSpace).set({
+                    templatename: myParamSpace,
+                    tipotemplate : templateType,
+                    escondidas : letrasEscondidasEstatitiscas,
+                    tentativas : attemps,
+                    palavra : input,
+                    clicadas : letrasClicadas,
+                });
+            });
+
         });
     }
 }
@@ -189,7 +245,7 @@ function unselectLastDiv(div) {
 }
 
 function checkIfDivSelected() {
-    if (selectedDiv == null) {
+    if (selectedDiv == null) {     
 
         throw new Error("No black area selected");
     }
@@ -207,3 +263,20 @@ function end() {
 function doesntContainNum(string){
   return !/\d/.test(string);
 }
+
+function clock() {
+
+    msec += 1;
+    if (msec == 100) {
+        sec += 1;
+        msec = 00;
+        if (sec == 60) {
+            sec = 00;
+            min += 1;
+
+        }
+    }
+    //console.log(min + ":" + sec + ":" + msec);
+}
+
+

@@ -70,7 +70,7 @@ function readURL(input, i) {
           imagesImageRef = storageRef.child(path);
 
           reader.onload = function (e) {
-              $('#answer'+i).append('<img id="img'+i+'" alt="'+input.files[0].name+'" src="' + e.target.result + '" class="img">');
+              $('#answer'+i).append('<img id="img'+i+'" alt="'+input.files[0].name+'" src="' + e.target.result + '" class="img" style="width: 100%; height:100%">');
               }
 
               var file = input.files[0];

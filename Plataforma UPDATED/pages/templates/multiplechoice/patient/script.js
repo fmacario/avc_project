@@ -22,7 +22,8 @@ templatesRef.once("value", function (snapshot) {
     rightAnswers = snapshot.val().respostasCertas,
         question = snapshot.val().pergunta,
         answers = snapshot.val().respostas,
-        answerNumber = snapshot.val().nrEscolhas
+        answerNumber = snapshot.val().nrEscolhas,
+        templateType = snapshot.val().tipo
     start();
 });
 
@@ -118,21 +119,6 @@ function generateBtn() {
     }
 }
 
-function clock() {
-
-    //console.log(timer);
-    msec += 1;
-    if (msec == 100) {
-        sec += 1;
-        msec = 00;
-        if (sec == 60) {
-            sec = 00;
-            min += 1;
-
-        }
-    }
-    //console.log(min + ":" + sec + ":" + msec);
-}
 
 function checkIfDone() {
     if (rightAnswers.length == 0) {
@@ -158,7 +144,8 @@ function checkIfDone() {
                     respostas: answers,
                     nrEscolhas: answerNumber,
                     tempo: n,
-                    attempts: tentativasResposta
+                    attempts: tentativasResposta,
+                    tipotemplate: templateType,
                 });
             });
 

@@ -11,8 +11,21 @@ var templatesRef = database.ref("templates/" + myParam); // database templates
 var order = []; // Array ordenado com nomes das imagens
 var images = [];
 
+//statistics
+var username;
+
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        username = (user.email).split('@')[0];
+    } else {
+        // No user is signed in.
+    }
+});
+
 
 templatesRef.once("value", function (snapshot) {
+    templateType = snapshot.val().tipo;
     order = snapshot.val().ordem;
     for (var i = 0; i < order.length; i++) {
         // read images
@@ -118,6 +131,23 @@ function drop(ev, num) {
             counter++;
             if (counter == num) {
                 $('#feedback').append('<h1>Parabéns! Tarefa concluída com sucesso!</h1>');
+
+                database.ref('patients/' + username).once("value", function (snapshot) {
+                    var finalTemplates = snapshot.child("ptemplates").val();
+                    var pprocess = snapshot.child("pprocess").val();
+                    var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
+                    finalTemplatesDone.push(myParamSpace);
+
+                    database.ref('patients/' + username).once("value", function (snapshot) {
+                        database.ref('patients/' + username + '/ptemplatesdone/' + myParamSpace).set({
+                            templatename: myParamSpace,
+                            tipotemplate : templateType,
+                        });
+                    });
+
+                });
+
+
             }
         }
         else {
