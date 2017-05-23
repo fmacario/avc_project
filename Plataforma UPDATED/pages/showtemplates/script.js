@@ -69,7 +69,9 @@ function removeTemplate(obj) {
         });
     });
 
-    //window.location.href = window.location.href;
+    setTimeout(function () {
+        window.location.href = window.location.href;
+    }, 1000);
 }
 
 function previewTemplate(obj) {
