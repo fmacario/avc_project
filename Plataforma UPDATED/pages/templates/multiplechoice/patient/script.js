@@ -134,11 +134,18 @@ function checkIfDone() {
             var finalTemplates = snapshot.child("ptemplates").val();
             var pprocess = snapshot.child("pprocess").val();
             var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
-            finalTemplatesDone.push(myParamSpace);
+            finalTemplatesDone.push(myParam);
 
             database.ref('patients/' + username).once("value", function (snapshot) {
-                database.ref('patients/' + username + '/ptemplatesdone/' + myParamSpace).set({
-                    templatename: myParamSpace,
+                database.ref('patients/' + username).set({
+                    ntemplates: snapshot.val().ntemplates,
+                    ntemplatesdone: finalTemplatesDone.length,
+                    pname: snapshot.val().pname,
+                    pprocess: snapshot.val().pprocess,
+                    ptemplates: snapshot.val().ptemplates                   
+                });
+                database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
+                    templatename: myParam,
                     pergunta: question,
                     respostasCertas: rightAnswers,
                     respostas: answers,

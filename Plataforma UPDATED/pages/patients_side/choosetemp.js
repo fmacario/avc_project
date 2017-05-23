@@ -21,6 +21,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         tpatients.replaceWith(table);
         var teste = $("#showtemplates table");
         var template = snapshot.val().ptemplates[i];
+        console.log(template);
         var finalTemplatesDone = snapshot.child("ptemplatesdone").val();
 
         if (jQuery.inArray(template, finalTemplatesDone) == -1) {

@@ -61,6 +61,9 @@ function updateGraphValues(templatename, tempos, tentativas) {
 
 function createGraphTempo() {
     var ctx = document.getElementById("lineChartTempo");
+    templatenames.unshift("teste");
+    tempo.unshift(0);
+    console.log(templatenames +  " -> " + tempo);
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {

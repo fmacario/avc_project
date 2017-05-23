@@ -322,7 +322,7 @@ function assignTask() {
 
         for (var i = 0; i < $("#seltemplates").val().length; i++) {
             if (jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == -1 || jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == null) {
-                finalTemplates.push($("#seltemplates").val()[i]);
+                finalTemplates.push($("#seltemplates").val()[i].replace(/ /g,"_"));
             }
         }
 

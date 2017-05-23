@@ -145,7 +145,7 @@ $(function () {
                     imgname: nomeimagem
                 });
                 alert("Template criado com sucesso");
-                location.reload();
+                //location.reload();
             }
 
         }
