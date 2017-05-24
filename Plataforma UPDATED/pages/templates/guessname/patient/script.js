@@ -22,7 +22,7 @@ var totalAttemps = 0;
 var letrasEscondidasEstatitiscas = [];
 var username;
 var attemps = [];
-var letrasClicadas=[];
+var letrasClicadas = [];
 
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -42,7 +42,7 @@ templatesRef.once("value", function (snapshot) {
     templateType = snapshot.val().tipo
 
     if (doesntContainNum(input)) {
-      $('#buttonsNumbers').hide();
+        $('#buttonsNumbers').hide();
     }
 
     arrayLetters = input.split('');
@@ -86,7 +86,7 @@ templatesRef.once("value", function (snapshot) {
         letrasEscondidas[i] = $("#letra" + escondePosicao[i]).html();
         //array para letras escondidas estatisticas
         letrasEscondidasEstatitiscas[i] = $("#letra" + escondePosicao[i]).html();
-        
+
         $("#letra" + escondePosicao[i]).attr('class', 'child col-sm-1 unselectable hided-div');
         $("#letra" + escondePosicao[i]).attr('onclick', 'getSelectedDiv(id)');
     }
@@ -201,27 +201,28 @@ function checkIfDone() {
         $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
         $("button").prop('disabled', true);
 
-/*        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
-            console.log(snapshot.val());
-        });*/
+        /*        database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
+                    console.log(snapshot.val());
+                });*/
 
         database.ref('patients/' + username).once("value", function (snapshot) {
-            var finalTemplates = snapshot.child("ptemplates").val();
-            var pprocess = snapshot.child("pprocess").val();
-            var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
-            finalTemplatesDone.push(myParam);
-
-            database.ref('patients/' + username).once("value", function (snapshot) {
-                database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
-                    templatename: myParam,
-                    tipotemplate : templateType,
-                    escondidas : letrasEscondidasEstatitiscas,
-                    tentativas : attemps,
-                    palavra : input,
-                    clicadas : letrasClicadas,
-                });
+            database.ref('patients/' + username).set({
+                ntemplates: snapshot.val().ntemplates,
+                ntemplatesdone: snapshot.child("ptemplatesdone").numChildren()+1,
+                pname: snapshot.val().pname,
+                pprocess: snapshot.val().pprocess,
+                ptemplates: snapshot.val().ptemplates,
+                ptemplatesdone: snapshot.child("ptemplatesdone").val()
             });
 
+            database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
+                templatename: myParam,
+                tipotemplate: templateType,
+                escondidas: letrasEscondidasEstatitiscas,
+                tentativas: attemps,
+                palavra: input,
+                clicadas: letrasClicadas,
+            });
         });
     }
 }
@@ -245,7 +246,7 @@ function unselectLastDiv(div) {
 }
 
 function checkIfDivSelected() {
-    if (selectedDiv == null) {     
+    if (selectedDiv == null) {
 
         throw new Error("No black area selected");
     }
@@ -260,8 +261,8 @@ function end() {
     $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
 }
 
-function doesntContainNum(string){
-  return !/\d/.test(string);
+function doesntContainNum(string) {
+    return !/\d/.test(string);
 }
 
 function clock() {

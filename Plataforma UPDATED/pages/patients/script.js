@@ -190,9 +190,7 @@ function showPatient(obj) {
 
             patientNameRef2.on('value', function (snapshot) {
                 $("#tabletempdone").replaceWith(html_block);
-                console.log(snapshot.val());
                 snapshot.forEach(function (childSnapshot) {
-                    console.log(childSnapshot.val());
                     $("#tabletempdone")
                         .append($('<tr id="' + childSnapshot.key + '">')
                             .append($('<td>')
@@ -208,7 +206,6 @@ function showPatient(obj) {
         })
 
         $("#graphs").click(function () {
-            console.log(selectedPatient);
             window.location = '../statistics/statistics.html' + '?param=' + selectedPatient;
         });
 
@@ -330,13 +327,15 @@ function assignTask() {
             finalTemplatesDone = snapshot.child("ptemplatesdone").val();
             var n_process = snapshot.child("pprocess").val();
             var n_templatesdone = snapshot.child("ntemplatesdone").val();
-            console.log(n_templatesdone);
+            var n_ptemplatesdone = snapshot.child("ptemplatesdone").val();
+            console.log(snapshot.val());
 
             database.ref('patients/' + selectedPatient).set({
                 pname: selectedPatient,
                 ptemplates: finalTemplates,
                 ntemplates: finalTemplates.length,
                 ntemplatesdone: n_templatesdone,
+                ptemplatesdone: n_ptemplatesdone,
                 pprocess: n_process
 
             });

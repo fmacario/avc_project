@@ -6,7 +6,6 @@ var y = 1.9;
 var links = [];
 var back, logout, cabecalho;
 
-
 // References
 var database = firebase.database(); // database service
 var auth = firebase.auth();         // auth service
@@ -44,20 +43,16 @@ firebase.auth().onAuthStateChanged(function (user) {
         //console.log(entity[i]);
         }
       start();
-    });
-
-    
-    
+    });    
   } else {
     // No user is signed in.
   }
 });
 
-
-
 function redirect(pagina) { 
   var refTemplates2 = database.ref('templates/' + pagina);
   refTemplates2.once("value", function (snapshot) {
+    console.log("fodasse");
     window.location = '../../pages/templates/' + snapshot.val().tipo + '/patient/patientVR.html' + '?param=' + pagina;
   });
 
@@ -163,10 +158,7 @@ if (entity[16] != null)
 
 
   logout.addEventListener('click', function () { 
-    console.log("ok");
-    
-    firebase.auth().signOut().then(function() {
-        console.log("sai");
+    firebase.auth().signOut().then(function() { 
         window.location = '../../index.html'; //After successful logs out, user will be redirected to index.html
     }).catch(function(error) {
         console.log(error);

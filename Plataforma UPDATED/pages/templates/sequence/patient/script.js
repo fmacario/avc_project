@@ -32,7 +32,7 @@ templatesRef.once("value", function (snapshot) {
         storageRef.child('templates/sequence/' + order[i]).getDownloadURL().then(function (url) {
             images.push(url);
 
-            if(images.length == order.length){
+            if (images.length == order.length) {
                 start();
             }
         });
@@ -127,27 +127,25 @@ function drop(ev, num) {
             document.getElementById(divId).appendChild(document.getElementById(data));
             document.getElementById(data).ondragstart = function () { return false; };
 
-
             counter++;
             if (counter == num) {
                 $('#feedback').append('<h1>Parabéns! Tarefa concluída com sucesso!</h1>');
 
                 database.ref('patients/' + username).once("value", function (snapshot) {
-                    var finalTemplates = snapshot.child("ptemplates").val();
-                    var pprocess = snapshot.child("pprocess").val();
-                    var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
-                    finalTemplatesDone.push(myParam);
-
-                    database.ref('patients/' + username).once("value", function (snapshot) {
-                        database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
-                            templatename: myParam,
-                            tipotemplate : templateType,
-                        });
+                    database.ref('patients/' + username).set({
+                        ntemplates: snapshot.val().ntemplates,
+                        ntemplatesdone: snapshot.child("ptemplatesdone").numChildren() + 1,
+                        pname: snapshot.val().pname,
+                        pprocess: snapshot.val().pprocess,
+                        ptemplates: snapshot.val().ptemplates,
+                        ptemplatesdone: snapshot.child("ptemplatesdone").val()
                     });
 
+                    database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
+                        templatename: myParam,
+                        tipotemplate: templateType,
+                    });
                 });
-
-
             }
         }
         else {
