@@ -250,7 +250,6 @@ function unselectLastDiv(div) {
 
 function checkIfDivSelected() {
     if (selectedDiv == null) {
-
         throw new Error("No black area selected");
     }
 }

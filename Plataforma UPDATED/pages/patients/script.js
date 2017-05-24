@@ -25,20 +25,6 @@ $(document).ready(function () {
                 .append($('<td>')
                     .text(childSnapshot.val().pprocess)
                 )
-                /*
-                .append($('<td>')
-                    .text(childSnapshot.val().page)
-                )
-                .append($('<td>')
-                    .text(childSnapshot.val().pschool)
-                )
-                .append($('<td>')
-                    .text(childSnapshot.val().pdateinjury)
-                )
-                .append($('<td>')
-                    .text(childSnapshot.val().ptypeinjury)
-                )
-                */
             )
         });
 
@@ -56,12 +42,6 @@ function writeUserData() {
     var ppassword = $("#ppassword").val();
     var pname = $("#pname").val();
     var pprocess = $("#pprocess").val();
-    /*
-    var page = $("#page").val();
-    var pschool = $("#pschool").val();
-    var pdateinjury = $("#pdateinjury").val();
-    var ptypeinjury = $("#ptypeinjury").val();
-    */
     auth.createUserWithEmailAndPassword(pusernameE, ppassword).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -144,7 +124,6 @@ function showPatient(obj) {
             '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
             '<div id="templates2" style="width: 25%; margin: auto;"></div>' +
             '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="deassignTask();">Desatribuir tarefa</button>' +
-
             '</div>' +
             '</div>';
 
@@ -170,7 +149,6 @@ function showPatient(obj) {
                             .append($('<td>')
                                 .text('A SER IMPLEMENTADO')
                             )
-
                         )
                 }
             }
@@ -202,7 +180,6 @@ function showPatient(obj) {
                         )
                 });
             });
-
         })
 
         $("#graphs").click(function () {
@@ -269,7 +246,6 @@ function editPatient() {
         $("#showpatients").toggleClass('box-body table-responsive no-padding');
         $("#jogo").show("slow");
 
-
         var html_block = '<form role="form">' +
             '<div class="form-group">' +
             '<label>Nome do paciente</label>' +
@@ -286,25 +262,14 @@ function editPatient() {
 }
 
 function modifyPatient() {
-    var n_pname = $("#n_pname").val();
-    var n_pprocess = $("#n_pprocess").val();
-    var finalTemplates = [];
-    var finalTemplatesDone = [];
-
-    database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
-        finalTemplates = jQuery.makeArray(snapshot.val());
-
-        database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
-            finalTemplatesDone = snapshot.child("ptemplatesdone").val();
-
-            database.ref('patients/' + selectedPatient).set({
-                pname: n_pname,
-                ptemplates: finalTemplates,
-                ntemplates: finalTemplates.length,
-                ptemplatesdone: finalTemplatesDone,
-                ntemplatesdona: finalTemplatesDone.length,
-                pprocess: n_pprocess
-            });
+    database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
+        database.ref('patients/' + selectedPatient).set({
+            pname: $("#n_pname").val(),
+            ptemplates: snapshot.child("ptemplates").val(),
+            ntemplates: snapshot.child("ptemplates").numChildren(),
+            ntemplatesdone: snapshot.child("ptemplatesdone").numChildren(),
+            ptemplatesdone: snapshot.child("ptemplatesdone").val(),
+            pprocess: $("#n_pprocess").val()
         });
     });
 }
@@ -312,32 +277,24 @@ function modifyPatient() {
 // Assign task to patient
 function assignTask() {
     var finalTemplates = [];
-    var finalTemplatesDone = [];
 
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
         finalTemplates = jQuery.makeArray(snapshot.val());
 
         for (var i = 0; i < $("#seltemplates").val().length; i++) {
             if (jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == -1 || jQuery.inArray($("#seltemplates").val()[i], snapshot.val()) == null) {
-                finalTemplates.push($("#seltemplates").val()[i].replace(/ /g,"_"));
+                finalTemplates.push($("#seltemplates").val()[i].replace(/ /g, "_"));
             }
         }
 
         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
-            finalTemplatesDone = snapshot.child("ptemplatesdone").val();
-            var n_process = snapshot.child("pprocess").val();
-            var n_templatesdone = snapshot.child("ntemplatesdone").val();
-            var n_ptemplatesdone = snapshot.child("ptemplatesdone").val();
-            console.log(snapshot.val());
-
             database.ref('patients/' + selectedPatient).set({
                 pname: selectedPatient,
                 ptemplates: finalTemplates,
-                ntemplates: finalTemplates.length,
-                ntemplatesdone: n_templatesdone,
-                ptemplatesdone: n_ptemplatesdone,
-                pprocess: n_process
-
+                ntemplates: snapshot.child("ptemplates").numChildren() + 1,
+                ntemplatesdone: snapshot.child("ptemplatesdone").numChildren(),
+                ptemplatesdone: snapshot.child("ptemplatesdone").val(),
+                pprocess: snapshot.child("pprocess").val()
             });
         });
     });
@@ -346,7 +303,6 @@ function assignTask() {
 // Deassgines templates to selected patient
 function deassignTask() {
     var finalTemplates = [];
-    var finalTemplatesDone = [];
 
     database.ref('patients/' + selectedPatient + "/ptemplates").once("value", function (snapshot) {
         finalTemplates = jQuery.makeArray(snapshot.val());
@@ -358,16 +314,13 @@ function deassignTask() {
         }
 
         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
-            finalTemplatesDone = snapshot.child("ptemplatesdone").val();
-            var n_process = snapshot.child("pprocess").val();
-            var n_templatesdone = snapshot.child("ntemplatesdone").val();
-
             database.ref('patients/' + selectedPatient).set({
                 pname: selectedPatient,
                 ptemplates: finalTemplates,
-                ntemplates: finalTemplates.length,
-                ntemplatesdone: n_templatesdone,
-                pprocess: n_process
+                ntemplates: snapshot.child("ptemplates").numChildren() - 1,
+                ntemplatesdone: snapshot.child("ptemplatesdone").numChildren(),
+                ptemplatesdone: snapshot.child("ptemplatesdone").val(),
+                pprocess: snapshot.child("pprocess").val()
             });
         });
     });

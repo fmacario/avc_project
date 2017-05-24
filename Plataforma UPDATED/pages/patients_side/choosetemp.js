@@ -14,17 +14,20 @@ var table = "<div id='showtemplates' class='box-body table-responsive no-padding
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
     var username = (user.email).split('@')[0];
-    var refTemplates = database.ref('patients/' + username);
-    
-    refTemplates.once("value", function (snapshot) {
+
+    database.ref('patients/' + username).once("value", function (snapshot) {
       for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
         tpatients.replaceWith(table);
-        var teste = $("#showtemplates table");
-        var template = snapshot.val().ptemplates[i];
-        console.log(template);
-        var finalTemplatesDone = snapshot.child("ptemplatesdone").val();
 
-        if (jQuery.inArray(template, finalTemplatesDone) == -1) {
+        var teste = $("#showtemplates table"); // Tem de ficar depois da isntrução de replaceWith
+
+        var template = snapshot.child(snapshot.val().ptemplates[i]).key;
+        var templatesDone = [];
+        snapshot.child("ptemplatesdone").forEach(function (childSnapshot) {
+          templatesDone.push(childSnapshot.key);
+        });
+
+        if (jQuery.inArray(template, templatesDone) == -1) {
           teste.append($('<tr id="' + template + '" onclick="redirect(' + template + ')">')
             .append($('<td>')
               .text(snapshot.val().ptemplates[i].replace(/_/g, ' '))
@@ -33,7 +36,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         }
         else {
           teste.append($('<tr id="' + template + '" onclick="redirect(' + template + ')" style="background-color: grey">')
-            .append($('<td>')
+            .append($('<td>') 
               .text(snapshot.val().ptemplates[i].replace(/_/g, ' '))
             )
           )
