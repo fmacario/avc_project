@@ -191,13 +191,9 @@ function drop(ev, p) {
 
                 database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
                     templatename: myParam,
-<<<<<<< HEAD
-                    tipotemplate: templateType,
-=======
                     tipotemplate : templateType,
                     tentativas : attemps,
                     tempo : n,
->>>>>>> ac2047bc45ec75e90097339427ac64f2e591043f
                 });
             });
         }

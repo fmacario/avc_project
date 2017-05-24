@@ -122,22 +122,15 @@ function generateBtn() {
 function checkIfDone() {
     if (rightAnswers.length == 0) {
         clearInterval(timer);
-
-<<<<<<< HEAD
-        var n = min + "." + sec + "." + msec;
-=======
         var n = min + "." + sec;
-        //console.log(n);
 
->>>>>>> ac2047bc45ec75e90097339427ac64f2e591043f
         tentativasResposta++;
         respostasCorretas++;
 
         database.ref('patients/' + username).once("value", function (snapshot) {
-<<<<<<< HEAD
             database.ref('patients/' + username).set({
                 ntemplates: snapshot.val().ntemplates,
-                ntemplatesdone: snapshot.child("ptemplatesdone").numChildren()+1,
+                ntemplatesdone: snapshot.child("ptemplatesdone").numChildren() + 1,
                 pname: snapshot.val().pname,
                 pprocess: snapshot.val().pprocess,
                 ptemplates: snapshot.val().ptemplates,
@@ -152,31 +145,6 @@ function checkIfDone() {
                 tempo: n,
                 attempts: tentativasResposta,
                 tipotemplate: templateType,
-=======
-            var finalTemplates = snapshot.child("ptemplates").val();
-            var pprocess = snapshot.child("pprocess").val();
-            var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
-            finalTemplatesDone.push(myParam);
-
-            database.ref('patients/' + username).once("value", function (snapshot) {
-               database.ref('patients/' + username).set({
-                    ntemplates: snapshot.val().ntemplates,
-                    ntemplatesdone: finalTemplatesDone.length,
-                    pname: snapshot.val().pname,
-                    pprocess: snapshot.val().pprocess,
-                    ptemplates: snapshot.val().ptemplates                   
-                });
-                database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
-                    templatename: myParam,
-                    pergunta: question,
-                    respostasCertas: rightAnswers,
-                    respostas: answers,
-                    nrEscolhas: answerNumber,
-                    tempo: n,
-                    attempts: tentativasResposta,
-                    tipotemplate: templateType,
-                });
->>>>>>> ac2047bc45ec75e90097339427ac64f2e591043f
             });
         });
 

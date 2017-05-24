@@ -209,7 +209,6 @@ function checkIfDone() {
                 });*/
 
         database.ref('patients/' + username).once("value", function (snapshot) {
-<<<<<<< HEAD
             database.ref('patients/' + username).set({
                 ntemplates: snapshot.val().ntemplates,
                 ntemplatesdone: snapshot.child("ptemplatesdone").numChildren()+1,
@@ -217,23 +216,6 @@ function checkIfDone() {
                 pprocess: snapshot.val().pprocess,
                 ptemplates: snapshot.val().ptemplates,
                 ptemplatesdone: snapshot.child("ptemplatesdone").val()
-=======
-            var finalTemplates = snapshot.child("ptemplates").val();
-            var pprocess = snapshot.child("pprocess").val();
-            var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
-            finalTemplatesDone.push(myParam);
-
-            database.ref('patients/' + username).once("value", function (snapshot) {
-                database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
-                    templatename: myParam,
-                    tipotemplate : templateType,
-                    escondidas : letrasEscondidasEstatitiscas,
-                    tentativas : attemps,
-                    palavra : input,
-                    clicadas : letrasClicadas,
-                    tempo: n,
-                });
->>>>>>> ac2047bc45ec75e90097339427ac64f2e591043f
             });
 
             database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
