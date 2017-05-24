@@ -145,6 +145,7 @@ $(function () {
                     imgname: nomeimagem
                 });
                 alert("Template criado com sucesso");
+                //adicionar delay
                 //location.reload();
             }
 

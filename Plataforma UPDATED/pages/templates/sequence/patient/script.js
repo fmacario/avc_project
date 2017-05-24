@@ -12,7 +12,13 @@ var order = []; // Array ordenado com nomes das imagens
 var images = [];
 
 //statistics
+var timer = setInterval(clock, 10);
+var msec = 00;
+var sec = 00;
+var min = 00;
+
 var username;
+var attemps = 0;
 
 
 firebase.auth().onAuthStateChanged(function (user) {
@@ -129,9 +135,12 @@ function drop(ev, num) {
 
             counter++;
             if (counter == num) {
+                clearInterval(timer);
+                var n = min + "." + sec;
                 $('#feedback').append('<h1>Parabéns! Tarefa concluída com sucesso!</h1>');
 
                 database.ref('patients/' + username).once("value", function (snapshot) {
+<<<<<<< HEAD
                     database.ref('patients/' + username).set({
                         ntemplates: snapshot.val().ntemplates,
                         ntemplatesdone: snapshot.child("ptemplatesdone").numChildren() + 1,
@@ -139,6 +148,21 @@ function drop(ev, num) {
                         pprocess: snapshot.val().pprocess,
                         ptemplates: snapshot.val().ptemplates,
                         ptemplatesdone: snapshot.child("ptemplatesdone").val()
+=======
+                    var finalTemplates = snapshot.child("ptemplates").val();
+                    var pprocess = snapshot.child("pprocess").val();
+                    var finalTemplatesDone = jQuery.makeArray(snapshot.child("ptemplatesdone").val());
+                    finalTemplatesDone.push(myParam);
+
+                    database.ref('patients/' + username).once("value", function (snapshot) {
+                        database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
+                            templatename: myParam,
+                            tipotemplate : templateType,
+                            tempo : n,
+                            tentativas : attemps,
+
+                        });
+>>>>>>> ac2047bc45ec75e90097339427ac64f2e591043f
                     });
 
                     database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
@@ -146,14 +170,36 @@ function drop(ev, num) {
                         tipotemplate: templateType,
                     });
                 });
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> ac2047bc45ec75e90097339427ac64f2e591043f
             }
         }
         else {
 
             document.getElementById(divId).appendChild(node);
+            attemps++;
             setTimeout(function () {
                 document.getElementById(divId).innerHTML = "";
             }, 1000);
         }
     }
+}
+
+function clock() {
+
+    msec += 1;
+    if (msec == 100) {
+        sec += 1;
+        msec = 00;
+        if (sec == 60) {
+            sec = 00;
+            min += 1;
+
+        }
+    }
+    //console.log(min + ":" + sec + ":" + msec);
 }

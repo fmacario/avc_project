@@ -5,16 +5,15 @@ var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
 var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
-var count =0;
+var count =0, j;
 
 
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        if(childSnapshot.val().tipotemplate == "guessname"){
-            count++;
-            updateTableValues(childSnapshot.val().templatename, childSnapshot.val().palavra, childSnapshot.val().escondidas, childSnapshot.val().tentativas, childSnapshot.val().clicadas);
 
+        if(childSnapshot.val().tipotemplate == "guessname"){
+                updateTableValues(childSnapshot.val().templatename, childSnapshot.val().palavra, childSnapshot.val().escondidas, childSnapshot.val().tentativas, childSnapshot.val().clicadas, childSnapshot.val().tempo);
 
         }
     });
@@ -25,8 +24,18 @@ templatesRef.once("value", function (snapshot) {
 
 var i;
 
-function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClicladas){
-        for (i = 1; i <= count; i++) {
+function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClicladas, tempo){
+
+    var tempoMin = tempo.split('.');
+    var tempoNew;
+
+    if(tempoMin[1] < 10){
+        tempoNew = tempoMin[0] + '.' + '0' + tempoMin[1];
+    }
+    else{
+        tempoNew = tempoMin[0] + '.' + tempoMin[1];
+    } 
+     
             $("#tableGuessName").append("<table class=\"table table-bordered table-hover\">" + 
                                         "<thead>"+
                                             "<tr>" +
@@ -43,6 +52,7 @@ function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClic
                                                                 "<th>Letras Escondidas</th>"+
                                                                 "<th>Numero de Tentativas</th>"+
                                                                 "<th>Letras Clicadas</th>"+
+                                                                "<th>Tempo</th>"+
                                                             "</tr>"+
                                                         "</thead>"+
                                                         "<tbody>"+ 
@@ -51,6 +61,7 @@ function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClic
                                                                     "<td>"+letras+"</td>"+
                                                                     "<td>"+tentativas+"</td>"+
                                                                     "<td>"+letrasClicladas+"</td>"+
+                                                                    "<td>"+tempoNew+"</td>"+
                                                                 "</tr>"+
                                                          "</tbody>"+
                                                       "</table>"+     
@@ -59,7 +70,7 @@ function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClic
                                             "</tbody>"+
                                         "</table>");
 
-            }
+            
 
     
 }
