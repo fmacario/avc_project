@@ -45,7 +45,8 @@ $(document).ready(function () {
                 tipo: "sequence"
             });
             alert("Tarefa guardada com sucesso!");
-            location.reload();
+            //adicionar delay
+            //location.reload();
             //$('#save').hide();
             //$('#preview').show();
             //$('#another').show();

@@ -12,26 +12,27 @@ var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/")
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
         if(childSnapshot.val().tipotemplate == "multiplechoice"){
-            updateGraphValues(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts);
+            updateGraphValuesMultiplas(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts);
+
         }
     });
 
-    createGraphTempo();
-    createGraphAttempts();
-    createGraphPercentagem();
+    createGraphTempoMultiplas();
+    createGraphAttemptsMultiplas();
+    createGraphPercentagemMultiplas();
 
 
 });
 
 var templatenames = [];
-var tempo = [];
+var tempos = [];
 var attempts = [];
 var percentagens = [];
+var tipotemplates = [];
 
-function updateGraphValues(templatename, tempos, tentativas) {
-    templatenames.push(templatename);
-
-    var tempoMin = tempos.split('.');
+function updateGraphValuesMultiplas(templatename, tempo, tentativas) {
+    templatenames.push(templatename);        
+    var tempoMin = tempo.split('.');
     var tempoNew;
     var temps = 0, erradas = 0, percentagemErradas=0, percentagemCertas = 0; 
    
@@ -43,7 +44,7 @@ function updateGraphValues(templatename, tempos, tentativas) {
     	tempoNew = tempoMin[0] + '.' + tempoMin[1];
     } 
 
-    tempo.push(tempoNew)
+    tempos.push(tempoNew);
     attempts.push(tentativas);
 
     for(var i = 0; i < attempts.length; i++){
@@ -59,12 +60,12 @@ function updateGraphValues(templatename, tempos, tentativas) {
 
 }
 
-function createGraphTempo() {
-    var ctx = document.getElementById("lineChartTempo");
-    templatenames.unshift("teste");
-    tempo.unshift(0);
-    console.log(templatenames +  " -> " + tempo);
-    var myChart = new Chart(ctx, {
+function createGraphTempoMultiplas() {
+    var ctxTimeMultiplas = document.getElementById("lineChartTempoMultiplas");
+    //templatenames.unshift("teste");
+    //tempo.unshift(0);
+    //console.log(templatenames +  " -> " + tempo);
+    var chartTimeMultiplas = new Chart(ctxTimeMultiplas, {
         type: 'line',
         data: {
             labels: templatenames,
@@ -88,7 +89,7 @@ function createGraphTempo() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: tempo,
+                    data: tempos,
                     spanGaps: false,
                 }
             ]
@@ -106,9 +107,9 @@ function createGraphTempo() {
     })
 }
 
-function createGraphAttempts() {
-    var ctx = document.getElementById("lineChartAttempts");
-    var myChart = new Chart(ctx, {
+function createGraphAttemptsMultiplas() {
+    var ctxTentativasMultiplas = document.getElementById("lineChartAttemptsMultiplas");
+    var chartTentativasMultiplas = new Chart(ctxTentativasMultiplas, {
         type: 'line',
         data: {
             labels: templatenames,
@@ -150,10 +151,10 @@ function createGraphAttempts() {
     })
 }
 
-function createGraphPercentagem() {
+function createGraphPercentagemMultiplas() {
 
-	 var ctx = document.getElementById("ringChart");
-	 var myChart = new Chart(ctx, {
+	 var ctxPercentageMultiplas = document.getElementById("ringChartMultiplas");
+	 var chartPercentageMultiplas = new Chart(ctxPercentageMultiplas, {
 	     type: 'doughnut',
 	     data : {
 	     labels: ["Certas (%)", "Erradas (%)" ],

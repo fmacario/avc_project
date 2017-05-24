@@ -159,7 +159,7 @@ $(":button").click(function () {
         console.log(totalAttemps);
         attemps.push(totalAttemps);
         totalAttemps = 0;
-        console.log(attemps);
+        //console.log(attemps);
 
 
 
@@ -198,6 +198,9 @@ Array.prototype.remove = function () {
 
 function checkIfDone() {
     if (letrasEscondidas.length == 0) {
+        clearInterval(timer);
+        var n = min + "." + sec
+
         $("#message").html("<p id=\"textoAjuda\"><h3>MUITO BEM! CONCLUIU COM SUCESSO A TAREFA!</h3></p>");
         $("button").prop('disabled', true);
 
@@ -219,6 +222,7 @@ function checkIfDone() {
                     tentativas : attemps,
                     palavra : input,
                     clicadas : letrasClicadas,
+                    tempo: n,
                 });
             });
 

@@ -40,7 +40,6 @@ function start() {
     $(".loader").hide('slow');
     $("#jogo").show('slow');
 
-
     window.SpeechRecognition = window.SpeechRecognition ||
         window.webkitSpeechRecognition ||
         null;
@@ -124,8 +123,8 @@ function checkIfDone() {
     if (rightAnswers.length == 0) {
         clearInterval(timer);
 
-        var n = min + "." + sec + "." + msec;
-        console.log(n);
+        var n = min + "." + sec;
+        //console.log(n);
 
         tentativasResposta++;
         respostasCorretas++;
@@ -137,7 +136,7 @@ function checkIfDone() {
             finalTemplatesDone.push(myParam);
 
             database.ref('patients/' + username).once("value", function (snapshot) {
-                database.ref('patients/' + username).set({
+               database.ref('patients/' + username).set({
                     ntemplates: snapshot.val().ntemplates,
                     ntemplatesdone: finalTemplatesDone.length,
                     pname: snapshot.val().pname,

@@ -13,9 +13,14 @@ var arrayTotal = [];
 var categorias = [];
 var images = [];
 
+
 //statistics
 var username;
-
+var attemps = 0;
+var timer = setInterval(clock, 10);
+var msec = 00;
+var sec = 00;
+var min = 00;
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -65,6 +70,7 @@ function start() {
     $('.loader').hide('slow');
     $('#main_div').show('slow');
 
+    console.log(timer);
     console.log(images);
     var orilength = categorias.length;
     counter = images.length;
@@ -93,6 +99,22 @@ function start() {
 
     }
 }
+
+function clock() {
+
+    msec += 1;
+    if (msec == 100) {
+        sec += 1;
+        msec = 00;
+        if (sec == 60) {
+            sec = 00;
+            min += 1;
+
+        }
+    }
+    //console.log(min + ":" + sec + ":" + msec);
+}
+
 
 
 //---- Removes element from array by value ------
@@ -152,8 +174,9 @@ function drop(ev, p) {
         document.getElementById(divId).appendChild(document.getElementById(data));
         document.getElementById(data).ondragstart = function () { return false; }; //depois de tar numa categoria, nao pode ser removida
 
-
         if (counter-- == 1) {
+            clearInterval(timer);
+            var n = min + "." + sec;
             $('#feed_div').append('<h1>Parabéns! Tarefa concluída com sucesso!</h1>');
 
             database.ref('patients/' + username).once("value", function (snapshot) {
@@ -166,6 +189,8 @@ function drop(ev, p) {
                 database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
                     templatename: myParam,
                     tipotemplate : templateType,
+                    tentativas : attemps,
+                    tempo : n,
                 });
             });
 
@@ -179,8 +204,10 @@ function drop(ev, p) {
 
     } else {
         document.getElementById(divId).appendChild(node);
+        attemps++;
         setTimeout(function () {
             document.getElementById(divId).removeChild(node);
         }, 1000);
     }
 }
+
