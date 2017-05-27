@@ -29,7 +29,7 @@ $(document).ready(function () {
         });
 
         $(".loader").hide("slow");
-        $("#showpatients").toggleClass('box-body table-responsive no-padding');
+        $("#showpatients").toggleClass('box-body table-responsive no-padding table-striped');
         $("#jogo").show("slow");
     });
 });
@@ -51,7 +51,7 @@ function writeUserData() {
         database.ref('patients/' + pusername).remove();
 
         if (errorCode === 'auth/email-already-in-use') {
-            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible merro">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                 '<h5><i class="icon fa fa-warning"></i> Utilizador já existe!</h5>' +
                 '</div>';
@@ -59,10 +59,10 @@ function writeUserData() {
             $("#mensagemErro").replaceWith(html_block);
         }
         if (errorCode === 'auth/weak-password') {
-            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible">' +
+            var html_block = '<div id="mensagemErro" class="alert alert-danger alert-dismissible merro">' +
                 '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
                 '<h5><i class="icon fa fa-warning"></i>Palavra-chave fraca.</h5>' +
-                'Escolha uma palavra-chave com pelo menos digitos.' +
+                'Escolha uma palavra-chave com pelo menos 6 digitos.' +
                 '</div>';
 
             $("#mensagemErro").replaceWith(html_block);
@@ -118,18 +118,26 @@ function showPatient(obj) {
             '<div id="tabletempdone"></div>' +
             '<li id="graphs"><a>Estatisticas<span class="pull-right badge bg-yellow"><i class="fa fa-fw fa-pie-chart"></i></span></a onclick="goToStatistics()"></li>' +
             '</ul>' +
-            '<button type="button" class="btn btn-block btn-danger btn-sm" style="width: 25%; margin: auto;" onclick="removePatient();window.location.href=window.location.href;">Remover paciente</button>' +
-            '<button type="button" class="btn btn-block btn-info btn-sm" style="width: 25%; margin: auto;" onclick="editPatient();">Editar paciente</button>' +
-            '<div id="templates" style="width: 25%; margin: auto;"></div>' +
-            '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="assignTask();">Atribuir tarefa</button>' +
-            '<div id="templates2" style="width: 25%; margin: auto;"></div>' +
-            '<button type="button" class="btn btn-block btn-primary btn-sm" style="width: 25%; margin: auto;" onclick="deassignTask();">Desatribuir tarefa</button>' +
+            '<div style="text-align: center;">' +
+            '<div   >' +
+            '<a href="#" class="btn btn-sm btn-danger buttoncenter" onclick="removePatient();window.location.href=window.location.href;"><i class="fa fa-trash-o" aria-hidden="true"></i> Remover paciente</a>' +
+            '<a href="#" class="btn btn-sm btn-info buttoncenter" onclick="editPatient();"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar paciente</a>' +
+            '</div>' +
+            '<div style="padding: 10px">' +
+            '<div id="templates"></div>' +
+            '<a href="#" class="btn btn-sm btn-primary buttoncenter" onclick="assignTask();"><i class="fa fa-plus-square" aria-hidden="true"></i> Atribuir tarefa</a>' +
+            '</div>' +
+            '<div id="templates2"></div>' + 
+            '<div>' +
+            '<a href="#" class="btn btn-sm btn-primary buttoncenter" onclick="deassignTask();"><i class="fa fa-minus-square" aria-hidden="true"></i> Desatribuir tarefa</a>' +
+            '</div>' +
+            '</div>' +
             '</div>' +
             '</div>';
 
         $('#showpatient').replaceWith(html_block);
         $('#atribuidas').click(function () {
-            html_block = "<table id='tabletemp' class='table table-hover'>" +
+            html_block = "<table id='tabletemp' class='table table-hover table-striped'>" +
                 "<tbody>" +
                 "<tr>" +
                 "<th>Nome</th>" +
@@ -155,7 +163,7 @@ function showPatient(obj) {
         })
 
         $('#completadas').click(function () {
-            html_block = "<table id='tabletempdone' class='table table-hover'>" +
+            html_block = "<table id='tabletempdone' class='table table-hover table-striped'>" +
                 "<tbody>" +
                 "<tr>" +
                 "<th>Nome</th>" +
@@ -185,10 +193,11 @@ function showPatient(obj) {
         $("#graphs").click(function () {
             window.location = '../statistics/statistics.html' + '?param=' + selectedPatient;
         });
+        
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
-            '<select id="seltemplates" class="form-control select2 " multiple="" data-placeholder="Select templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+            '<select id="seltemplates" class="form-control select2 " multiple="" data-placeholder="Associar templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 
         refTemplates = database.ref('templates/');
 
@@ -210,7 +219,7 @@ function showPatient(obj) {
 
         var conc2 = '<div id="templates2" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
-            '<select id="seltemplates2" class="form-control select2 " multiple="" data-placeholder="Select templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
+            '<select id="seltemplates2" class="form-control select2 " multiple="" data-placeholder="Desassociar templates" style="width: 100%;" tabindex="-1" aria-hidden="true">';
 
         refTemplatesAss = database.ref('patients/' + selectedPatient + '/ptemplates');
 

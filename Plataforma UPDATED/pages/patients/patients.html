@@ -12,7 +12,7 @@
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
@@ -44,7 +44,6 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-
         <header class="main-header">
             <!-- Logo -->
             <a href="../doctors_side/dashboard.html" class="logo">
@@ -158,8 +157,6 @@
 
                         </ul>
                     </li>
-
-
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -180,60 +177,54 @@
 
                 <!-- Main content -->
                 <section class="content">
-                    <!-- Default box -->
-                    <div class="box box-solid box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Adicionar novo Paciente</h3>
-                            <div class="box-tools pull-right">
-                                <!-- Buttons, labels, and many other things can be placed here! -->
+                    <!-- Adicionar novo Paciente box -->
+                    <div class="box box-warning">
+                        <div class="box-header ui-sortable-handle" style="cursor: move;">
+                            <i class="fa fa-user-o"></i>
+
+                            <h3 class="box-title">Adicionar Paciente</h3>
+                            <!-- tools box -->
+                            <div class="pull-right box-tools">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove"><i class="fa fa-times"></i></button>
                             </div>
-                            <!-- /.box-tools -->
+                            <!-- /. tools -->
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form role="form">
-                                <!-- Patient Name -->
-                                <div class="form-group">
-                                    <label>Username</label>
-                                    <input type="text" class="form-control" id="pusername" placeholder="Insira Username">
-                                    <label>Password</label>
-                                    <input type="text" class="form-control" id="ppassword" placeholder="Insira Password">
-                                    <label>Nome do paciente</label>
-                                    <input type="text" class="form-control" id="pname" placeholder="Insira Nome do Paciente">
-                                    <label>Nº de processo</label>
-                                    <input type="number" class="form-control" id="pprocess" placeholder="Insira o numero do processo associado">
-                                    <!--
-                                    <label>Idade</label>
-                                    <input type="number" class="form-control" id="page" placeholder="Insira Idade do paciente">
-                                    <label>Escolaridade</label>
-                                    <input type="number" class="form-control" id="pschool" placeholder="Insira anos de escolaridade">
-                                    <label>Data da lesão:</label>
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="pdateinjury">
-                                    </div>
-                                    <label>Tipo de lesão</label>
-                                    <input type="text" class="form-control" id="ptypeinjury" placeholder="Tipo de lesão">
+                            <form>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user-plus fa-fw"></i></span>
+                                    <input id="pusername" type="text" class="form-control" name="email" placeholder="Username">
                                 </div>
-                                -->
-                                    <button type="button" class="btn btn-block btn-primary btn-lg" onclick="writeUserData();" style="width: 55%; margin: auto;">Adicionar Paciente
-                                </button>
-                                    <div id="mensagemErro"></div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                                    <input id="ppassword" type="password" class="form-control" name="password" placeholder="Password">
+                                </div>
+                                <div style="height: 20px"></div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                    <input id="pname" type="text" class="form-control" name="email" placeholder="Nome do paciente">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-id-card-o fa-fw"></i></span>
+                                    <input id="pprocess" type="number" class="form-control" name="msg" placeholder="ID do processo">
+                                </div>
                             </form>
-                            </div>
-                            <!-- /.box-body -->
-                            <div class="box-footer">
-                                <!-- Adicionar qualquer coisa ao footer -->
-                            </div>
-                            <!-- box-footer -->
                         </div>
-                        <!-- /.box -->
+                        <!-- /.box-body -->
+                        <div class="box-footer" style="text-align: center;">
+                            <div>
+                                <a href="#" class="btn btn-sm btn-info buttoncenter" onclick="writeUserData();"><span class="glyphicon glyphicon-plus"></span> Adicionar Paciente</a>
+                            </div>
+                            <div id="mensagemErro" class="merro"></div>
+                        </div>
+                        <!-- box-footer -->
                     </div>
+                    <!-- /.box -->
 
                     <!-- Show patients box -->
-                    <div class="box box-solid box-primary">
+                    <div class="box box-info">
                         <div class="box-header">
                             <h3 class="box-title">Lista de pacientes</h3>
                             <div class="box-tools">
@@ -252,17 +243,11 @@
                         <!-- Selected Patient zone -->
                         <div id='jogo' class='box-body table-responsive'>
                             <div id="showpatient"></div>
-                            <table class='table table-hover'>
+                            <table class='table table-hover table-striped'>
                                 <tbody>
                                     <tr>
                                         <th>Nome</th>
                                         <th>Nº do processo</th>
-                                        <!--
-                                        <th>Idade</th>
-                                        <th>Anos de escolaridade</th>
-                                        <th>Data da lesão</th>
-                                        <th>Tipo da lesão</th>
-                                        -->
                                     </tr>
                                 </tbody>
                             </table>
@@ -275,16 +260,13 @@
                 <!-- /.content -->
             </section>
         </div>
-        <!-- /.content -->
-        </section>
+    </div>
+    <!-- /.content -->
+    </section>
     </div>
     <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer" style="text-align: right">
-        <strong><a href="http://xcoa.av.it.pt/~pei2016-2017_g9/">Stroke Rehab project website</a>.</strong> All rights reserved.
-    </footer>
-
     <!-- ./wrapper -->
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/3.7.3/firebase.js"></script>
@@ -304,18 +286,6 @@
     <script src="../../dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
-    <!-- Page script -->
-    <!--
-    <script>
-                                                                                                        $(function () {
-                                                                                                            //Date picker
-                                                                                                            $('#pdateinjury').datepicker({
-                                                                                                                autoclose: true
-                                                                                                            });
-                                                                                                        });
-    </script>
-    -->
-    <!-- script local para esta pagina -->
     <script src="../../logout.js"></script>
     <script src="../../username.js"></script>
     <script src="script.js"></script>
