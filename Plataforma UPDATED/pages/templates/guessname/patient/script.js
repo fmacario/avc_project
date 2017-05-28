@@ -218,7 +218,7 @@ function checkIfDone() {
                 ptemplatesdone: snapshot.child("ptemplatesdone").val()
             });
 
-            database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
+            database.ref('patients/' + username + '/ptemplatesdone/guessname' + myParam).set({
                 templatename: myParam,
                 tipotemplate: templateType,
                 escondidas: letrasEscondidasEstatitiscas,

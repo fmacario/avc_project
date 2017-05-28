@@ -4,17 +4,14 @@ var database = firebase.database(); // database service
 var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
-var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
+var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/multiplechoice");
 
 
 
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        if(childSnapshot.val().tipotemplate == "multiplechoice"){
             updateGraphValuesMultiplas(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().attempts);
-
-        }
     });
 
     createGraphTempoMultiplas();
