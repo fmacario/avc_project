@@ -112,9 +112,9 @@ function showPatient(obj) {
             '<h5 class="widget-user-desc">Paciente</h5>' +
             '</div>' +
             '<ul class="nav nav-stacked">' +
-            '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.val().ntemplates + '</span></a></li>' +
+            '<li id="atribuidas"><a>Tarefas atribuidas<span class="pull-right badge bg-aqua">' + snapshot.child("ptemplates").numChildren() + '</span></a></li>' +
             '<div id="tabletemp"></div>' +
-            '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">' + snapshot.val().ntemplatesdone + '</span></a></li>' +
+            '<li id="completadas"><a>Tarefas completadas<span class="pull-right badge bg-green">' + snapshot.child("ptemplatesdone").numChildren() + '</span></a></li>' +
             '<div id="tabletempdone"></div>' +
             '<li id="graphs"><a>Estatisticas<span class="pull-right badge bg-yellow"><i class="fa fa-fw fa-pie-chart"></i></span></a onclick="goToStatistics()"></li>' +
             '</ul>' +
@@ -127,7 +127,7 @@ function showPatient(obj) {
             '<div id="templates"></div>' +
             '<a href="#" class="btn btn-sm btn-primary buttoncenter" onclick="assignTask();"><i class="fa fa-plus-square" aria-hidden="true"></i> Atribuir tarefa</a>' +
             '</div>' +
-            '<div id="templates2"></div>' + 
+            '<div id="templates2"></div>' +
             '<div>' +
             '<a href="#" class="btn btn-sm btn-primary buttoncenter" onclick="deassignTask();"><i class="fa fa-minus-square" aria-hidden="true"></i> Desatribuir tarefa</a>' +
             '</div>' +
@@ -149,6 +149,7 @@ function showPatient(obj) {
             $("#tabletemp").replaceWith(html_block);
             if (snapshot.val().ntemplates != 0) {
                 for (var i = 0; i < snapshot.val().ptemplates.length; i++) {
+                    console.log(snapshot.val().ptemplates[i]);
                     $("#tabletemp")
                         .append($('<tr id="' + snapshot.key + '">')
                             .append($('<td>')
@@ -177,15 +178,17 @@ function showPatient(obj) {
             patientNameRef2.on('value', function (snapshot) {
                 $("#tabletempdone").replaceWith(html_block);
                 snapshot.forEach(function (childSnapshot) {
-                    $("#tabletempdone")
-                        .append($('<tr id="' + childSnapshot.key + '">')
-                            .append($('<td>')
-                                .text(childSnapshot.key)
+                    childSnapshot.forEach(function (childSnapshot2) {
+                        $("#tabletempdone")
+                            .append($('<tr id="' + childSnapshot2.val().templatename + '">')
+                                .append($('<td>')
+                                    .text(childSnapshot2.val().templatename.replace(/_/g, ' '))
+                                )
+                                .append($('<td>')
+                                    .text(childSnapshot.key)
+                                )
                             )
-                            .append($('<td>')
-                                .text('A SER IMPLEMENTADO')
-                            )
-                        )
+                    });
                 });
             });
         })
@@ -193,7 +196,7 @@ function showPatient(obj) {
         $("#graphs").click(function () {
             window.location = '../statistics/statistics.html' + '?param=' + selectedPatient;
         });
-        
+
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
@@ -318,8 +321,10 @@ function deassignTask() {
         var index;
 
         for (var i = 0; i < $("#seltemplates2").val().length; i++) {
-            index = finalTemplates.indexOf($("#seltemplates2").val()[i]);
-            finalTemplates.splice(index, 1);
+            index = finalTemplates.indexOf($("#seltemplates2").val()[i].replace(/ /g, "_"));
+            if (index != -1) {
+                finalTemplates.splice(index, 1);
+            }
         }
 
         database.ref('patients/' + selectedPatient).once("value", function (snapshot) {
