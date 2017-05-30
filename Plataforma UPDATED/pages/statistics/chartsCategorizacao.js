@@ -4,10 +4,7 @@ var database = firebase.database(); // database service
 var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
-var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/categorizacao");
-
-
-
+var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/categorizacao/");
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {

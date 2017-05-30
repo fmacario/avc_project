@@ -4,74 +4,65 @@ var database = firebase.database(); // database service
 var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
-var templatesRef = database.ref("patients/" + myParamSpace +"/ptemplatesdone/guessname");
-var count =0, j;
-
-
+var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/guessname");
+var count = 0, j;
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-
-                updateTableValues(childSnapshot.val().templatename, childSnapshot.val().palavra, childSnapshot.val().escondidas, childSnapshot.val().tentativas, childSnapshot.val().clicadas, childSnapshot.val().tempo);
-
-    
+        updateTableValues(childSnapshot.val().templatename, childSnapshot.val().palavra, childSnapshot.val().escondidas, childSnapshot.val().tentativas, childSnapshot.val().clicadas, childSnapshot.val().tempo);
     });
-
-  
-
 });
 
 var i;
 
-function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClicladas, tempo){
-
+function updateTableValues(nomeTemplate, palavra, letras, tentativas, letrasClicladas, tempo) {
     var tempoMin = tempo.split('.');
     var tempoNew;
 
-    if(tempoMin[1] < 10){
+    if (tempoMin[1] < 10) {
         tempoNew = tempoMin[0] + '.' + '0' + tempoMin[1];
     }
-    else{
+    else {
         tempoNew = tempoMin[0] + '.' + tempoMin[1];
-    } 
-     
-            $("#tableGuessName").append("<table class=\"table table-bordered table-hover\">" + 
-                                        "<thead>"+
-                                            "<tr>" +
-                                                "<th>"+ nomeTemplate + "</th>" +
-                                            "</tr>" +
-                                        "</thead>" +
-                                        "<tbody>" + 
-                                            "<tr>"+
-                                                "<td>"+
-                                                    "<table class=\"table\">"+
-                                                        "<thead>"+
-                                                            "<tr>"+
-                                                                "<th>Palavra</th>"+
-                                                                "<th>Letras Escondidas</th>"+
-                                                                "<th>Numero de Tentativas</th>"+
-                                                                "<th>Letras Clicadas</th>"+
-                                                                "<th>Tempo</th>"+
-                                                            "</tr>"+
-                                                        "</thead>"+
-                                                        "<tbody>"+ 
-                                                                "<tr>"+
-                                                                    "<td>"+palavra+"</td>"+
-                                                                    "<td>"+letras+"</td>"+
-                                                                    "<td>"+tentativas+"</td>"+
-                                                                    "<td>"+letrasClicladas+"</td>"+
-                                                                    "<td>"+tempoNew+"</td>"+
-                                                                "</tr>"+
-                                                         "</tbody>"+
-                                                      "</table>"+     
-                                                "</td>" +
-                                              "</tr>"+
-                                            "</tbody>"+
-                                        "</table>");
+    }
 
-            
+    $("#tableGuessName").append("<table class=\"table table-bordered table-hover\">" +
+        "<thead>" +
+        "<tr>" +
+        "<th>" + nomeTemplate + "</th>" +
+        "</tr>" +
+        "</thead>" +
+        "<tbody>" +
+        "<tr>" +
+        "<td>" +
+        "<table class=\"table\">" +
+        "<thead>" +
+        "<tr>" +
+        "<th>Palavra</th>" +
+        "<th>Letras Escondidas</th>" +
+        "<th>Numero de Tentativas</th>" +
+        "<th>Letras Clicadas</th>" +
+        "<th>Tempo</th>" +
+        "</tr>" +
+        "</thead>" +
+        "<tbody>" +
+        "<tr>" +
+        "<td>" + palavra + "</td>" +
+        "<td>" + letras + "</td>" +
+        "<td>" + tentativas + "</td>" +
+        "<td>" + letrasClicladas + "</td>" +
+        "<td>" + tempoNew + "</td>" +
+        "</tr>" +
+        "</tbody>" +
+        "</table>" +
+        "</td>" +
+        "</tr>" +
+        "</tbody>" +
+        "</table>");
 
-    
+
+
+
 }
 
 

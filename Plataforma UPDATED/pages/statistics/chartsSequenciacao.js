@@ -6,12 +6,10 @@ myParamSpace = myParam.replace('_', ' ');
 
 var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/sequence");
 
-
-
-
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-            updateGraphValuesSequence(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().tentativas);
+        console.log(childSnapshot.val());
+        updateGraphValuesSequence(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().tentativas);
 
     });
 
@@ -19,38 +17,38 @@ templatesRef.once("value", function (snapshot) {
 
 });
 
-var templatenames = [];
-var tempos = [];
+var templatenames2 = [];
+var tempos2 = [];
 var attempts = [];
 
 
 function updateGraphValuesSequence(templatename, tempo, tentativas) {
-    templatenames.push(templatename);        
+        console.log("-1" + templatenames2);
+    templatenames2.push(templatename);
     var tempoMin = tempo.split('.');
     var tempoNew;
-   
 
-    if(tempoMin[1] < 10){
-    	tempoNew = tempoMin[0] + '.' + '0' + tempoMin[1];
+    if (tempoMin[1] < 10) {
+        tempoNew = tempoMin[0] + '.' + '0' + tempoMin[1];
     }
-    else{
-    	tempoNew = tempoMin[0] + '.' + tempoMin[1];
-    } 
+    else {
+        tempoNew = tempoMin[0] + '.' + tempoMin[1];
+    }
 
-    tempos.push(tempoNew);
+    tempos2.push(tempoNew);
     attempts.push(tentativas);
-
+    console.log("-2" + templatenames2);
 }
 
 function createGraphTempoSequence() {
     var ctxTimeSequence = document.getElementById("lineChartTempoSequence");
-    //templatenames.unshift("teste");
+    //templatenames2.unshift("teste");
     //tempo.unshift(0);
-    //console.log(templatenames +  " -> " + tempo);
+    //console.log(templatenames2 +  " -> " + tempo);
     var chartTimeSequence = new Chart(ctxTimeSequence, {
         type: 'line',
         data: {
-            labels: templatenames,
+            labels: templatenames2,
             datasets: [
                 {
                     label: "Tempo de resposta",
@@ -71,7 +69,7 @@ function createGraphTempoSequence() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: tempos,
+                    data: tempos2,
                     spanGaps: false,
                 }
             ]

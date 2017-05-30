@@ -189,7 +189,7 @@ function drop(ev, p) {
                     ptemplatesdone: snapshot.child("ptemplatesdone").val()
                 });
 
-                database.ref('patients/' + username + '/ptemplatesdone/categorizacao' + myParam).set({
+                database.ref('patients/' + username + '/ptemplatesdone' + '/categorizacao/' + myParam).set({
                     templatename: myParam,
                     tipotemplate : templateType,
                     tentativas : attemps,
