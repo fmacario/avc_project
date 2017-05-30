@@ -67,6 +67,7 @@ $(document).ready(function () {
 
 
         alert("Tarefa guardada com sucesso!");
+        location.reload();
     });
 });
 

@@ -146,7 +146,7 @@ $(function () {
                 });
                 alert("Template criado com sucesso");
                 //adicionar delay
-                //location.reload();
+                location.reload();
             }
 
         }
