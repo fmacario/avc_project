@@ -21,14 +21,14 @@ templatesRef.once("value", function (snapshot) {
 
 });
 
-var templatenames = [];
-var tempos = [];
-var attempts = [];
-var percentagens = [];
-var tipotemplates = [];
+var templatenamesMult = [];
+var temposMult = [];
+var attemptsMult = [];
+var percentagensMult = [];
+var tipotemplatesMult = [];
 
 function updateGraphValuesMultiplas(templatename, tempo, tentativas) {
-    templatenames.push(templatename);        
+    templatenamesMult.push(templatename);        
     var tempoMin = tempo.split('.');
     var tempoNew;
     var temps = 0, erradas = 0, percentagemErradas=0, percentagemCertas = 0; 
@@ -41,19 +41,19 @@ function updateGraphValuesMultiplas(templatename, tempo, tentativas) {
     	tempoNew = tempoMin[0] + '.' + tempoMin[1];
     } 
 
-    tempos.push(tempoNew);
-    attempts.push(tentativas);
+    temposMult.push(tempoNew);
+    attemptsMult.push(tentativas);
 
-    for(var i = 0; i < attempts.length; i++){
-    	temps += attempts[i];
+    for(var i = 0; i < attemptsMult.length; i++){
+    	temps += attemptsMult[i];
     }
 
-    erradas = temps - templatenames.length;
+    erradas = temps - templatenamesMult.length;
     percentagemErradas = erradas/temps;
-    percentagemCertas = templatenames.length/temps;
+    percentagemCertas = templatenamesMult.length/temps;
 
-    percentagens[0] = percentagemCertas * 100;
-    percentagens[1] = percentagemErradas * 100;
+    percentagensMult[0] = percentagemCertas * 100;
+    percentagensMult[1] = percentagemErradas * 100;
 
 }
 
@@ -65,7 +65,7 @@ function createGraphTempoMultiplas() {
     var chartTimeMultiplas = new Chart(ctxTimeMultiplas, {
         type: 'line',
         data: {
-            labels: templatenames,
+            labels: templatenamesMult,
             datasets: [
                 {
                     label: "Tempo de resposta",
@@ -86,7 +86,7 @@ function createGraphTempoMultiplas() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: tempos,
+                    data: temposMult,
                     spanGaps: false,
                 }
             ]
@@ -109,7 +109,7 @@ function createGraphAttemptsMultiplas() {
     var chartTentativasMultiplas = new Chart(ctxTentativasMultiplas, {
         type: 'line',
         data: {
-            labels: templatenames,
+            labels: templatenamesMult,
             datasets: [
                 {
                     label: "Tentativas de resposta",
@@ -130,7 +130,7 @@ function createGraphAttemptsMultiplas() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: attempts,
+                    data: attemptsMult,
                     spanGaps: false,
                 }
             ]
@@ -156,7 +156,7 @@ function createGraphPercentagemMultiplas() {
 	     data : {
 	     labels: ["Certas (%)", "Erradas (%)" ],
 	     datasets: [{
-	             data: percentagens,
+	             data: percentagensMult,
 	             backgroundColor: ["#FF6384", "#36A2EB"],
 	         }]
 	 	}

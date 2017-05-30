@@ -15,13 +15,13 @@ templatesRef.once("value", function (snapshot) {
     createGraphTempoCategorias();
 });
 
-var templatenames = [];
-var tempos = [];
+var templatenamesCat = [];
+var temposCat = [];
 //var attempts = [];
 
 
 function updateGraphValuesCategorias(templatename, tempo, tentativas) {
-    templatenames.push(templatename);
+    templatenamesCat.push(templatename);
 
     var tempoMin = tempo.split('.');
     var tempoNew;
@@ -34,7 +34,7 @@ function updateGraphValuesCategorias(templatename, tempo, tentativas) {
         tempoNew = tempoMin[0] + '.' + tempoMin[1];
     } 
 
-    tempos.push(tempoNew);
+    temposCat.push(tempoNew);
 }
 
 function createGraphTempoCategorias() {
@@ -43,7 +43,7 @@ function createGraphTempoCategorias() {
     var chartTimeCategorizacao = new Chart(ctxTimeCategorizacao, {
         type: 'line',
         data: {
-            labels: templatenames,
+            labels: templatenamesCat,
             datasets: [
                 {
                     label: "Tempo de resposta",
@@ -64,7 +64,7 @@ function createGraphTempoCategorias() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: tempos,
+                    data: temposCat,
                     spanGaps: false,
                 }
             ]
