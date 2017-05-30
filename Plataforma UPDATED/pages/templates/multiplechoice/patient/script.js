@@ -136,7 +136,7 @@ function checkIfDone() {
                 ptemplates: snapshot.val().ptemplates,
                 ptemplatesdone: snapshot.child("ptemplatesdone").val()
             });
-            database.ref('patients/' + username + '/ptemplatesdone/' + myParam).set({
+            database.ref('patients/' + username + '/ptemplatesdone/multiplechoice' + myParam).set({
                 templatename: myParam,
                 pergunta: question,
                 respostasCertas: rightAnswers,

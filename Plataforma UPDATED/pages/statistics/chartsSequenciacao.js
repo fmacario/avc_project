@@ -4,17 +4,15 @@ var database = firebase.database(); // database service
 var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
-var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
+var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/sequence");
 
 
 
 
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
-        if(childSnapshot.val().tipotemplate == "sequence"){
             updateGraphValuesSequence(childSnapshot.val().templatename, childSnapshot.val().tempo, childSnapshot.val().tentativas);
 
-        }
     });
 
     createGraphTempoSequence();

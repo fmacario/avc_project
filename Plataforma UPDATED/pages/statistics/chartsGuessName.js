@@ -4,7 +4,7 @@ var database = firebase.database(); // database service
 var myParam = location.search.split('param=')[1]
 myParamSpace = myParam.replace('_', ' ');
 
-var templatesRef = database.ref("patients/" + myParamSpace + "/ptemplatesdone/");
+var templatesRef = database.ref("patients/" + myParamSpace +"/ptemplatesdone/guessname");
 var count =0, j;
 
 
@@ -12,10 +12,9 @@ var count =0, j;
 templatesRef.once("value", function (snapshot) {
     snapshot.forEach(function (childSnapshot) {
 
-        if(childSnapshot.val().tipotemplate == "guessname"){
                 updateTableValues(childSnapshot.val().templatename, childSnapshot.val().palavra, childSnapshot.val().escondidas, childSnapshot.val().tentativas, childSnapshot.val().clicadas, childSnapshot.val().tempo);
 
-        }
+    
     });
 
   
