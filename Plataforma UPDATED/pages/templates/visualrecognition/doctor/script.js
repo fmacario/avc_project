@@ -186,7 +186,7 @@ function generateTemplate() {
         tipo: 'visualrecognition',
         nrEscolhas: answerNumber
     })
-    reloadPage();
+    //reloadPage();
 }
 
 
