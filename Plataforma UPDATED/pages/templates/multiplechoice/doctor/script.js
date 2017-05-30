@@ -113,7 +113,7 @@ function generateTemplate() {
         tipo: 'multiplechoice',
         nrEscolhas: answerNumber
     })
-    reloadPage();
+    //reloadPage();
 }
 
 function checkIfAnswerMissig() {
