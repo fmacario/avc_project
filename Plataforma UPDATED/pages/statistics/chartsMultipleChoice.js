@@ -54,6 +54,7 @@ function updateGraphValuesMultiplas(templatename, tempo, tentativas) {
 
     percentagensMult[0] = percentagemCertas * 100;
     percentagensMult[1] = percentagemErradas * 100;
+    console.log("------>>>>>" + attemptsMult);
 
 }
 
@@ -106,6 +107,7 @@ function createGraphTempoMultiplas() {
 
 function createGraphAttemptsMultiplas() {
     var ctxTentativasMultiplas = document.getElementById("lineChartAttemptsMultiplas");
+    attemptsMult.unshift(0);
     var chartTentativasMultiplas = new Chart(ctxTentativasMultiplas, {
         type: 'line',
         data: {

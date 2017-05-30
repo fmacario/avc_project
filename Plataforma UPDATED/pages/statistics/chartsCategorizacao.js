@@ -88,6 +88,7 @@ function createGraphTempoCategorias() {
 
 function createGraphAttemptsCategorias() {
     var ctxTentativasCategorias = document.getElementById("lineChartAttemptsCategorias");
+    attemptsCat.unshift(0);
     var ctxTentativasCategorias = new Chart(ctxTentativasCategorias, {
         type: 'line',
         data: {

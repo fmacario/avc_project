@@ -89,6 +89,7 @@ function createGraphTempoSequence() {
 
 function createGraphAttemptsSequence() {
     var ctxTentativasSequence = document.getElementById("lineChartAttemptsSequence");
+    attemptsSeq.unshift(0);
     var ctxTentativasSequence = new Chart(ctxTentativasSequence, {
         type: 'line',
         data: {
