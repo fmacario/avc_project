@@ -10,13 +10,7 @@ var patientAssociatedTemplates;
 
 // Displays patients of database in a table
 $(document).ready(function () {
-    showPatientTable();
-});
-
-// Show table of patients
-function showPatientTable() {
     $("#jogo").hide();
-    $("#loader").show('slow');
 
     var tpatients = $('#showpatients')  // table patients
     var patientsRef = database.ref("patients/"); // database patients
@@ -38,7 +32,7 @@ function showPatientTable() {
         $("#showpatients").toggleClass('box-body table-responsive no-padding table-striped');
         $("#jogo").show("slow");
     });
-}
+});
 
 // Adds patient to database
 function writeUserData() {
@@ -85,7 +79,7 @@ function writeUserData() {
     setTimeout(function () {
         relogin();
         setTimeout(function () {
-            showPatientTable();
+            window.location.href = window.location.href;
         }, 1000);
     }, 1000);
 }
@@ -104,7 +98,8 @@ function showPatient(obj) {
     var patientNameRef = database.ref('patients/' + selectedPatient);
 
     patientNameRef.on('value', function (snapshot) {
-        var html_block = '<div id="showpatient" style="display: none;">' +
+        var html_block = '<div class="loader" style="margin: auto;"></div>' +
+            '<div id="showpatient" style="display: none">' +
             '<div class="box box-widget widget-user-2" style="z-index: 2;width: 100%;">' +
             '<div class="box-header with-border">' +
             '<!-- Add the bg color to the header using any of the bg-* classes -->' +
@@ -132,7 +127,7 @@ function showPatient(obj) {
             '<div id="templates"></div>' +
             '<a href="#" class="btn btn-sm btn-primary buttoncenter" onclick="assignTask();"><i class="fa fa-plus-square" aria-hidden="true"></i> Atribuir tarefa</a>' +
             '</div>' +
-            '<div id="templates2"></div>' +
+            '<div id="templates2"></div>' + 
             '<div>' +
             '<a href="#" class="btn btn-sm btn-primary buttoncenter" onclick="deassignTask();"><i class="fa fa-minus-square" aria-hidden="true"></i> Desatribuir tarefa</a>' +
             '</div>' +
@@ -198,7 +193,7 @@ function showPatient(obj) {
         $("#graphs").click(function () {
             window.location = '../statistics/statistics.html' + '?param=' + selectedPatient;
         });
-
+        
 
         var conc = '<div id="templates" style="width: 25%; margin: auto;">' +
             '<div class="form-group">' +
@@ -351,71 +346,3 @@ function relogin() {
         console.log(errorCode);
     });
 }
-
-function displaySearch() {
-    var searchText = $("#searchText").val();
-    var table = $("#jogo table");
-    var newTable = $("<table class='table table-hover table-striped'></table>");
-
-    newTable.append($('<tr>')
-        .append($('<th>')
-            .text('Nome')
-        )
-        .append($('<th>')
-            .text('Nº do processo')
-        )
-        .append($('<th>')
-        )
-    );
-
-    if (searchText == "") {
-        var patientsRef = database.ref("patients/"); // database patients
-
-        patientsRef.once("value", function (snapshot) {
-            snapshot.forEach(function (childSnapshot) {
-                newTable.append($('<tr id="' + childSnapshot.val().pname + '">')
-                    .append($('<td>')
-                        .text(childSnapshot.val().pname)
-                    )
-                    .append($('<td>')
-                        .text(childSnapshot.val().pprocess)
-                    )
-                )
-            });
-        });
-
-
-        table.replaceWith(newTable);
-        return;
-    }
-
-    $('#jogo table tr').each(function () {
-        var templateName = $(this).find("td:first").html();
-        var nprocess = $(this).find("td:nth-child(2)").html();
-
-        if (templateName != undefined) {
-            var index = templateName.indexOf(searchText);
-            if (index != -1) {
-                //table.empty();
-                newTable.append($('<tr id="' + templateName + '">')
-                    .append($('<td>')
-                        .text(templateName)
-                    )
-                    .append($('<td>')
-                        .text(nprocess)
-                    )
-                )
-            }
-        }
-    });
-
-    table.replaceWith(newTable);
-}
-
-// Enter key to submit
-$('#searchText').keypress(function (e) {
-    if (e.which == 13) {
-        displaySearch();
-        return false;
-    }
-});
