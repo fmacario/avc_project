@@ -17,14 +17,13 @@ templatesRef.once("value", function (snapshot) {
 
 });
 
-var templatenames2 = [];
-var tempos2 = [];
-var attempts = [];
+var templatenamesSeq = [];
+var temposSeq = [];
+var attemptsSeq = [];
 
 
 function updateGraphValuesSequence(templatename, tempo, tentativas) {
-        console.log("-1" + templatenames2);
-    templatenames2.push(templatename);
+    templatenamesSeq.push(templatename);
     var tempoMin = tempo.split('.');
     var tempoNew;
 
@@ -35,9 +34,9 @@ function updateGraphValuesSequence(templatename, tempo, tentativas) {
         tempoNew = tempoMin[0] + '.' + tempoMin[1];
     }
 
-    tempos2.push(tempoNew);
-    attempts.push(tentativas);
-    console.log("-2" + templatenames2);
+    temposSeq.push(tempoNew);
+    attemptsSeq.push(tentativas);
+    console.log("-2" + templatenamesSeq);
 }
 
 function createGraphTempoSequence() {
@@ -48,7 +47,7 @@ function createGraphTempoSequence() {
     var chartTimeSequence = new Chart(ctxTimeSequence, {
         type: 'line',
         data: {
-            labels: templatenames2,
+            labels: templatenamesSeq,
             datasets: [
                 {
                     label: "Tempo de resposta",
@@ -69,7 +68,7 @@ function createGraphTempoSequence() {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: tempos2,
+                    data: temposSeq,
                     spanGaps: false,
                 }
             ]
