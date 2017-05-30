@@ -181,7 +181,6 @@
                     <div class="box box-warning">
                         <div class="box-header ui-sortable-handle" style="cursor: move;">
                             <i class="fa fa-user-o"></i>
-
                             <h3 class="box-title">Adicionar Paciente</h3>
                             <!-- tools box -->
                             <div class="pull-right box-tools">
@@ -192,7 +191,8 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form>
+                            <form id="add-form">
+                                <label>Credenciais de acesso</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user-plus fa-fw"></i></span>
                                     <input id="pusername" type="text" class="form-control" name="email" placeholder="Username">
@@ -202,6 +202,7 @@
                                     <input id="ppassword" type="password" class="form-control" name="password" placeholder="Password">
                                 </div>
                                 <div style="height: 20px"></div>
+                                <label>Dados do paciente</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                                     <input id="pname" type="text" class="form-control" name="email" placeholder="Nome do paciente">
@@ -226,28 +227,30 @@
                     <!-- Show patients box -->
                     <div class="box box-info">
                         <div class="box-header">
+                            <i class="fa fa-list" aria-hidden="true"></i>
                             <h3 class="box-title">Lista de pacientes</h3>
                             <div class="box-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
-                                    <input type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
+                                    <input id="searchText" type="text" name="table_search" class="form-control pull-right" placeholder="Pesquisar">
                                     <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        <button type="submit" class="btn btn-default"><i class="fa fa-search" onclick="displaySearch()"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /.box-header -->
-                        <div id="showpatients" class="box-body table-responsive" style="overflow-y: hidden;">
-                            <div class="loader" style="margin: auto;"></div>
+                        <div id="showpatients" class="box-body table-responsive" style="text-align: center;">
+                            <img src="../../dist/img/loader.gif" class="loader" style="margin: auto;">
                         </div>
                         <!-- Selected Patient zone -->
                         <div id='jogo' class='box-body table-responsive'>
-                            <div id="showpatient"></div>
+                            <div id="showtemplates"></div>
                             <table class='table table-hover table-striped'>
                                 <tbody>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Nº do processo</th>
+                                        <th>Nº do Processo</th>
+                                        <th></th>
                                     </tr>
                                 </tbody>
                             </table>
