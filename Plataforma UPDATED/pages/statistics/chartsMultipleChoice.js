@@ -59,8 +59,8 @@ function updateGraphValuesMultiplas(templatename, tempo, tentativas) {
 
 function createGraphTempoMultiplas() {
     var ctxTimeMultiplas = document.getElementById("lineChartTempoMultiplas");
-    //templatenames.unshift("teste");
-    //tempo.unshift(0);
+    templatenamesMult.unshift("teste");
+    temposMult.unshift(0);
     //console.log(templatenames +  " -> " + tempo);
     var chartTimeMultiplas = new Chart(ctxTimeMultiplas, {
         type: 'line',

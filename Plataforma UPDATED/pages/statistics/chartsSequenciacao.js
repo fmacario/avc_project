@@ -41,8 +41,8 @@ function updateGraphValuesSequence(templatename, tempo, tentativas) {
 
 function createGraphTempoSequence() {
     var ctxTimeSequence = document.getElementById("lineChartTempoSequence");
-    //templatenames2.unshift("teste");
-    //tempo.unshift(0);
+    templatenamesSeq.unshift("teste");
+    temposSeq.unshift(0);
     //console.log(templatenames2 +  " -> " + tempo);
     var chartTimeSequence = new Chart(ctxTimeSequence, {
         type: 'line',

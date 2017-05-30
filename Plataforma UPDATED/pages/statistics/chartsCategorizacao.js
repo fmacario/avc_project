@@ -40,6 +40,8 @@ function updateGraphValuesCategorias(templatename, tempo, tentativas) {
 function createGraphTempoCategorias() {
 
     var ctxTimeCategorizacao = document.getElementById("lineChartTempoCategorizao");
+    templatenamesCat.unshift("teste");
+    temposCat.unshift(0);
     var chartTimeCategorizacao = new Chart(ctxTimeCategorizacao, {
         type: 'line',
         data: {
